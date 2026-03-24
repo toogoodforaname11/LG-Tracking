@@ -18,20 +18,21 @@ from app.discovery.base import BaseScraper, DiscoveredItem
 
 
 # CivicWeb meeting type keywords for classification
-MEETING_TYPE_MAP = {
-    "regular": "regular",
-    "special": "special",
-    "public hearing": "public_hearing",
-    "committee": "committee",
-    "committee of the whole": "committee_of_the_whole",
-    "council": "regular",
-    "board": "regular",
-}
+# Ordered longest-first so "committee of the whole" matches before "committee"
+MEETING_TYPE_MAP = [
+    ("committee of the whole", "committee_of_the_whole"),
+    ("public hearing", "public_hearing"),
+    ("special", "special"),
+    ("committee", "committee"),
+    ("regular", "regular"),
+    ("council", "regular"),
+    ("board", "regular"),
+]
 
 
 def classify_meeting_type(title: str) -> str:
     title_lower = title.lower()
-    for keyword, mtype in MEETING_TYPE_MAP.items():
+    for keyword, mtype in MEETING_TYPE_MAP:
         if keyword in title_lower:
             return mtype
     return "regular"
