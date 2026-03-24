@@ -685,6 +685,202 @@ BC_MUNICIPALITIES_BATCH_2 = [
     },
 ]
 
+# Batch 3 – 10 municipalities with correct specific meeting pages
+BC_MUNICIPALITIES_BATCH_3 = [
+    {
+        "name": "City of Mission",
+        "short_name": "Mission",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.mission.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://mission.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Mission CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://mission.civicweb.net/filepro/documents/",
+                "label": "Mission CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Nanaimo",
+        "short_name": "Nanaimo",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.nanaimo.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@CityofNanaimo",
+                "label": "Nanaimo YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Nelson",
+        "short_name": "Nelson",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.nelson.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.nelson.ca/council",
+                "label": "Nelson Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of New Westminster",
+        "short_name": "New Westminster",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.newwestcity.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.GRANICUS,
+                "source_type": SourceType.AGENDA,
+                "url": "https://newwestcity.ca.granicus.com",
+                "label": "New Westminster Granicus Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of North Vancouver",
+        "short_name": "North Vancouver City",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.cnv.org/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://northvancouver.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "North Vancouver City CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://northvancouver.civicweb.net/filepro/documents/",
+                "label": "North Vancouver City CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of North Vancouver",
+        "short_name": "North Vancouver District",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.dnv.org/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@DistrictofNorthVancouver",
+                "label": "North Vancouver District YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Oak Bay",
+        "short_name": "Oak Bay",
+        "gov_type": GovType.DISTRICT,
+        "region": "CRD",
+        "website_url": "https://www.oakbay.ca/",
+        "population": 18094,
+        # Already in CRD list (portal URLs); adding specific meeting-list pages.
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://oakbay.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Oak Bay CivicWeb Meeting List",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Penticton",
+        "short_name": "Penticton",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.penticton.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.GRANICUS,
+                "source_type": SourceType.AGENDA,
+                "url": "https://penticton.ca.granicus.com",
+                "label": "Penticton Granicus Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Port Coquitlam",
+        "short_name": "Port Coquitlam",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.portcoquitlam.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://portcoquitlam.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Port Coquitlam CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://portcoquitlam.civicweb.net/filepro/documents/",
+                "label": "Port Coquitlam CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Prince George",
+        "short_name": "Prince George",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.princegeorge.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@CityofPrinceGeorge",
+                "label": "Prince George YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+]
+
 
 async def seed_registry(db: AsyncSession) -> dict:
     """Seed the registry with BC municipalities and sources.
@@ -693,7 +889,12 @@ async def seed_registry(db: AsyncSession) -> dict:
     """
     stats = {"municipalities_created": 0, "municipalities_existed": 0, "sources_created": 0}
 
-    all_municipalities = CRD_MUNICIPALITIES + BC_MUNICIPALITIES_BATCH_1 + BC_MUNICIPALITIES_BATCH_2
+    all_municipalities = (
+        CRD_MUNICIPALITIES
+        + BC_MUNICIPALITIES_BATCH_1
+        + BC_MUNICIPALITIES_BATCH_2
+        + BC_MUNICIPALITIES_BATCH_3
+    )
     for muni_data in all_municipalities:
         sources_data = muni_data.pop("sources")
 
