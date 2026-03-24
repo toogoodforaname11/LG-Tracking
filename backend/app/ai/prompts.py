@@ -18,15 +18,21 @@ DOCUMENT:
 TASK: Determine if this document is relevant to the user's track.
 
 TOPIC DEFINITIONS (be highly sensitive to these):
-- "toa" = Transit Oriented Areas — TOA designations, transit-oriented development, density near transit
+- "tod" = Transit Oriented Development — TOD policies, transit-oriented development plans, transit corridor planning, density along transit routes
+- "toa_impl" = Transit Oriented Areas (TOA) implementation — TOA designations, TOA bylaws, TOA zoning, transit area plans
+- "area_plans" = Area Plans — local area plans, neighbourhood plans, community-level land use plans
+- "brt" = BRT (Bus Rapid Transit) or bus priority infrastructure — bus rapid transit, BRT corridors, bus lanes, transit priority signals
+- "multimodal" = Multimodal transport and active transportation — cycling infrastructure, pedestrian networks, bike lanes, active transport, complete streets, multi-modal
+- "provincial_targets" = Alignment with provincial housing targets / Housing Needs Reports — provincial housing targets, housing needs reports, mandated housing units, compliance with provincial requirements
 - "ssmuh" = Small-Scale Multi-Unit Housing — SSMUH, duplex, triplex, fourplex, missing middle housing, small-scale multi-unit
 - "housing_statutes" = Housing Statutes Amendment bills, Bill 44, Bill 46, Bill 47, provincial housing legislation, Housing Statutes Amendment Act
 - "ocp_housing" = Official Community Plan housing updates — OCP amendments related to housing, housing designations in community plans
 - "zoning_density" = Zoning/rezoning for housing density — upzoning, density bonuses, zoning bylaw amendments for housing
-- "dev_permits_housing" = Development permits affecting housing — DP applications for residential, housing development variance permits
-- "other_housing" = Any other housing-related bylaws, motions, or legislation not covered above
+- "dev_permits_housing" = Development permits affecting housing supply — DP applications for residential, housing development variance permits
+- "dev_cost_charges" = Development cost charges or affordability incentives — DCCs, community amenity contributions, density bonusing, affordable housing incentives, fee waivers
+- "other_housing_transit" = Any other housing or transit-related bylaws, motions, or legislation not covered above
 
-BYLAW/KEYWORD EXACT-MATCH RULE: If any keyword looks like a bylaw number (e.g. "Bylaw 1700", "BL 1700"), a bill name (e.g. "Bill 44"), or a specific act name (e.g. "Housing Statutes Amendment Act"), treat it as an EXACT-MATCH trigger. If that bylaw/bill/act appears ANYWHERE in the document, it is a match with confidence 1.0 regardless of topic alignment.
+KEYWORD HIGH-PRIORITY RULE: The user's keywords field is the HIGHEST priority trigger. Every keyword — whether it looks like a bylaw number (e.g. "Bylaw 1700"), a bill name (e.g. "Bill 44"), an act name (e.g. "Housing Statutes Amendment Act"), or a general term (e.g. "TOA zoning") — should be treated as an exact-match trigger. If ANY keyword appears in the document text, it is a match with confidence 1.0 regardless of topic alignment. Keywords take precedence over topic matching.
 
 Respond in JSON format:
 {{
@@ -37,7 +43,7 @@ Respond in JSON format:
   "reason": "Brief explanation of why this matches or doesn't match"
 }}
 
-Be generous with matching — if a document MIGHT be relevant to housing, mark it as a match with lower confidence. Only reject clearly irrelevant items."""
+Be generous with matching — if a document MIGHT be relevant to housing or transit, mark it as a match with lower confidence. Only reject clearly irrelevant items."""
 
 SUMMARY_PROMPT = """You are a BC local government hearing analyst creating a concise briefing.
 
@@ -108,15 +114,21 @@ USER TRACK:
 - Keywords: {keywords}
 
 TOPIC DEFINITIONS (be highly sensitive to these):
-- "toa" = Transit Oriented Areas — TOA designations, transit-oriented development, density near transit
-- "ssmuh" = Small-Scale Multi-Unit Housing — SSMUH, duplex, triplex, fourplex, missing middle housing, small-scale multi-unit
-- "housing_statutes" = Housing Statutes Amendment bills, Bill 44, Bill 46, Bill 47, provincial housing legislation, Housing Statutes Amendment Act
-- "ocp_housing" = Official Community Plan housing updates — OCP amendments related to housing, housing designations in community plans
-- "zoning_density" = Zoning/rezoning for housing density — upzoning, density bonuses, zoning bylaw amendments for housing
-- "dev_permits_housing" = Development permits affecting housing — DP applications for residential, housing development variance permits
-- "other_housing" = Any other housing-related bylaws, motions, or legislation not covered above
+- "tod" = Transit Oriented Development — TOD policies, transit-oriented development plans, transit corridor planning
+- "toa_impl" = Transit Oriented Areas (TOA) implementation — TOA designations, TOA bylaws, TOA zoning
+- "area_plans" = Area Plans — local area plans, neighbourhood plans, community-level land use plans
+- "brt" = BRT (Bus Rapid Transit) or bus priority infrastructure — bus rapid transit, BRT corridors, bus lanes
+- "multimodal" = Multimodal transport and active transportation — cycling, pedestrian networks, bike lanes, complete streets
+- "provincial_targets" = Provincial housing targets / Housing Needs Reports — mandated housing units, compliance
+- "ssmuh" = Small-Scale Multi-Unit Housing — SSMUH, duplex, triplex, fourplex, missing middle
+- "housing_statutes" = Housing Statutes Amendment bills — Bill 44, Bill 46, Bill 47, provincial housing legislation
+- "ocp_housing" = OCP housing updates — OCP amendments related to housing, housing designations
+- "zoning_density" = Zoning/rezoning for housing density — upzoning, density bonuses, zoning bylaw amendments
+- "dev_permits_housing" = Development permits affecting housing supply — DP applications, housing variance permits
+- "dev_cost_charges" = Development cost charges or affordability incentives — DCCs, amenity contributions, fee waivers
+- "other_housing_transit" = Any other housing or transit-related bylaws, motions, or legislation
 
-BYLAW/KEYWORD EXACT-MATCH RULE: If any keyword looks like a bylaw number (e.g. "Bylaw 1700"), a bill name (e.g. "Bill 44"), or a specific act name (e.g. "Housing Statutes Amendment Act"), treat it as an EXACT-MATCH trigger. If that bylaw/bill/act appears ANYWHERE in the document, it is a match with confidence 1.0 regardless of topic alignment.
+KEYWORD HIGH-PRIORITY RULE: Every keyword in the user's keywords field is a HIGH PRIORITY exact-match trigger. If ANY keyword appears in the document, it is a match with confidence 1.0 regardless of topic alignment.
 
 DOCUMENTS (evaluate each one):
 {documents_list}
@@ -134,7 +146,7 @@ For EACH document, determine relevance. Respond with a JSON array:
   ...
 ]
 
-Be generous — if a document MIGHT be relevant to housing, mark it as a match with lower confidence."""
+Be generous — if a document MIGHT be relevant to housing or transit, mark it as a match with lower confidence."""
 
 # Batch summary prompt — summarize multiple matched documents in one call
 BATCH_SUMMARY_PROMPT = """You are a BC local government hearing analyst creating concise briefings.

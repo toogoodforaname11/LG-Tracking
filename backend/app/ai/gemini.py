@@ -206,23 +206,35 @@ def keyword_fallback_match(
     """
     content_lower = content.lower()
 
-    # Check for exact bylaw/bill/act keyword matches first (high confidence)
-    bylaw_matches = []
-    regular_matches = []
-    for kw in keywords:
-        if kw.lower() in content_lower:
-            if _is_bylaw_keyword(kw):
-                bylaw_matches.append(kw)
-            else:
-                regular_matches.append(kw)
+    # All keywords are high-priority exact-match triggers
+    matched_keywords = [kw for kw in keywords if kw.lower() in content_lower]
 
-    matched_keywords = bylaw_matches + regular_matches
-
-    # Topic keyword mappings — focused on housing/transit/bylaw topics
+    # Topic keyword mappings — housing, transit, and provincial priority topics
     topic_keywords = {
-        "toa": [
-            "transit oriented", "transit-oriented", "toa", "transit area",
-            "density near transit", "transit village", "rapid transit",
+        "tod": [
+            "transit oriented development", "transit-oriented development", "tod",
+            "transit corridor", "density along transit",
+        ],
+        "toa_impl": [
+            "transit oriented area", "transit-oriented area", "toa",
+            "toa designation", "toa bylaw", "toa zoning", "transit area plan",
+        ],
+        "area_plans": [
+            "local area plan", "neighbourhood plan", "neighborhood plan",
+            "area plan", "community plan", "land use plan",
+        ],
+        "brt": [
+            "bus rapid transit", "brt", "bus priority", "bus lane",
+            "transit priority", "rapid bus",
+        ],
+        "multimodal": [
+            "multimodal", "multi-modal", "active transportation", "cycling",
+            "bike lane", "pedestrian", "complete street", "active transport",
+        ],
+        "provincial_targets": [
+            "provincial housing target", "housing needs report",
+            "mandated housing", "provincial requirement", "housing target",
+            "compliance", "housing needs assessment",
         ],
         "ssmuh": [
             "small-scale multi-unit", "ssmuh", "duplex", "triplex", "fourplex",
@@ -244,10 +256,16 @@ def keyword_fallback_match(
             "development permit", "dp application", "development variance",
             "housing permit", "residential permit", "building permit",
         ],
-        "other_housing": [
+        "dev_cost_charges": [
+            "development cost charge", "dcc", "community amenity contribution",
+            "density bonus", "affordability incentive", "fee waiver",
+            "amenity contribution",
+        ],
+        "other_housing_transit": [
             "housing", "affordable housing", "rental", "housing strategy",
             "housing bylaw", "housing policy", "residential", "shelter",
             "supportive housing", "social housing", "housing agreement",
+            "transit", "transportation",
         ],
     }
 
@@ -259,12 +277,12 @@ def keyword_fallback_match(
 
     is_match = bool(matched_keywords or matched_topics)
 
-    # Bylaw exact matches get high confidence
-    if bylaw_matches:
+    # Any keyword match gets high confidence (keywords are high-priority triggers)
+    if matched_keywords:
         confidence = 1.0
     else:
-        total_possible = len(keywords) + len(topics)
-        total_matched = len(matched_keywords) + len(matched_topics)
+        total_possible = len(topics)
+        total_matched = len(matched_topics)
         confidence = total_matched / max(total_possible, 1)
 
     return {
@@ -273,9 +291,7 @@ def keyword_fallback_match(
         "matched_topics": matched_topics,
         "matched_keywords": matched_keywords,
         "reason": (
-            f"Bylaw exact match: {bylaw_matches}, Keyword match: {regular_matches}, Topic match: {matched_topics}"
-            if bylaw_matches
-            else f"Keyword match: {matched_keywords}, Topic match: {matched_topics}"
+            f"Keyword exact match: {matched_keywords}, Topic match: {matched_topics}"
             if is_match
             else "No keyword or topic matches found"
         ),
