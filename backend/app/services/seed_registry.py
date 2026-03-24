@@ -1497,6 +1497,201 @@ BC_MUNICIPALITIES_BATCH_6 = [
     },
 ]
 
+# Batch 7 – 10 municipalities with correct specific meeting pages
+BC_MUNICIPALITIES_BATCH_7 = [
+    {
+        "name": "City of Powell River",
+        "short_name": "Powell River",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.powellriver.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://powellriver.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Powell River CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://powellriver.civicweb.net/filepro/documents/",
+                "label": "Powell River CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Squamish",
+        "short_name": "Squamish",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.squamish.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://squamish.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Squamish CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://squamish.civicweb.net/filepro/documents/",
+                "label": "Squamish CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Resort Municipality of Whistler",
+        "short_name": "Whistler",
+        "gov_type": GovType.MOUNTAIN_RESORT,
+        "region": "BC",
+        "website_url": "https://www.whistler.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://whistler.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Whistler CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://whistler.civicweb.net/filepro/documents/",
+                "label": "Whistler CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Revelstoke",
+        "short_name": "Revelstoke",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.revelstoke.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.revelstoke.ca/council",
+                "label": "Revelstoke Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Town of Golden",
+        "short_name": "Golden",
+        "gov_type": GovType.TOWN,
+        "region": "BC",
+        "website_url": "https://www.golden.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.golden.ca/council",
+                "label": "Golden Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Cranbrook",
+        "short_name": "Cranbrook",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.cranbrook.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.cranbrook.ca/council",
+                "label": "Cranbrook Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Kimberley",
+        "short_name": "Kimberley",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.kimberley.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.kimberley.ca/council",
+                "label": "Kimberley Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Rossland",
+        "short_name": "Rossland",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.rossland.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.rossland.ca/council",
+                "label": "Rossland Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Sparwood",
+        "short_name": "Sparwood",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.sparwood.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.sparwood.ca/council",
+                "label": "Sparwood Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Elkford",
+        "short_name": "Elkford",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.elkford.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.elkford.ca/council",
+                "label": "Elkford Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+]
+
 
 async def seed_registry(db: AsyncSession) -> dict:
     """Seed the registry with BC municipalities and sources.
@@ -1513,6 +1708,7 @@ async def seed_registry(db: AsyncSession) -> dict:
         + BC_MUNICIPALITIES_BATCH_4
         + BC_MUNICIPALITIES_BATCH_5
         + BC_MUNICIPALITIES_BATCH_6
+        + BC_MUNICIPALITIES_BATCH_7
     )
     for muni_data in all_municipalities:
         sources_data = muni_data.pop("sources")
