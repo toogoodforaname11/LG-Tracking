@@ -1692,6 +1692,208 @@ BC_MUNICIPALITIES_BATCH_7 = [
     },
 ]
 
+# Batch 8 – 10 municipalities with correct specific meeting pages
+BC_MUNICIPALITIES_BATCH_8 = [
+    {
+        "name": "City of Port Moody",
+        "short_name": "Port Moody",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.portmoody.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://portmoody.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Port Moody CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://portmoody.civicweb.net/filepro/documents/",
+                "label": "Port Moody CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Pitt Meadows",
+        "short_name": "Pitt Meadows",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.pittmeadows.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://pittmeadows.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Pitt Meadows CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://pittmeadows.civicweb.net/filepro/documents/",
+                "label": "Pitt Meadows CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Hope",
+        "short_name": "Hope",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.hope.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.hope.ca/council",
+                "label": "Hope Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Kent",
+        "short_name": "Kent",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.kentbc.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.kentbc.ca/council",
+                "label": "Kent Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Harrison Hot Springs",
+        "short_name": "Harrison Hot Springs",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.harrisonhotsprings.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.harrisonhotsprings.ca/council",
+                "label": "Harrison Hot Springs Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Lions Bay",
+        "short_name": "Lions Bay",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.lionsbay.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.lionsbay.ca/council",
+                "label": "Lions Bay Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Bowen Island Municipality",
+        "short_name": "Bowen Island",
+        "gov_type": GovType.ISLAND_MUNICIPALITY,
+        "region": "BC",
+        "website_url": "https://www.bowenislandmunicipality.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://bowenisland.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Bowen Island CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://bowenisland.civicweb.net/filepro/documents/",
+                "label": "Bowen Island CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Town of Gibsons",
+        "short_name": "Gibsons",
+        "gov_type": GovType.TOWN,
+        "region": "BC",
+        "website_url": "https://www.gibsons.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.gibsons.ca/council",
+                "label": "Gibsons Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Sechelt",
+        "short_name": "Sechelt",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.sechelt.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://sechelt.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Sechelt CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://sechelt.civicweb.net/filepro/documents/",
+                "label": "Sechelt CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Pemberton",
+        "short_name": "Pemberton",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.pemberton.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.pemberton.ca/council",
+                "label": "Pemberton Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+]
+
 
 async def seed_registry(db: AsyncSession) -> dict:
     """Seed the registry with BC municipalities and sources.
@@ -1709,6 +1911,7 @@ async def seed_registry(db: AsyncSession) -> dict:
         + BC_MUNICIPALITIES_BATCH_5
         + BC_MUNICIPALITIES_BATCH_6
         + BC_MUNICIPALITIES_BATCH_7
+        + BC_MUNICIPALITIES_BATCH_8
     )
     for muni_data in all_municipalities:
         sources_data = muni_data.pop("sources")
