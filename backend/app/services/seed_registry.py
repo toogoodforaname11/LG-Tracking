@@ -881,6 +881,188 @@ BC_MUNICIPALITIES_BATCH_3 = [
     },
 ]
 
+# Batch 4 – 10 municipalities with correct specific meeting pages
+BC_MUNICIPALITIES_BATCH_4 = [
+    {
+        "name": "City of Prince Rupert",
+        "short_name": "Prince Rupert",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.princerupert.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.princerupert.ca/council-meetings",
+                "label": "Prince Rupert Council Meetings",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Quesnel",
+        "short_name": "Quesnel",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.quesnel.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.quesnel.ca/council",
+                "label": "Quesnel Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Richmond",
+        "short_name": "Richmond",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.richmond.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@CityofRichmondBC",
+                "label": "Richmond YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Saanich",
+        "short_name": "Saanich",
+        "gov_type": GovType.DISTRICT,
+        "region": "CRD",
+        "website_url": "https://www.saanich.ca/",
+        "population": 117735,
+        # Already in CRD list (custom); Granicus source added here.
+        "sources": [
+            {
+                "platform": Platform.GRANICUS,
+                "source_type": SourceType.AGENDA,
+                "url": "https://saanich.ca.granicus.com",
+                "label": "Saanich Granicus Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Salmon Arm",
+        "short_name": "Salmon Arm",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.salmonarm.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.salmonarm.ca/council",
+                "label": "Salmon Arm Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Surrey",
+        "short_name": "Surrey",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.surrey.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.surrey.ca/council",
+                "label": "Surrey Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Terrace",
+        "short_name": "Terrace",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.terrace.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.terrace.ca/council",
+                "label": "Terrace Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Trail",
+        "short_name": "Trail",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.trail.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.trail.ca/council",
+                "label": "Trail Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Vancouver",
+        "short_name": "Vancouver",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.vancouver.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@VanCityClerk",
+                "label": "Vancouver YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Vernon",
+        "short_name": "Vernon",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.vernon.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://vernon.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Vernon CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://vernon.civicweb.net/filepro/documents/",
+                "label": "Vernon CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+]
+
 
 async def seed_registry(db: AsyncSession) -> dict:
     """Seed the registry with BC municipalities and sources.
@@ -894,6 +1076,7 @@ async def seed_registry(db: AsyncSession) -> dict:
         + BC_MUNICIPALITIES_BATCH_1
         + BC_MUNICIPALITIES_BATCH_2
         + BC_MUNICIPALITIES_BATCH_3
+        + BC_MUNICIPALITIES_BATCH_4
     )
     for muni_data in all_municipalities:
         sources_data = muni_data.pop("sources")
