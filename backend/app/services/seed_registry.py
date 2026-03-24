@@ -3182,6 +3182,199 @@ BC_MUNICIPALITIES_BATCH_15 = [
     },
 ]
 
+# Batch 16 – final 11 municipalities (completes all 161 BC municipalities)
+# Note: some entries overlap with Batch 15; duplicates are handled by seed_registry's
+# existing-check logic (skipped if short_name already exists).
+BC_MUNICIPALITIES_BATCH_16 = [
+    {
+        "name": "Town of Fort Nelson",
+        "short_name": "Fort Nelson",
+        "gov_type": GovType.TOWN,
+        "region": "BC",
+        "website_url": "https://www.fortnelson.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.fortnelson.ca/council",
+                "label": "Fort Nelson Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Northern Rockies Regional Municipality",
+        "short_name": "Northern Rockies",
+        "gov_type": GovType.REGIONAL_MUNICIPALITY,
+        "region": "BC",
+        "website_url": "https://www.northernrockies.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.northernrockies.ca/council",
+                "label": "Northern Rockies Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Wells",
+        "short_name": "Wells",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.wellsbc.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.wellsbc.ca/council",
+                "label": "Wells Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of McBride",
+        "short_name": "McBride",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.mcbride.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.mcbride.ca/council",
+                "label": "McBride Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Granisle",
+        "short_name": "Granisle",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.granisle.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.granisle.ca/council",
+                "label": "Granisle Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Telkwa",
+        "short_name": "Telkwa",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.telkwa.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.telkwa.ca/council",
+                "label": "Telkwa Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of New Hazelton",
+        "short_name": "New Hazelton",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.newhazelton.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.newhazelton.ca/council",
+                "label": "New Hazelton Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Hazelton",
+        "short_name": "Hazelton",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.hazelton.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.hazelton.ca/council",
+                "label": "Hazelton Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Stewart",
+        "short_name": "Stewart",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.stewartbc.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.stewartbc.ca/council",
+                "label": "Stewart Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Port Edward",
+        "short_name": "Port Edward",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.portedward.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.portedward.ca/council",
+                "label": "Port Edward Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Tumbler Ridge",
+        "short_name": "Tumbler Ridge",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.tumblerridge.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.tumblerridge.ca/council",
+                "label": "Tumbler Ridge Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+]
+
 
 async def seed_registry(db: AsyncSession) -> dict:
     """Seed the registry with BC municipalities and sources.
@@ -3207,6 +3400,7 @@ async def seed_registry(db: AsyncSession) -> dict:
         + BC_MUNICIPALITIES_BATCH_13
         + BC_MUNICIPALITIES_BATCH_14
         + BC_MUNICIPALITIES_BATCH_15
+        + BC_MUNICIPALITIES_BATCH_16
     )
     for muni_data in all_municipalities:
         sources_data = muni_data.pop("sources")
