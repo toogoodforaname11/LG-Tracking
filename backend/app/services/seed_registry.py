@@ -2089,6 +2089,180 @@ BC_MUNICIPALITIES_BATCH_9 = [
     },
 ]
 
+# Batch 10 – 10 municipalities with correct specific meeting pages
+BC_MUNICIPALITIES_BATCH_10 = [
+    {
+        "name": "District of Kitimat",
+        "short_name": "Kitimat",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.kitimat.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.kitimat.ca/council",
+                "label": "Kitimat Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Town of Smithers",
+        "short_name": "Smithers",
+        "gov_type": GovType.TOWN,
+        "region": "BC",
+        "website_url": "https://www.smithers.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.smithers.ca/council",
+                "label": "Smithers Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Houston",
+        "short_name": "Houston",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.houston.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.houston.ca/council",
+                "label": "Houston Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Vanderhoof",
+        "short_name": "Vanderhoof",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.vanderhoof.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.vanderhoof.ca/council",
+                "label": "Vanderhoof Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Mackenzie",
+        "short_name": "Mackenzie",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.mackenzie.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.mackenzie.ca/council",
+                "label": "Mackenzie Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Fort St. James",
+        "short_name": "Fort St. James",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.fortstjames.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.fortstjames.ca/council",
+                "label": "Fort St. James Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Dawson Creek",
+        "short_name": "Dawson Creek",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.dawsoncreek.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.GRANICUS,
+                "source_type": SourceType.AGENDA,
+                "url": "https://dawsoncreek.ca.granicus.com",
+                "label": "Dawson Creek Granicus Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Chetwynd",
+        "short_name": "Chetwynd",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.chetwynd.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.chetwynd.ca/council",
+                "label": "Chetwynd Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Tumbler Ridge",
+        "short_name": "Tumbler Ridge",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.tumblerridge.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.tumblerridge.ca/council",
+                "label": "Tumbler Ridge Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Hudson's Hope",
+        "short_name": "Hudson's Hope",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.hudsonshope.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.hudsonshope.ca/council",
+                "label": "Hudson's Hope Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+]
+
 
 async def seed_registry(db: AsyncSession) -> dict:
     """Seed the registry with BC municipalities and sources.
@@ -2108,6 +2282,7 @@ async def seed_registry(db: AsyncSession) -> dict:
         + BC_MUNICIPALITIES_BATCH_7
         + BC_MUNICIPALITIES_BATCH_8
         + BC_MUNICIPALITIES_BATCH_9
+        + BC_MUNICIPALITIES_BATCH_10
     )
     for muni_data in all_municipalities:
         sources_data = muni_data.pop("sources")
