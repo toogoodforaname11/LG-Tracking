@@ -1,7 +1,7 @@
 import enum
 from datetime import datetime
 
-from sqlalchemy import String, Text, Enum, DateTime, Integer, Boolean, ForeignKey, Index
+from sqlalchemy import String, Text, Enum, DateTime, Integer, Boolean, ForeignKey, Index, JSON
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.database import Base
@@ -58,6 +58,8 @@ class Document(Base):
     url: Mapped[str] = mapped_column(Text, nullable=False)
     content_hash: Mapped[str | None] = mapped_column(String(64))  # SHA-256
     raw_text: Mapped[str | None] = mapped_column(Text)  # Extracted text for AI processing
+    video_timestamps: Mapped[list | None] = mapped_column(JSON)  # [{t: "0:15:30", label: "Public Hearing - OCP"}, ...]
+    video_duration: Mapped[str | None] = mapped_column(String(10))  # HH:MM:SS
     is_new: Mapped[bool] = mapped_column(Boolean, default=True)
     is_processed: Mapped[bool] = mapped_column(Boolean, default=False)  # AI processing done
     first_seen_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)

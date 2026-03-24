@@ -1,8 +1,11 @@
-"""Gemini AI client for matching and summarization."""
+"""Gemini AI client for matching and summarization.
+
+Supports batching to reduce API costs — multiple documents can be
+matched or summarized in a single Gemini call.
+"""
 
 import json
 import logging
-from typing import Any
 
 from app.config import settings
 
@@ -11,6 +14,10 @@ logger = logging.getLogger(__name__)
 # Lazy import — only needed when actually calling Gemini
 _genai = None
 _model = None
+
+# Batch size limits
+MATCH_BATCH_SIZE = 10  # Match up to 10 docs per Gemini call
+SUMMARY_BATCH_SIZE = 5  # Summarize up to 5 docs per call (summaries are larger)
 
 
 def _get_model():
@@ -23,11 +30,8 @@ def _get_model():
     return _model
 
 
-async def gemini_match(prompt: str) -> dict:
-    """Run a matching prompt and parse JSON response.
-
-    Returns parsed dict or a fallback if parsing fails.
-    """
+async def gemini_match(prompt: str) -> dict | None:
+    """Run a matching prompt and parse JSON response."""
     if not settings.gemini_api_key:
         logger.warning("Gemini API key not set — using keyword fallback matching")
         return None
@@ -51,7 +55,37 @@ async def gemini_match(prompt: str) -> dict:
         return None
 
 
-async def gemini_summarize(prompt: str) -> dict:
+async def gemini_batch_match(prompt: str) -> list[dict] | None:
+    """Run a batch matching prompt. Returns list of match results per document."""
+    if not settings.gemini_api_key:
+        return None
+
+    try:
+        model = _get_model()
+        response = model.generate_content(
+            prompt,
+            generation_config={
+                "temperature": 0.1,
+                "max_output_tokens": 2000,
+                "response_mime_type": "application/json",
+            },
+        )
+        result = json.loads(response.text)
+        # Handle both array and object responses
+        if isinstance(result, list):
+            return result
+        if isinstance(result, dict) and "results" in result:
+            return result["results"]
+        return [result]
+    except json.JSONDecodeError:
+        logger.error(f"Gemini batch match returned non-JSON: {response.text[:200]}")
+        return None
+    except Exception as e:
+        logger.error(f"Gemini batch match failed: {e}")
+        return None
+
+
+async def gemini_summarize(prompt: str) -> dict | None:
     """Run a summarization prompt and parse JSON response."""
     if not settings.gemini_api_key:
         logger.warning("Gemini API key not set — skipping summarization")
@@ -76,8 +110,37 @@ async def gemini_summarize(prompt: str) -> dict:
         return None
 
 
+async def gemini_batch_summarize(prompt: str) -> list[dict] | None:
+    """Run a batch summarization prompt. Returns list of summaries per document."""
+    if not settings.gemini_api_key:
+        return None
+
+    try:
+        model = _get_model()
+        response = model.generate_content(
+            prompt,
+            generation_config={
+                "temperature": 0.3,
+                "max_output_tokens": 5000,
+                "response_mime_type": "application/json",
+            },
+        )
+        result = json.loads(response.text)
+        if isinstance(result, list):
+            return result
+        if isinstance(result, dict) and "results" in result:
+            return result["results"]
+        return [result]
+    except json.JSONDecodeError:
+        logger.error(f"Gemini batch summary returned non-JSON: {response.text[:200]}")
+        return None
+    except Exception as e:
+        logger.error(f"Gemini batch summary failed: {e}")
+        return None
+
+
 async def gemini_embed(text: str) -> list[float] | None:
-    """Generate embedding for text using Gemini Embedding-2."""
+    """Generate embedding for text using Gemini text-embedding-004."""
     if not settings.gemini_api_key:
         return None
 
@@ -93,6 +156,35 @@ async def gemini_embed(text: str) -> list[float] | None:
     except Exception as e:
         logger.error(f"Gemini embed call failed: {e}")
         return None
+
+
+async def gemini_batch_embed(texts: list[str]) -> list[list[float] | None]:
+    """Batch embed multiple texts in a single API call.
+
+    Gemini embed_content supports batching natively — pass a list of strings.
+    This reduces API calls from N to 1.
+    """
+    if not settings.gemini_api_key:
+        return [None] * len(texts)
+
+    try:
+        if _genai is None:
+            _get_model()
+
+        # Gemini embed_content accepts a list for batch embedding
+        result = _genai.embed_content(
+            model="models/text-embedding-004",
+            content=texts,
+            task_type="retrieval_document",
+        )
+        return result["embedding"]
+    except Exception as e:
+        logger.error(f"Gemini batch embed failed: {e}")
+        # Fallback: try individual embeds
+        embeddings = []
+        for text in texts:
+            embeddings.append(await gemini_embed(text))
+        return embeddings
 
 
 def keyword_fallback_match(
