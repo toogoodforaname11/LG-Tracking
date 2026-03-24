@@ -1271,6 +1271,232 @@ BC_MUNICIPALITIES_BATCH_5 = [
     },
 ]
 
+# Batch 6 – 10 municipalities with correct specific meeting pages
+BC_MUNICIPALITIES_BATCH_6 = [
+    {
+        "name": "City of Langford",
+        "short_name": "Langford",
+        "gov_type": GovType.CITY,
+        "region": "CRD",
+        "website_url": "https://langford.ca/",
+        "population": 46584,
+        # Already in CRD list (custom); CivicWeb source added here.
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://langford.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Langford CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://langford.civicweb.net/filepro/documents/",
+                "label": "Langford CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Township of Esquimalt",
+        "short_name": "Esquimalt",
+        "gov_type": GovType.DISTRICT,
+        "region": "CRD",
+        "website_url": "https://www.esquimalt.ca/",
+        "population": 17655,
+        # Already in CRD list (custom); CivicWeb source added here.
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://esquimalt.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Esquimalt CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://esquimalt.civicweb.net/filepro/documents/",
+                "label": "Esquimalt CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Highlands",
+        "short_name": "Highlands",
+        "gov_type": GovType.DISTRICT,
+        "region": "CRD",
+        "website_url": "https://www.highlands.ca/",
+        "population": 2373,
+        # Already in CRD list (custom); CivicWeb source added here.
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://highlands.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Highlands CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://highlands.civicweb.net/filepro/documents/",
+                "label": "Highlands CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Courtenay",
+        "short_name": "Courtenay",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.courtenay.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.GRANICUS,
+                "source_type": SourceType.AGENDA,
+                "url": "https://courtenay.ca.granicus.com",
+                "label": "Courtenay Granicus Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Town of Comox",
+        "short_name": "Comox",
+        "gov_type": GovType.TOWN,
+        "region": "BC",
+        "website_url": "https://www.comox.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://comox.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Comox CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://comox.civicweb.net/filepro/documents/",
+                "label": "Comox CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Cumberland",
+        "short_name": "Cumberland",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.cumberland.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.cumberland.ca/council",
+                "label": "Cumberland Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Port Alberni",
+        "short_name": "Port Alberni",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.portalberni.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.GRANICUS,
+                "source_type": SourceType.AGENDA,
+                "url": "https://portalberni.ca.granicus.com",
+                "label": "Port Alberni Granicus Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Parksville",
+        "short_name": "Parksville",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.parksville.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://parksville.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Parksville CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://parksville.civicweb.net/filepro/documents/",
+                "label": "Parksville CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Town of Qualicum Beach",
+        "short_name": "Qualicum Beach",
+        "gov_type": GovType.TOWN,
+        "region": "BC",
+        "website_url": "https://www.qualicumbeach.com/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://qualicumbeach.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Qualicum Beach CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://qualicumbeach.civicweb.net/filepro/documents/",
+                "label": "Qualicum Beach CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Town of Ladysmith",
+        "short_name": "Ladysmith",
+        "gov_type": GovType.TOWN,
+        "region": "BC",
+        "website_url": "https://www.ladysmith.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://ladysmith.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Ladysmith CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://ladysmith.civicweb.net/filepro/documents/",
+                "label": "Ladysmith CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+]
+
 
 async def seed_registry(db: AsyncSession) -> dict:
     """Seed the registry with BC municipalities and sources.
@@ -1286,6 +1512,7 @@ async def seed_registry(db: AsyncSession) -> dict:
         + BC_MUNICIPALITIES_BATCH_3
         + BC_MUNICIPALITIES_BATCH_4
         + BC_MUNICIPALITIES_BATCH_5
+        + BC_MUNICIPALITIES_BATCH_6
     )
     for muni_data in all_municipalities:
         sources_data = muni_data.pop("sources")
