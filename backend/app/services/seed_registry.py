@@ -1894,6 +1894,201 @@ BC_MUNICIPALITIES_BATCH_8 = [
     },
 ]
 
+# Batch 9 – 10 municipalities with correct specific meeting pages
+BC_MUNICIPALITIES_BATCH_9 = [
+    {
+        "name": "District of Summerland",
+        "short_name": "Summerland",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.summerland.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://summerland.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Summerland CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://summerland.civicweb.net/filepro/documents/",
+                "label": "Summerland CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Peachland",
+        "short_name": "Peachland",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.peachland.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://peachland.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Peachland CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://peachland.civicweb.net/filepro/documents/",
+                "label": "Peachland CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Lake Country",
+        "short_name": "Lake Country",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.lakecountry.bc.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://lakecountry.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Lake Country CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://lakecountry.civicweb.net/filepro/documents/",
+                "label": "Lake Country CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Township of Spallumcheen",
+        "short_name": "Spallumcheen",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.spallumcheen.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.spallumcheen.ca/council",
+                "label": "Spallumcheen Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Coldstream",
+        "short_name": "Coldstream",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.coldstream.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.coldstream.ca/council",
+                "label": "Coldstream Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Lumby",
+        "short_name": "Lumby",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.lumby.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.lumby.ca/council",
+                "label": "Lumby Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Sicamous",
+        "short_name": "Sicamous",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.sicamous.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.sicamous.ca/council",
+                "label": "Sicamous Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Enderby",
+        "short_name": "Enderby",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.enderby.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.enderby.ca/council",
+                "label": "Enderby Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Salmon Arm",
+        "short_name": "Salmon Arm",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.salmonarm.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.GRANICUS,
+                "source_type": SourceType.AGENDA,
+                "url": "https://salmonarm.ca.granicus.com",
+                "label": "Salmon Arm Granicus Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Revelstoke",
+        "short_name": "Revelstoke",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.revelstoke.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.revelstoke.ca/council",
+                "label": "Revelstoke Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+]
+
 
 async def seed_registry(db: AsyncSession) -> dict:
     """Seed the registry with BC municipalities and sources.
@@ -1912,6 +2107,7 @@ async def seed_registry(db: AsyncSession) -> dict:
         + BC_MUNICIPALITIES_BATCH_6
         + BC_MUNICIPALITIES_BATCH_7
         + BC_MUNICIPALITIES_BATCH_8
+        + BC_MUNICIPALITIES_BATCH_9
     )
     for muni_data in all_municipalities:
         sources_data = muni_data.pop("sources")
