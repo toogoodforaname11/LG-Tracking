@@ -21,22 +21,159 @@ const AVAILABLE_TOPICS = [
   { id: "other_housing_transit", label: "Other Housing or Transit-Related Bylaws / Legislation" },
 ] as const;
 
-// Municipalities sourced from seed registry — Colwood first, then CRD alphabetical
+// All BC municipalities sourced from seed registry — alphabetical
 const MUNICIPALITIES = [
-  "Colwood",
+  "100 Mile House",
+  "Abbotsford",
+  "Ainsworth Hot Springs",
+  "Alert Bay",
+  "Armstrong",
+  "Ashcroft",
+  "Balfour",
+  "Barriere",
+  "Bowen Island",
+  "Burnaby",
+  "Cache Creek",
+  "Campbell River",
+  "Canal Flats",
+  "Castlegar",
   "Central Saanich",
+  "Chase",
+  "Chetwynd",
+  "Chilliwack",
+  "Christina Lake",
+  "Clearwater",
+  "Clinton",
+  "Coldstream",
+  "Colwood",
+  "Comox",
+  "Coquitlam",
+  "Courtenay",
+  "Cranbrook",
   "CRD",
+  "Creston",
+  "Cumberland",
+  "Dawson Creek",
+  "Duncan",
+  "Elkford",
+  "Enderby",
   "Esquimalt",
+  "Fernie",
+  "Fort Nelson",
+  "Fort St. James",
+  "Fort St. John",
+  "Fruitvale",
+  "Gibsons",
+  "Gold River",
+  "Golden",
+  "Grand Forks",
+  "Granisle",
+  "Greenwood",
+  "Harrison Hot Springs",
+  "Hazelton",
   "Highlands",
+  "Hope",
+  "Houston",
+  "Hudson's Hope",
+  "Invermere",
+  "Kamloops",
+  "Kaslo",
+  "Kelowna",
+  "Kent",
+  "Keremeos",
+  "Kimberley",
+  "Kitimat",
+  "Ladysmith",
+  "Lake Country",
+  "Lake Cowichan",
   "Langford",
+  "Langley City",
+  "Langley Township",
+  "Lantzville",
+  "Lillooet",
+  "Lions Bay",
+  "Logan Lake",
+  "Lumby",
+  "Mackenzie",
+  "Maple Ridge",
+  "McBride",
+  "Merritt",
   "Metchosin",
+  "Midway",
+  "Mission",
+  "Montrose",
+  "Nakusp",
+  "Nanaimo",
+  "Nelson",
+  "New Denver",
+  "New Hazelton",
+  "New Westminster",
   "North Saanich",
+  "North Vancouver City",
+  "North Vancouver District",
+  "Northern Rockies",
   "Oak Bay",
+  "Oliver",
+  "Osoyoos",
+  "Parksville",
+  "Peachland",
+  "Pemberton",
+  "Penticton",
+  "Pitt Meadows",
+  "Port Alberni",
+  "Port Coquitlam",
+  "Port Edward",
+  "Port Hardy",
+  "Port McNeill",
+  "Port Moody",
+  "Powell River",
+  "Prince George",
+  "Prince Rupert",
+  "Princeton",
+  "Qualicum Beach",
+  "Quesnel",
+  "Radium Hot Springs",
+  "Revelstoke",
+  "Richmond",
+  "Riondel",
+  "Rossland",
   "Saanich",
+  "Salmo",
+  "Salmon Arm",
+  "Sechelt",
+  "Sicamous",
   "Sidney",
+  "Silverton",
+  "Slocan",
+  "Smithers",
   "Sooke",
+  "Spallumcheen",
+  "Sparwood",
+  "Squamish",
+  "Stewart",
+  "Summerland",
+  "Surrey",
+  "Tahsis",
+  "Telkwa",
+  "Terrace",
+  "Tofino",
+  "Trail",
+  "Tumbler Ridge",
+  "Ucluelet",
+  "Valemount",
+  "Vancouver",
+  "Vanderhoof",
+  "Vernon",
   "Victoria",
   "View Royal",
+  "Warfield",
+  "Wells",
+  "West Kelowna",
+  "West Vancouver",
+  "Whistler",
+  "White Rock",
+  "Williams Lake",
+  "Zeballos",
 ];
 
 type FormState = "idle" | "submitting" | "success" | "error";
@@ -52,6 +189,7 @@ export default function SubscribePage() {
   const [formState, setFormState] = useState<FormState>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [muniDropdownOpen, setMuniDropdownOpen] = useState(false);
+  const [muniSearch, setMuniSearch] = useState("");
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -59,6 +197,7 @@ export default function SubscribePage() {
       const target = e.target as HTMLElement;
       if (!target.closest("[data-muni-dropdown]")) {
         setMuniDropdownOpen(false);
+        setMuniSearch("");
       }
     };
     document.addEventListener("click", handleClickOutside);
@@ -247,8 +386,21 @@ export default function SubscribePage() {
             </button>
 
             {muniDropdownOpen && (
-              <div className="absolute z-10 mt-1 max-h-60 w-full overflow-y-auto rounded-lg border border-gray-200 bg-white shadow-lg">
-                {MUNICIPALITIES.map((name) => (
+              <div className="absolute z-10 mt-1 max-h-72 w-full overflow-hidden rounded-lg border border-gray-200 bg-white shadow-lg">
+                <div className="sticky top-0 border-b border-gray-100 bg-white p-2">
+                  <input
+                    type="text"
+                    value={muniSearch}
+                    onChange={(e) => setMuniSearch(e.target.value)}
+                    placeholder="Search municipalities..."
+                    className="w-full rounded border border-gray-200 px-3 py-1.5 text-sm focus:border-blue-400 focus:outline-none"
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                </div>
+                <div className="max-h-60 overflow-y-auto">
+                {MUNICIPALITIES.filter((name) =>
+                  name.toLowerCase().includes(muniSearch.toLowerCase())
+                ).map((name) => (
                   <label
                     key={name}
                     className="flex cursor-pointer items-center px-4 py-2 hover:bg-blue-50"
@@ -262,6 +414,7 @@ export default function SubscribePage() {
                     <span className="text-sm text-gray-700">{name}</span>
                   </label>
                 ))}
+                </div>
               </div>
             )}
           </div>
