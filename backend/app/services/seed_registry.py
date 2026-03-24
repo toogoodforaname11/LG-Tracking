@@ -2465,6 +2465,194 @@ BC_MUNICIPALITIES_BATCH_11 = [
     },
 ]
 
+# Batch 12 – 10 municipalities with correct specific meeting pages
+BC_MUNICIPALITIES_BATCH_12 = [
+    {
+        "name": "Village of Fruitvale",
+        "short_name": "Fruitvale",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.fruitvale.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.fruitvale.ca/council",
+                "label": "Fruitvale Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Warfield",
+        "short_name": "Warfield",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.warfield.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.warfield.ca/council",
+                "label": "Warfield Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Montrose",
+        "short_name": "Montrose",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.montrose.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.montrose.ca/council",
+                "label": "Montrose Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Greenwood",
+        "short_name": "Greenwood",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.greenwoodbc.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.greenwoodbc.ca/council",
+                "label": "Greenwood Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Midway",
+        "short_name": "Midway",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.midwaybc.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.midwaybc.ca/council",
+                "label": "Midway Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Town of Osoyoos",
+        "short_name": "Osoyoos",
+        "gov_type": GovType.TOWN,
+        "region": "BC",
+        "website_url": "https://www.osoyoos.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://osoyoos.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Osoyoos CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://osoyoos.civicweb.net/filepro/documents/",
+                "label": "Osoyoos CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Town of Oliver",
+        "short_name": "Oliver",
+        "gov_type": GovType.TOWN,
+        "region": "BC",
+        "website_url": "https://www.oliver.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://oliver.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Oliver CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://oliver.civicweb.net/filepro/documents/",
+                "label": "Oliver CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Town of Princeton",
+        "short_name": "Princeton",
+        "gov_type": GovType.TOWN,
+        "region": "BC",
+        "website_url": "https://www.princeton.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.princeton.ca/council",
+                "label": "Princeton Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Keremeos",
+        "short_name": "Keremeos",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.keremeos.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.keremeos.ca/council",
+                "label": "Keremeos Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of New Denver",
+        "short_name": "New Denver",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.newdenver.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.newdenver.ca/council",
+                "label": "New Denver Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+]
+
 
 async def seed_registry(db: AsyncSession) -> dict:
     """Seed the registry with BC municipalities and sources.
@@ -2486,6 +2674,7 @@ async def seed_registry(db: AsyncSession) -> dict:
         + BC_MUNICIPALITIES_BATCH_9
         + BC_MUNICIPALITIES_BATCH_10
         + BC_MUNICIPALITIES_BATCH_11
+        + BC_MUNICIPALITIES_BATCH_12
     )
     for muni_data in all_municipalities:
         sources_data = muni_data.pop("sources")
