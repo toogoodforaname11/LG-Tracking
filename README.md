@@ -1,12 +1,26 @@
-# BC Hearing Watch — Email-Only Prototype
+# BC Hearing Watch — Housing & Bylaw Tracking
 
-Subscribe to **immediate alerts** and **weekly AI-summarized digests** of BC municipal council meetings. One form, email-only.
+Subscribe to **immediate alerts** and **weekly AI-summarized digests** of BC municipal council meetings — focused on **housing policy, transit-oriented development, zoning, and specific bylaws**.
 
 **This is an experimental personal tool using public data. AI summaries may contain errors. Always verify with original municipal sources. Not official government communication.**
 
+## Topics Tracked
+
+- **Transit Oriented Areas (TOA)** — TOA designations, density near transit
+- **Small-Scale Multi-Unit Housing (SSMUH)** — duplex, triplex, fourplex, missing middle
+- **Housing Statutes Amendment Bills** — Bill 44, Bill 46, Bill 47, related provincial legislation
+- **Official Community Plan (OCP)** — housing-related OCP amendments and updates
+- **Zoning / Rezoning for Housing Density** — upzoning, density bonuses, zoning bylaw changes
+- **Development Permits Affecting Housing** — residential DP applications and variances
+- **Other Housing-Related Bylaws / Legislation** — anything else housing-related
+
+### Specific Bylaw Tracking
+
+You can track specific bylaws by name or number (e.g. "Bylaw 1700" or "Housing Statutes Amendment Act") in the keywords field. The system will alert you every time that exact bylaw is mentioned in any hearing, regardless of topic.
+
 ## How It Works
 
-1. **Subscribe**: Visit the form at `/`, enter your email, pick municipalities, topics, and optionally enable immediate alerts
+1. **Subscribe**: Visit the form at `/`, enter your email, pick municipalities, housing topics, and optionally enable immediate alerts
 2. **Edit**: Submit the same form with the same email — your preferences are overwritten instantly
 3. **Immediate Alerts** (opt-in): Sources are polled every 30 minutes. When a new matching council item is detected, you get an email right away
 4. **Weekly Digest** (always): Every Sunday at 8 PM Pacific, you receive a full summary of the week's matching council updates

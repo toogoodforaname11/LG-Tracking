@@ -4,13 +4,21 @@ import { useState, useEffect } from "react";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
-// Topics — easy to extend by adding entries here
+// Topics — housing, transit, and provincial priority topics
 const AVAILABLE_TOPICS = [
-  { id: "ocp_updates", label: "OCP Updates" },
-  { id: "rezoning_housing", label: "Rezoning / Housing" },
-  { id: "environment", label: "Environment" },
-  { id: "development_permits", label: "Development Permits" },
-  { id: "other", label: "Other" },
+  { id: "tod", label: "Transit Oriented Development (TOD)" },
+  { id: "toa_impl", label: "Transit Oriented Areas (TOA) Implementation" },
+  { id: "area_plans", label: "Area Plans (Local Area or Neighbourhood Plans)" },
+  { id: "brt", label: "BRT (Bus Rapid Transit) or Bus Priority Infrastructure" },
+  { id: "multimodal", label: "Multimodal Transport and Active Transportation" },
+  { id: "provincial_targets", label: "Alignment with Provincial Housing Targets / Housing Needs Reports" },
+  { id: "ssmuh", label: "Small-Scale Multi-Unit Housing (SSMUH) / Duplex-Triplex-Fourplex" },
+  { id: "housing_statutes", label: "Housing Statutes Amendment Bills / Related Legislation" },
+  { id: "ocp_housing", label: "Official Community Plan (OCP) Housing-Related Updates" },
+  { id: "zoning_density", label: "Zoning / Rezoning for Housing Density" },
+  { id: "dev_permits_housing", label: "Development Permits Affecting Housing Supply" },
+  { id: "dev_cost_charges", label: "Development Cost Charges or Affordability Incentives" },
+  { id: "other_housing_transit", label: "Other Housing or Transit-Related Bylaws / Legislation" },
 ] as const;
 
 // Municipalities sourced from seed registry — Colwood first, then CRD alphabetical
@@ -40,7 +48,7 @@ export default function SubscribePage() {
   >([]);
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
   const [keywords, setKeywords] = useState("");
-  const [immediateAlerts, setImmediateAlerts] = useState(false);
+  const [immediateAlerts, setImmediateAlerts] = useState(true);
   const [formState, setFormState] = useState<FormState>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [muniDropdownOpen, setMuniDropdownOpen] = useState(false);
@@ -158,7 +166,8 @@ export default function SubscribePage() {
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="rounded-lg border bg-white p-6 shadow-sm">
         <h2 className="mb-1 text-xl font-bold text-gray-900">
-          Subscribe to Municipal Alerts &amp; Digests
+          BC Local Government Watch &mdash; Housing, Transit &amp; Provincial
+          Priority Updates
         </h2>
         <p className="mb-6 text-sm text-gray-500">
           Get AI-summarized updates from BC municipal council meetings. Choose
@@ -183,6 +192,34 @@ export default function SubscribePage() {
             placeholder="you@example.com"
             className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
           />
+        </div>
+
+        {/* Keywords / Bylaw / Bill Tracking — PROMINENT, right after email */}
+        <div className="mb-5 rounded-lg border-2 border-blue-300 bg-blue-50 p-4">
+          <label
+            htmlFor="keywords"
+            className="mb-1 block text-sm font-semibold text-blue-900"
+          >
+            Specific Keywords / Bylaw / Bill Tracking
+          </label>
+          <p className="mb-2 text-xs text-blue-700">
+            Enter specific bylaw numbers, bill names, or keywords you want to
+            track (e.g. &quot;Bylaw 1700&quot;, &quot;Housing Statutes Amendment
+            Act&quot;, &quot;TOA zoning&quot;). The system will alert you every
+            time these exact terms are mentioned in any hearing.
+          </p>
+          <input
+            id="keywords"
+            type="text"
+            value={keywords}
+            onChange={(e) => setKeywords(e.target.value)}
+            placeholder="e.g. Bylaw 1700, Bill 44, TOA zoning, affordable housing"
+            className="w-full rounded-lg border border-blue-300 bg-white px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+          />
+          <p className="mt-1 text-xs text-blue-600">
+            Comma-separated. We&apos;ll match these against meeting agendas,
+            minutes, and videos.
+          </p>
         </div>
 
         {/* Municipalities — multi-select dropdown */}
@@ -263,7 +300,7 @@ export default function SubscribePage() {
           <label className="mb-2 block text-sm font-medium text-gray-700">
             Topics
           </label>
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
             {AVAILABLE_TOPICS.map((topic) => (
               <label
                 key={topic.id}
@@ -277,35 +314,12 @@ export default function SubscribePage() {
                   type="checkbox"
                   checked={selectedTopics.includes(topic.id)}
                   onChange={() => toggleTopic(topic.id)}
-                  className="mr-2 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                  className="mr-2 h-4 w-4 shrink-0 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                 />
                 {topic.label}
               </label>
             ))}
           </div>
-        </div>
-
-        {/* Keywords */}
-        <div className="mb-5">
-          <label
-            htmlFor="keywords"
-            className="mb-1 block text-sm font-medium text-gray-700"
-          >
-            Keywords{" "}
-            <span className="font-normal text-gray-400">(optional)</span>
-          </label>
-          <input
-            id="keywords"
-            type="text"
-            value={keywords}
-            onChange={(e) => setKeywords(e.target.value)}
-            placeholder="e.g. affordable housing, bike lanes, tree bylaw"
-            className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
-          />
-          <p className="mt-1 text-xs text-gray-400">
-            Comma-separated. We&apos;ll match these against meeting agendas and
-            minutes.
-          </p>
         </div>
 
         {/* Immediate Alerts checkbox */}
@@ -361,7 +375,7 @@ export default function SubscribePage() {
             AI summarizes relevant items matching your topics and keywords
           </li>
           <li>
-            <strong>Immediate alerts</strong> (opt-in): get emailed within
+            <strong>Immediate alerts</strong> (default ON): get emailed within
             minutes when a new matching item appears
           </li>
           <li>

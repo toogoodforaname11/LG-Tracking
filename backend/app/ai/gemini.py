@@ -187,30 +187,86 @@ async def gemini_batch_embed(texts: list[str]) -> list[list[float] | None]:
         return embeddings
 
 
+def _is_bylaw_keyword(kw: str) -> bool:
+    """Check if a keyword looks like a specific bylaw number, bill, or act name."""
+    kw_lower = kw.strip().lower()
+    import re
+    # Matches patterns like "bylaw 1700", "bl 1700", "bill 44", or act names
+    return bool(re.match(r"^(bylaw|by-law|bl|bill)\s+\d+", kw_lower)) or "act" in kw_lower
+
+
 def keyword_fallback_match(
     content: str, topics: list[str], keywords: list[str]
 ) -> dict:
     """Simple keyword-based matching when Gemini is unavailable.
 
     Used as fallback when API key is not set or calls fail.
+    Includes exact-match bylaw/bill tracking: if a keyword looks like a bylaw
+    number or act name and appears anywhere in the content, it's a high-confidence match.
     """
     content_lower = content.lower()
+
+    # All keywords are high-priority exact-match triggers
     matched_keywords = [kw for kw in keywords if kw.lower() in content_lower]
 
-    # Topic keyword mappings
+    # Topic keyword mappings — housing, transit, and provincial priority topics
     topic_keywords = {
-        "ocp_updates": ["official community plan", "ocp", "community plan amendment"],
-        "rezoning": ["rezone", "rezoning", "zoning amendment", "zoning bylaw"],
-        "development_permits": ["development permit", "dp application", "development variance"],
-        "public_hearings": ["public hearing", "statutory hearing"],
-        "bylaws": ["bylaw", "by-law", "bylaw amendment"],
-        "budget": ["budget", "financial plan", "tax rate", "revenue"],
-        "environment": ["environment", "climate", "watershed", "stormwater", "emissions"],
-        "transportation": ["transportation", "transit", "cycling", "road", "traffic"],
-        "housing": ["housing", "affordable housing", "rental", "housing strategy"],
-        "parks_recreation": ["park", "recreation", "trail", "community centre"],
-        "utilities": ["water", "sewer", "utility", "infrastructure"],
-        "governance": ["governance", "council procedure", "election", "boundary"],
+        "tod": [
+            "transit oriented development", "transit-oriented development", "tod",
+            "transit corridor", "density along transit",
+        ],
+        "toa_impl": [
+            "transit oriented area", "transit-oriented area", "toa",
+            "toa designation", "toa bylaw", "toa zoning", "transit area plan",
+        ],
+        "area_plans": [
+            "local area plan", "neighbourhood plan", "neighborhood plan",
+            "area plan", "community plan", "land use plan",
+        ],
+        "brt": [
+            "bus rapid transit", "brt", "bus priority", "bus lane",
+            "transit priority", "rapid bus",
+        ],
+        "multimodal": [
+            "multimodal", "multi-modal", "active transportation", "cycling",
+            "bike lane", "pedestrian", "complete street", "active transport",
+        ],
+        "provincial_targets": [
+            "provincial housing target", "housing needs report",
+            "mandated housing", "provincial requirement", "housing target",
+            "compliance", "housing needs assessment",
+        ],
+        "ssmuh": [
+            "small-scale multi-unit", "ssmuh", "duplex", "triplex", "fourplex",
+            "four-plex", "missing middle", "multi-unit housing", "small scale multi",
+        ],
+        "housing_statutes": [
+            "housing statutes amendment", "bill 44", "bill 46", "bill 47",
+            "housing legislation", "provincial housing", "housing act",
+        ],
+        "ocp_housing": [
+            "official community plan", "ocp", "community plan amendment",
+            "ocp amendment", "ocp housing", "housing designation",
+        ],
+        "zoning_density": [
+            "rezone", "rezoning", "zoning amendment", "zoning bylaw",
+            "upzoning", "density bonus", "housing density", "zoning for housing",
+        ],
+        "dev_permits_housing": [
+            "development permit", "dp application", "development variance",
+            "housing permit", "residential permit", "building permit",
+        ],
+        "dev_cost_charges": [
+            "development cost charge", "dcc", "community amenity contribution",
+            "density bonus", "affordability incentive", "fee waiver",
+            "amenity contribution",
+        ],
+        "other_housing_transit": [
+            "housing", "affordable housing", "rental", "housing strategy",
+            "housing bylaw", "housing policy", "residential", "shelter",
+            "supportive housing", "social housing", "housing agreement",
+            "transit", "transportation",
+        ],
     }
 
     matched_topics = []
@@ -220,9 +276,14 @@ def keyword_fallback_match(
                 matched_topics.append(topic)
 
     is_match = bool(matched_keywords or matched_topics)
-    total_possible = len(keywords) + len(topics)
-    total_matched = len(matched_keywords) + len(matched_topics)
-    confidence = total_matched / max(total_possible, 1)
+
+    # Any keyword match gets high confidence (keywords are high-priority triggers)
+    if matched_keywords:
+        confidence = 1.0
+    else:
+        total_possible = len(topics)
+        total_matched = len(matched_topics)
+        confidence = total_matched / max(total_possible, 1)
 
     return {
         "is_match": is_match,
@@ -230,7 +291,7 @@ def keyword_fallback_match(
         "matched_topics": matched_topics,
         "matched_keywords": matched_keywords,
         "reason": (
-            f"Keyword match: {matched_keywords}, Topic match: {matched_topics}"
+            f"Keyword exact match: {matched_keywords}, Topic match: {matched_topics}"
             if is_match
             else "No keyword or topic matches found"
         ),
