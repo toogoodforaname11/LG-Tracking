@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "BC Local Government Watch – Housing, Transit & Provincial Priority Updates",
+  title: "BC Local Government Council Tracker – Housing, Transit & Provincial Priority Updates",
   description:
     "Subscribe to updates on housing, transit, and local government hearings from BC municipalities.",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: Readonly<{h
   children: React.ReactNode;
 }>) {
   return (
@@ -19,7 +19,7 @@ export default function RootLayout({
           <div className="mx-auto flex max-w-2xl items-center justify-between">
             <div>
               <h1 className="text-xl font-bold text-blue-800">
-                BC Hearing Watch
+                                    BC Local Government Council Tracker
               </h1>
               <p className="text-xs text-gray-500">
                 Municipal Council Alerts &amp; Digest
