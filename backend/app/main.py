@@ -11,6 +11,7 @@ from app.api.health import router as health_router
 from app.api.discovery import router as discovery_router
 from app.api.tracks import router as tracks_router
 from app.api.processing import router as processing_router
+from app.api.alerts import router as alerts_router
 
 
 @asynccontextmanager
@@ -42,3 +43,4 @@ app.include_router(registry_router, prefix="/api/v1", tags=["registry"])
 app.include_router(discovery_router, prefix="/api/v1/discovery", tags=["discovery"])
 app.include_router(tracks_router, prefix="/api/v1", tags=["tracks"])
 app.include_router(processing_router, prefix="/api/v1/ai", tags=["processing"])
+app.include_router(alerts_router, prefix="/api/v1/alerts", tags=["alerts"])
