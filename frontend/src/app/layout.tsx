@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "BC Hearing Watch — Weekly Municipal Digest",
+  title: "BC Hearing Watch — Municipal Council Alerts & Digest",
   description:
-    "Subscribe to weekly AI-summarized digests of BC local government council hearings and decisions.",
+    "Subscribe to immediate alerts and weekly AI-summarized digests of BC local government council hearings and decisions.",
 };
 
 export default function RootLayout({
@@ -22,7 +22,7 @@ export default function RootLayout({
                 BC Hearing Watch
               </h1>
               <p className="text-xs text-gray-500">
-                Weekly Municipal Council Digest
+                Municipal Council Alerts &amp; Digest
               </p>
             </div>
             <span className="rounded bg-amber-100 px-2 py-1 text-xs font-medium text-amber-800">

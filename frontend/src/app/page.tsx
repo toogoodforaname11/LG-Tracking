@@ -40,6 +40,7 @@ export default function SubscribePage() {
   >([]);
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
   const [keywords, setKeywords] = useState("");
+  const [immediateAlerts, setImmediateAlerts] = useState(false);
   const [formState, setFormState] = useState<FormState>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [muniDropdownOpen, setMuniDropdownOpen] = useState(false);
@@ -82,6 +83,7 @@ export default function SubscribePage() {
           municipalities: selectedMunicipalities,
           topics: selectedTopics,
           keywords,
+          immediate_alerts: immediateAlerts,
         }),
       });
 
@@ -122,11 +124,23 @@ export default function SubscribePage() {
         <h2 className="mb-2 text-2xl font-bold text-gray-900">
           Preferences Saved!
         </h2>
-        <p className="mb-6 text-gray-600">
-          You will receive weekly digests every{" "}
-          <strong>Sunday at 8 PM Pacific</strong> with AI-summarized updates
-          from your selected municipalities.
+        <p className="mb-4 text-gray-600">
+          You will receive{" "}
+          {immediateAlerts ? (
+            <>
+              <strong>immediate alerts</strong> when new matching items are
+              detected, plus{" "}
+            </>
+          ) : null}
+          <strong>weekly digests every Sunday at 8 PM Pacific</strong> with
+          AI-summarized updates from your selected municipalities.
         </p>
+        {immediateAlerts && (
+          <div className="mx-auto mb-4 max-w-md rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800">
+            Immediate alerts are ON — we poll sources every 30 minutes and will
+            email you as soon as a matching item is found.
+          </div>
+        )}
         <p className="mb-6 text-sm text-gray-500">
           A confirmation email has been sent to <strong>{email}</strong>.
         </p>
@@ -144,12 +158,12 @@ export default function SubscribePage() {
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="rounded-lg border bg-white p-6 shadow-sm">
         <h2 className="mb-1 text-xl font-bold text-gray-900">
-          Subscribe to Weekly Digests
+          Subscribe to Municipal Alerts &amp; Digests
         </h2>
         <p className="mb-6 text-sm text-gray-500">
-          Get AI-summarized updates from BC municipal council meetings delivered
-          to your inbox every Sunday. Enter the same email to update your
-          preferences anytime.
+          Get AI-summarized updates from BC municipal council meetings. Choose
+          immediate alerts, weekly digests, or both. Enter the same email to
+          update your preferences anytime.
         </p>
 
         {/* Email */}
@@ -272,7 +286,7 @@ export default function SubscribePage() {
         </div>
 
         {/* Keywords */}
-        <div className="mb-6">
+        <div className="mb-5">
           <label
             htmlFor="keywords"
             className="mb-1 block text-sm font-medium text-gray-700"
@@ -292,6 +306,28 @@ export default function SubscribePage() {
             Comma-separated. We&apos;ll match these against meeting agendas and
             minutes.
           </p>
+        </div>
+
+        {/* Immediate Alerts checkbox */}
+        <div className="mb-6 rounded-lg border border-amber-200 bg-amber-50 p-4">
+          <label className="flex cursor-pointer items-start gap-3">
+            <input
+              type="checkbox"
+              checked={immediateAlerts}
+              onChange={(e) => setImmediateAlerts(e.target.checked)}
+              className="mt-0.5 h-4 w-4 rounded border-gray-300 text-amber-600 focus:ring-amber-500"
+            />
+            <div>
+              <span className="text-sm font-medium text-amber-900">
+                Send me immediate alerts after each matching council meeting
+              </span>
+              <p className="mt-1 text-xs text-amber-700">
+                We poll sources every 30 minutes. When a new matching item is
+                detected, you&apos;ll receive an email right away. Weekly
+                digests are always sent regardless of this setting.
+              </p>
+            </div>
+          </label>
         </div>
 
         {/* Error */}
@@ -319,13 +355,18 @@ export default function SubscribePage() {
         <ul className="list-inside list-disc space-y-1 text-blue-700">
           <li>
             We scan council agendas, minutes, and meeting videos from your
-            selected municipalities
+            selected municipalities every 30 minutes
           </li>
           <li>
             AI summarizes relevant items matching your topics and keywords
           </li>
           <li>
-            You get one email per week (Sunday 8 PM Pacific) — no spam
+            <strong>Immediate alerts</strong> (opt-in): get emailed within
+            minutes when a new matching item appears
+          </li>
+          <li>
+            <strong>Weekly digest</strong> (always): full summary every Sunday
+            at 8 PM Pacific
           </li>
           <li>
             To change preferences, just submit this form again with the same

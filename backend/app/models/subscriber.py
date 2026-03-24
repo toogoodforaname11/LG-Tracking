@@ -16,6 +16,7 @@ class Subscriber(Base):
     municipalities: Mapped[dict] = mapped_column(JSONB, nullable=False, default=list)
     topics: Mapped[dict] = mapped_column(JSONB, nullable=False, default=list)
     keywords: Mapped[str | None] = mapped_column(Text)
+    immediate_alerts: Mapped[bool] = mapped_column(Boolean, default=False)
     active: Mapped[bool] = mapped_column(Boolean, default=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
     updated_at: Mapped[datetime] = mapped_column(

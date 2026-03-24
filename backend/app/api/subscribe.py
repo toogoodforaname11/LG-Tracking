@@ -25,6 +25,7 @@ class SubscribeRequest(BaseModel):
     municipalities: list[str]  # list of short_names like ["Colwood", "Victoria"]
     topics: list[str]
     keywords: str = ""
+    immediate_alerts: bool = False
 
 
 class SubscribeResponse(BaseModel):
@@ -41,7 +42,12 @@ class UnsubscribeResponse(BaseModel):
 # --- Resend email helper ---
 
 
-def send_confirmation_email(email: str, municipalities: list[str], topics: list[str]) -> bool:
+def send_confirmation_email(
+    email: str,
+    municipalities: list[str],
+    topics: list[str],
+    immediate_alerts: bool,
+) -> bool:
     """Send a confirmation email via Resend. Returns True on success."""
     if not settings.resend_api_key:
         logger.warning("RESEND_API_KEY not set — skipping confirmation email")
@@ -54,12 +60,23 @@ def send_confirmation_email(email: str, municipalities: list[str], topics: list[
         muni_list = ", ".join(municipalities) if municipalities else "None selected"
         topic_list = ", ".join(topics) if topics else "None selected"
 
+        alerts_note = ""
+        if immediate_alerts:
+            alerts_note = """
+            <div style="background:#fef3c7;border-radius:8px;padding:12px 16px;margin:16px 0;border-left:4px solid #f59e0b;">
+                <p style="margin:0;font-size:14px;color:#92400e;">
+                    <strong>Immediate Alerts: ON</strong> — You will receive an email
+                    within minutes whenever a new matching council item is detected.
+                </p>
+            </div>
+            """
+
         html = f"""
         <html>
         <body style="font-family:system-ui,-apple-system,sans-serif;max-width:600px;margin:0 auto;padding:20px;color:#1a1a1a;">
             <div style="border-bottom:3px solid #1e40af;padding-bottom:16px;margin-bottom:24px;">
                 <h1 style="color:#1e40af;margin:0;font-size:24px;">BC Hearing Watch</h1>
-                <p style="color:#6b7280;margin:4px 0 0;font-size:14px;">Weekly Municipal Digest</p>
+                <p style="color:#6b7280;margin:4px 0 0;font-size:14px;">Municipal Council Alerts &amp; Digest</p>
             </div>
 
             <h2 style="color:#111;font-size:20px;">Preferences Saved!</h2>
@@ -69,8 +86,11 @@ def send_confirmation_email(email: str, municipalities: list[str], topics: list[
 
             <div style="background:#f0f4ff;border-radius:8px;padding:16px;margin:16px 0;">
                 <p style="margin:0 0 8px;"><strong>Municipalities:</strong> {muni_list}</p>
-                <p style="margin:0;"><strong>Topics:</strong> {topic_list}</p>
+                <p style="margin:0 0 8px;"><strong>Topics:</strong> {topic_list}</p>
+                <p style="margin:0;"><strong>Immediate Alerts:</strong> {'Enabled' if immediate_alerts else 'Disabled'}</p>
             </div>
+
+            {alerts_note}
 
             <p style="color:#374151;line-height:1.6;">
                 You will receive weekly digests every <strong>Sunday at 8 PM Pacific</strong>
@@ -87,8 +107,7 @@ def send_confirmation_email(email: str, municipalities: list[str], topics: list[
                 This is an experimental personal tool using public data.
                 AI summaries may contain errors. Always verify with original municipal sources.
                 Not official government communication.<br><br>
-                To unsubscribe, click here:
-                <a href="{{{{unsubscribe_url}}}}" style="color:#6b7280;">Unsubscribe</a>
+                <a href="{{{{unsubscribe_url}}}}" style="color:#6b7280;">Unsubscribe from all emails</a>
             </p>
         </body>
         </html>
@@ -114,7 +133,6 @@ def send_confirmation_email(email: str, municipalities: list[str], topics: list[
 @router.post("/subscribe", response_model=SubscribeResponse)
 async def subscribe(req: SubscribeRequest, db: AsyncSession = Depends(get_db)):
     """Subscribe or update preferences. Same email = overwrite."""
-    # Upsert: check if subscriber exists
     result = await db.execute(
         select(Subscriber).where(Subscriber.email == req.email)
     )
@@ -124,6 +142,7 @@ async def subscribe(req: SubscribeRequest, db: AsyncSession = Depends(get_db)):
         existing.municipalities = req.municipalities
         existing.topics = req.topics
         existing.keywords = req.keywords
+        existing.immediate_alerts = req.immediate_alerts
         existing.active = True
         existing.updated_at = datetime.utcnow()
         action = "updated"
@@ -133,6 +152,7 @@ async def subscribe(req: SubscribeRequest, db: AsyncSession = Depends(get_db)):
             municipalities=req.municipalities,
             topics=req.topics,
             keywords=req.keywords,
+            immediate_alerts=req.immediate_alerts,
             active=True,
         )
         db.add(subscriber)
@@ -140,13 +160,19 @@ async def subscribe(req: SubscribeRequest, db: AsyncSession = Depends(get_db)):
 
     await db.commit()
 
-    # Send confirmation email (best-effort, don't fail the request)
-    send_confirmation_email(req.email, req.municipalities, req.topics)
+    # Send confirmation email (best-effort)
+    send_confirmation_email(req.email, req.municipalities, req.topics, req.immediate_alerts)
+
+    alerts_msg = ""
+    if req.immediate_alerts:
+        alerts_msg = " You will also receive immediate alerts when new matching items are detected."
 
     return SubscribeResponse(
         status="ok",
         email=req.email,
-        message=f"Preferences {action}! You will receive weekly digests every Sunday.",
+        message=(
+            f"Preferences {action}! You will receive weekly digests every Sunday.{alerts_msg}"
+        ),
     )
 
 
@@ -167,5 +193,5 @@ async def unsubscribe(email: str, db: AsyncSession = Depends(get_db)):
 
     return UnsubscribeResponse(
         status="ok",
-        message="You have been unsubscribed. You will no longer receive weekly digests.",
+        message="You have been unsubscribed. You will no longer receive emails.",
     )

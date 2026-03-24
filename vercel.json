@@ -1,6 +1,10 @@
 {
   "crons": [
     {
+      "path": "/api/v1/cron/poll",
+      "schedule": "*/30 * * * *"
+    },
+    {
       "path": "/api/v1/cron/weekly-digest",
       "schedule": "0 3 * * 1"
     }
