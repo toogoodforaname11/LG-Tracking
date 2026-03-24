@@ -2,7 +2,7 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    app_name: str = "BC Hearing Watch"
+    app_name: str = "BC Local Government Council Tracker"
     debug: bool = True
 
     # Neon Postgres
@@ -22,7 +22,7 @@ class Settings(BaseSettings):
 
     # Resend (email)
     resend_api_key: str = ""
-    resend_from_email: str = "BC Hearing Watch <noreply@bchearingwatch.ca>"
+        resend_from_email: str = "BC Local Government Council Tracker <noreply@bchearingwatch.ca>"
 
     # Scraping
     request_delay_seconds: float = 2.0
