@@ -1,4 +1,4 @@
-"""Seed the sources registry with CRD municipalities and their known data sources."""
+"""Seed the sources registry with BC municipalities and their known data sources."""
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
@@ -310,15 +310,189 @@ CRD_MUNICIPALITIES = [
     },
 ]
 
+# Batch 1 – 10 municipalities (Colwood already in CRD list above)
+BC_MUNICIPALITIES_BATCH_1 = [
+    {
+        "name": "District of 100 Mile House",
+        "short_name": "100 Mile House",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.100milehouse.com/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.100milehouse.com/council-meetings",
+                "label": "100 Mile House Council Meetings",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Abbotsford",
+        "short_name": "Abbotsford",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.abbotsford.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://abbotsford.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Abbotsford CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://abbotsford.civicweb.net/filepro/documents/",
+                "label": "Abbotsford CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Armstrong",
+        "short_name": "Armstrong",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.armstrong.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.armstrong.ca/council",
+                "label": "Armstrong Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Burnaby",
+        "short_name": "Burnaby",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.burnaby.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://burnaby.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Burnaby CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://burnaby.civicweb.net/filepro/documents/",
+                "label": "Burnaby CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Campbell River",
+        "short_name": "Campbell River",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.campbellriver.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.GRANICUS,
+                "source_type": SourceType.AGENDA,
+                "url": "https://campbellriver.ca.granicus.com",
+                "label": "Campbell River Granicus Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Castlegar",
+        "short_name": "Castlegar",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.castlegar.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.castlegar.ca/council",
+                "label": "Castlegar Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Central Saanich",
+        "short_name": "Central Saanich",
+        "gov_type": GovType.DISTRICT,
+        "region": "CRD",
+        "website_url": "https://www.centralsaanich.ca/",
+        "population": 18576,
+        # Also in CRD list above (CivicWeb); Granicus source added here.
+        "sources": [
+            {
+                "platform": Platform.GRANICUS,
+                "source_type": SourceType.AGENDA,
+                "url": "https://centralsaanich.ca.granicus.com",
+                "label": "Central Saanich Granicus Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Chilliwack",
+        "short_name": "Chilliwack",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.chilliwack.com/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@ChilliwackCity",
+                "label": "Chilliwack YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    # Colwood – already present in CRD_MUNICIPALITIES, skipped.
+    {
+        "name": "City of Coquitlam",
+        "short_name": "Coquitlam",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.coquitlam.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.GRANICUS,
+                "source_type": SourceType.AGENDA,
+                "url": "https://coquitlam.ca.granicus.com",
+                "label": "Coquitlam Granicus Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+]
+
 
 async def seed_registry(db: AsyncSession) -> dict:
-    """Seed the registry with CRD municipalities and sources.
+    """Seed the registry with BC municipalities and sources.
 
     Returns a summary of what was created vs already existed.
     """
     stats = {"municipalities_created": 0, "municipalities_existed": 0, "sources_created": 0}
 
-    for muni_data in CRD_MUNICIPALITIES:
+    all_municipalities = CRD_MUNICIPALITIES + BC_MUNICIPALITIES_BATCH_1
+    for muni_data in all_municipalities:
         sources_data = muni_data.pop("sources")
 
         # Check if municipality already exists
