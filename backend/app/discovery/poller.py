@@ -112,6 +112,15 @@ async def store_discovered_items(
         # Compute content hash from URL (will be updated with actual content later)
         content_hash = hashlib.sha256(item.url.encode()).hexdigest()
 
+        # For video items, store timestamps and description as raw_text
+        raw_text = None
+        video_timestamps = None
+        video_duration = None
+        if item.item_type == "video" and item.raw_metadata:
+            raw_text = item.raw_metadata.get("content_for_embedding")
+            video_timestamps = item.raw_metadata.get("timestamps")
+            video_duration = item.raw_metadata.get("duration")
+
         doc = Document(
             meeting_id=meeting_id,
             municipality_id=municipality.id,
@@ -120,6 +129,9 @@ async def store_discovered_items(
             title=item.title,
             url=item.url,
             content_hash=content_hash,
+            raw_text=raw_text,
+            video_timestamps=video_timestamps,
+            video_duration=video_duration,
             is_new=True,
             is_processed=False,
             first_seen_at=datetime.utcnow(),

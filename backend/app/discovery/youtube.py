@@ -1,18 +1,23 @@
 """YouTube video discovery for council meetings.
 
-Uses YouTube Data API v3 (or RSS feed fallback) to find new council meeting videos.
+Uses YouTube RSS feed for discovery + oEmbed/page scrape for timestamps.
+Timestamps are extracted from video descriptions (chapter markers like "0:15:30 Public Hearing").
 """
 
 import re
 from datetime import datetime
-from urllib.parse import urljoin
 from xml.etree import ElementTree
+
+import httpx
 
 from app.discovery.base import BaseScraper, DiscoveredItem
 
 
 # YouTube RSS feed URL pattern (no API key needed)
 YT_FEED_URL = "https://www.youtube.com/feeds/videos.xml?channel_id={channel_id}"
+
+# oEmbed endpoint for getting video metadata
+YT_OEMBED_URL = "https://www.youtube.com/oembed?url={video_url}&format=json"
 
 # Keywords that indicate a council meeting video
 MEETING_KEYWORDS = [
@@ -25,29 +30,163 @@ MEETING_KEYWORDS = [
     "board meeting",
 ]
 
+# Regex for timestamp patterns in video descriptions
+# Matches: "0:15:30 Public Hearing", "1:02:15 - Rezoning Application", "15:30 Budget Discussion"
+TIMESTAMP_PATTERN = re.compile(
+    r"(?:^|\n)\s*(\d{1,2}:\d{2}(?::\d{2})?)\s*[-–—]?\s*(.+?)(?:\n|$)",
+    re.MULTILINE,
+)
+
+
+def parse_timestamps(text: str) -> list[dict]:
+    """Extract timestamp chapters from video description text.
+
+    Returns list of {"t": "0:15:30", "seconds": 930, "label": "Public Hearing - OCP Amendment"}.
+    """
+    timestamps = []
+    for match in TIMESTAMP_PATTERN.finditer(text):
+        time_str = match.group(1).strip()
+        label = match.group(2).strip()
+
+        # Skip very short labels (likely not real chapters)
+        if len(label) < 3:
+            continue
+
+        # Convert to seconds for deep-link generation
+        parts = time_str.split(":")
+        if len(parts) == 3:
+            seconds = int(parts[0]) * 3600 + int(parts[1]) * 60 + int(parts[2])
+        elif len(parts) == 2:
+            seconds = int(parts[0]) * 60 + int(parts[1])
+        else:
+            continue
+
+        timestamps.append({
+            "t": time_str,
+            "seconds": seconds,
+            "label": label,
+        })
+
+    return timestamps
+
+
+def format_timestamps_for_embedding(timestamps: list[dict], video_url: str) -> str:
+    """Format timestamps into text suitable for embedding/indexing.
+
+    Produces text like:
+    "At 0:15:30 (https://youtube.com/watch?v=X&t=930): Public Hearing - OCP Amendment"
+    """
+    if not timestamps:
+        return ""
+
+    lines = ["VIDEO CHAPTERS/TIMESTAMPS:"]
+    for ts in timestamps:
+        deep_link = f"{video_url}&t={ts['seconds']}"
+        lines.append(f"  [{ts['t']}] {ts['label']} ({deep_link})")
+    return "\n".join(lines)
+
+
+async def fetch_video_description(video_id: str) -> str | None:
+    """Fetch video description by scraping the watch page.
+
+    YouTube doesn't expose descriptions via oEmbed, so we fetch the watch page
+    and extract from the meta tag or JSON-LD.
+    """
+    url = f"https://www.youtube.com/watch?v={video_id}"
+    try:
+        async with httpx.AsyncClient(
+            timeout=15,
+            headers={
+                "User-Agent": (
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                    "AppleWebKit/537.36 (KHTML, like Gecko) "
+                    "Chrome/125.0.0.0 Safari/537.36"
+                ),
+                "Accept-Language": "en-US,en;q=0.9",
+            },
+            follow_redirects=True,
+        ) as client:
+            resp = await client.get(url)
+            resp.raise_for_status()
+            html = resp.text
+
+            # Strategy 1: Extract from meta description tag
+            meta_match = re.search(
+                r'<meta\s+name="description"\s+content="([^"]*)"', html
+            )
+            meta_desc = meta_match.group(1) if meta_match else ""
+
+            # Strategy 2: Extract from ytInitialData JSON (has full description)
+            json_match = re.search(
+                r'"description":\s*\{"simpleText":\s*"([^"]*?)"\}', html
+            )
+            if json_match:
+                # Unescape JSON string
+                full_desc = json_match.group(1).replace("\\n", "\n").replace('\\"', '"')
+                return full_desc
+
+            # Strategy 3: Try shortDescription from ytInitialPlayerResponse
+            short_match = re.search(
+                r'"shortDescription":\s*"(.*?)(?<!\\)"', html, re.DOTALL
+            )
+            if short_match:
+                full_desc = short_match.group(1).replace("\\n", "\n").replace('\\"', '"')
+                return full_desc
+
+            return meta_desc or None
+
+    except Exception:
+        return None
+
+
+async def fetch_video_duration(video_id: str) -> str | None:
+    """Try to extract video duration from the watch page."""
+    url = f"https://www.youtube.com/watch?v={video_id}"
+    try:
+        async with httpx.AsyncClient(timeout=15, follow_redirects=True) as client:
+            resp = await client.get(url)
+            html = resp.text
+
+            # Look for duration in ISO 8601 format from JSON-LD
+            dur_match = re.search(r'"lengthSeconds":\s*"(\d+)"', html)
+            if dur_match:
+                total_seconds = int(dur_match.group(1))
+                hours = total_seconds // 3600
+                minutes = (total_seconds % 3600) // 60
+                seconds = total_seconds % 60
+                if hours > 0:
+                    return f"{hours}:{minutes:02d}:{seconds:02d}"
+                return f"{minutes}:{seconds:02d}"
+    except Exception:
+        pass
+    return None
+
 
 class YouTubeScraper(BaseScraper):
-    """Discover council meeting videos via YouTube RSS feed (no API key required)."""
+    """Discover council meeting videos via YouTube RSS feed + timestamp extraction."""
 
     def __init__(self, municipality: str, channel_id: str):
-        # YouTube RSS doesn't need a base_url, but we set one for the feed
         super().__init__(municipality, f"https://www.youtube.com/channel/{channel_id}")
         self.channel_id = channel_id
         self.feed_url = YT_FEED_URL.format(channel_id=channel_id)
 
     async def discover(self) -> list[DiscoveredItem]:
-        """Discover recent council meeting videos from YouTube RSS feed."""
+        """Discover recent council meeting videos from YouTube RSS feed.
+
+        For each video found, also fetches the description to extract
+        timestamp chapters (e.g., "0:15:30 Public Hearing - OCP Amendment").
+        """
         items = []
 
         try:
             xml_text = await self.fetch(self.feed_url)
-            items = self._parse_feed(xml_text)
+            items = await self._parse_feed(xml_text)
         except Exception as e:
             print(f"[YouTube] Feed fetch failed for {self.municipality}: {e}")
 
         return items
 
-    def _parse_feed(self, xml_text: str) -> list[DiscoveredItem]:
+    async def _parse_feed(self, xml_text: str) -> list[DiscoveredItem]:
         """Parse YouTube Atom feed XML for council meeting videos."""
         items = []
         ns = {
@@ -94,6 +233,20 @@ class YouTubeScraper(BaseScraper):
 
             video_url = f"https://www.youtube.com/watch?v={video_id}"
 
+            # Fetch description and extract timestamps
+            description = await fetch_video_description(video_id)
+            timestamps = parse_timestamps(description) if description else []
+            duration = await fetch_video_duration(video_id)
+
+            # Build text content from description + timestamps for matching/embedding
+            content_parts = [title]
+            if description:
+                content_parts.append(description)
+            if timestamps:
+                content_parts.append(
+                    format_timestamps_for_embedding(timestamps, video_url)
+                )
+
             items.append(
                 DiscoveredItem(
                     municipality=self.municipality,
@@ -107,6 +260,10 @@ class YouTubeScraper(BaseScraper):
                         "video_id": video_id,
                         "channel_id": self.channel_id,
                         "published": published,
+                        "description": description,
+                        "timestamps": timestamps,
+                        "duration": duration,
+                        "content_for_embedding": "\n".join(content_parts),
                     },
                 )
             )
