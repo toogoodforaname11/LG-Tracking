@@ -9,6 +9,7 @@ import app.models  # noqa: F401 — ensure all models registered before create_a
 from app.api.registry import router as registry_router
 from app.api.health import router as health_router
 from app.api.discovery import router as discovery_router
+from app.api.tracks import router as tracks_router
 
 
 @asynccontextmanager
@@ -38,3 +39,4 @@ app.add_middleware(
 app.include_router(health_router, tags=["health"])
 app.include_router(registry_router, prefix="/api/v1", tags=["registry"])
 app.include_router(discovery_router, prefix="/api/v1/discovery", tags=["discovery"])
+app.include_router(tracks_router, prefix="/api/v1", tags=["tracks"])
