@@ -2653,6 +2653,180 @@ BC_MUNICIPALITIES_BATCH_12 = [
     },
 ]
 
+# Batch 13 – 10 municipalities with correct specific meeting pages
+BC_MUNICIPALITIES_BATCH_13 = [
+    {
+        "name": "Village of Silverton",
+        "short_name": "Silverton",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.silverton.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.silverton.ca/council",
+                "label": "Silverton Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Slocan",
+        "short_name": "Slocan",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.slocan.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.slocan.ca/council",
+                "label": "Slocan Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Kaslo",
+        "short_name": "Kaslo",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.kaslo.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.kaslo.ca/council",
+                "label": "Kaslo Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Nakusp",
+        "short_name": "Nakusp",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.nakusp.com/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.nakusp.com/council",
+                "label": "Nakusp Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Town of Creston",
+        "short_name": "Creston",
+        "gov_type": GovType.TOWN,
+        "region": "BC",
+        "website_url": "https://www.creston.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.creston.ca/council",
+                "label": "Creston Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Salmo",
+        "short_name": "Salmo",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.salmo.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.salmo.ca/council",
+                "label": "Salmo Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Riondel",
+        "short_name": "Riondel",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.riondel.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.riondel.ca/council",
+                "label": "Riondel Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Ainsworth Hot Springs",
+        "short_name": "Ainsworth Hot Springs",
+        "gov_type": GovType.UNINCORPORATED,
+        "region": "BC",
+        "website_url": "https://www.rdkb.com/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.rdkb.com",
+                "label": "Ainsworth Hot Springs RDKB Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Balfour",
+        "short_name": "Balfour",
+        "gov_type": GovType.UNINCORPORATED,
+        "region": "BC",
+        "website_url": "https://www.rdkb.com/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.rdkb.com",
+                "label": "Balfour RDKB Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Christina Lake",
+        "short_name": "Christina Lake",
+        "gov_type": GovType.UNINCORPORATED,
+        "region": "BC",
+        "website_url": "https://www.rdkb.com/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.rdkb.com",
+                "label": "Christina Lake RDKB Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+]
+
 
 async def seed_registry(db: AsyncSession) -> dict:
     """Seed the registry with BC municipalities and sources.
@@ -2675,6 +2849,7 @@ async def seed_registry(db: AsyncSession) -> dict:
         + BC_MUNICIPALITIES_BATCH_10
         + BC_MUNICIPALITIES_BATCH_11
         + BC_MUNICIPALITIES_BATCH_12
+        + BC_MUNICIPALITIES_BATCH_13
     )
     for muni_data in all_municipalities:
         sources_data = muni_data.pop("sources")

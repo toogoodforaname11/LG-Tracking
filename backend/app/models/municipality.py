@@ -15,6 +15,7 @@ class GovType(str, enum.Enum):
     REGIONAL_DISTRICT = "regional_district"
     ISLAND_MUNICIPALITY = "island_municipality"
     MOUNTAIN_RESORT = "mountain_resort"
+    UNINCORPORATED = "unincorporated"
 
 
 class Platform(str, enum.Enum):
