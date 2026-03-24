@@ -5,8 +5,10 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
 from app.db.database import engine, Base
+import app.models  # noqa: F401 — ensure all models registered before create_all
 from app.api.registry import router as registry_router
 from app.api.health import router as health_router
+from app.api.discovery import router as discovery_router
 
 
 @asynccontextmanager
@@ -35,3 +37,4 @@ app.add_middleware(
 
 app.include_router(health_router, tags=["health"])
 app.include_router(registry_router, prefix="/api/v1", tags=["registry"])
+app.include_router(discovery_router, prefix="/api/v1/discovery", tags=["discovery"])
