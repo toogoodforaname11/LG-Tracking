@@ -1063,6 +1063,214 @@ BC_MUNICIPALITIES_BATCH_4 = [
     },
 ]
 
+# Batch 5 – 10 municipalities with correct specific meeting pages
+BC_MUNICIPALITIES_BATCH_5 = [
+    {
+        "name": "City of Victoria",
+        "short_name": "Victoria",
+        "gov_type": GovType.CITY,
+        "region": "CRD",
+        "website_url": "https://www.victoria.ca/",
+        "population": 91867,
+        # Already in CRD list (CivicWeb); eScribe source added here.
+        "sources": [
+            {
+                "platform": Platform.ESCRIBE,
+                "source_type": SourceType.AGENDA,
+                "url": "https://pub-victoria.escribemeetings.com",
+                "label": "Victoria eScribe Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of West Kelowna",
+        "short_name": "West Kelowna",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.westkelownacity.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://westkelowna.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "West Kelowna CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://westkelowna.civicweb.net/filepro/documents/",
+                "label": "West Kelowna CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of West Vancouver",
+        "short_name": "West Vancouver",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.westvancouver.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@WestVanDistrict",
+                "label": "West Vancouver YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of White Rock",
+        "short_name": "White Rock",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.whiterockcity.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://whiterock.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "White Rock CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://whiterock.civicweb.net/filepro/documents/",
+                "label": "White Rock CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Williams Lake",
+        "short_name": "Williams Lake",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.williamslake.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.williamslake.ca/council",
+                "label": "Williams Lake Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Town of View Royal",
+        "short_name": "View Royal",
+        "gov_type": GovType.TOWN,
+        "region": "CRD",
+        "website_url": "https://www.viewroyal.ca/",
+        "population": 11575,
+        # Already in CRD list (custom); CivicWeb source added here.
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://viewroyal.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "View Royal CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://viewroyal.civicweb.net/filepro/documents/",
+                "label": "View Royal CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Sooke",
+        "short_name": "Sooke",
+        "gov_type": GovType.DISTRICT,
+        "region": "CRD",
+        "website_url": "https://www.sooke.ca/",
+        "population": 15054,
+        # Already in CRD list; adding specific meeting-list pages.
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://sooke.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Sooke CivicWeb Meeting List",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Town of Sidney",
+        "short_name": "Sidney",
+        "gov_type": GovType.TOWN,
+        "region": "CRD",
+        "website_url": "https://www.sidney.ca/",
+        "population": 12405,
+        # Already in CRD list (custom); CivicWeb source added here.
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://sidney.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Sidney CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://sidney.civicweb.net/filepro/documents/",
+                "label": "Sidney CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of North Saanich",
+        "short_name": "North Saanich",
+        "gov_type": GovType.DISTRICT,
+        "region": "CRD",
+        "website_url": "https://northsaanich.ca/",
+        "population": 12220,
+        # Already in CRD list; adding specific meeting-list pages.
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://northsaanich.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "North Saanich CivicWeb Meeting List",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Metchosin",
+        "short_name": "Metchosin",
+        "gov_type": GovType.DISTRICT,
+        "region": "CRD",
+        "website_url": "https://www.metchosin.ca/",
+        "population": 5169,
+        # Already in CRD list; adding specific meeting-list pages.
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://metchosin.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Metchosin CivicWeb Meeting List",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+]
+
 
 async def seed_registry(db: AsyncSession) -> dict:
     """Seed the registry with BC municipalities and sources.
@@ -1077,6 +1285,7 @@ async def seed_registry(db: AsyncSession) -> dict:
         + BC_MUNICIPALITIES_BATCH_2
         + BC_MUNICIPALITIES_BATCH_3
         + BC_MUNICIPALITIES_BATCH_4
+        + BC_MUNICIPALITIES_BATCH_5
     )
     for muni_data in all_municipalities:
         sources_data = muni_data.pop("sources")

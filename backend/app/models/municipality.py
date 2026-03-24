@@ -21,6 +21,7 @@ class Platform(str, enum.Enum):
     CIVICWEB = "civicweb"
     GRANICUS = "granicus"
     CIVICPLUS = "civicplus"
+    ESCRIBE = "escribe"
     YOUTUBE = "youtube"
     CUSTOM = "custom"
     UNKNOWN = "unknown"
