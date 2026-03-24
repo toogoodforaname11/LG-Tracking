@@ -2827,6 +2827,187 @@ BC_MUNICIPALITIES_BATCH_13 = [
     },
 ]
 
+# Batch 14 – 10 municipalities with correct specific meeting pages
+BC_MUNICIPALITIES_BATCH_14 = [
+    {
+        "name": "District of Invermere",
+        "short_name": "Invermere",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.invermere.net/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.invermere.net/council",
+                "label": "Invermere Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Canal Flats",
+        "short_name": "Canal Flats",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.canalflats.com/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.canalflats.com/council",
+                "label": "Canal Flats Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Radium Hot Springs",
+        "short_name": "Radium Hot Springs",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.radiumhotsprings.com/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.radiumhotsprings.com/council",
+                "label": "Radium Hot Springs Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Ashcroft",
+        "short_name": "Ashcroft",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.ashcroftbc.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.ashcroftbc.ca/council",
+                "label": "Ashcroft Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Cache Creek",
+        "short_name": "Cache Creek",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.cachecreekbc.com/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.cachecreekbc.com/council",
+                "label": "Cache Creek Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Clinton",
+        "short_name": "Clinton",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.clintonbc.com/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.clintonbc.com/council",
+                "label": "Clinton Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Lillooet",
+        "short_name": "Lillooet",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.lillooetbc.com/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.lillooetbc.com/council",
+                "label": "Lillooet Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Merritt",
+        "short_name": "Merritt",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.merritt.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://merritt.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Merritt CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://merritt.civicweb.net/filepro/documents/",
+                "label": "Merritt CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Logan Lake",
+        "short_name": "Logan Lake",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.loganlake.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.loganlake.ca/council",
+                "label": "Logan Lake Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Chase",
+        "short_name": "Chase",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.chasebc.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.chasebc.ca/council",
+                "label": "Chase Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+]
+
 
 async def seed_registry(db: AsyncSession) -> dict:
     """Seed the registry with BC municipalities and sources.
@@ -2850,6 +3031,7 @@ async def seed_registry(db: AsyncSession) -> dict:
         + BC_MUNICIPALITIES_BATCH_11
         + BC_MUNICIPALITIES_BATCH_12
         + BC_MUNICIPALITIES_BATCH_13
+        + BC_MUNICIPALITIES_BATCH_14
     )
     for muni_data in all_municipalities:
         sources_data = muni_data.pop("sources")
