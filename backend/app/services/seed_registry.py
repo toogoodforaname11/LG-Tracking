@@ -483,6 +483,208 @@ BC_MUNICIPALITIES_BATCH_1 = [
     },
 ]
 
+# Batch 2 – 10 municipalities with correct specific meeting pages
+BC_MUNICIPALITIES_BATCH_2 = [
+    {
+        "name": "City of Duncan",
+        "short_name": "Duncan",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.duncan.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://duncan.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Duncan CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://duncan.civicweb.net/filepro/documents/",
+                "label": "Duncan CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Enderby",
+        "short_name": "Enderby",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.enderby.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.enderby.ca/council",
+                "label": "Enderby Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Fernie",
+        "short_name": "Fernie",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.fernie.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.fernie.ca/council-meetings",
+                "label": "Fernie Council Meetings",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Fort St. John",
+        "short_name": "Fort St. John",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.fortstjohn.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.GRANICUS,
+                "source_type": SourceType.AGENDA,
+                "url": "https://fortstjohn.ca.granicus.com",
+                "label": "Fort St. John Granicus Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Grand Forks",
+        "short_name": "Grand Forks",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.grandforks.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.grandforks.ca/council",
+                "label": "Grand Forks Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Kamloops",
+        "short_name": "Kamloops",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.kamloops.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@CityofKamloops",
+                "label": "Kamloops YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Kelowna",
+        "short_name": "Kelowna",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.kelowna.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://kelowna.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Kelowna CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://kelowna.civicweb.net/filepro/documents/",
+                "label": "Kelowna CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Langley City",
+        "short_name": "Langley City",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.langleycity.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://langley.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Langley City CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://langley.civicweb.net/filepro/documents/",
+                "label": "Langley City CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Township of Langley",
+        "short_name": "Langley Township",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.tol.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@TownshipofLangley",
+                "label": "Langley Township YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "City of Maple Ridge",
+        "short_name": "Maple Ridge",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.mapleridge.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://mapleridge.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Maple Ridge CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://mapleridge.civicweb.net/filepro/documents/",
+                "label": "Maple Ridge CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+]
+
 
 async def seed_registry(db: AsyncSession) -> dict:
     """Seed the registry with BC municipalities and sources.
@@ -491,7 +693,7 @@ async def seed_registry(db: AsyncSession) -> dict:
     """
     stats = {"municipalities_created": 0, "municipalities_existed": 0, "sources_created": 0}
 
-    all_municipalities = CRD_MUNICIPALITIES + BC_MUNICIPALITIES_BATCH_1
+    all_municipalities = CRD_MUNICIPALITIES + BC_MUNICIPALITIES_BATCH_1 + BC_MUNICIPALITIES_BATCH_2
     for muni_data in all_municipalities:
         sources_data = muni_data.pop("sources")
 
