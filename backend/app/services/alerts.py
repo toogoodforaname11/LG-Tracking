@@ -138,7 +138,7 @@ def render_digest_html(digest: dict) -> str:
     return f"""
     <html>
     <body style="font-family:system-ui,-apple-system,sans-serif;max-width:600px;margin:0 auto;padding:20px;">
-        <h1 style="color:#1976d2;">BC Hearing Watch</h1>
+        <h1 style="color:#1976d2;">BC Local Government Council Tracker</h1>
         <h2>Digest: {digest['track_name']}</h2>
         <p style="color:#666;">{digest['total_matches']} new matches found &bull; {digest['generated_at'][:10]}</p>
         {items_html}
@@ -157,7 +157,7 @@ def render_digest_html(digest: dict) -> str:
 def render_digest_text(digest: dict) -> str:
     """Render a digest dict into plain text."""
     lines = [
-        f"BC Hearing Watch — Digest: {digest['track_name']}",
+        f"BC Local Government Council Tracker — Digest: {digest['track_name']}",
         f"{digest['total_matches']} new matches found — {digest['generated_at'][:10]}",
         "=" * 60,
         "",
@@ -186,7 +186,7 @@ async def send_digest_email(digest: dict, recipient: str) -> bool:
     # Actual SMTP sending (enable when SMTP is configured)
     # try:
     #     msg = MIMEMultipart("alternative")
-    #     msg["Subject"] = f"[BC Hearing Watch] {digest['track_name']} — {digest['total_matches']} new matches"
+    #     msg["Subject"] = f"[BC Local Government Council Tracker] {digest['track_name']} — {digest['total_matches']} new matches"
     #     msg["From"] = "noreply@bchearingwatch.local"
     #     msg["To"] = recipient
     #     msg.attach(MIMEText(render_digest_text(digest), "plain"))
