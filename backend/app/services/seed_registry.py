@@ -2263,6 +2263,208 @@ BC_MUNICIPALITIES_BATCH_10 = [
     },
 ]
 
+# Batch 11 – 10 municipalities with correct specific meeting pages
+BC_MUNICIPALITIES_BATCH_11 = [
+    {
+        "name": "District of Lake Cowichan",
+        "short_name": "Lake Cowichan",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.lakecowichan.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://lakecowichan.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Lake Cowichan CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://lakecowichan.civicweb.net/filepro/documents/",
+                "label": "Lake Cowichan CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Port Hardy",
+        "short_name": "Port Hardy",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.porthardy.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.porthardy.ca/council",
+                "label": "Port Hardy Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Port McNeill",
+        "short_name": "Port McNeill",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.portmcneill.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.portmcneill.ca/council",
+                "label": "Port McNeill Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Alert Bay",
+        "short_name": "Alert Bay",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.alertbay.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.alertbay.ca/council",
+                "label": "Alert Bay Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Gold River",
+        "short_name": "Gold River",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.goldriver.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.goldriver.ca/council",
+                "label": "Gold River Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Tahsis",
+        "short_name": "Tahsis",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.tahsis.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.tahsis.ca/council",
+                "label": "Tahsis Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Zeballos",
+        "short_name": "Zeballos",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.zeballos.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.zeballos.ca/council",
+                "label": "Zeballos Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Ucluelet",
+        "short_name": "Ucluelet",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.ucluelet.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://ucluelet.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Ucluelet CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://ucluelet.civicweb.net/filepro/documents/",
+                "label": "Ucluelet CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Tofino",
+        "short_name": "Tofino",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.tofino.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://tofino.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Tofino CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://tofino.civicweb.net/filepro/documents/",
+                "label": "Tofino CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Lantzville",
+        "short_name": "Lantzville",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.lantzville.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://lantzville.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Lantzville CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://lantzville.civicweb.net/filepro/documents/",
+                "label": "Lantzville CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+]
+
 
 async def seed_registry(db: AsyncSession) -> dict:
     """Seed the registry with BC municipalities and sources.
@@ -2283,6 +2485,7 @@ async def seed_registry(db: AsyncSession) -> dict:
         + BC_MUNICIPALITIES_BATCH_8
         + BC_MUNICIPALITIES_BATCH_9
         + BC_MUNICIPALITIES_BATCH_10
+        + BC_MUNICIPALITIES_BATCH_11
     )
     for muni_data in all_municipalities:
         sources_data = muni_data.pop("sources")
