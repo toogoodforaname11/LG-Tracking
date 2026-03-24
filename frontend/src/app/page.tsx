@@ -1,323 +1,380 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import {
-  getMunicipalities,
-  getTracks,
-  getTrackMatches,
-  triggerPoll,
-  triggerProcessing,
-  deleteTrack,
-} from "@/lib/api";
-import type { Municipality, Track, TrackMatch } from "@/lib/api";
+import { useState, useEffect } from "react";
 
-export default function Home() {
-  const [municipalities, setMunicipalities] = useState<Municipality[]>([]);
-  const [tracks, setTracks] = useState<Track[]>([]);
-  const [matches, setMatches] = useState<Record<number, TrackMatch[]>>({});
-  const [loading, setLoading] = useState(true);
-  const [running, setRunning] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
-  const load = async () => {
-    try {
-      const [muniData, tracksData] = await Promise.all([
-        getMunicipalities(),
-        getTracks(),
-      ]);
-      setMunicipalities(muniData.municipalities);
-      setTracks(tracksData);
+// Topics — easy to extend by adding entries here
+const AVAILABLE_TOPICS = [
+  { id: "ocp_updates", label: "OCP Updates" },
+  { id: "rezoning_housing", label: "Rezoning / Housing" },
+  { id: "environment", label: "Environment" },
+  { id: "development_permits", label: "Development Permits" },
+  { id: "other", label: "Other" },
+] as const;
 
-      // Load matches for each track
-      const matchesMap: Record<number, TrackMatch[]> = {};
-      for (const track of tracksData) {
-        try {
-          matchesMap[track.id] = await getTrackMatches(track.id);
-        } catch {
-          matchesMap[track.id] = [];
-        }
-      }
-      setMatches(matchesMap);
-    } catch {
-      setError("Failed to load data. Is the backend running on localhost:8000?");
-    } finally {
-      setLoading(false);
-    }
-  };
+// Municipalities sourced from seed registry — Colwood first, then CRD alphabetical
+const MUNICIPALITIES = [
+  "Colwood",
+  "Central Saanich",
+  "CRD",
+  "Esquimalt",
+  "Highlands",
+  "Langford",
+  "Metchosin",
+  "North Saanich",
+  "Oak Bay",
+  "Saanich",
+  "Sidney",
+  "Sooke",
+  "Victoria",
+  "View Royal",
+];
 
+type FormState = "idle" | "submitting" | "success" | "error";
+
+export default function SubscribePage() {
+  const [email, setEmail] = useState("");
+  const [selectedMunicipalities, setSelectedMunicipalities] = useState<
+    string[]
+  >([]);
+  const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
+  const [keywords, setKeywords] = useState("");
+  const [immediateAlerts, setImmediateAlerts] = useState(false);
+  const [formState, setFormState] = useState<FormState>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [muniDropdownOpen, setMuniDropdownOpen] = useState(false);
+
+  // Close dropdown when clicking outside
   useEffect(() => {
-    load();
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest("[data-muni-dropdown]")) {
+        setMuniDropdownOpen(false);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
   }, []);
 
-  const handlePoll = async () => {
-    setRunning("poll");
+  const toggleMunicipality = (name: string) => {
+    setSelectedMunicipalities((prev) =>
+      prev.includes(name) ? prev.filter((m) => m !== name) : [...prev, name]
+    );
+  };
+
+  const toggleTopic = (id: string) => {
+    setSelectedTopics((prev) =>
+      prev.includes(id) ? prev.filter((t) => t !== id) : [...prev, id]
+    );
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormState("submitting");
+    setErrorMessage("");
+
     try {
-      await triggerPoll();
-      await load();
-    } catch (e: unknown) {
-      setError(e instanceof Error ? e.message : "Poll failed");
-    } finally {
-      setRunning(null);
+      const res = await fetch(`${API_BASE}/api/v1/subscribe`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          municipalities: selectedMunicipalities,
+          topics: selectedTopics,
+          keywords,
+          immediate_alerts: immediateAlerts,
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error(
+          data?.detail || `Request failed with status ${res.status}`
+        );
+      }
+
+      setFormState("success");
+    } catch (err) {
+      setFormState("error");
+      setErrorMessage(
+        err instanceof Error ? err.message : "Something went wrong"
+      );
     }
   };
 
-  const handleProcess = async () => {
-    setRunning("process");
-    try {
-      await triggerProcessing();
-      await load();
-    } catch (e: unknown) {
-      setError(e instanceof Error ? e.message : "Processing failed");
-    } finally {
-      setRunning(null);
-    }
-  };
-
-  const handleRunAll = async () => {
-    setRunning("all");
-    try {
-      await triggerPoll();
-      await triggerProcessing();
-      await load();
-    } catch (e: unknown) {
-      setError(e instanceof Error ? e.message : "Pipeline failed");
-    } finally {
-      setRunning(null);
-    }
-  };
-
-  const handleDeleteTrack = async (id: number) => {
-    try {
-      await deleteTrack(id);
-      await load();
-    } catch {
-      setError("Failed to delete track");
-    }
-  };
-
-  const muniMap = Object.fromEntries(municipalities.map((m) => [m.id, m]));
-  const activeSources = municipalities.reduce(
-    (acc, m) => acc + m.sources.filter((s) => s.scrape_status === "active").length,
-    0
-  );
-
-  if (loading) return <p className="text-gray-500">Loading...</p>;
-
-  return (
-    <div className="space-y-8">
-      {error && (
-        <div className="rounded-lg bg-red-50 p-4 text-sm text-red-700">
-          {error}
-          <button onClick={() => setError(null)} className="ml-2 font-medium underline">
-            Dismiss
-          </button>
+  if (formState === "success") {
+    return (
+      <div className="rounded-lg border bg-white p-8 text-center shadow-sm">
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
+          <svg
+            className="h-8 w-8 text-green-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
         </div>
-      )}
-
-      <section>
-        <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold">Dashboard</h2>
-          <span className="text-xs text-gray-400">
-            demo user: demo-gov001
-          </span>
-        </div>
-        <p className="mt-1 text-gray-600">
-          Track BC local government hearing updates. Opt-in to topics and get alerts.
+        <h2 className="mb-2 text-2xl font-bold text-gray-900">
+          Preferences Saved!
+        </h2>
+        <p className="mb-4 text-gray-600">
+          You will receive{" "}
+          {immediateAlerts ? (
+            <>
+              <strong>immediate alerts</strong> when new matching items are
+              detected, plus{" "}
+            </>
+          ) : null}
+          <strong>weekly digests every Sunday at 8 PM Pacific</strong> with
+          AI-summarized updates from your selected municipalities.
         </p>
-      </section>
-
-      {/* Stats */}
-      <section className="grid gap-4 sm:grid-cols-4">
-        <div className="rounded-lg border bg-white p-5 shadow-sm">
-          <h3 className="text-sm font-medium text-gray-500">Municipalities</h3>
-          <p className="mt-1 text-3xl font-bold">{municipalities.length}</p>
-          <p className="text-sm text-gray-400">CRD region</p>
-        </div>
-        <div className="rounded-lg border bg-white p-5 shadow-sm">
-          <h3 className="text-sm font-medium text-gray-500">Active Sources</h3>
-          <p className="mt-1 text-3xl font-bold">{activeSources}</p>
-          <p className="text-sm text-gray-400">CivicWeb + YouTube</p>
-        </div>
-        <div className="rounded-lg border bg-white p-5 shadow-sm">
-          <h3 className="text-sm font-medium text-gray-500">Your Tracks</h3>
-          <p className="mt-1 text-3xl font-bold">
-            {tracks.filter((t) => t.is_active).length}
-          </p>
-          <p className="text-sm text-gray-400">active</p>
-        </div>
-        <div className="rounded-lg border bg-white p-5 shadow-sm">
-          <h3 className="text-sm font-medium text-gray-500">Matches</h3>
-          <p className="mt-1 text-3xl font-bold">
-            {Object.values(matches).reduce((a, m) => a + m.length, 0)}
-          </p>
-          <p className="text-sm text-gray-400">total</p>
-        </div>
-      </section>
-
-      {/* Actions */}
-      <section>
-        <h3 className="mb-3 text-lg font-semibold">Actions</h3>
-        <div className="flex flex-wrap gap-3">
-          <Link
-            href="/tracks/new"
-            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
-          >
-            Create Track
-          </Link>
-          <Link
-            href="/municipalities"
-            className="rounded-lg border px-4 py-2 text-sm font-medium hover:bg-gray-50"
-          >
-            Browse Municipalities
-          </Link>
-          <Link
-            href="/search"
-            className="rounded-lg border px-4 py-2 text-sm font-medium hover:bg-gray-50"
-          >
-            Search
-          </Link>
-          <button
-            onClick={handlePoll}
-            disabled={!!running}
-            className="rounded-lg border border-green-200 bg-green-50 px-4 py-2 text-sm font-medium text-green-700 hover:bg-green-100 disabled:opacity-50"
-          >
-            {running === "poll" ? "Polling..." : "Poll Sources"}
-          </button>
-          <button
-            onClick={handleProcess}
-            disabled={!!running}
-            className="rounded-lg border border-purple-200 bg-purple-50 px-4 py-2 text-sm font-medium text-purple-700 hover:bg-purple-100 disabled:opacity-50"
-          >
-            {running === "process" ? "Processing..." : "Process Matches"}
-          </button>
-          <button
-            onClick={handleRunAll}
-            disabled={!!running}
-            className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-2 text-sm font-medium text-amber-700 hover:bg-amber-100 disabled:opacity-50"
-          >
-            {running === "all" ? "Running..." : "Run Full Pipeline"}
-          </button>
-        </div>
-      </section>
-
-      {/* Tracks */}
-      <section>
-        <h3 className="mb-3 text-lg font-semibold">My Tracks</h3>
-        {tracks.length === 0 ? (
-          <div className="rounded-lg border-2 border-dashed p-6 text-center text-gray-500">
-            <p>No tracks yet.</p>
-            <Link
-              href="/tracks/new"
-              className="mt-2 inline-block text-blue-600 hover:underline"
-            >
-              Create your first track
-            </Link>
-          </div>
-        ) : (
-          <div className="space-y-4">
-            {tracks.map((track) => (
-              <div
-                key={track.id}
-                className={`rounded-lg border bg-white p-4 shadow-sm ${
-                  !track.is_active ? "opacity-50" : ""
-                }`}
-              >
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h4 className="font-semibold">{track.name}</h4>
-                    <p className="text-sm text-gray-500">
-                      {track.municipality_ids
-                        .map((id) => muniMap[id]?.short_name || `#${id}`)
-                        .join(", ")}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span
-                      className={`rounded-full px-2 py-0.5 text-xs ${
-                        track.is_active
-                          ? "bg-green-100 text-green-700"
-                          : "bg-gray-100 text-gray-500"
-                      }`}
-                    >
-                      {track.is_active ? "Active" : "Inactive"}
-                    </span>
-                    <button
-                      onClick={() => handleDeleteTrack(track.id)}
-                      className="text-xs text-red-500 hover:underline"
-                    >
-                      Deactivate
-                    </button>
-                  </div>
-                </div>
-
-                <div className="mt-2 flex flex-wrap gap-1">
-                  {track.topics.map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-full bg-blue-50 px-2 py-0.5 text-xs text-blue-700"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                  {track.keywords.map((k) => (
-                    <span
-                      key={k}
-                      className="rounded-full bg-amber-50 px-2 py-0.5 text-xs text-amber-700"
-                    >
-                      {k}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Matches for this track */}
-                {(matches[track.id] || []).length > 0 && (
-                  <div className="mt-3 border-t pt-3">
-                    <p className="mb-2 text-xs font-medium text-gray-500">
-                      {matches[track.id].length} matches
-                    </p>
-                    {matches[track.id].slice(0, 3).map((m) => (
-                      <div key={m.id} className="mb-2 rounded bg-gray-50 p-2 text-sm">
-                        <div className="flex items-center gap-2">
-                          <span
-                            className={`rounded px-1.5 py-0.5 text-xs ${
-                              m.verification_status === "verified"
-                                ? "bg-green-100 text-green-700"
-                                : "bg-yellow-100 text-yellow-700"
-                            }`}
-                          >
-                            {m.verification_status || "unverified"}
-                          </span>
-                          <span className="text-xs text-gray-400">
-                            {m.match_score != null
-                              ? `${(m.match_score * 100).toFixed(0)}% match`
-                              : ""}
-                          </span>
-                        </div>
-                        {m.summary && (
-                          <p className="mt-1 text-xs text-gray-600 line-clamp-2">
-                            {m.summary}
-                          </p>
-                        )}
-                        {m.match_reason && !m.summary && (
-                          <p className="mt-1 text-xs text-gray-500">{m.match_reason}</p>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
+        {immediateAlerts && (
+          <div className="mx-auto mb-4 max-w-md rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800">
+            Immediate alerts are ON — we poll sources every 30 minutes and will
+            email you as soon as a matching item is found.
           </div>
         )}
-      </section>
-
-      <footer className="mt-12 border-t pt-4 text-xs text-gray-400">
-        <p>
-          Public data only. Not official government communication. AI-generated
-          summaries may contain errors — always verify with original sources.
+        <p className="mb-6 text-sm text-gray-500">
+          A confirmation email has been sent to <strong>{email}</strong>.
         </p>
-      </footer>
-    </div>
+        <button
+          onClick={() => setFormState("idle")}
+          className="rounded-lg bg-blue-800 px-6 py-2 text-sm font-medium text-white hover:bg-blue-900"
+        >
+          Edit Preferences
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="rounded-lg border bg-white p-6 shadow-sm">
+        <h2 className="mb-1 text-xl font-bold text-gray-900">
+          Subscribe to Municipal Alerts &amp; Digests
+        </h2>
+        <p className="mb-6 text-sm text-gray-500">
+          Get AI-summarized updates from BC municipal council meetings. Choose
+          immediate alerts, weekly digests, or both. Enter the same email to
+          update your preferences anytime.
+        </p>
+
+        {/* Email */}
+        <div className="mb-5">
+          <label
+            htmlFor="email"
+            className="mb-1 block text-sm font-medium text-gray-700"
+          >
+            Email Address <span className="text-red-500">*</span>
+          </label>
+          <input
+            id="email"
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@example.com"
+            className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+          />
+        </div>
+
+        {/* Municipalities — multi-select dropdown */}
+        <div className="mb-5">
+          <label className="mb-1 block text-sm font-medium text-gray-700">
+            Municipalities
+          </label>
+          <div className="relative" data-muni-dropdown>
+            <button
+              type="button"
+              onClick={() => setMuniDropdownOpen(!muniDropdownOpen)}
+              className="flex w-full items-center justify-between rounded-lg border border-gray-300 px-4 py-2.5 text-left text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+            >
+              <span className="text-gray-600">
+                {selectedMunicipalities.length === 0
+                  ? "Select municipalities..."
+                  : `${selectedMunicipalities.length} selected`}
+              </span>
+              <svg
+                className={`h-4 w-4 text-gray-400 transition-transform ${muniDropdownOpen ? "rotate-180" : ""}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+
+            {muniDropdownOpen && (
+              <div className="absolute z-10 mt-1 max-h-60 w-full overflow-y-auto rounded-lg border border-gray-200 bg-white shadow-lg">
+                {MUNICIPALITIES.map((name) => (
+                  <label
+                    key={name}
+                    className="flex cursor-pointer items-center px-4 py-2 hover:bg-blue-50"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={selectedMunicipalities.includes(name)}
+                      onChange={() => toggleMunicipality(name)}
+                      className="mr-3 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span className="text-sm text-gray-700">{name}</span>
+                  </label>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Selected pills */}
+          {selectedMunicipalities.length > 0 && (
+            <div className="mt-2 flex flex-wrap gap-1.5">
+              {selectedMunicipalities.map((name) => (
+                <span
+                  key={name}
+                  className="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800"
+                >
+                  {name}
+                  <button
+                    type="button"
+                    onClick={() => toggleMunicipality(name)}
+                    className="ml-1 text-blue-600 hover:text-blue-900"
+                  >
+                    &times;
+                  </button>
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Topics — checkboxes */}
+        <div className="mb-5">
+          <label className="mb-2 block text-sm font-medium text-gray-700">
+            Topics
+          </label>
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+            {AVAILABLE_TOPICS.map((topic) => (
+              <label
+                key={topic.id}
+                className={`flex cursor-pointer items-center rounded-lg border px-3 py-2.5 text-sm transition-colors ${
+                  selectedTopics.includes(topic.id)
+                    ? "border-blue-500 bg-blue-50 text-blue-800"
+                    : "border-gray-200 bg-white text-gray-700 hover:bg-gray-50"
+                }`}
+              >
+                <input
+                  type="checkbox"
+                  checked={selectedTopics.includes(topic.id)}
+                  onChange={() => toggleTopic(topic.id)}
+                  className="mr-2 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                />
+                {topic.label}
+              </label>
+            ))}
+          </div>
+        </div>
+
+        {/* Keywords */}
+        <div className="mb-5">
+          <label
+            htmlFor="keywords"
+            className="mb-1 block text-sm font-medium text-gray-700"
+          >
+            Keywords{" "}
+            <span className="font-normal text-gray-400">(optional)</span>
+          </label>
+          <input
+            id="keywords"
+            type="text"
+            value={keywords}
+            onChange={(e) => setKeywords(e.target.value)}
+            placeholder="e.g. affordable housing, bike lanes, tree bylaw"
+            className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+          />
+          <p className="mt-1 text-xs text-gray-400">
+            Comma-separated. We&apos;ll match these against meeting agendas and
+            minutes.
+          </p>
+        </div>
+
+        {/* Immediate Alerts checkbox */}
+        <div className="mb-6 rounded-lg border border-amber-200 bg-amber-50 p-4">
+          <label className="flex cursor-pointer items-start gap-3">
+            <input
+              type="checkbox"
+              checked={immediateAlerts}
+              onChange={(e) => setImmediateAlerts(e.target.checked)}
+              className="mt-0.5 h-4 w-4 rounded border-gray-300 text-amber-600 focus:ring-amber-500"
+            />
+            <div>
+              <span className="text-sm font-medium text-amber-900">
+                Send me immediate alerts after each matching council meeting
+              </span>
+              <p className="mt-1 text-xs text-amber-700">
+                We poll sources every 30 minutes. When a new matching item is
+                detected, you&apos;ll receive an email right away. Weekly
+                digests are always sent regardless of this setting.
+              </p>
+            </div>
+          </label>
+        </div>
+
+        {/* Error */}
+        {formState === "error" && (
+          <div className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-700">
+            {errorMessage}
+          </div>
+        )}
+
+        {/* Submit */}
+        <button
+          type="submit"
+          disabled={formState === "submitting" || !email}
+          className="w-full rounded-lg bg-blue-800 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-900 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          {formState === "submitting"
+            ? "Saving..."
+            : "Subscribe / Update Preferences"}
+        </button>
+      </div>
+
+      {/* Info box */}
+      <div className="rounded-lg border border-blue-100 bg-blue-50 p-4 text-sm text-blue-800">
+        <p className="mb-2 font-medium">How it works:</p>
+        <ul className="list-inside list-disc space-y-1 text-blue-700">
+          <li>
+            We scan council agendas, minutes, and meeting videos from your
+            selected municipalities every 30 minutes
+          </li>
+          <li>
+            AI summarizes relevant items matching your topics and keywords
+          </li>
+          <li>
+            <strong>Immediate alerts</strong> (opt-in): get emailed within
+            minutes when a new matching item appears
+          </li>
+          <li>
+            <strong>Weekly digest</strong> (always): full summary every Sunday
+            at 8 PM Pacific
+          </li>
+          <li>
+            To change preferences, just submit this form again with the same
+            email
+          </li>
+          <li>Every email includes a one-click unsubscribe link</li>
+        </ul>
+      </div>
+    </form>
   );
 }

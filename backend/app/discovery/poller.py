@@ -13,6 +13,7 @@ from app.discovery.base import DiscoveredItem
 from app.discovery.civicweb import CivicWebScraper
 from app.discovery.youtube import YouTubeScraper
 from app.config import settings
+from app.services.instant_alerts import send_immediate_alerts_for_documents
 
 
 # Map item_type strings to DocType enum
@@ -66,9 +67,10 @@ async def poll_source(source: Source, municipality: Municipality) -> list[Discov
 
 async def store_discovered_items(
     db: AsyncSession, items: list[DiscoveredItem], source: Source, municipality: Municipality
-) -> dict:
-    """Store discovered items in the database. Returns stats."""
+) -> tuple[dict, list[Document]]:
+    """Store discovered items in the database. Returns (stats, new_docs)."""
     stats = {"total": len(items), "new": 0, "existing": 0}
+    new_docs: list[Document] = []
 
     for item in items:
         # Check if document already exists (by URL)
@@ -137,14 +139,18 @@ async def store_discovered_items(
             first_seen_at=datetime.utcnow(),
         )
         db.add(doc)
+        new_docs.append(doc)
         stats["new"] += 1
 
     await db.commit()
-    return stats
+    return stats, new_docs
 
 
 async def run_discovery(db: AsyncSession, municipality_filter: str | None = None) -> dict:
     """Run discovery across all active sources.
+
+    After polling, sends immediate alerts for any new documents to subscribers
+    who have immediate_alerts enabled.
 
     Args:
         db: Database session
@@ -167,6 +173,7 @@ async def run_discovery(db: AsyncSession, municipality_filter: str | None = None
     source_munis = result.all()
 
     results = {}
+    all_new_docs: list[Document] = []
 
     for source, municipality in source_munis:
         muni_name = municipality.short_name
@@ -180,8 +187,9 @@ async def run_discovery(db: AsyncSession, municipality_filter: str | None = None
         try:
             items = await poll_source(source, municipality)
 
-            # Store items
-            stats = await store_discovered_items(db, items, source, municipality)
+            # Store items — now also returns new Document objects
+            stats, new_docs = await store_discovered_items(db, items, source, municipality)
+            all_new_docs.extend(new_docs)
 
             # Update scrape run
             scrape_run.finished_at = datetime.utcnow()
@@ -212,5 +220,15 @@ async def run_discovery(db: AsyncSession, municipality_filter: str | None = None
 
         # Rate limiting between sources
         await asyncio.sleep(settings.request_delay_seconds)
+
+    # Send immediate alerts for all new documents discovered in this run
+    if all_new_docs:
+        try:
+            alert_stats = await send_immediate_alerts_for_documents(db, all_new_docs)
+            results["_immediate_alerts"] = alert_stats
+            print(f"[Poller] Immediate alerts: {alert_stats['alerts_sent']} sent")
+        except Exception as e:
+            print(f"[Poller] Error sending immediate alerts: {e}")
+            results["_immediate_alerts"] = {"error": str(e)}
 
     return results
