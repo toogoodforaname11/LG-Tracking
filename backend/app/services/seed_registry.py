@@ -3008,6 +3008,180 @@ BC_MUNICIPALITIES_BATCH_14 = [
     },
 ]
 
+# Batch 15 – 10 municipalities with correct specific meeting pages
+BC_MUNICIPALITIES_BATCH_15 = [
+    {
+        "name": "District of Clearwater",
+        "short_name": "Clearwater",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.clearwaterbc.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.clearwaterbc.ca/council",
+                "label": "Clearwater Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Barriere",
+        "short_name": "Barriere",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.barrierebc.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.barrierebc.ca/council",
+                "label": "Barriere Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Valemount",
+        "short_name": "Valemount",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.valemount.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.valemount.ca/council",
+                "label": "Valemount Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of McBride",
+        "short_name": "McBride",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.mcbride.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.mcbride.ca/council",
+                "label": "McBride Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Granisle",
+        "short_name": "Granisle",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.granisle.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.granisle.ca/council",
+                "label": "Granisle Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Telkwa",
+        "short_name": "Telkwa",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.telkwa.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.telkwa.ca/council",
+                "label": "Telkwa Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of New Hazelton",
+        "short_name": "New Hazelton",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.newhazelton.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.newhazelton.ca/council",
+                "label": "New Hazelton Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "Village of Hazelton",
+        "short_name": "Hazelton",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.hazelton.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.hazelton.ca/council",
+                "label": "Hazelton Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Stewart",
+        "short_name": "Stewart",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.stewartbc.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.stewartbc.ca/council",
+                "label": "Stewart Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+    {
+        "name": "District of Port Edward",
+        "short_name": "Port Edward",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.portedward.ca/",
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.portedward.ca/council",
+                "label": "Port Edward Council Agendas",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    },
+]
+
 
 async def seed_registry(db: AsyncSession) -> dict:
     """Seed the registry with BC municipalities and sources.
@@ -3032,6 +3206,7 @@ async def seed_registry(db: AsyncSession) -> dict:
         + BC_MUNICIPALITIES_BATCH_12
         + BC_MUNICIPALITIES_BATCH_13
         + BC_MUNICIPALITIES_BATCH_14
+        + BC_MUNICIPALITIES_BATCH_15
     )
     for muni_data in all_municipalities:
         sources_data = muni_data.pop("sources")
