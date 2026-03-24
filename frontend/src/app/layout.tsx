@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "BC Hearing Watch — Municipal Council Alerts & Digest",
+  title: "BC Local Government Watch – Housing, Transit & Provincial Priority Updates",
   description:
-    "Subscribe to immediate alerts and weekly AI-summarized digests of BC local government council hearings and decisions.",
+    "Subscribe to updates on housing, transit, and local government hearings from BC municipalities.",
 };
 
 export default function RootLayout({

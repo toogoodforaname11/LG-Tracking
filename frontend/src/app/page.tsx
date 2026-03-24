@@ -136,19 +136,12 @@ export default function SubscribePage() {
           You will receive{" "}
           {immediateAlerts ? (
             <>
-              <strong>immediate alerts</strong> when new matching items are
-              detected, plus{" "}
+              <strong>immediate alerts</strong> (if enabled) +{" "}
             </>
           ) : null}
-          <strong>weekly digests every Sunday at 8 PM Pacific</strong> with
-          AI-summarized updates from your selected municipalities.
+          <strong>weekly digests every Sunday</strong>. Re-visit this page
+          anytime to edit.
         </p>
-        {immediateAlerts && (
-          <div className="mx-auto mb-4 max-w-md rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800">
-            Immediate alerts are ON — we poll sources every 30 minutes and will
-            email you as soon as a matching item is found.
-          </div>
-        )}
         <p className="mb-6 text-sm text-gray-500">
           A confirmation email has been sent to <strong>{email}</strong>.
         </p>
@@ -170,9 +163,8 @@ export default function SubscribePage() {
           Priority Updates
         </h2>
         <p className="mb-6 text-sm text-gray-500">
-          Get AI-summarized updates from BC municipal council meetings. Choose
-          immediate alerts, weekly digests, or both. Enter the same email to
-          update your preferences anytime.
+          Subscribe to updates on housing, transit, and local government
+          hearings. Enter the same email to update your preferences anytime.
         </p>
 
         {/* Email */}
@@ -194,29 +186,30 @@ export default function SubscribePage() {
           />
         </div>
 
-        {/* Keywords / Bylaw / Bill Tracking — PROMINENT, right after email */}
-        <div className="mb-5 rounded-lg border-2 border-blue-300 bg-blue-50 p-4">
+        {/* Keywords / Bylaw / Bill Tracking — MOST PROMINENT FIELD */}
+        <div className="mb-6 rounded-xl border-2 border-blue-500 bg-blue-50 p-5 shadow-md">
           <label
             htmlFor="keywords"
-            className="mb-1 block text-sm font-semibold text-blue-900"
+            className="mb-2 block text-lg font-bold text-blue-900"
           >
-            Specific Keywords / Bylaw / Bill Tracking
+            Track Specific Bills, Bylaws, or Keywords
           </label>
-          <p className="mb-2 text-xs text-blue-700">
-            Enter specific bylaw numbers, bill names, or keywords you want to
-            track (e.g. &quot;Bylaw 1700&quot;, &quot;Housing Statutes Amendment
-            Act&quot;, &quot;TOA zoning&quot;). The system will alert you every
-            time these exact terms are mentioned in any hearing.
-          </p>
           <input
             id="keywords"
             type="text"
             value={keywords}
             onChange={(e) => setKeywords(e.target.value)}
             placeholder="e.g. Bylaw 1700, Bill 44, TOA zoning, affordable housing"
-            className="w-full rounded-lg border border-blue-300 bg-white px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+            className="w-full rounded-lg border-2 border-blue-400 bg-white px-4 py-3 text-base focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
           />
-          <p className="mt-1 text-xs text-blue-600">
+          <div className="mt-3 rounded-lg border border-blue-200 bg-white px-4 py-3 text-sm leading-relaxed text-blue-800">
+            Enter specific bylaw numbers, bill names, or keywords you want to
+            track (e.g. &lsquo;Bylaw 1700&rsquo;, &lsquo;Housing Statutes
+            Amendment Act&rsquo;, &lsquo;TOA zoning&rsquo;, &lsquo;TOD area
+            plan&rsquo;). The system will alert you every time these exact terms
+            are mentioned in any hearing.
+          </div>
+          <p className="mt-2 text-xs text-blue-600">
             Comma-separated. We&apos;ll match these against meeting agendas,
             minutes, and videos.
           </p>
@@ -359,7 +352,7 @@ export default function SubscribePage() {
         >
           {formState === "submitting"
             ? "Saving..."
-            : "Subscribe / Update Preferences"}
+            : "Subscribe / Update My Preferences"}
         </button>
       </div>
 
