@@ -30,11 +30,26 @@ def _get_model():
     return _model
 
 
-async def gemini_match(prompt: str) -> dict | None:
-    """Run a matching prompt and parse JSON response."""
+def _extract_usage(response) -> dict[str, int]:
+    """Extract token counts from a Gemini GenerateContentResponse."""
+    try:
+        meta = response.usage_metadata
+        return {
+            "input_tokens": meta.prompt_token_count or 0,
+            "output_tokens": meta.candidates_token_count or 0,
+        }
+    except Exception:
+        return {"input_tokens": 0, "output_tokens": 0}
+
+
+async def gemini_match(prompt: str) -> tuple[dict | None, dict[str, int]]:
+    """Run a matching prompt and parse JSON response.
+
+    Returns (result, usage) where usage has input_tokens/output_tokens.
+    """
     if not settings.gemini_api_key:
         logger.warning("Gemini API key not set — using keyword fallback matching")
-        return None
+        return None, {"input_tokens": 0, "output_tokens": 0}
 
     try:
         model = _get_model()
@@ -46,19 +61,19 @@ async def gemini_match(prompt: str) -> dict | None:
                 "response_mime_type": "application/json",
             },
         )
-        return json.loads(response.text)
+        return json.loads(response.text), _extract_usage(response)
     except json.JSONDecodeError:
         logger.error(f"Gemini returned non-JSON response: {response.text[:200]}")
-        return None
+        return None, {"input_tokens": 0, "output_tokens": 0}
     except Exception as e:
         logger.error(f"Gemini match call failed: {e}")
-        return None
+        return None, {"input_tokens": 0, "output_tokens": 0}
 
 
-async def gemini_batch_match(prompt: str) -> list[dict] | None:
-    """Run a batch matching prompt. Returns list of match results per document."""
+async def gemini_batch_match(prompt: str) -> tuple[list[dict] | None, dict[str, int]]:
+    """Run a batch matching prompt. Returns (results, usage)."""
     if not settings.gemini_api_key:
-        return None
+        return None, {"input_tokens": 0, "output_tokens": 0}
 
     try:
         model = _get_model()
@@ -70,26 +85,27 @@ async def gemini_batch_match(prompt: str) -> list[dict] | None:
                 "response_mime_type": "application/json",
             },
         )
+        usage = _extract_usage(response)
         result = json.loads(response.text)
         # Handle both array and object responses
         if isinstance(result, list):
-            return result
+            return result, usage
         if isinstance(result, dict) and "results" in result:
-            return result["results"]
-        return [result]
+            return result["results"], usage
+        return [result], usage
     except json.JSONDecodeError:
         logger.error(f"Gemini batch match returned non-JSON: {response.text[:200]}")
-        return None
+        return None, {"input_tokens": 0, "output_tokens": 0}
     except Exception as e:
         logger.error(f"Gemini batch match failed: {e}")
-        return None
+        return None, {"input_tokens": 0, "output_tokens": 0}
 
 
-async def gemini_summarize(prompt: str) -> dict | None:
-    """Run a summarization prompt and parse JSON response."""
+async def gemini_summarize(prompt: str) -> tuple[dict | None, dict[str, int]]:
+    """Run a summarization prompt and parse JSON response. Returns (result, usage)."""
     if not settings.gemini_api_key:
         logger.warning("Gemini API key not set — skipping summarization")
-        return None
+        return None, {"input_tokens": 0, "output_tokens": 0}
 
     try:
         model = _get_model()
@@ -101,19 +117,19 @@ async def gemini_summarize(prompt: str) -> dict | None:
                 "response_mime_type": "application/json",
             },
         )
-        return json.loads(response.text)
+        return json.loads(response.text), _extract_usage(response)
     except json.JSONDecodeError:
         logger.error(f"Gemini returned non-JSON for summary: {response.text[:200]}")
-        return None
+        return None, {"input_tokens": 0, "output_tokens": 0}
     except Exception as e:
         logger.error(f"Gemini summarize call failed: {e}")
-        return None
+        return None, {"input_tokens": 0, "output_tokens": 0}
 
 
-async def gemini_batch_summarize(prompt: str) -> list[dict] | None:
-    """Run a batch summarization prompt. Returns list of summaries per document."""
+async def gemini_batch_summarize(prompt: str) -> tuple[list[dict] | None, dict[str, int]]:
+    """Run a batch summarization prompt. Returns (results, usage)."""
     if not settings.gemini_api_key:
-        return None
+        return None, {"input_tokens": 0, "output_tokens": 0}
 
     try:
         model = _get_model()
@@ -125,18 +141,19 @@ async def gemini_batch_summarize(prompt: str) -> list[dict] | None:
                 "response_mime_type": "application/json",
             },
         )
+        usage = _extract_usage(response)
         result = json.loads(response.text)
         if isinstance(result, list):
-            return result
+            return result, usage
         if isinstance(result, dict) and "results" in result:
-            return result["results"]
-        return [result]
+            return result["results"], usage
+        return [result], usage
     except json.JSONDecodeError:
         logger.error(f"Gemini batch summary returned non-JSON: {response.text[:200]}")
-        return None
+        return None, {"input_tokens": 0, "output_tokens": 0}
     except Exception as e:
         logger.error(f"Gemini batch summary failed: {e}")
-        return None
+        return None, {"input_tokens": 0, "output_tokens": 0}
 
 
 async def gemini_embed(text: str) -> list[float] | None:

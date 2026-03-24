@@ -30,6 +30,8 @@ from app.ai.gemini import (
     MATCH_BATCH_SIZE,
     SUMMARY_BATCH_SIZE,
 )
+from app.services.cost_tracker import log_api_cost
+from app.config import settings
 
 logger = logging.getLogger(__name__)
 
@@ -62,6 +64,7 @@ async def _batch_match_documents(
     docs_with_munis: list[tuple[Document, str]],
     track: Track,
     munis: dict[int, Municipality],
+    db: AsyncSession,
 ) -> list[tuple[Document, dict]]:
     """Match a batch of documents against a track using a single Gemini call.
 
@@ -93,13 +96,19 @@ async def _batch_match_documents(
             for idx, (doc, muni_name) in enumerate(batch)
         )
 
-        batch_results = await gemini_batch_match(
+        batch_results, usage = await gemini_batch_match(
             BATCH_MATCH_PROMPT.format(
                 municipalities=", ".join(track_munis),
                 topics=", ".join(track.topics),
                 keywords=", ".join(track.keywords),
                 documents_list=docs_list,
             )
+        )
+
+        await log_api_cost(
+            db, "gemini", "batch_match", settings.gemini_model,
+            usage["input_tokens"], usage["output_tokens"],
+            context={"doc_count": len(batch), "track_id": track.id},
         )
 
         if batch_results:
@@ -118,6 +127,7 @@ async def _batch_summarize_matches(
     matched_docs: list[tuple[Document, dict]],
     track: Track,
     munis: dict[int, Municipality],
+    db: AsyncSession,
 ) -> list[tuple[Document, dict, dict | None]]:
     """Summarize a batch of matched documents using fewer Gemini calls.
 
@@ -150,12 +160,18 @@ async def _batch_summarize_matches(
             for idx, (doc, _) in enumerate(batch)
         )
 
-        batch_summaries = await gemini_batch_summarize(
+        batch_summaries, usage = await gemini_batch_summarize(
             BATCH_SUMMARY_PROMPT.format(
                 topics=", ".join(track.topics),
                 keywords=", ".join(track.keywords),
                 documents_list=docs_list,
             )
+        )
+
+        await log_api_cost(
+            db, "gemini", "batch_summarize", settings.gemini_model,
+            usage["input_tokens"], usage["output_tokens"],
+            context={"doc_count": len(batch), "track_id": track.id},
         )
 
         if batch_summaries:
@@ -235,14 +251,14 @@ async def process_new_documents(db: AsyncSession) -> dict:
         individual_calls = len(relevant_docs)
 
         # Batch match
-        matched = await _batch_match_documents(relevant_docs, track, munis)
+        matched = await _batch_match_documents(relevant_docs, track, munis, db)
         stats["matches_found"] += len(matched)
 
         batch_calls = (len(relevant_docs) + MATCH_BATCH_SIZE - 1) // MATCH_BATCH_SIZE
         stats["gemini_calls_saved"] += max(0, individual_calls - batch_calls)
 
         # Batch summarize
-        summarized = await _batch_summarize_matches(matched, track, munis)
+        summarized = await _batch_summarize_matches(matched, track, munis, db)
 
         for doc, match_result, summary_result in summarized:
             if summary_result:

@@ -47,14 +47,17 @@ async def verify_with_perplexity(
     meeting_date: str,
     document_type: str,
     key_points: list[str],
-) -> dict | None:
+) -> tuple[dict | None, dict[str, int]]:
     """Verify key points using Perplexity Search API.
 
-    Returns verification result dict or None if API unavailable.
+    Returns (verification_result, usage) where usage has input_tokens/output_tokens.
+    Returns (None, zero_usage) if API unavailable or call fails.
     """
+    _zero = {"input_tokens": 0, "output_tokens": 0}
+
     if not settings.perplexity_api_key:
         logger.warning("Perplexity API key not set — skipping verification")
-        return None
+        return None, _zero
 
     claims_text = "\n".join(f"- {point}" for point in key_points)
     prompt = VERIFY_PROMPT.format(
@@ -89,17 +92,22 @@ async def verify_with_perplexity(
             data = response.json()
             content = data["choices"][0]["message"]["content"]
 
+            usage_raw = data.get("usage", {})
+            usage = {
+                "input_tokens": usage_raw.get("prompt_tokens", 0),
+                "output_tokens": usage_raw.get("completion_tokens", 0),
+            }
+
             # Try to parse as JSON
             try:
-                return json.loads(content)
+                return json.loads(content), usage
             except json.JSONDecodeError:
-                # If not JSON, return as raw text
                 return {
                     "verification_status": "unverified",
                     "raw_response": content,
                     "overall_confidence": 0.0,
-                }
+                }, usage
 
     except Exception as e:
         logger.error(f"Perplexity verification failed: {e}")
-        return None
+        return None, _zero
