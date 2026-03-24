@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "BC Hearing Watch",
-  description: "Track BC local government council hearing updates",
+  title: "BC Hearing Watch — Weekly Municipal Digest",
+  description:
+    "Subscribe to weekly AI-summarized digests of BC local government council hearings and decisions.",
 };
 
 export default function RootLayout({
@@ -14,46 +14,34 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-gray-50 text-gray-900 antialiased">
-        <header className="border-b bg-white px-6 py-3">
-          <div className="mx-auto flex max-w-6xl items-center justify-between">
-            <div className="flex items-center gap-6">
-              <Link href="/" className="text-xl font-bold hover:text-blue-700">
+      <body className="min-h-screen bg-gray-50 text-gray-900 antialiased">
+        <header className="border-b bg-white px-6 py-4">
+          <div className="mx-auto flex max-w-2xl items-center justify-between">
+            <div>
+              <h1 className="text-xl font-bold text-blue-800">
                 BC Hearing Watch
-              </Link>
-              <nav className="flex gap-4 text-sm">
-                <Link
-                  href="/"
-                  className="text-gray-600 hover:text-gray-900"
-                >
-                  Dashboard
-                </Link>
-                <Link
-                  href="/municipalities"
-                  className="text-gray-600 hover:text-gray-900"
-                >
-                  Municipalities
-                </Link>
-                <Link
-                  href="/tracks/new"
-                  className="text-gray-600 hover:text-gray-900"
-                >
-                  New Track
-                </Link>
-                <Link
-                  href="/search"
-                  className="text-gray-600 hover:text-gray-900"
-                >
-                  Search
-                </Link>
-              </nav>
+              </h1>
+              <p className="text-xs text-gray-500">
+                Weekly Municipal Council Digest
+              </p>
             </div>
             <span className="rounded bg-amber-100 px-2 py-1 text-xs font-medium text-amber-800">
-              Prototype
+              Experimental
             </span>
           </div>
         </header>
-        <main className="mx-auto max-w-6xl px-6 py-8">{children}</main>
+        <main className="mx-auto max-w-2xl px-6 py-8">{children}</main>
+        <footer className="border-t bg-gray-100 px-6 py-6">
+          <div className="mx-auto max-w-2xl">
+            <p className="text-xs leading-relaxed text-gray-500">
+              This is an experimental personal tool using public data. AI
+              summaries may contain errors. Always verify with original
+              municipal sources. Not official government communication. This
+              tool tracks publicly available council meeting agendas, minutes,
+              and videos from BC municipalities.
+            </p>
+          </div>
+        </footer>
       </body>
     </html>
   );

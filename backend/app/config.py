@@ -20,6 +20,10 @@ class Settings(BaseSettings):
     # Perplexity
     perplexity_api_key: str = ""
 
+    # Resend (email)
+    resend_api_key: str = ""
+    resend_from_email: str = "BC Hearing Watch <noreply@bchearingwatch.ca>"
+
     # Scraping
     request_delay_seconds: float = 2.0
     scrape_timeout_seconds: int = 30

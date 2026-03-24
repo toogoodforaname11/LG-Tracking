@@ -12,7 +12,31 @@ async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
   return res.json();
 }
 
-// --- Registry ---
+// --- Subscribe ---
+
+export interface SubscribeRequest {
+  email: string;
+  municipalities: string[];
+  topics: string[];
+  keywords: string;
+}
+
+export interface SubscribeResponse {
+  status: string;
+  email: string;
+  message: string;
+}
+
+export async function subscribe(
+  data: SubscribeRequest
+): Promise<SubscribeResponse> {
+  return apiFetch("/api/v1/subscribe", {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
+}
+
+// --- Registry (kept for seed endpoint) ---
 
 export interface Source {
   id: number;
@@ -51,85 +75,15 @@ export async function seedRegistry(): Promise<{
   return apiFetch("/api/v1/seed", { method: "POST" });
 }
 
-// --- Tracks ---
-
-export interface Track {
-  id: number;
-  user_id: string;
-  name: string;
-  municipality_ids: number[];
-  topics: string[];
-  keywords: string[];
-  is_active: boolean;
-  notify_email: boolean;
-  created_at: string;
-  updated_at: string;
-}
-
-export interface TrackMatch {
-  id: number;
-  track_id: number;
-  document_id: number;
-  match_score: number | null;
-  match_reason: string | null;
-  matched_topics: string[] | null;
-  matched_keywords: string[] | null;
-  summary: string | null;
-  verification_status: string | null;
-  notified_at: string | null;
-}
-
-export async function getTracks(): Promise<Track[]> {
-  return apiFetch("/api/v1/tracks");
-}
-
-export async function createTrack(data: {
-  name: string;
-  municipality_ids: number[];
-  topics: string[];
-  keywords: string[];
-}): Promise<Track> {
-  return apiFetch("/api/v1/tracks", {
-    method: "POST",
-    body: JSON.stringify(data),
-  });
-}
-
-export async function deleteTrack(id: number): Promise<void> {
-  return apiFetch(`/api/v1/tracks/${id}`, { method: "DELETE" });
-}
-
-export async function getTrackMatches(trackId: number): Promise<TrackMatch[]> {
-  return apiFetch(`/api/v1/tracks/${trackId}/matches`);
-}
-
-export async function getTopics(): Promise<{ topics: string[] }> {
-  return apiFetch("/api/v1/topics");
-}
-
-// --- Discovery ---
+// --- Discovery (kept for backend cron) ---
 
 export async function triggerPoll(municipality?: string): Promise<unknown> {
   const params = municipality ? `?municipality=${municipality}` : "";
   return apiFetch(`/api/v1/discovery/poll${params}`, { method: "POST" });
 }
 
-export async function getDocuments(newOnly = false): Promise<unknown[]> {
-  return apiFetch(`/api/v1/discovery/documents?new_only=${newOnly}`);
-}
-
-// --- Processing ---
+// --- Processing (kept for backend cron) ---
 
 export async function triggerProcessing(): Promise<unknown> {
   return apiFetch("/api/v1/ai/process", { method: "POST" });
-}
-
-// --- Alerts ---
-
-export async function triggerNotify(): Promise<unknown> {
-  return apiFetch("/api/v1/alerts/notify", { method: "POST" });
-}
-
-export async function getDigest(trackId: number): Promise<unknown> {
-  return apiFetch(`/api/v1/alerts/digest/${trackId}`);
 }
