@@ -1,6 +1,6 @@
 """Gemini prompts for matching and summarization."""
 
-MATCH_PROMPT = """You are a BC local government hearing analyst. Your job is to determine if a municipal document is relevant to a user's tracking preferences.
+MATCH_PROMPT = """You are a BC local government hearing analyst specializing in housing policy. Your job is to determine if a municipal document is relevant to a user's tracking preferences.
 
 USER TRACK:
 - Municipalities: {municipalities}
@@ -17,6 +17,17 @@ DOCUMENT:
 
 TASK: Determine if this document is relevant to the user's track.
 
+TOPIC DEFINITIONS (be highly sensitive to these):
+- "toa" = Transit Oriented Areas — TOA designations, transit-oriented development, density near transit
+- "ssmuh" = Small-Scale Multi-Unit Housing — SSMUH, duplex, triplex, fourplex, missing middle housing, small-scale multi-unit
+- "housing_statutes" = Housing Statutes Amendment bills, Bill 44, Bill 46, Bill 47, provincial housing legislation, Housing Statutes Amendment Act
+- "ocp_housing" = Official Community Plan housing updates — OCP amendments related to housing, housing designations in community plans
+- "zoning_density" = Zoning/rezoning for housing density — upzoning, density bonuses, zoning bylaw amendments for housing
+- "dev_permits_housing" = Development permits affecting housing — DP applications for residential, housing development variance permits
+- "other_housing" = Any other housing-related bylaws, motions, or legislation not covered above
+
+BYLAW/KEYWORD EXACT-MATCH RULE: If any keyword looks like a bylaw number (e.g. "Bylaw 1700", "BL 1700"), a bill name (e.g. "Bill 44"), or a specific act name (e.g. "Housing Statutes Amendment Act"), treat it as an EXACT-MATCH trigger. If that bylaw/bill/act appears ANYWHERE in the document, it is a match with confidence 1.0 regardless of topic alignment.
+
 Respond in JSON format:
 {{
   "is_match": true/false,
@@ -26,7 +37,7 @@ Respond in JSON format:
   "reason": "Brief explanation of why this matches or doesn't match"
 }}
 
-Be generous with matching — if a document MIGHT be relevant, mark it as a match with lower confidence. Only reject clearly irrelevant items."""
+Be generous with matching — if a document MIGHT be relevant to housing, mark it as a match with lower confidence. Only reject clearly irrelevant items."""
 
 SUMMARY_PROMPT = """You are a BC local government hearing analyst creating a concise briefing.
 
@@ -89,12 +100,23 @@ Document: {content}
 Output a single dense paragraph optimized for embedding-based retrieval. Include all timestamp labels inline."""
 
 # Batch matching prompt — processes multiple documents in one call to reduce API costs
-BATCH_MATCH_PROMPT = """You are a BC local government hearing analyst. Determine which of these documents are relevant to the user's tracking preferences.
+BATCH_MATCH_PROMPT = """You are a BC local government hearing analyst specializing in housing policy. Determine which of these documents are relevant to the user's tracking preferences.
 
 USER TRACK:
 - Municipalities: {municipalities}
 - Topics of interest: {topics}
 - Keywords: {keywords}
+
+TOPIC DEFINITIONS (be highly sensitive to these):
+- "toa" = Transit Oriented Areas — TOA designations, transit-oriented development, density near transit
+- "ssmuh" = Small-Scale Multi-Unit Housing — SSMUH, duplex, triplex, fourplex, missing middle housing, small-scale multi-unit
+- "housing_statutes" = Housing Statutes Amendment bills, Bill 44, Bill 46, Bill 47, provincial housing legislation, Housing Statutes Amendment Act
+- "ocp_housing" = Official Community Plan housing updates — OCP amendments related to housing, housing designations in community plans
+- "zoning_density" = Zoning/rezoning for housing density — upzoning, density bonuses, zoning bylaw amendments for housing
+- "dev_permits_housing" = Development permits affecting housing — DP applications for residential, housing development variance permits
+- "other_housing" = Any other housing-related bylaws, motions, or legislation not covered above
+
+BYLAW/KEYWORD EXACT-MATCH RULE: If any keyword looks like a bylaw number (e.g. "Bylaw 1700"), a bill name (e.g. "Bill 44"), or a specific act name (e.g. "Housing Statutes Amendment Act"), treat it as an EXACT-MATCH trigger. If that bylaw/bill/act appears ANYWHERE in the document, it is a match with confidence 1.0 regardless of topic alignment.
 
 DOCUMENTS (evaluate each one):
 {documents_list}
@@ -112,7 +134,7 @@ For EACH document, determine relevance. Respond with a JSON array:
   ...
 ]
 
-Be generous — if a document MIGHT be relevant, mark it as a match with lower confidence."""
+Be generous — if a document MIGHT be relevant to housing, mark it as a match with lower confidence."""
 
 # Batch summary prompt — summarize multiple matched documents in one call
 BATCH_SUMMARY_PROMPT = """You are a BC local government hearing analyst creating concise briefings.

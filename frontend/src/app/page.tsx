@@ -6,11 +6,13 @@ const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
 // Topics — easy to extend by adding entries here
 const AVAILABLE_TOPICS = [
-  { id: "ocp_updates", label: "OCP Updates" },
-  { id: "rezoning_housing", label: "Rezoning / Housing" },
-  { id: "environment", label: "Environment" },
-  { id: "development_permits", label: "Development Permits" },
-  { id: "other", label: "Other" },
+  { id: "toa", label: "Transit Oriented Areas (TOA)" },
+  { id: "ssmuh", label: "Small-Scale Multi-Unit Housing (SSMUH) / Duplex-Triplex-Fourplex" },
+  { id: "housing_statutes", label: "Housing Statutes Amendment Bills / Related Legislation" },
+  { id: "ocp_housing", label: "Official Community Plan (OCP) Housing-Related Updates" },
+  { id: "zoning_density", label: "Zoning / Rezoning for Housing Density" },
+  { id: "dev_permits_housing", label: "Development Permits Affecting Housing" },
+  { id: "other_housing", label: "Other Housing-Related Bylaws / Legislation" },
 ] as const;
 
 // Municipalities sourced from seed registry — Colwood first, then CRD alphabetical
@@ -263,7 +265,7 @@ export default function SubscribePage() {
           <label className="mb-2 block text-sm font-medium text-gray-700">
             Topics
           </label>
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
             {AVAILABLE_TOPICS.map((topic) => (
               <label
                 key={topic.id}
@@ -277,12 +279,18 @@ export default function SubscribePage() {
                   type="checkbox"
                   checked={selectedTopics.includes(topic.id)}
                   onChange={() => toggleTopic(topic.id)}
-                  className="mr-2 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                  className="mr-2 h-4 w-4 shrink-0 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                 />
                 {topic.label}
               </label>
             ))}
           </div>
+          <p className="mt-2 text-xs text-gray-500">
+            You can also enter specific bylaw numbers or names in the keywords
+            field (e.g. &quot;Bylaw 1700&quot; or &quot;Housing Statutes
+            Amendment Act&quot;) &mdash; the system will alert you every time
+            that exact bylaw is mentioned in any hearing.
+          </p>
         </div>
 
         {/* Keywords */}

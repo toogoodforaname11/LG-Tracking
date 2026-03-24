@@ -187,30 +187,68 @@ async def gemini_batch_embed(texts: list[str]) -> list[list[float] | None]:
         return embeddings
 
 
+def _is_bylaw_keyword(kw: str) -> bool:
+    """Check if a keyword looks like a specific bylaw number, bill, or act name."""
+    kw_lower = kw.strip().lower()
+    import re
+    # Matches patterns like "bylaw 1700", "bl 1700", "bill 44", or act names
+    return bool(re.match(r"^(bylaw|by-law|bl|bill)\s+\d+", kw_lower)) or "act" in kw_lower
+
+
 def keyword_fallback_match(
     content: str, topics: list[str], keywords: list[str]
 ) -> dict:
     """Simple keyword-based matching when Gemini is unavailable.
 
     Used as fallback when API key is not set or calls fail.
+    Includes exact-match bylaw/bill tracking: if a keyword looks like a bylaw
+    number or act name and appears anywhere in the content, it's a high-confidence match.
     """
     content_lower = content.lower()
-    matched_keywords = [kw for kw in keywords if kw.lower() in content_lower]
 
-    # Topic keyword mappings
+    # Check for exact bylaw/bill/act keyword matches first (high confidence)
+    bylaw_matches = []
+    regular_matches = []
+    for kw in keywords:
+        if kw.lower() in content_lower:
+            if _is_bylaw_keyword(kw):
+                bylaw_matches.append(kw)
+            else:
+                regular_matches.append(kw)
+
+    matched_keywords = bylaw_matches + regular_matches
+
+    # Topic keyword mappings — focused on housing/transit/bylaw topics
     topic_keywords = {
-        "ocp_updates": ["official community plan", "ocp", "community plan amendment"],
-        "rezoning": ["rezone", "rezoning", "zoning amendment", "zoning bylaw"],
-        "development_permits": ["development permit", "dp application", "development variance"],
-        "public_hearings": ["public hearing", "statutory hearing"],
-        "bylaws": ["bylaw", "by-law", "bylaw amendment"],
-        "budget": ["budget", "financial plan", "tax rate", "revenue"],
-        "environment": ["environment", "climate", "watershed", "stormwater", "emissions"],
-        "transportation": ["transportation", "transit", "cycling", "road", "traffic"],
-        "housing": ["housing", "affordable housing", "rental", "housing strategy"],
-        "parks_recreation": ["park", "recreation", "trail", "community centre"],
-        "utilities": ["water", "sewer", "utility", "infrastructure"],
-        "governance": ["governance", "council procedure", "election", "boundary"],
+        "toa": [
+            "transit oriented", "transit-oriented", "toa", "transit area",
+            "density near transit", "transit village", "rapid transit",
+        ],
+        "ssmuh": [
+            "small-scale multi-unit", "ssmuh", "duplex", "triplex", "fourplex",
+            "four-plex", "missing middle", "multi-unit housing", "small scale multi",
+        ],
+        "housing_statutes": [
+            "housing statutes amendment", "bill 44", "bill 46", "bill 47",
+            "housing legislation", "provincial housing", "housing act",
+        ],
+        "ocp_housing": [
+            "official community plan", "ocp", "community plan amendment",
+            "ocp amendment", "ocp housing", "housing designation",
+        ],
+        "zoning_density": [
+            "rezone", "rezoning", "zoning amendment", "zoning bylaw",
+            "upzoning", "density bonus", "housing density", "zoning for housing",
+        ],
+        "dev_permits_housing": [
+            "development permit", "dp application", "development variance",
+            "housing permit", "residential permit", "building permit",
+        ],
+        "other_housing": [
+            "housing", "affordable housing", "rental", "housing strategy",
+            "housing bylaw", "housing policy", "residential", "shelter",
+            "supportive housing", "social housing", "housing agreement",
+        ],
     }
 
     matched_topics = []
@@ -220,9 +258,14 @@ def keyword_fallback_match(
                 matched_topics.append(topic)
 
     is_match = bool(matched_keywords or matched_topics)
-    total_possible = len(keywords) + len(topics)
-    total_matched = len(matched_keywords) + len(matched_topics)
-    confidence = total_matched / max(total_possible, 1)
+
+    # Bylaw exact matches get high confidence
+    if bylaw_matches:
+        confidence = 1.0
+    else:
+        total_possible = len(keywords) + len(topics)
+        total_matched = len(matched_keywords) + len(matched_topics)
+        confidence = total_matched / max(total_possible, 1)
 
     return {
         "is_match": is_match,
@@ -230,7 +273,9 @@ def keyword_fallback_match(
         "matched_topics": matched_topics,
         "matched_keywords": matched_keywords,
         "reason": (
-            f"Keyword match: {matched_keywords}, Topic match: {matched_topics}"
+            f"Bylaw exact match: {bylaw_matches}, Keyword match: {regular_matches}, Topic match: {matched_topics}"
+            if bylaw_matches
+            else f"Keyword match: {matched_keywords}, Topic match: {matched_topics}"
             if is_match
             else "No keyword or topic matches found"
         ),
