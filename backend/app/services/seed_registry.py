@@ -3403,11 +3403,12 @@ async def seed_registry(db: AsyncSession) -> dict:
         + BC_MUNICIPALITIES_BATCH_16
     )
     for muni_data in all_municipalities:
-        sources_data = muni_data.pop("sources")
+        sources_data = muni_data.get("sources", [])
+        muni_fields = {k: v for k, v in muni_data.items() if k != "sources"}
 
         # Check if municipality already exists
         result = await db.execute(
-            select(Municipality).where(Municipality.short_name == muni_data["short_name"])
+            select(Municipality).where(Municipality.short_name == muni_fields["short_name"])
         )
         existing = result.scalar_one_or_none()
 
@@ -3415,7 +3416,7 @@ async def seed_registry(db: AsyncSession) -> dict:
             stats["municipalities_existed"] += 1
             muni = existing
         else:
-            muni = Municipality(**muni_data)
+            muni = Municipality(**muni_fields)
             db.add(muni)
             await db.flush()  # Get the ID
             stats["municipalities_created"] += 1
