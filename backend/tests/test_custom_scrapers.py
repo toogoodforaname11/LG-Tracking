@@ -56,8 +56,8 @@ def test_classify_crd_meeting_type():
 
 
 def test_custom_scraper_map_has_all_crd():
-    expected = {"Saanich", "Sidney", "Esquimalt", "View Royal", "Langford", "Highlands", "CRD"}
-    assert set(CUSTOM_SCRAPER_MAP.keys()) == expected
+    crd_expected = {"Saanich", "Sidney", "Esquimalt", "View Royal", "Langford", "Highlands", "CRD"}
+    assert crd_expected.issubset(set(CUSTOM_SCRAPER_MAP.keys()))
 
 
 def test_get_custom_scraper_returns_correct_type():

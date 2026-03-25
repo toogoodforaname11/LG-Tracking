@@ -13,6 +13,7 @@ from app.models.municipality import Municipality, Source, ScrapeStatus, Platform
 from app.models.document import Document, Meeting, DocType, MeetingType
 from app.discovery.base import BaseScraper, DiscoveredItem
 from app.discovery.civicweb import CivicWebScraper
+from app.discovery.granicus import GranicusScraper
 from app.discovery.youtube import YouTubeScraper
 from app.discovery.custom_saanich import SaanichScraper
 from app.discovery.custom_sidney import SidneyScraper
@@ -21,6 +22,10 @@ from app.discovery.custom_viewroyal import ViewRoyalScraper
 from app.discovery.custom_langford import LangfordScraper
 from app.discovery.custom_highlands import HighlandsScraper
 from app.discovery.custom_crd import CRDScraper
+from app.discovery.custom_100milehouse import HundredMileHouseScraper
+from app.discovery.custom_armstrong import ArmstrongScraper
+from app.discovery.custom_castlegar import CastlegarScraper
+from app.discovery.custom_enderby import EnderbyScraper
 from app.config import settings
 from app.services.instant_alerts import send_immediate_alerts_for_documents
 
@@ -46,6 +51,7 @@ MEETING_TYPE_MAP = {
 
 # Registry of custom scrapers keyed by municipality short_name
 CUSTOM_SCRAPER_MAP: dict[str, type] = {
+    # CRD municipalities
     "Saanich": SaanichScraper,
     "Sidney": SidneyScraper,
     "Esquimalt": EsquimaltScraper,
@@ -53,6 +59,11 @@ CUSTOM_SCRAPER_MAP: dict[str, type] = {
     "Langford": LangfordScraper,
     "Highlands": HighlandsScraper,
     "CRD": CRDScraper,
+    # BC municipalities — Batch 1+2
+    "100 Mile House": HundredMileHouseScraper,
+    "Armstrong": ArmstrongScraper,
+    "Castlegar": CastlegarScraper,
+    "Enderby": EnderbyScraper,
 }
 
 
@@ -90,6 +101,9 @@ async def poll_source(source: Source, municipality: Municipality) -> list[Discov
                 channel_id = source.url.rstrip("/").split("/")[-1]
 
             scraper = YouTubeScraper(municipality.short_name, channel_id)
+            return await scraper.discover()
+        elif source.platform == Platform.GRANICUS:
+            scraper = GranicusScraper(municipality.short_name, source.url)
             return await scraper.discover()
         elif source.platform == Platform.CUSTOM:
             scraper = _get_custom_scraper(municipality.short_name, source.url)
