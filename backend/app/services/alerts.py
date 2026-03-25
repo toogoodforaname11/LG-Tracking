@@ -13,6 +13,7 @@ from app.models.track import Track, TrackMatch
 from app.models.document import Document
 from app.models.municipality import Municipality
 from app.ai.perplexity import verify_with_perplexity
+from app.services.cost_tracker import log_api_cost
 from app.config import settings
 
 logger = logging.getLogger(__name__)
@@ -62,11 +63,16 @@ async def generate_digest(db: AsyncSession, track_id: int) -> dict | None:
 
         # Run Perplexity verification on key points if available
         if match.key_points and not match.verification_status == "verified":
-            verification = await verify_with_perplexity(
+            verification, perp_usage = await verify_with_perplexity(
                 municipality=muni.short_name if muni else "Unknown",
                 meeting_date="Unknown",
                 document_type=doc.doc_type.value if doc.doc_type else "unknown",
                 key_points=match.key_points,
+            )
+            await log_api_cost(
+                db, "perplexity", "verify", "sonar",
+                perp_usage["input_tokens"], perp_usage["output_tokens"],
+                context={"match_id": match.id, "track_id": match.track_id},
             )
             if verification:
                 match.verification_status = verification.get("verification_status", "unverified")

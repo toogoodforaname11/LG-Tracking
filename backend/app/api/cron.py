@@ -11,6 +11,7 @@ from app.db.database import get_db
 from app.services.digest import run_weekly_digest
 from app.services.instant_alerts import send_immediate_alerts_for_documents
 from app.discovery.poller import run_discovery
+from app.ai.processor import process_new_documents
 from app.models.document import Document
 
 logger = logging.getLogger(__name__)
@@ -41,7 +42,8 @@ async def trigger_poll(
     Automatically sends immediate alerts to subscribers when new docs are found.
     """
     results = await run_discovery(db)
-    return {"status": "completed", "results": results}
+    processing_stats = await process_new_documents(db)
+    return {"status": "completed", "results": results, "processing": processing_stats}
 
 
 @router.post("/poll-and-digest")
@@ -55,11 +57,15 @@ async def poll_then_digest(
     poll_results = await run_discovery(db)
     logger.info(f"Poll complete: {poll_results}")
 
+    processing_stats = await process_new_documents(db)
+    logger.info(f"Processing complete: {processing_stats}")
+
     digest_stats = await run_weekly_digest(db)
 
     return {
         "status": "completed",
         "poll_results": poll_results,
+        "processing_stats": processing_stats,
         "digest_stats": digest_stats,
     }
 
