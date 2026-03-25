@@ -30,7 +30,7 @@ TOPIC DEFINITIONS (be highly sensitive to these):
 - "zoning_density" = Zoning/rezoning for housing density — upzoning, density bonuses, zoning bylaw amendments for housing
 - "dev_permits_housing" = Development permits affecting housing supply — DP applications for residential, housing development variance permits
 - "dev_cost_charges" = Development cost charges or affordability incentives — DCCs, community amenity contributions, density bonusing, affordable housing incentives, fee waivers
-- "other_housing_transit" = Any other housing or transit-related bylaws, motions, or legislation not covered above
+- "transportation_plan" = Transportation plan or transportation study — municipal transportation master plans, transportation studies
 
 KEYWORD HIGH-PRIORITY RULE: The user's keywords field is the HIGHEST priority trigger. Every keyword — whether it looks like a bylaw number (e.g. "Bylaw 1700"), a bill name (e.g. "Bill 44"), an act name (e.g. "Housing Statutes Amendment Act"), or a general term (e.g. "TOA zoning") — should be treated as an exact-match trigger. If ANY keyword appears in the document text, it is a match with confidence 1.0 regardless of topic alignment. Keywords take precedence over topic matching.
 
@@ -126,7 +126,7 @@ TOPIC DEFINITIONS (be highly sensitive to these):
 - "zoning_density" = Zoning/rezoning for housing density — upzoning, density bonuses, zoning bylaw amendments
 - "dev_permits_housing" = Development permits affecting housing supply — DP applications, housing variance permits
 - "dev_cost_charges" = Development cost charges or affordability incentives — DCCs, amenity contributions, fee waivers
-- "other_housing_transit" = Any other housing or transit-related bylaws, motions, or legislation
+- "transportation_plan" = Transportation plan or transportation study — municipal transportation master plans, transportation studies
 
 KEYWORD HIGH-PRIORITY RULE: Every keyword in the user's keywords field is a HIGH PRIORITY exact-match trigger. If ANY keyword appears in the document, it is a match with confidence 1.0 regardless of topic alignment.
 

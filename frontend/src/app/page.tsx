@@ -18,7 +18,7 @@ const AVAILABLE_TOPICS = [
   { id: "zoning_density", label: "Zoning / Rezoning for Housing Density" },
   { id: "dev_permits_housing", label: "Development Permits Affecting Housing Supply" },
   { id: "dev_cost_charges", label: "Development Cost Charges or Affordability Incentives" },
-  { id: "other_housing_transit", label: "Other Housing or Transit-Related Bylaws / Legislation" },
+  { id: "transportation_plan", label: "Transportation Plan or Transportation Study" },
 ] as const;
 
 // Keywords searched per topic — mirrors backend build_digest_items topic_keywords exactly
@@ -42,7 +42,7 @@ const TOPIC_KEYWORDS: Record<string, string[]> = {
   brt: [
     "bus rapid transit", "BRT", "bus priority",
     "rapid bus", "B-Line", "bus lane", "queue jump",
-    "bus exchange", "transit corridor",
+    "bus exchange", "transit corridor", "rapid transit",
   ],
   multimodal: [
     "multimodal", "active transportation", "cycling infrastructure",
@@ -53,7 +53,7 @@ const TOPIC_KEYWORDS: Record<string, string[]> = {
   provincial_targets: [
     "housing needs report", "housing needs assessment",
     "provincial housing target", "housing target",
-    "HNR", "Bill 46", "housing supply",
+    "HNR", "housing supply",
     "housing action plan", "housing strategy",
   ],
   ssmuh: [
@@ -95,11 +95,8 @@ const TOPIC_KEYWORDS: Record<string, string[]> = {
     "affordable housing reserve", "affordability incentive",
     "waiver of fees", "fee waiver",
   ],
-  other_housing_transit: [
-    "housing", "affordable housing", "rental housing",
-    "market rental", "below-market",
-    "transit", "bus route", "SkyTrain", "rapid transit",
-    "transportation plan", "mobility",
+  transportation_plan: [
+    "transportation plan", "transportation study",
   ],
 };
 
@@ -110,12 +107,6 @@ const HOUSING_BILLS = [
     label: "Bill 44",
     keyword: "Bill 44",
     description: "Small-Scale Multi-Unit Housing (SSMUH) — duplexes, triplexes, fourplexes as-of-right",
-  },
-  {
-    id: "bill46",
-    label: "Bill 46",
-    keyword: "Bill 46",
-    description: "Housing Needs Reports & development financing (amenity cost charges)",
   },
   {
     id: "bill47",
@@ -292,7 +283,7 @@ const MUNICIPALITIES = [
   "Zeballos",
 ];
 
-type FormState = "idle" | "submitting" | "success" | "error";
+type FormState = "idle" | "submitting" | "success" | "magic_link_sent" | "confirmed" | "error";
 
 export default function SubscribePage() {
   const [email, setEmail] = useState("");
@@ -306,6 +297,16 @@ export default function SubscribePage() {
   const [muniSearch, setMuniSearch] = useState("");
   const [expandedTopics, setExpandedTopics] = useState<Set<string>>(new Set());
   const [selectedBills, setSelectedBills] = useState<Set<string>>(new Set());
+
+  // Show "confirmed" state when redirected back from a magic link click.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("confirmed") === "true") {
+      setFormState("confirmed");
+      // Clean the query param from the URL without a page reload.
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+  }, []);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -390,7 +391,12 @@ export default function SubscribePage() {
         );
       }
 
-      setFormState("success");
+      const data = await res.json();
+      if (data.status === "magic_link_sent") {
+        setFormState("magic_link_sent");
+      } else {
+        setFormState("success");
+      }
     } catch (err) {
       setFormState("error");
       setErrorMessage(
@@ -432,6 +438,79 @@ export default function SubscribePage() {
         </p>
         <p className="mb-6 text-sm text-gray-500">
           A confirmation email has been sent to <strong>{email}</strong>.
+        </p>
+        <button
+          onClick={() => setFormState("idle")}
+          className="rounded-lg bg-blue-800 px-6 py-2 text-sm font-medium text-white hover:bg-blue-900"
+        >
+          Edit Preferences
+        </button>
+      </div>
+    );
+  }
+
+  if (formState === "magic_link_sent") {
+    return (
+      <div className="rounded-lg border bg-white p-8 text-center shadow-sm">
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
+          <svg
+            className="h-8 w-8 text-blue-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+            />
+          </svg>
+        </div>
+        <h2 className="mb-2 text-2xl font-bold text-gray-900">
+          Check Your Inbox
+        </h2>
+        <p className="mb-4 text-gray-600">
+          A confirmation link has been sent to{" "}
+          <strong>{email}</strong>. Click it to apply your updated preferences.
+        </p>
+        <p className="mb-6 text-sm text-gray-500">
+          The link expires in 24 hours. If you did not request this change,
+          you can safely ignore the email.
+        </p>
+        <button
+          onClick={() => setFormState("idle")}
+          className="rounded-lg border border-gray-300 px-6 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+        >
+          Back
+        </button>
+      </div>
+    );
+  }
+
+  if (formState === "confirmed") {
+    return (
+      <div className="rounded-lg border bg-white p-8 text-center shadow-sm">
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
+          <svg
+            className="h-8 w-8 text-green-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+        </div>
+        <h2 className="mb-2 text-2xl font-bold text-gray-900">
+          Preferences Updated!
+        </h2>
+        <p className="mb-6 text-gray-600">
+          Your subscription preferences have been confirmed and saved.
         </p>
         <button
           onClick={() => setFormState("idle")}
