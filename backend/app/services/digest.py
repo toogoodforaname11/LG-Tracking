@@ -171,32 +171,117 @@ def build_digest_items(
     items = []
     kw_list = [k.strip().lower() for k in (subscriber_keywords or "").split(",") if k.strip()]
 
-    # Topic → keyword mapping. Keys must match AVAILABLE_TOPICS in models/track.py exactly.
+    # Topic → keyword mapping.
+    #
+    # Keys MUST match the topic IDs sent by the frontend (page.tsx AVAILABLE_TOPICS).
+    # A mismatch causes every subscriber topic to silently match zero documents.
+    #
+    # Keyword strategy: BC councils rarely name legislation in full. Agendas and
+    # minutes use bylaw numbers, bill numbers, acronyms, and staff-report shorthand.
+    # Each list captures the realistic surface forms a document will contain.
+    #
+    # Provincial legislation reference (BC):
+    #   Bill 44 → Housing Statutes (Residential Development) Amendment Act — SSMUH
+    #   Bill 47 → Housing Statutes (Transit-Oriented Areas) Amendment Act — TOA
+    #   Bill 46 → Housing Statutes (Housing Needs Reports) Amendment Act
+    #   Bill 35 → Short-Term Rental Accommodations Act
     topic_keywords: dict[str, list[str]] = {
-        "ocp_updates": ["ocp", "official community plan", "community plan", "land use"],
-        "rezoning": ["rezoning", "rezone", "zoning amendment", "zoning change", "zone"],
-        "development_permits": [
-            "development permit", "building permit", "variance",
-            "development application", "dp application",
+        # Transit Oriented Development (broad)
+        "tod": [
+            "transit-oriented development", "transit oriented development",
+            "tod", "transit hub", "transit node",
         ],
-        "public_hearings": ["public hearing"],
-        "bylaws": ["bylaw", "by-law"],
-        "budget": ["budget", "financial plan", "levy", "taxation", "five-year"],
-        "environment": ["environment", "climate", "tree", "watershed", "stormwater", "green"],
-        "transportation": [
-            "road", "transit", "cycling", "pedestrian", "traffic",
-            "highway", "sidewalk", "active transportation",
+        # Transit Oriented Areas — BC Bill 47 station-area zones
+        "toa_impl": [
+            "transit-oriented area", "transit oriented area",
+            "toa", "bill 47",
+            "station area", "station precinct", "skytrain area",
+            "frequent transit", "frequent transit network", "ftn",
+            "400 metre", "400m", "800 metre", "800m",
+            "bus exchange", "rapid transit station",
         ],
-        "housing": [
-            "housing", "affordable housing", "rental", "density",
-            "subdivision", "secondary suite", "laneway",
+        # Local area / neighbourhood plans
+        "area_plans": [
+            "area plan", "neighbourhood plan", "local area plan",
+            "community plan amendment", "area structure plan",
+            "neighbourhood planning", "district plan",
         ],
-        "parks_recreation": [
-            "park", "trail", "recreation", "community centre",
-            "community center", "playground", "sports field",
+        # Bus Rapid Transit / bus priority
+        "brt": [
+            "bus rapid transit", "brt", "bus priority",
+            "rapid bus", "b-line", "bus lane", "queue jump",
+            "bus exchange", "transit corridor",
         ],
-        "utilities": ["water", "sewer", "stormwater utility", "solid waste", "sanitary"],
-        "governance": ["election", "council procedure", "boundary", "amalgamation", "bylaw"],
+        # Multimodal / active transportation
+        "multimodal": [
+            "multimodal", "active transportation", "cycling infrastructure",
+            "bike lane", "cycle track", "cycling network",
+            "pedestrian", "walkability", "greenway", "shared path",
+            "complete streets", "sidewalk improvement",
+        ],
+        # Provincial housing targets / Housing Needs Reports (Bill 46)
+        "provincial_targets": [
+            "housing needs report", "housing needs assessment",
+            "provincial housing target", "housing target",
+            "hnr", "bill 46", "housing supply",
+            "housing action plan", "housing strategy",
+        ],
+        # Small-Scale Multi-Unit Housing — BC Bill 44
+        "ssmuh": [
+            "small-scale multi-unit", "ssmuh",
+            "bill 44",
+            "duplex", "triplex", "fourplex", "multiplex", "sixplex",
+            "missing middle", "gentle density",
+            "secondary suite", "garden suite", "carriage house",
+            "infill housing", "laneway home",
+        ],
+        # Housing Statutes Amendment Act / Related Bylaws
+        # (covers the family of BC housing bills and their local bylaw responses)
+        "housing_statutes": [
+            "housing statutes", "housing statute",
+            "bill 44", "bill 47", "bill 46", "bill 35",
+            "short-term rental", "short term rental", "airbnb",
+            "provincial housing legislation", "housing legislation",
+            "housing amendment", "zoning bylaw amendment",
+            "residential infill", "as-of-right", "as of right",
+        ],
+        # OCP updates (any official community plan work)
+        "ocp_housing": [
+            "official community plan", "ocp",
+            "ocp amendment", "community plan amendment",
+            "land use designation", "future land use",
+            "ocp bylaw", "plan amendment",
+        ],
+        # Zoning / rezoning for housing density
+        "zoning_density": [
+            "rezoning", "rezone", "zoning bylaw amendment",
+            "zoning amendment", "density bonus",
+            "floor area ratio", "far", "floor space ratio", "fsr",
+            "height increase", "density increase",
+            "comprehensive development zone", "cd zone",
+        ],
+        # Development permits affecting housing supply
+        "dev_permits_housing": [
+            "development permit", "development variance permit", "dvp",
+            "building permit", "construction permit",
+            "development application", "form and character",
+            "amenity contribution",
+        ],
+        # Development Cost Charges / affordability incentives
+        "dev_cost_charges": [
+            "development cost charge", "dcc", "development cost levy",
+            "community amenity contribution", "cac",
+            "amenity contribution", "density bonusing",
+            "affordable housing reserve", "affordability incentive",
+            "waiver of fees", "fee waiver",
+        ],
+        # Broad housing/transit bucket — catches anything not above
+        "other_housing_transit": [
+            "housing", "affordable housing", "rental housing",
+            "market rental", "below-market", "below market",
+            "transit", "bus route", "skytrain", "rapid transit",
+            "transportation plan", "mobility",
+        ],
     }
 
     for doc, muni in docs_with_munis:
