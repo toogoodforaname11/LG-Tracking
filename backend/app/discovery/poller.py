@@ -113,13 +113,12 @@ from app.discovery.custom_zeballos import ZeballosScraper
 from app.discovery.custom_belcarra import BelcarraScraper
 from app.discovery.custom_burnslake import BurnsLakeScraper
 from app.discovery.custom_fraserlake import FraserLakeScraper
-from app.discovery.custom_lytton import LyttonScraper
+from app.discovery.custom_anmore import AnmoreScraper
 from app.discovery.custom_masset import MassetScraper
 from app.discovery.custom_portalice import PortAliceScraper
 from app.discovery.custom_portclements import PortClementsScraper
 from app.discovery.custom_poucecoupe import PouceCoupeScraper
 from app.discovery.custom_sayward import SaywardScraper
-from app.discovery.custom_sunpeaks import SunPeaksScraper
 from app.config import settings
 from app.services.instant_alerts import send_immediate_alerts_for_documents
 
@@ -245,16 +244,15 @@ CUSTOM_SCRAPER_MAP: dict[str, type] = {
     "Wells": WellsScraper,
     "Zeballos": ZeballosScraper,
     # BC municipalities — Batch 17 (previously missing)
+    "Anmore": AnmoreScraper,
     "Belcarra": BelcarraScraper,
     "Burns Lake": BurnsLakeScraper,
     "Fraser Lake": FraserLakeScraper,
-    "Lytton": LyttonScraper,
     "Masset": MassetScraper,
     "Port Alice": PortAliceScraper,
     "Port Clements": PortClementsScraper,
     "Pouce Coupe": PouceCoupeScraper,
     "Sayward": SaywardScraper,
-    "Sun Peaks": SunPeaksScraper,
 }
 
 
