@@ -246,7 +246,6 @@ def build_digest_items(
             "bill 44", "bill 46", "bill 47", "bill 16", "bill 25",
             "provincial housing legislation", "housing legislation",
             "housing amendment", "amenity cost charge",
-            "short-term rental", "short term rental",
             "parking requirement", "excessive parking",
             "development approval", "tenant protection",
             "residential infill", "as-of-right", "as of right",

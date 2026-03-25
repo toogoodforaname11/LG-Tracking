@@ -68,9 +68,8 @@ const TOPIC_KEYWORDS: Record<string, string[]> = {
     "Bill 44", "Bill 46", "Bill 47", "Bill 16", "Bill 25",
     "provincial housing legislation", "housing legislation",
     "housing amendment", "amenity cost charge",
-    "short-term rental", "parking requirement",
-    "development approval", "tenant protection",
-    "residential infill", "as-of-right",
+    "parking requirement", "development approval",
+    "tenant protection", "residential infill", "as-of-right",
   ],
   ocp_housing: [
     "official community plan", "OCP", "OCP amendment",
@@ -103,6 +102,40 @@ const TOPIC_KEYWORDS: Record<string, string[]> = {
     "transportation plan", "mobility",
   ],
 };
+
+// BC Housing Statutes Amendment Act — specific bills the user can filter by
+const HOUSING_BILLS = [
+  {
+    id: "bill44",
+    label: "Bill 44",
+    keyword: "Bill 44",
+    description: "Small-Scale Multi-Unit Housing (SSMUH) — duplexes, triplexes, fourplexes as-of-right",
+  },
+  {
+    id: "bill46",
+    label: "Bill 46",
+    keyword: "Bill 46",
+    description: "Housing Needs Reports & development financing (amenity cost charges)",
+  },
+  {
+    id: "bill47",
+    label: "Bill 47",
+    keyword: "Bill 47",
+    description: "Transit-Oriented Areas (TOA) — increased density near rapid transit stations",
+  },
+  {
+    id: "bill16",
+    label: "Bill 16 (2024)",
+    keyword: "Bill 16",
+    description: "Zoning bylaws, development approvals, tenant protection amendments",
+  },
+  {
+    id: "bill25",
+    label: "Bill 25 (2025)",
+    keyword: "Bill 25",
+    description: "SSMUH alignment, parking limit changes",
+  },
+] as const;
 
 // All BC municipalities sourced from seed registry — alphabetical
 const MUNICIPALITIES = [
@@ -272,6 +305,7 @@ export default function SubscribePage() {
   const [muniDropdownOpen, setMuniDropdownOpen] = useState(false);
   const [muniSearch, setMuniSearch] = useState("");
   const [expandedTopics, setExpandedTopics] = useState<Set<string>>(new Set());
+  const [selectedBills, setSelectedBills] = useState<Set<string>>(new Set());
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -310,12 +344,33 @@ export default function SubscribePage() {
     });
   };
 
+  const toggleBill = (billId: string) => {
+    setSelectedBills((prev) => {
+      const next = new Set(prev);
+      if (next.has(billId)) {
+        next.delete(billId);
+      } else {
+        next.add(billId);
+      }
+      return next;
+    });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormState("submitting");
     setErrorMessage("");
 
     try {
+      // Merge any specifically-checked bills into the keywords string
+      const billKeywords = HOUSING_BILLS
+        .filter((b) => selectedBills.has(b.id))
+        .map((b) => b.keyword);
+      const allKeywords = [keywords, ...billKeywords]
+        .map((k) => k.trim())
+        .filter(Boolean)
+        .join(", ");
+
       const res = await fetch(`${API_BASE}/api/v1/subscribe`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -323,7 +378,7 @@ export default function SubscribePage() {
           email,
           municipalities: selectedMunicipalities,
           topics: selectedTopics,
-          keywords,
+          keywords: allKeywords,
           immediate_alerts: immediateAlerts,
         }),
       });
@@ -600,8 +655,34 @@ export default function SubscribePage() {
                     </button>
                   </div>
 
-                  {/* Expanded keyword list */}
-                  {isExpanded && kws.length > 0 && (
+                  {/* Expanded section */}
+                  {isExpanded && topic.id === "housing_statutes" ? (
+                    <div className="border-t border-gray-100 px-3 pb-3 pt-2">
+                      <p className="mb-2 text-xs font-medium text-gray-500">
+                        Filter by specific bill (leave all unchecked to match any):
+                      </p>
+                      <div className="space-y-1.5">
+                        {HOUSING_BILLS.map((bill) => (
+                          <label
+                            key={bill.id}
+                            className="flex cursor-pointer items-start gap-2"
+                          >
+                            <input
+                              type="checkbox"
+                              checked={selectedBills.has(bill.id)}
+                              onChange={() => toggleBill(bill.id)}
+                              className="mt-0.5 h-4 w-4 shrink-0 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                            />
+                            <span className="text-xs text-gray-700">
+                              <span className="font-semibold">{bill.label}</span>
+                              {" — "}
+                              {bill.description}
+                            </span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+                  ) : isExpanded && kws.length > 0 ? (
                     <div className="border-t border-gray-100 px-3 pb-3 pt-2">
                       <p className="mb-1.5 text-xs font-medium text-gray-500">
                         Searches for:
@@ -617,7 +698,7 @@ export default function SubscribePage() {
                         ))}
                       </div>
                     </div>
-                  )}
+                  ) : null}
                 </div>
               );
             })}
