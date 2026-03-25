@@ -43,7 +43,7 @@ class Meeting(Base):
     )
 
     __table_args__ = (
-        Index("ix_meetings_muni_date", "municipality_id", "meeting_date"),
+        Index("ix_meetings_muni_date_type", "municipality_id", "meeting_date", "meeting_type"),
     )
 
 

@@ -279,6 +279,16 @@ async def process_new_documents(db: AsyncSession) -> dict:
             summarized = await _batch_summarize_matches(matched, track, munis, db)
 
             for doc, match_result, summary_result in summarized:
+                # Idempotency: skip if this (track, document) pair already exists.
+                existing_match = await db.execute(
+                    select(TrackMatch).where(
+                        TrackMatch.track_id == track.id,
+                        TrackMatch.document_id == doc.id,
+                    )
+                )
+                if existing_match.scalar_one_or_none():
+                    continue
+
                 if summary_result:
                     stats["summaries_generated"] += 1
 

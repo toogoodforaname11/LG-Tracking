@@ -20,11 +20,19 @@ async def verify_cron_secret(
     emails to all subscribers (abuse), or reset the database seed.  The check
     must be deterministic — if the secret is configured and the header is wrong
     or missing, the request is rejected with 401, unconditionally.
+
+    When CRON_SECRET is blank and debug mode is off, the server is
+    misconfigured for production — reject with 503 rather than silently
+    allowing unauthenticated access.
     """
     if not settings.cron_secret:
-        # Secret not configured — endpoint is unprotected (dev/local only).
-        # This state is intentional for local development; in production
-        # CRON_SECRET must be set.
-        return
+        if settings.debug:
+            # Local development — allow unauthenticated access.
+            return
+        raise HTTPException(
+            status_code=503,
+            detail="Server misconfiguration: CRON_SECRET is not set. "
+            "All protected endpoints are unavailable until it is configured.",
+        )
     if x_cron_secret != settings.cron_secret:
         raise HTTPException(status_code=401, detail="Unauthorized: invalid or missing X-Cron-Secret")

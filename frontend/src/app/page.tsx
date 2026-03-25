@@ -437,7 +437,7 @@ export default function SubscribePage() {
           anytime to edit.
         </p>
         <p className="mb-6 text-sm text-gray-500">
-          A confirmation email has been sent to <strong>{email}</strong>.
+          If email delivery is configured, a confirmation will be sent to <strong>{email}</strong>.
         </p>
         <button
           onClick={() => setFormState("idle")}

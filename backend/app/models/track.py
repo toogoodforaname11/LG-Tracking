@@ -7,26 +7,32 @@ for specific municipalities. Only matched items get full AI processing.
 import enum
 from datetime import datetime, timezone
 
-from sqlalchemy import String, Text, DateTime, Integer, Boolean, ForeignKey, Index, JSON
+from sqlalchemy import String, Text, DateTime, Integer, Boolean, ForeignKey, Index, JSON, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.database import Base
 
 
-# Predefined topics users can opt into
+# Predefined topics users can opt into.
+#
+# These IDs MUST match the frontend (page.tsx AVAILABLE_TOPICS[].id),
+# the digest builder (digest.py topic_keywords keys), and the keyword
+# fallback matcher (gemini.py topic_keywords keys).  A mismatch causes
+# topic-based matching to silently return zero results.
 AVAILABLE_TOPICS = [
-    "ocp_updates",        # Official Community Plan amendments
-    "rezoning",           # Zoning changes and applications
-    "development_permits", # Development permit applications
-    "public_hearings",    # All public hearings
-    "bylaws",             # New/amended bylaws
-    "budget",             # Budget discussions and approvals
-    "environment",        # Environmental assessments, climate action
-    "transportation",     # Roads, transit, cycling infrastructure
-    "housing",            # Affordable housing, housing strategy
-    "parks_recreation",   # Parks, trails, community facilities
-    "utilities",          # Water, sewer, stormwater
-    "governance",         # Council procedures, elections, boundaries
+    "tod",                  # Transit Oriented Development
+    "toa_impl",             # Transit Oriented Areas (BC Bill 47)
+    "area_plans",           # Local area / neighbourhood plans
+    "brt",                  # Bus Rapid Transit / bus priority
+    "multimodal",           # Multimodal / active transportation
+    "provincial_targets",   # Provincial housing targets / Housing Needs Reports
+    "ssmuh",                # Small-Scale Multi-Unit Housing (BC Bill 44)
+    "housing_statutes",     # Housing Statutes Amendment Act / related bylaws
+    "ocp_housing",          # OCP updates
+    "zoning_density",       # Zoning / rezoning for housing density
+    "dev_permits_housing",  # Development permits affecting housing supply
+    "dev_cost_charges",     # Development cost charges / affordability incentives
+    "other_housing_transit", # Other housing or transit-related
 ]
 
 
@@ -96,4 +102,5 @@ class TrackMatch(Base):
     __table_args__ = (
         Index("ix_track_matches_track", "track_id"),
         Index("ix_track_matches_document", "document_id"),
+        UniqueConstraint("track_id", "document_id", name="uq_track_matches_track_document"),
     )

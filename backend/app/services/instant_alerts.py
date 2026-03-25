@@ -176,6 +176,11 @@ async def send_immediate_alerts_for_documents(
         logger.info("No subscribers with immediate alerts enabled")
         return stats
 
+    # Refuse to send emails with broken unsubscribe links.
+    if not settings.app_base_url:
+        logger.warning("APP_BASE_URL not set — skipping immediate alerts (unsubscribe links would be broken)")
+        return stats
+
     # Build municipality lookup for the new documents
     muni_ids = {doc.municipality_id for doc in new_documents}
     result = await db.execute(

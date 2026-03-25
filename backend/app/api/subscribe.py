@@ -257,23 +257,28 @@ async def subscribe(
     await db.commit()
     await db.refresh(subscriber)
 
-    unsubscribe_url = (
-        f"{settings.app_base_url}/api/v1/unsubscribe"
-        f"?token={quote(subscriber.unsubscribe_token)}"
-    )
-
+    # Send confirmation email in background — does not block the API response
+    # and does not cause the subscribe action to fail if email delivery fails.
+    # Skip if APP_BASE_URL is not configured (unsubscribe links would be broken).
     alerts_msg = ""
     if req.immediate_alerts:
         alerts_msg = " You will also receive immediate alerts when new matching items are detected."
 
-    background_tasks.add_task(
-        send_confirmation_email,
-        req.email,
-        req.municipalities,
-        req.topics,
-        req.immediate_alerts,
-        unsubscribe_url,
-    )
+    if settings.app_base_url:
+        unsubscribe_url = (
+            f"{settings.app_base_url}/api/v1/unsubscribe"
+            f"?token={quote(subscriber.unsubscribe_token)}"
+        )
+        background_tasks.add_task(
+            send_confirmation_email,
+            req.email,
+            req.municipalities,
+            req.topics,
+            req.immediate_alerts,
+            unsubscribe_url,
+        )
+    else:
+        logger.warning("APP_BASE_URL not set — skipping confirmation email (unsubscribe links would be broken)")
 
     return SubscribeResponse(
         status="created",

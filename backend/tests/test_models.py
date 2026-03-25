@@ -28,7 +28,7 @@ def test_enums():
 
 
 def test_available_topics():
-    assert len(AVAILABLE_TOPICS) == 12
-    assert "ocp_updates" in AVAILABLE_TOPICS
-    assert "rezoning" in AVAILABLE_TOPICS
-    assert "public_hearings" in AVAILABLE_TOPICS
+    assert len(AVAILABLE_TOPICS) == 13
+    assert "ocp_housing" in AVAILABLE_TOPICS
+    assert "zoning_density" in AVAILABLE_TOPICS
+    assert "tod" in AVAILABLE_TOPICS
