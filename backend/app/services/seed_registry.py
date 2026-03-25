@@ -2037,23 +2037,6 @@ BC_MUNICIPALITIES_BATCH_9 = [
         ],
     },
     {
-        "name": "City of Enderby",
-        "short_name": "Enderby",
-        "gov_type": GovType.CITY,
-        "region": "BC",
-        "website_url": "https://www.enderby.ca/",
-        "population": None,
-        "sources": [
-            {
-                "platform": Platform.CUSTOM,
-                "source_type": SourceType.AGENDA,
-                "url": "https://www.enderby.ca/council",
-                "label": "Enderby Council Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-        ],
-    },
-    {
         "name": "City of Salmon Arm",
         "short_name": "Salmon Arm",
         "gov_type": GovType.CITY,
@@ -2066,23 +2049,6 @@ BC_MUNICIPALITIES_BATCH_9 = [
                 "source_type": SourceType.AGENDA,
                 "url": "https://salmonarm.ca.granicus.com",
                 "label": "Salmon Arm Granicus Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-        ],
-    },
-    {
-        "name": "City of Revelstoke",
-        "short_name": "Revelstoke",
-        "gov_type": GovType.CITY,
-        "region": "BC",
-        "website_url": "https://www.revelstoke.ca/",
-        "population": None,
-        "sources": [
-            {
-                "platform": Platform.CUSTOM,
-                "source_type": SourceType.AGENDA,
-                "url": "https://www.revelstoke.ca/council",
-                "label": "Revelstoke Council Agendas",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
         ],
@@ -3183,8 +3149,7 @@ BC_MUNICIPALITIES_BATCH_15 = [
 ]
 
 # Batch 16 – final 11 municipalities (completes all 161 BC municipalities)
-# Note: some entries overlap with Batch 15; duplicates are handled by seed_registry's
-# existing-check logic (skipped if short_name already exists).
+# Batch 16 – unique entries only (duplicates from Batch 15 removed)
 BC_MUNICIPALITIES_BATCH_16 = [
     {
         "name": "Town of Fort Nelson",
@@ -3233,142 +3198,6 @@ BC_MUNICIPALITIES_BATCH_16 = [
                 "source_type": SourceType.AGENDA,
                 "url": "https://www.wellsbc.ca/council",
                 "label": "Wells Council Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-        ],
-    },
-    {
-        "name": "Village of McBride",
-        "short_name": "McBride",
-        "gov_type": GovType.VILLAGE,
-        "region": "BC",
-        "website_url": "https://www.mcbride.ca/",
-        "population": None,
-        "sources": [
-            {
-                "platform": Platform.CUSTOM,
-                "source_type": SourceType.AGENDA,
-                "url": "https://www.mcbride.ca/council",
-                "label": "McBride Council Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-        ],
-    },
-    {
-        "name": "Village of Granisle",
-        "short_name": "Granisle",
-        "gov_type": GovType.VILLAGE,
-        "region": "BC",
-        "website_url": "https://www.granisle.ca/",
-        "population": None,
-        "sources": [
-            {
-                "platform": Platform.CUSTOM,
-                "source_type": SourceType.AGENDA,
-                "url": "https://www.granisle.ca/council",
-                "label": "Granisle Council Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-        ],
-    },
-    {
-        "name": "Village of Telkwa",
-        "short_name": "Telkwa",
-        "gov_type": GovType.VILLAGE,
-        "region": "BC",
-        "website_url": "https://www.telkwa.ca/",
-        "population": None,
-        "sources": [
-            {
-                "platform": Platform.CUSTOM,
-                "source_type": SourceType.AGENDA,
-                "url": "https://www.telkwa.ca/council",
-                "label": "Telkwa Council Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-        ],
-    },
-    {
-        "name": "Village of New Hazelton",
-        "short_name": "New Hazelton",
-        "gov_type": GovType.VILLAGE,
-        "region": "BC",
-        "website_url": "https://www.newhazelton.ca/",
-        "population": None,
-        "sources": [
-            {
-                "platform": Platform.CUSTOM,
-                "source_type": SourceType.AGENDA,
-                "url": "https://www.newhazelton.ca/council",
-                "label": "New Hazelton Council Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-        ],
-    },
-    {
-        "name": "Village of Hazelton",
-        "short_name": "Hazelton",
-        "gov_type": GovType.VILLAGE,
-        "region": "BC",
-        "website_url": "https://www.hazelton.ca/",
-        "population": None,
-        "sources": [
-            {
-                "platform": Platform.CUSTOM,
-                "source_type": SourceType.AGENDA,
-                "url": "https://www.hazelton.ca/council",
-                "label": "Hazelton Council Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-        ],
-    },
-    {
-        "name": "District of Stewart",
-        "short_name": "Stewart",
-        "gov_type": GovType.DISTRICT,
-        "region": "BC",
-        "website_url": "https://www.stewartbc.ca/",
-        "population": None,
-        "sources": [
-            {
-                "platform": Platform.CUSTOM,
-                "source_type": SourceType.AGENDA,
-                "url": "https://www.stewartbc.ca/council",
-                "label": "Stewart Council Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-        ],
-    },
-    {
-        "name": "District of Port Edward",
-        "short_name": "Port Edward",
-        "gov_type": GovType.DISTRICT,
-        "region": "BC",
-        "website_url": "https://www.portedward.ca/",
-        "population": None,
-        "sources": [
-            {
-                "platform": Platform.CUSTOM,
-                "source_type": SourceType.AGENDA,
-                "url": "https://www.portedward.ca/council",
-                "label": "Port Edward Council Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-        ],
-    },
-    {
-        "name": "District of Tumbler Ridge",
-        "short_name": "Tumbler Ridge",
-        "gov_type": GovType.DISTRICT,
-        "region": "BC",
-        "website_url": "https://www.tumblerridge.ca/",
-        "population": None,
-        "sources": [
-            {
-                "platform": Platform.CUSTOM,
-                "source_type": SourceType.AGENDA,
-                "url": "https://www.tumblerridge.ca/council",
-                "label": "Tumbler Ridge Council Agendas",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
         ],
