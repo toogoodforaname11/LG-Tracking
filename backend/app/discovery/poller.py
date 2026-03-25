@@ -11,9 +11,16 @@ from sqlalchemy import select
 
 from app.models.municipality import Municipality, Source, ScrapeStatus, Platform, ScrapeRun
 from app.models.document import Document, Meeting, DocType, MeetingType
-from app.discovery.base import DiscoveredItem
+from app.discovery.base import BaseScraper, DiscoveredItem
 from app.discovery.civicweb import CivicWebScraper
 from app.discovery.youtube import YouTubeScraper
+from app.discovery.custom_saanich import SaanichScraper
+from app.discovery.custom_sidney import SidneyScraper
+from app.discovery.custom_esquimalt import EsquimaltScraper
+from app.discovery.custom_viewroyal import ViewRoyalScraper
+from app.discovery.custom_langford import LangfordScraper
+from app.discovery.custom_highlands import HighlandsScraper
+from app.discovery.custom_crd import CRDScraper
 from app.config import settings
 from app.services.instant_alerts import send_immediate_alerts_for_documents
 
@@ -35,6 +42,26 @@ MEETING_TYPE_MAP = {
     "committee": MeetingType.COMMITTEE,
     "committee_of_the_whole": MeetingType.COW,
 }
+
+
+# Registry of custom scrapers keyed by municipality short_name
+CUSTOM_SCRAPER_MAP: dict[str, type] = {
+    "Saanich": SaanichScraper,
+    "Sidney": SidneyScraper,
+    "Esquimalt": EsquimaltScraper,
+    "View Royal": ViewRoyalScraper,
+    "Langford": LangfordScraper,
+    "Highlands": HighlandsScraper,
+    "CRD": CRDScraper,
+}
+
+
+def _get_custom_scraper(short_name: str, url: str) -> BaseScraper | None:
+    """Look up and instantiate a custom scraper for a municipality."""
+    scraper_cls = CUSTOM_SCRAPER_MAP.get(short_name)
+    if scraper_cls:
+        return scraper_cls(short_name, url)
+    return None
 
 
 async def poll_source(source: Source, municipality: Municipality) -> list[DiscoveredItem]:
@@ -64,6 +91,15 @@ async def poll_source(source: Source, municipality: Municipality) -> list[Discov
 
             scraper = YouTubeScraper(municipality.short_name, channel_id)
             return await scraper.discover()
+        elif source.platform == Platform.CUSTOM:
+            scraper = _get_custom_scraper(municipality.short_name, source.url)
+            if scraper:
+                return await scraper.discover()
+            logger.warning(
+                "No custom scraper for %s (source %d: %s)",
+                municipality.short_name, source.id, source.label,
+            )
+            return []
         else:
             logger.warning(
                 "Unsupported platform %s for source %d (%s/%s)",
