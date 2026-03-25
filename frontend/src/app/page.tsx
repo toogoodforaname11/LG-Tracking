@@ -53,7 +53,7 @@ const TOPIC_KEYWORDS: Record<string, string[]> = {
   provincial_targets: [
     "housing needs report", "housing needs assessment",
     "provincial housing target", "housing target",
-    "HNR", "Bill 46", "housing supply",
+    "HNR", "housing supply",
     "housing action plan", "housing strategy",
   ],
   ssmuh: [
@@ -110,12 +110,6 @@ const HOUSING_BILLS = [
     label: "Bill 44",
     keyword: "Bill 44",
     description: "Small-Scale Multi-Unit Housing (SSMUH) — duplexes, triplexes, fourplexes as-of-right",
-  },
-  {
-    id: "bill46",
-    label: "Bill 46",
-    keyword: "Bill 46",
-    description: "Housing Needs Reports & development financing (amenity cost charges)",
   },
   {
     id: "bill47",

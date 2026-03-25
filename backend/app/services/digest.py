@@ -219,11 +219,11 @@ def build_digest_items(
             "pedestrian", "walkability", "greenway", "shared path",
             "complete streets", "sidewalk improvement",
         ],
-        # Provincial housing targets / Housing Needs Reports (Bill 46)
+        # Provincial housing targets / Housing Needs Reports
         "provincial_targets": [
             "housing needs report", "housing needs assessment",
             "provincial housing target", "housing target",
-            "hnr", "bill 46", "housing supply",
+            "hnr", "housing supply",
             "housing action plan", "housing strategy",
         ],
         # Small-Scale Multi-Unit Housing — BC Bill 44
