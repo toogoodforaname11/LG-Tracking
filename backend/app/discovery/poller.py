@@ -29,6 +29,13 @@ from app.discovery.custom_enderby import EnderbyScraper
 from app.discovery.custom_fernie import FernieScraper
 from app.discovery.custom_grandforks import GrandForksScraper
 from app.discovery.custom_nelson import NelsonScraper
+from app.discovery.custom_princerupert import PrinceRupertScraper
+from app.discovery.custom_quesnel import QuesnelScraper
+from app.discovery.custom_salmonarm import SalmonArmScraper
+from app.discovery.custom_surrey import SurreyScraper
+from app.discovery.custom_terrace import TerraceScraper
+from app.discovery.custom_trail import TrailScraper
+from app.discovery.custom_williamslake import WilliamsLakeScraper
 from app.config import settings
 from app.services.instant_alerts import send_immediate_alerts_for_documents
 
@@ -71,6 +78,14 @@ CUSTOM_SCRAPER_MAP: dict[str, type] = {
     "Fernie": FernieScraper,
     "Grand Forks": GrandForksScraper,
     "Nelson": NelsonScraper,
+    # BC municipalities — Phase 4
+    "Prince Rupert": PrinceRupertScraper,
+    "Quesnel": QuesnelScraper,
+    "Salmon Arm": SalmonArmScraper,
+    "Surrey": SurreyScraper,
+    "Terrace": TerraceScraper,
+    "Trail": TrailScraper,
+    "Williams Lake": WilliamsLakeScraper,
 }
 
 
