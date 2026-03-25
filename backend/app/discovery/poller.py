@@ -26,6 +26,9 @@ from app.discovery.custom_100milehouse import HundredMileHouseScraper
 from app.discovery.custom_armstrong import ArmstrongScraper
 from app.discovery.custom_castlegar import CastlegarScraper
 from app.discovery.custom_enderby import EnderbyScraper
+from app.discovery.custom_fernie import FernieScraper
+from app.discovery.custom_grandforks import GrandForksScraper
+from app.discovery.custom_nelson import NelsonScraper
 from app.config import settings
 from app.services.instant_alerts import send_immediate_alerts_for_documents
 
@@ -64,6 +67,10 @@ CUSTOM_SCRAPER_MAP: dict[str, type] = {
     "Armstrong": ArmstrongScraper,
     "Castlegar": CastlegarScraper,
     "Enderby": EnderbyScraper,
+    # BC municipalities — Phase 3
+    "Fernie": FernieScraper,
+    "Grand Forks": GrandForksScraper,
+    "Nelson": NelsonScraper,
 }
 
 
