@@ -13,6 +13,7 @@ const AVAILABLE_TOPICS = [
   { id: "multimodal", label: "Multimodal Transport and Active Transportation" },
   { id: "provincial_targets", label: "Alignment with Provincial Housing Targets / Housing Needs Reports" },
   { id: "ssmuh", label: "Small-Scale Multi-Unit Housing (SSMUH) / Duplex-Triplex-Fourplex" },
+  { id: "housing_statutes", label: "Housing Statutes Amendment Act / Related Bylaws" },
   { id: "ocp_housing", label: "OCP Updates" },
   { id: "zoning_density", label: "Zoning / Rezoning for Housing Density" },
   { id: "dev_permits_housing", label: "Development Permits Affecting Housing Supply" },
@@ -61,6 +62,12 @@ const TOPIC_KEYWORDS: Record<string, string[]> = {
     "missing middle", "gentle density",
     "secondary suite", "garden suite", "carriage house",
     "infill housing", "laneway home",
+  ],
+  housing_statutes: [
+    "housing statutes", "Bill 44", "Bill 47", "Bill 46", "Bill 35",
+    "short-term rental", "Airbnb", "provincial housing legislation",
+    "housing legislation", "housing amendment", "zoning bylaw amendment",
+    "residential infill", "as-of-right",
   ],
   ocp_housing: [
     "official community plan", "OCP", "OCP amendment",
