@@ -36,6 +36,79 @@ from app.discovery.custom_surrey import SurreyScraper
 from app.discovery.custom_terrace import TerraceScraper
 from app.discovery.custom_trail import TrailScraper
 from app.discovery.custom_williamslake import WilliamsLakeScraper
+from app.discovery.custom_ainsworthhotsprings import AinsworthHotSpringsScraper
+from app.discovery.custom_alertbay import AlertBayScraper
+from app.discovery.custom_ashcroft import AshcroftScraper
+from app.discovery.custom_balfour import BalfourScraper
+from app.discovery.custom_barriere import BarriereScraper
+from app.discovery.custom_cachecreek import CacheCreekScraper
+from app.discovery.custom_canalflats import CanalFlatsScraper
+from app.discovery.custom_chase import ChaseScraper
+from app.discovery.custom_chetwynd import ChetwyndScraper
+from app.discovery.custom_christinalake import ChristinaLakeScraper
+from app.discovery.custom_clearwater import ClearwaterScraper
+from app.discovery.custom_clinton import ClintonScraper
+from app.discovery.custom_coldstream import ColdstreamScraper
+from app.discovery.custom_cranbrook import CranbrookScraper
+from app.discovery.custom_creston import CrestonScraper
+from app.discovery.custom_cumberland import CumberlandScraper
+from app.discovery.custom_elkford import ElkfordScraper
+from app.discovery.custom_fortnelson import FortNelsonScraper
+from app.discovery.custom_fortstjames import FortStJamesScraper
+from app.discovery.custom_fruitvale import FruitvaleScraper
+from app.discovery.custom_gibsons import GibsonsScraper
+from app.discovery.custom_goldriver import GoldRiverScraper
+from app.discovery.custom_golden import GoldenScraper
+from app.discovery.custom_granisle import GranisleScraper
+from app.discovery.custom_greenwood import GreenwoodScraper
+from app.discovery.custom_harrisonhotsprings import HarrisonHotSpringsScraper
+from app.discovery.custom_hazelton import HazeltonScraper
+from app.discovery.custom_hope import HopeScraper
+from app.discovery.custom_houston import HoustonScraper
+from app.discovery.custom_hudsonshope import HudsonsHopeScraper
+from app.discovery.custom_invermere import InvermereScraper
+from app.discovery.custom_kaslo import KasloScraper
+from app.discovery.custom_kent import KentScraper
+from app.discovery.custom_keremeos import KeremeosScraper
+from app.discovery.custom_kimberley import KimberleyScraper
+from app.discovery.custom_kitimat import KitimatScraper
+from app.discovery.custom_lillooet import LillooetScraper
+from app.discovery.custom_lionsbay import LionsBayScraper
+from app.discovery.custom_loganlake import LoganLakeScraper
+from app.discovery.custom_lumby import LumbyScraper
+from app.discovery.custom_mackenzie import MackenzieScraper
+from app.discovery.custom_mcbride import McBrideScraper
+from app.discovery.custom_midway import MidwayScraper
+from app.discovery.custom_montrose import MontroseScraper
+from app.discovery.custom_nakusp import NakuspScraper
+from app.discovery.custom_newdenver import NewDenverScraper
+from app.discovery.custom_newhazelton import NewHazeltonScraper
+from app.discovery.custom_northernrockies import NorthernRockiesScraper
+from app.discovery.custom_pemberton import PembertonScraper
+from app.discovery.custom_portedward import PortEdwardScraper
+from app.discovery.custom_porthardy import PortHardyScraper
+from app.discovery.custom_portmcneill import PortMcNeillScraper
+from app.discovery.custom_princeton import PrincetonScraper
+from app.discovery.custom_radiumhotsprings import RadiumHotSpringsScraper
+from app.discovery.custom_revelstoke import RevelstokeScraper
+from app.discovery.custom_riondel import RiondelScraper
+from app.discovery.custom_rossland import RosslandScraper
+from app.discovery.custom_salmo import SalmoScraper
+from app.discovery.custom_sicamous import SicamousScraper
+from app.discovery.custom_silverton import SilvertonScraper
+from app.discovery.custom_slocan import SlocanScraper
+from app.discovery.custom_smithers import SmithersScraper
+from app.discovery.custom_spallumcheen import SpallumcheenScraper
+from app.discovery.custom_sparwood import SparwoodScraper
+from app.discovery.custom_stewart import StewartScraper
+from app.discovery.custom_tahsis import TahsisScraper
+from app.discovery.custom_telkwa import TelkwaScraper
+from app.discovery.custom_tumblerridge import TumblerRidgeScraper
+from app.discovery.custom_valemount import ValemountScraper
+from app.discovery.custom_vanderhoof import VanderhoofScraper
+from app.discovery.custom_warfield import WarfieldScraper
+from app.discovery.custom_wells import WellsScraper
+from app.discovery.custom_zeballos import ZeballosScraper
 from app.config import settings
 from app.services.instant_alerts import send_immediate_alerts_for_documents
 
@@ -86,6 +159,80 @@ CUSTOM_SCRAPER_MAP: dict[str, type] = {
     "Terrace": TerraceScraper,
     "Trail": TrailScraper,
     "Williams Lake": WilliamsLakeScraper,
+    # BC municipalities — Phases 7-11
+    "Ainsworth Hot Springs": AinsworthHotSpringsScraper,
+    "Alert Bay": AlertBayScraper,
+    "Ashcroft": AshcroftScraper,
+    "Balfour": BalfourScraper,
+    "Barriere": BarriereScraper,
+    "Cache Creek": CacheCreekScraper,
+    "Canal Flats": CanalFlatsScraper,
+    "Chase": ChaseScraper,
+    "Chetwynd": ChetwyndScraper,
+    "Christina Lake": ChristinaLakeScraper,
+    "Clearwater": ClearwaterScraper,
+    "Clinton": ClintonScraper,
+    "Coldstream": ColdstreamScraper,
+    "Cranbrook": CranbrookScraper,
+    "Creston": CrestonScraper,
+    "Cumberland": CumberlandScraper,
+    "Elkford": ElkfordScraper,
+    "Fort Nelson": FortNelsonScraper,
+    "Fort St. James": FortStJamesScraper,
+    "Fruitvale": FruitvaleScraper,
+    "Gibsons": GibsonsScraper,
+    "Gold River": GoldRiverScraper,
+    "Golden": GoldenScraper,
+    "Granisle": GranisleScraper,
+    "Greenwood": GreenwoodScraper,
+    "Harrison Hot Springs": HarrisonHotSpringsScraper,
+    "Hazelton": HazeltonScraper,
+    "Hope": HopeScraper,
+    "Houston": HoustonScraper,
+    "Hudson's Hope": HudsonsHopeScraper,
+    "Invermere": InvermereScraper,
+    "Kaslo": KasloScraper,
+    "Kent": KentScraper,
+    "Keremeos": KeremeosScraper,
+    "Kimberley": KimberleyScraper,
+    "Kitimat": KitimatScraper,
+    "Lillooet": LillooetScraper,
+    "Lions Bay": LionsBayScraper,
+    "Logan Lake": LoganLakeScraper,
+    "Lumby": LumbyScraper,
+    "Mackenzie": MackenzieScraper,
+    "McBride": McBrideScraper,
+    "Midway": MidwayScraper,
+    "Montrose": MontroseScraper,
+    "Nakusp": NakuspScraper,
+    "New Denver": NewDenverScraper,
+    "New Hazelton": NewHazeltonScraper,
+    "Northern Rockies": NorthernRockiesScraper,
+    "Pemberton": PembertonScraper,
+    "Port Edward": PortEdwardScraper,
+    "Port Hardy": PortHardyScraper,
+    "Port McNeill": PortMcNeillScraper,
+    "Princeton": PrincetonScraper,
+    "Radium Hot Springs": RadiumHotSpringsScraper,
+    "Revelstoke": RevelstokeScraper,
+    "Riondel": RiondelScraper,
+    "Rossland": RosslandScraper,
+    "Salmo": SalmoScraper,
+    "Sicamous": SicamousScraper,
+    "Silverton": SilvertonScraper,
+    "Slocan": SlocanScraper,
+    "Smithers": SmithersScraper,
+    "Spallumcheen": SpallumcheenScraper,
+    "Sparwood": SparwoodScraper,
+    "Stewart": StewartScraper,
+    "Tahsis": TahsisScraper,
+    "Telkwa": TelkwaScraper,
+    "Tumbler Ridge": TumblerRidgeScraper,
+    "Valemount": ValemountScraper,
+    "Vanderhoof": VanderhoofScraper,
+    "Warfield": WarfieldScraper,
+    "Wells": WellsScraper,
+    "Zeballos": ZeballosScraper,
 }
 
 
