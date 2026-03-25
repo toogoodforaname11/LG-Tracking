@@ -59,7 +59,7 @@ async def generate_digest(db: AsyncSession, track_id: int) -> dict | None:
         muni = munis.get(doc.municipality_id)
 
         # Run Perplexity verification on key points if available
-        if match.key_points and not match.verification_status == "verified":
+        if match.key_points and match.verification_status != "verified":
             verification, perp_usage = await verify_with_perplexity(
                 municipality=muni.short_name if muni else "Unknown",
                 meeting_date="Unknown",
@@ -131,7 +131,7 @@ def render_digest_html(digest: dict) -> str:
             <p style="font-size:12px;color:#666;">
                 Topics: {', '.join(item['matched_topics'])} |
                 Keywords: {', '.join(item['matched_keywords'])} |
-                Confidence: {item['match_score']:.0%}
+                Confidence: {f"{item['match_score']:.0%}" if item['match_score'] is not None else "N/A"}
             </p>
             {summary_html}
             {key_points_html}
