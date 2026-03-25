@@ -64,9 +64,12 @@ const TOPIC_KEYWORDS: Record<string, string[]> = {
     "infill housing", "laneway home",
   ],
   housing_statutes: [
-    "housing statutes", "Bill 44", "Bill 47", "Bill 46", "Bill 35",
-    "short-term rental", "Airbnb", "provincial housing legislation",
-    "housing legislation", "housing amendment", "zoning bylaw amendment",
+    "housing statutes", "housing statutes amendment",
+    "Bill 44", "Bill 46", "Bill 47", "Bill 16", "Bill 25",
+    "provincial housing legislation", "housing legislation",
+    "housing amendment", "amenity cost charge",
+    "short-term rental", "parking requirement",
+    "development approval", "tenant protection",
     "residential infill", "as-of-right",
   ],
   ocp_housing: [

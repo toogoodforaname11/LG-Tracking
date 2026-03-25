@@ -236,13 +236,19 @@ def build_digest_items(
             "infill housing", "laneway home",
         ],
         # Housing Statutes Amendment Act / Related Bylaws
-        # (covers the family of BC housing bills and their local bylaw responses)
+        # Bill 44 (2023): SSMUH — small-scale multi-unit housing
+        # Bill 46 (2023): Development financing, amenity cost charges
+        # Bill 47 (2023): Transit-oriented areas, density near rapid transit
+        # Bill 16 (2024): Zoning bylaws, development approvals, tenant protection
+        # Bill 25 (2025): SSMUH alignment, short-term rental rules, parking limits
         "housing_statutes": [
-            "housing statutes", "housing statute",
-            "bill 44", "bill 47", "bill 46", "bill 35",
-            "short-term rental", "short term rental", "airbnb",
+            "housing statutes", "housing statute", "housing statutes amendment",
+            "bill 44", "bill 46", "bill 47", "bill 16", "bill 25",
             "provincial housing legislation", "housing legislation",
-            "housing amendment", "zoning bylaw amendment",
+            "housing amendment", "amenity cost charge",
+            "short-term rental", "short term rental",
+            "parking requirement", "excessive parking",
+            "development approval", "tenant protection",
             "residential infill", "as-of-right", "as of right",
         ],
         # OCP updates (any official community plan work)
