@@ -114,7 +114,7 @@ async def list_sources(
     return result.scalars().all()
 
 
-@router.post("/sources", response_model=SourceOut, status_code=201)
+@router.post("/sources", response_model=SourceOut, status_code=201, dependencies=[Depends(verify_cron_secret)])
 async def create_source(source: SourceCreate, db: AsyncSession = Depends(get_db)):
     """Add a new source to a municipality."""
     result = await db.execute(
@@ -137,7 +137,7 @@ async def create_source(source: SourceCreate, db: AsyncSession = Depends(get_db)
     return new_source
 
 
-@router.patch("/sources/{source_id}/status")
+@router.patch("/sources/{source_id}/status", dependencies=[Depends(verify_cron_secret)])
 async def update_source_status(
     source_id: int,
     status: str,

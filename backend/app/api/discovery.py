@@ -5,12 +5,13 @@ from sqlalchemy import select, func
 from app.db.database import get_db
 from app.discovery.poller import run_discovery
 from app.models.document import Document, Meeting
-from app.models.municipality import ScrapeRun
+from app.models.municipality import Municipality, ScrapeRun
+from app.api.dependencies import verify_cron_secret
 
 router = APIRouter()
 
 
-@router.post("/poll")
+@router.post("/poll", dependencies=[Depends(verify_cron_secret)])
 async def trigger_poll(
     municipality: str | None = Query(None, description="Filter by municipality short_name"),
     db: AsyncSession = Depends(get_db),
@@ -30,6 +31,10 @@ async def list_documents(
 ):
     """List discovered documents."""
     query = select(Document).order_by(Document.first_seen_at.desc()).limit(limit)
+    if municipality:
+        query = query.join(Municipality, Document.municipality_id == Municipality.id).where(
+            Municipality.short_name == municipality
+        )
     if new_only:
         query = query.where(Document.is_new.is_(True))
     if doc_type:
@@ -62,6 +67,10 @@ async def list_meetings(
 ):
     """List discovered meetings."""
     query = select(Meeting).order_by(Meeting.meeting_date.desc()).limit(limit)
+    if municipality:
+        query = query.join(Municipality, Meeting.municipality_id == Municipality.id).where(
+            Municipality.short_name == municipality
+        )
     result = await db.execute(query)
     meetings = result.scalars().all()
 

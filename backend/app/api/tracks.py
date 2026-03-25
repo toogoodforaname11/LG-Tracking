@@ -177,6 +177,13 @@ async def list_track_matches(
     track_id: int, limit: int = 20, db: AsyncSession = Depends(get_db)
 ):
     """List matches for a specific track."""
+    # Verify track belongs to current user before returning matches
+    track_check = await db.execute(
+        select(Track).where(Track.id == track_id, Track.user_id == DEMO_USER_ID)
+    )
+    if not track_check.scalar_one_or_none():
+        raise HTTPException(status_code=404, detail="Track not found")
+
     result = await db.execute(
         select(TrackMatch)
         .where(TrackMatch.track_id == track_id)

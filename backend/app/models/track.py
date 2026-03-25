@@ -7,7 +7,7 @@ for specific municipalities. Only matched items get full AI processing.
 import enum
 from datetime import datetime, timezone
 
-from sqlalchemy import String, Text, DateTime, Integer, Boolean, ForeignKey, Index, JSON
+from sqlalchemy import String, Text, DateTime, Integer, Boolean, ForeignKey, Index, JSON, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.database import Base
@@ -96,4 +96,5 @@ class TrackMatch(Base):
     __table_args__ = (
         Index("ix_track_matches_track", "track_id"),
         Index("ix_track_matches_document", "document_id"),
+        UniqueConstraint("track_id", "document_id", name="uq_track_matches_track_document"),
     )

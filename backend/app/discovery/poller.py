@@ -98,18 +98,40 @@ async def store_discovered_items(
         )
         existing_doc = result.scalar_one_or_none()
 
+        # Extract content fields early — needed for both hash and document creation.
+        raw_text = None
+        video_timestamps = None
+        video_duration = None
+        if item.item_type == "video" and item.raw_metadata:
+            raw_text = item.raw_metadata.get("content_for_embedding")
+            video_timestamps = item.raw_metadata.get("timestamps")
+            video_duration = item.raw_metadata.get("duration")
+
         if existing_doc:
             stats["existing"] += 1
             existing_doc.last_checked_at = datetime.now(timezone.utc)
+            # Detect content changes at the same URL (revised agendas/minutes).
+            hash_source = raw_text or item.title or item.url
+            new_hash = hashlib.sha256(hash_source.encode()).hexdigest()
+            if existing_doc.content_hash and new_hash != existing_doc.content_hash:
+                existing_doc.content_hash = new_hash
+                existing_doc.is_processed = False
+                existing_doc.is_new = True
+                if raw_text:
+                    existing_doc.raw_text = raw_text
+                stats.setdefault("updated", 0)
+                stats["updated"] += 1
             continue
 
         # Find or create meeting record
         meeting_id = None
         if item.meeting_date:
+            meeting_type_enum = MEETING_TYPE_MAP.get(item.meeting_type or "regular")
             result = await db.execute(
                 select(Meeting).where(
                     Meeting.municipality_id == municipality.id,
                     Meeting.meeting_date == item.meeting_date,
+                    Meeting.meeting_type == meeting_type_enum,
                 )
             )
             meeting = result.scalar_one_or_none()
@@ -118,22 +140,16 @@ async def store_discovered_items(
                     municipality_id=municipality.id,
                     title=item.title,
                     meeting_date=item.meeting_date,
-                    meeting_type=MEETING_TYPE_MAP.get(item.meeting_type or "regular"),
+                    meeting_type=meeting_type_enum,
                     source_url=item.url,
                 )
                 db.add(meeting)
                 await db.flush()
             meeting_id = meeting.id
 
-        content_hash = hashlib.sha256(item.url.encode()).hexdigest()
-
-        raw_text = None
-        video_timestamps = None
-        video_duration = None
-        if item.item_type == "video" and item.raw_metadata:
-            raw_text = item.raw_metadata.get("content_for_embedding")
-            video_timestamps = item.raw_metadata.get("timestamps")
-            video_duration = item.raw_metadata.get("duration")
+        # Hash from actual content, not URL — enables revision detection.
+        hash_source = raw_text or item.title or item.url
+        content_hash = hashlib.sha256(hash_source.encode()).hexdigest()
 
         doc = Document(
             meeting_id=meeting_id,

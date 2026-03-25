@@ -27,12 +27,14 @@ class SubscribeRequest(BaseModel):
     topics: list[str]
     keywords: str = ""
     immediate_alerts: bool = False
+    edit_token: str | None = None  # Required when updating an existing subscription
 
 
 class SubscribeResponse(BaseModel):
     status: str
     email: str
     message: str
+    edit_token: str | None = None  # Returned on new subscription for future updates
 
 
 class UnsubscribeResponse(BaseModel):
@@ -147,6 +149,17 @@ async def subscribe(
     existing = result.scalar_one_or_none()
 
     if existing:
+        # Updating an existing subscription requires proof of ownership via
+        # the edit_token (which is the subscriber's unsubscribe_token UUID).
+        # Without this check, anyone who knows an email address could
+        # overwrite that subscriber's preferences — an account-integrity
+        # violation.
+        if not req.edit_token or req.edit_token != existing.unsubscribe_token:
+            raise HTTPException(
+                status_code=403,
+                detail="edit_token is required to update an existing subscription. "
+                "Check your confirmation email for the edit link.",
+            )
         existing.municipalities = req.municipalities
         existing.topics = req.topics
         existing.keywords = req.keywords
@@ -196,6 +209,7 @@ async def subscribe(
         message=(
             f"Preferences {action}! You will receive weekly digests every Sunday.{alerts_msg}"
         ),
+        edit_token=subscriber.unsubscribe_token if action == "created" else None,
     )
 
 
