@@ -1,0 +1,12 @@
+# BC Local Government Council Tracker — cron jobs
+# These replace the Vercel Cron jobs defined in vercel.json.
+# Install with: crontab -u www-data deploy/crontab
+#
+# Both endpoints require X-Cron-Secret — set CRON_SECRET in /var/www/lg-tracking/backend/.env
+# and replace <YOUR_CRON_SECRET> below with the same value.
+
+# Poll all sources every 30 minutes for new documents
+*/30 * * * * curl -s -X POST http://127.0.0.1:8000/api/v1/cron/poll -H "X-Cron-Secret: <YOUR_CRON_SECRET>" >> /var/log/lg-tracking-poll.log 2>&1
+
+# Send weekly digest every Monday at 04:00 UTC (Sunday 8 PM Pacific)
+0 4 * * 1 curl -s -X POST http://127.0.0.1:8000/api/v1/cron/weekly-digest -H "X-Cron-Secret: <YOUR_CRON_SECRET>" >> /var/log/lg-tracking-digest.log 2>&1
