@@ -3204,6 +3204,300 @@ BC_MUNICIPALITIES_BATCH_16 = [
     },
 ]
 
+# Batch 17 – 15 previously missing BC municipalities
+BC_MUNICIPALITIES_BATCH_17 = [
+    {
+        "name": "Village of Anmore",
+        "short_name": "Anmore",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.anmore.com/",
+        "population": 2350,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://anmore.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Anmore CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://anmore.civicweb.net/filepro/documents/",
+                "label": "Anmore CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "Village of Belcarra",
+        "short_name": "Belcarra",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.belcarra.ca/",
+        "population": 720,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.belcarra.ca/council",
+                "label": "Belcarra Council Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "Village of Burns Lake",
+        "short_name": "Burns Lake",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.burnslake.ca/",
+        "population": 1779,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.burnslake.ca/council",
+                "label": "Burns Lake Council Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "City of Delta",
+        "short_name": "Delta",
+        "gov_type": GovType.CITY,
+        "region": "BC",
+        "website_url": "https://www.delta.ca/",
+        "population": 108455,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://delta.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Delta CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://delta.civicweb.net/filepro/documents/",
+                "label": "Delta CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "Village of Fraser Lake",
+        "short_name": "Fraser Lake",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.fraserlake.ca/",
+        "population": 1000,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.fraserlake.ca/council",
+                "label": "Fraser Lake Council Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "Village of Lytton",
+        "short_name": "Lytton",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.lytton.ca/",
+        "population": 210,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.lytton.ca/council",
+                "label": "Lytton Council Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "Village of Masset",
+        "short_name": "Masset",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.masset.ca/",
+        "population": 793,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.masset.ca/council",
+                "label": "Masset Council Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "Municipality of North Cowichan",
+        "short_name": "North Cowichan",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://www.northcowichan.ca/",
+        "population": 31990,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://northcowichan.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "North Cowichan CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://northcowichan.civicweb.net/filepro/documents/",
+                "label": "North Cowichan CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "Village of Port Alice",
+        "short_name": "Port Alice",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.portalice.ca/",
+        "population": 664,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.portalice.ca/council",
+                "label": "Port Alice Council Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "Village of Port Clements",
+        "short_name": "Port Clements",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.portclements.ca/",
+        "population": 272,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.portclements.ca/council",
+                "label": "Port Clements Council Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "Village of Pouce Coupe",
+        "short_name": "Pouce Coupe",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://poucecoupe.ca/",
+        "population": 739,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://poucecoupe.ca/government/administration/council-meetings/",
+                "label": "Pouce Coupe Council Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "Village of Queen Charlotte",
+        "short_name": "Queen Charlotte",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.queencharlotte.ca/",
+        "population": 865,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://queencharlotte.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Queen Charlotte CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://queencharlotte.civicweb.net/filepro/documents/",
+                "label": "Queen Charlotte CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "Village of Sayward",
+        "short_name": "Sayward",
+        "gov_type": GovType.VILLAGE,
+        "region": "BC",
+        "website_url": "https://www.sayward.ca/",
+        "population": 311,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.sayward.ca/council",
+                "label": "Sayward Council Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "Sun Peaks Mountain Resort Municipality",
+        "short_name": "Sun Peaks",
+        "gov_type": GovType.MOUNTAIN_RESORT,
+        "region": "BC",
+        "website_url": "https://www.sunpeaksmunicipality.ca/",
+        "population": 1620,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://www.sunpeaksmunicipality.ca/council",
+                "label": "Sun Peaks Council Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "District of Taylor",
+        "short_name": "Taylor",
+        "gov_type": GovType.DISTRICT,
+        "region": "BC",
+        "website_url": "https://districtoftaylor.com/",
+        "population": 1469,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://taylor.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Taylor CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://taylor.civicweb.net/filepro/documents/",
+                "label": "Taylor CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+]
+
 
 async def seed_registry(db: AsyncSession) -> dict:
     """Seed the registry with BC municipalities and sources.
@@ -3230,6 +3524,7 @@ async def seed_registry(db: AsyncSession) -> dict:
         + BC_MUNICIPALITIES_BATCH_14
         + BC_MUNICIPALITIES_BATCH_15
         + BC_MUNICIPALITIES_BATCH_16
+        + BC_MUNICIPALITIES_BATCH_17
     )
     for muni_data in all_municipalities:
         sources_data = muni_data.get("sources", [])

@@ -110,6 +110,16 @@ from app.discovery.custom_vanderhoof import VanderhoofScraper
 from app.discovery.custom_warfield import WarfieldScraper
 from app.discovery.custom_wells import WellsScraper
 from app.discovery.custom_zeballos import ZeballosScraper
+from app.discovery.custom_belcarra import BelcarraScraper
+from app.discovery.custom_burnslake import BurnsLakeScraper
+from app.discovery.custom_fraserlake import FraserLakeScraper
+from app.discovery.custom_lytton import LyttonScraper
+from app.discovery.custom_masset import MassetScraper
+from app.discovery.custom_portalice import PortAliceScraper
+from app.discovery.custom_portclements import PortClementsScraper
+from app.discovery.custom_poucecoupe import PouceCoupeScraper
+from app.discovery.custom_sayward import SaywardScraper
+from app.discovery.custom_sunpeaks import SunPeaksScraper
 from app.config import settings
 from app.services.instant_alerts import send_immediate_alerts_for_documents
 
@@ -234,6 +244,17 @@ CUSTOM_SCRAPER_MAP: dict[str, type] = {
     "Warfield": WarfieldScraper,
     "Wells": WellsScraper,
     "Zeballos": ZeballosScraper,
+    # BC municipalities — Batch 17 (previously missing)
+    "Belcarra": BelcarraScraper,
+    "Burns Lake": BurnsLakeScraper,
+    "Fraser Lake": FraserLakeScraper,
+    "Lytton": LyttonScraper,
+    "Masset": MassetScraper,
+    "Port Alice": PortAliceScraper,
+    "Port Clements": PortClementsScraper,
+    "Pouce Coupe": PouceCoupeScraper,
+    "Sayward": SaywardScraper,
+    "Sun Peaks": SunPeaksScraper,
 }
 
 
