@@ -51,6 +51,7 @@ def send_confirmation_email(
     topics: list[str],
     immediate_alerts: bool,
     unsubscribe_url: str,
+    edit_token: str = "",
 ) -> None:
     """Send a confirmation email via Resend.
 
@@ -107,6 +108,8 @@ def send_confirmation_email(
 
             <p style="color:#374151;line-height:1.6;">
                 To update your preferences, visit the form again and submit with the same email address.
+                Your edit token is: <code style="background:#f3f4f6;padding:2px 6px;border-radius:4px;font-size:13px;">{edit_token}</code>
+                — save this if you need to update from a different device.
             </p>
 
             <hr style="border:none;border-top:1px solid #e5e7eb;margin:24px 0;">
@@ -197,6 +200,7 @@ async def subscribe(
             req.topics,
             req.immediate_alerts,
             unsubscribe_url,
+            subscriber.unsubscribe_token,
         )
     else:
         logger.warning("APP_BASE_URL not set — skipping confirmation email (unsubscribe links would be broken)")

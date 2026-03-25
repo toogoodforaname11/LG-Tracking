@@ -371,6 +371,10 @@ export default function SubscribePage() {
         .filter(Boolean)
         .join(", ");
 
+      // Include edit_token if we have one stored for this email — required
+      // by the backend to update an existing subscription.
+      const storedToken = localStorage.getItem(`edit_token:${email}`);
+
       const res = await fetch(`${API_BASE}/api/v1/subscribe`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -380,6 +384,7 @@ export default function SubscribePage() {
           topics: selectedTopics,
           keywords: allKeywords,
           immediate_alerts: immediateAlerts,
+          ...(storedToken ? { edit_token: storedToken } : {}),
         }),
       });
 
@@ -388,6 +393,13 @@ export default function SubscribePage() {
         throw new Error(
           data?.detail || `Request failed with status ${res.status}`
         );
+      }
+
+      // Persist the edit_token returned on new subscriptions so future
+      // updates from this browser can authenticate.
+      const data = await res.json();
+      if (data.edit_token) {
+        localStorage.setItem(`edit_token:${email}`, data.edit_token);
       }
 
       setFormState("success");

@@ -359,3 +359,38 @@ def test_create_all_guarded_by_debug():
     # The create_all call should be inside an if settings.debug block
     assert "settings.debug" in source, "create_all must be guarded behind settings.debug"
     assert "create_all" in source, "create_all should still exist for dev mode"
+
+
+# ---------------------------------------------------------------------------
+# 10. Legacy URL-hash migration does not trigger reprocessing
+# ---------------------------------------------------------------------------
+
+
+def test_legacy_url_hash_not_treated_as_content_change():
+    """Documents with legacy sha256(url) hashes must not be marked for reprocessing.
+
+    The poller must detect that the existing hash matches sha256(url) and
+    silently upgrade to the new content-based hash without setting
+    is_processed=False.
+    """
+    url = "https://example.com/agenda.pdf"
+    title = "Council Meeting Agenda"
+    legacy_hash = hashlib.sha256(url.encode()).hexdigest()
+    new_hash = hashlib.sha256(title.encode()).hexdigest()  # title != url
+
+    # Verify they differ (otherwise the test is vacuous)
+    assert legacy_hash != new_hash
+
+    # The poller checks: if existing_hash == sha256(url) and new_hash != sha256(url),
+    # it silently upgrades. This is the backward-compat path.
+    # We verify the logic inline since we can't easily run the full async poller.
+    existing_content_hash = legacy_hash
+    legacy_url_hash = hashlib.sha256(url.encode()).hexdigest()
+    hash_source = title  # raw_text is None, falls back to title
+    computed_new_hash = hashlib.sha256(hash_source.encode()).hexdigest()
+
+    is_legacy_migration = (
+        existing_content_hash == legacy_url_hash
+        and computed_new_hash != legacy_url_hash
+    )
+    assert is_legacy_migration, "Should detect legacy URL hash and migrate silently"

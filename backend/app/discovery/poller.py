@@ -110,9 +110,23 @@ async def store_discovered_items(
         if existing_doc:
             stats["existing"] += 1
             existing_doc.last_checked_at = datetime.now(timezone.utc)
+
             # Detect content changes at the same URL (revised agendas/minutes).
             hash_source = raw_text or item.title or item.url
             new_hash = hashlib.sha256(hash_source.encode()).hexdigest()
+
+            # Legacy migration: rows created before the content-hash fix
+            # stored sha256(url).  If the existing hash matches the old URL-
+            # based scheme, silently upgrade to the new content-based hash
+            # without marking for reprocessing — the document content has not
+            # actually changed, only the hashing strategy has.
+            legacy_url_hash = hashlib.sha256(item.url.encode()).hexdigest()
+            if existing_doc.content_hash == legacy_url_hash and new_hash != legacy_url_hash:
+                existing_doc.content_hash = new_hash
+                if raw_text:
+                    existing_doc.raw_text = raw_text
+                continue
+
             if existing_doc.content_hash and new_hash != existing_doc.content_hash:
                 existing_doc.content_hash = new_hash
                 existing_doc.is_processed = False
