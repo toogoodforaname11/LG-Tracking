@@ -385,7 +385,13 @@ async def run_weekly_digest(db: AsyncSession) -> dict:
         items = build_digest_items(docs_with_munis, topics, subscriber.keywords)
         stats["total_items"] += len(items)
 
-        # Build token-based unsubscribe URL
+        # Skip email if APP_BASE_URL is not configured — unsubscribe links
+        # would be relative paths, which are broken in email clients.
+        if not settings.app_base_url:
+            logger.warning("APP_BASE_URL not set — skipping digest for %s", subscriber.email)
+            stats["emails_failed"] += 1
+            continue
+
         unsubscribe_url = (
             f"{settings.app_base_url}/api/v1/unsubscribe"
             f"?token={quote(subscriber.unsubscribe_token)}"

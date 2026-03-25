@@ -2,8 +2,13 @@
 
 Supports batching to reduce API costs — multiple documents can be
 matched or summarized in a single Gemini call.
+
+All google-generativeai SDK calls are synchronous. They are wrapped in
+asyncio.to_thread() so they run in a thread pool and never block the
+event loop.
 """
 
+import asyncio
 import json
 import logging
 
@@ -53,7 +58,8 @@ async def gemini_match(prompt: str) -> tuple[dict | None, dict[str, int]]:
 
     try:
         model = _get_model()
-        response = model.generate_content(
+        response = await asyncio.to_thread(
+            model.generate_content,
             prompt,
             generation_config={
                 "temperature": 0.1,
@@ -77,7 +83,8 @@ async def gemini_batch_match(prompt: str) -> tuple[list[dict] | None, dict[str, 
 
     try:
         model = _get_model()
-        response = model.generate_content(
+        response = await asyncio.to_thread(
+            model.generate_content,
             prompt,
             generation_config={
                 "temperature": 0.1,
@@ -109,7 +116,8 @@ async def gemini_summarize(prompt: str) -> tuple[dict | None, dict[str, int]]:
 
     try:
         model = _get_model()
-        response = model.generate_content(
+        response = await asyncio.to_thread(
+            model.generate_content,
             prompt,
             generation_config={
                 "temperature": 0.3,
@@ -133,7 +141,8 @@ async def gemini_batch_summarize(prompt: str) -> tuple[list[dict] | None, dict[s
 
     try:
         model = _get_model()
-        response = model.generate_content(
+        response = await asyncio.to_thread(
+            model.generate_content,
             prompt,
             generation_config={
                 "temperature": 0.3,
@@ -164,7 +173,8 @@ async def gemini_embed(text: str) -> list[float] | None:
     try:
         if _genai is None:
             _get_model()  # Initialize genai
-        result = _genai.embed_content(
+        result = await asyncio.to_thread(
+            _genai.embed_content,
             model="models/text-embedding-004",
             content=text,
             task_type="retrieval_document",
@@ -189,7 +199,8 @@ async def gemini_batch_embed(texts: list[str]) -> list[list[float] | None]:
             _get_model()
 
         # Gemini embed_content accepts a list for batch embedding
-        result = _genai.embed_content(
+        result = await asyncio.to_thread(
+            _genai.embed_content,
             model="models/text-embedding-004",
             content=texts,
             task_type="retrieval_document",

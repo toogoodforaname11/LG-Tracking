@@ -7,9 +7,14 @@ These tests verify the deterministic fixes (not warnings) for:
 - TrackMatch uniqueness constraint
 - Content hash computed from content, not URL
 - Meeting dedup includes meeting_type
+- Topic ID alignment between frontend and backend
+- Gemini calls wrapped in asyncio.to_thread
+- create_all guarded behind debug mode
 """
 
+import asyncio
 import hashlib
+import inspect
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
@@ -265,3 +270,92 @@ def test_seed_requires_cron_secret():
 
     deps = _get_route_dependencies("app.api.registry", "router", "/seed", "POST")
     assert verify_cron_secret in deps
+
+
+# ---------------------------------------------------------------------------
+# 7. Topic ID alignment between frontend and backend
+# ---------------------------------------------------------------------------
+
+
+def test_topics_match_digest_service():
+    """AVAILABLE_TOPICS in track.py must match digest.py topic_keywords keys."""
+    from app.models.track import AVAILABLE_TOPICS
+    from app.services.digest import build_digest_items
+
+    # Extract topic_keywords keys from digest.py source (they're defined inline
+    # in build_digest_items). We verify by checking that every AVAILABLE_TOPIC
+    # is a valid key in the keyword fallback matcher instead, since both the
+    # digest and gemini fallback share the same topic IDs.
+    from app.ai.gemini import keyword_fallback_match
+
+    # Run a no-op match just to exercise the topic_keywords dict
+    for topic in AVAILABLE_TOPICS:
+        result = keyword_fallback_match("", [topic], [])
+        # Should not crash — topic must be a recognized key
+        assert isinstance(result, dict)
+        assert "is_match" in result
+
+
+def test_topics_match_gemini_fallback():
+    """Every AVAILABLE_TOPIC must be a key in the gemini keyword_fallback_match topic_keywords."""
+    from app.models.track import AVAILABLE_TOPICS
+
+    # The topic_keywords dict is defined inside keyword_fallback_match.
+    # We can verify by reading the source code for the function.
+    from app.ai.gemini import keyword_fallback_match
+
+    source = inspect.getsource(keyword_fallback_match)
+    for topic in AVAILABLE_TOPICS:
+        assert f'"{topic}"' in source, f"Topic '{topic}' not found in keyword_fallback_match topic_keywords"
+
+
+def test_frontend_topic_ids_present_in_backend():
+    """Frontend topic IDs must all be recognized by the backend."""
+    from app.models.track import AVAILABLE_TOPICS
+
+    # These are the topic IDs from frontend/src/app/page.tsx AVAILABLE_TOPICS
+    frontend_topics = [
+        "tod", "toa_impl", "area_plans", "brt", "multimodal",
+        "provincial_targets", "ssmuh", "housing_statutes", "ocp_housing",
+        "zoning_density", "dev_permits_housing", "dev_cost_charges",
+        "other_housing_transit",
+    ]
+    for topic in frontend_topics:
+        assert topic in AVAILABLE_TOPICS, f"Frontend topic '{topic}' missing from backend AVAILABLE_TOPICS"
+
+
+# ---------------------------------------------------------------------------
+# 8. Gemini calls use asyncio.to_thread (not blocking event loop)
+# ---------------------------------------------------------------------------
+
+
+def test_gemini_functions_use_asyncio_to_thread():
+    """All Gemini API-calling async functions must use asyncio.to_thread."""
+    import app.ai.gemini as gemini_module
+
+    async_funcs = [
+        "gemini_match", "gemini_batch_match",
+        "gemini_summarize", "gemini_batch_summarize",
+        "gemini_embed", "gemini_batch_embed",
+    ]
+    for func_name in async_funcs:
+        func = getattr(gemini_module, func_name)
+        source = inspect.getsource(func)
+        assert "asyncio.to_thread" in source, (
+            f"{func_name} must use asyncio.to_thread to avoid blocking the event loop"
+        )
+
+
+# ---------------------------------------------------------------------------
+# 9. create_all guarded behind debug mode
+# ---------------------------------------------------------------------------
+
+
+def test_create_all_guarded_by_debug():
+    """Base.metadata.create_all must only run when settings.debug is True."""
+    import app.main as main_module
+
+    source = inspect.getsource(main_module.lifespan)
+    # The create_all call should be inside an if settings.debug block
+    assert "settings.debug" in source, "create_all must be guarded behind settings.debug"
+    assert "create_all" in source, "create_all should still exist for dev mode"

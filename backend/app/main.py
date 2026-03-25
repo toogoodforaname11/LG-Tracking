@@ -20,9 +20,14 @@ from app.api.costs import router as costs_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Create tables on startup (dev mode — use Alembic migrations in prod)
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
+    if settings.debug:
+        # Auto-create tables in dev mode only.  Production must use explicit
+        # migrations (Alembic) so that schema changes are versioned and
+        # reversible.  Running create_all in production silently papers over
+        # migration drift — a schema may appear to work locally but diverge
+        # from the migrated production schema.
+        async with engine.begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
     yield
     await engine.dispose()
 
