@@ -3,7 +3,8 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     app_name: str = "BC Local Government Council Tracker"
-    debug: bool = True
+    debug: bool = False
+    app_base_url: str = ""  # e.g. https://your-domain.com (no trailing slash)
 
     # Neon Postgres
     database_url: str = "postgresql+asyncpg://localhost:5432/hearing_watch"
@@ -22,7 +23,16 @@ class Settings(BaseSettings):
 
     # Resend (email)
     resend_api_key: str = ""
-        resend_from_email: str = "BC Local Government Council Tracker <noreply@bchearingwatch.ca>"
+    resend_from_email: str = "BC Local Government Council Tracker <noreply@bchearingwatch.ca>"
+
+    # CORS — comma-separated list of allowed origins
+    # e.g. "http://localhost:3000,https://yourdomain.com"
+    allowed_origins: str = "http://localhost:3000"
+
+    # Cron secret — protects cron and admin endpoints from unauthorized invocation.
+    # Set to any non-empty string in production. Callers must send:
+    #   X-Cron-Secret: <value>
+    cron_secret: str = ""
 
     # Scraping
     request_delay_seconds: float = 2.0

@@ -7,6 +7,7 @@ from pydantic import BaseModel
 from app.db.database import get_db
 from app.models.municipality import Municipality, Source, ScrapeStatus
 from app.services.seed_registry import seed_registry
+from app.api.dependencies import verify_cron_secret
 
 router = APIRouter()
 
@@ -116,7 +117,6 @@ async def list_sources(
 @router.post("/sources", response_model=SourceOut, status_code=201)
 async def create_source(source: SourceCreate, db: AsyncSession = Depends(get_db)):
     """Add a new source to a municipality."""
-    # Verify municipality exists
     result = await db.execute(
         select(Municipality).where(Municipality.id == source.municipality_id)
     )
@@ -143,18 +143,32 @@ async def update_source_status(
     status: str,
     db: AsyncSession = Depends(get_db),
 ):
-    """Update the scrape status of a source."""
+    """Update the scrape status of a source. Status must be a valid ScrapeStatus value."""
+    # Validate against the enum — accepting arbitrary strings would corrupt the column.
+    valid_statuses = {s.value for s in ScrapeStatus}
+    if status not in valid_statuses:
+        raise HTTPException(
+            status_code=422,
+            detail=f"Invalid status '{status}'. Must be one of: {sorted(valid_statuses)}",
+        )
+
     result = await db.execute(select(Source).where(Source.id == source_id))
     source = result.scalar_one_or_none()
     if not source:
         raise HTTPException(status_code=404, detail="Source not found")
-    source.scrape_status = status
+
+    source.scrape_status = ScrapeStatus(status)
     await db.commit()
     return {"id": source_id, "scrape_status": status}
 
 
-@router.post("/seed", response_model=SeedResult)
+@router.post("/seed", response_model=SeedResult, dependencies=[Depends(verify_cron_secret)])
 async def seed_data(db: AsyncSession = Depends(get_db)):
-    """Seed the registry with CRD municipalities and their known sources."""
+    """Seed the registry with BC municipalities and their known sources.
+
+    Protected by X-Cron-Secret header when CRON_SECRET is configured.
+    This endpoint resets and re-seeds all municipality data and should
+    never be callable by arbitrary external parties.
+    """
     stats = await seed_registry(db)
     return stats

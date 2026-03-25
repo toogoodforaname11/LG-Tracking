@@ -19,6 +19,7 @@ export interface SubscribeRequest {
   municipalities: string[];
   topics: string[];
   keywords: string;
+  immediate_alerts: boolean;
 }
 
 export interface SubscribeResponse {
@@ -36,7 +37,7 @@ export async function subscribe(
   });
 }
 
-// --- Registry (kept for seed endpoint) ---
+// --- Registry ---
 
 export interface Source {
   id: number;
@@ -60,30 +61,11 @@ export interface Municipality {
   sources: Source[];
 }
 
-export async function getMunicipalities(): Promise<{
+export interface MunicipalityListResponse {
   municipalities: Municipality[];
   total: number;
-}> {
+}
+
+export async function getMunicipalities(): Promise<MunicipalityListResponse> {
   return apiFetch("/api/v1/municipalities");
-}
-
-export async function seedRegistry(): Promise<{
-  municipalities_created: number;
-  municipalities_existed: number;
-  sources_created: number;
-}> {
-  return apiFetch("/api/v1/seed", { method: "POST" });
-}
-
-// --- Discovery (kept for backend cron) ---
-
-export async function triggerPoll(municipality?: string): Promise<unknown> {
-  const params = municipality ? `?municipality=${municipality}` : "";
-  return apiFetch(`/api/v1/discovery/poll${params}`, { method: "POST" });
-}
-
-// --- Processing (kept for backend cron) ---
-
-export async function triggerProcessing(): Promise<unknown> {
-  return apiFetch("/api/v1/ai/process", { method: "POST" });
 }

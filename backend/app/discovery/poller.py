@@ -2,7 +2,9 @@
 
 import asyncio
 import hashlib
-from datetime import datetime
+import json
+import logging
+from datetime import datetime, timezone
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
@@ -14,6 +16,8 @@ from app.discovery.civicweb import CivicWebScraper
 from app.discovery.youtube import YouTubeScraper
 from app.config import settings
 from app.services.instant_alerts import send_immediate_alerts_for_documents
+
+logger = logging.getLogger(__name__)
 
 
 # Map item_type strings to DocType enum
@@ -42,23 +46,35 @@ async def poll_source(source: Source, municipality: Municipality) -> list[Discov
             scraper = CivicWebScraper(municipality.short_name, source.url)
             return await scraper.discover()
         elif source.platform == Platform.YOUTUBE:
-            # Extract channel ID from URL or scrape_config
             channel_id = None
             if source.scrape_config:
-                import json
-                config = json.loads(source.scrape_config)
-                channel_id = config.get("channel_id")
+                try:
+                    config = json.loads(source.scrape_config)
+                    channel_id = config.get("channel_id")
+                except json.JSONDecodeError as e:
+                    logger.error(
+                        "Invalid JSON in scrape_config for source %d (%s): %s",
+                        source.id, source.label, e,
+                    )
+                    return []
+
             if not channel_id:
-                # Try to extract from URL like youtube.com/@CityofColwood
-                channel_id = source.url.split("/")[-1]
+                # Fall back to extracting from URL like youtube.com/@CityofColwood
+                channel_id = source.url.rstrip("/").split("/")[-1]
 
             scraper = YouTubeScraper(municipality.short_name, channel_id)
             return await scraper.discover()
         else:
-            print(f"[Poller] Unsupported platform {source.platform} for {municipality.short_name}")
+            logger.warning(
+                "Unsupported platform %s for source %d (%s/%s)",
+                source.platform, source.id, municipality.short_name, source.label,
+            )
             return []
     except Exception as e:
-        print(f"[Poller] Error polling {source.label}: {e}")
+        logger.error(
+            "Error polling source %d (%s/%s): %s",
+            source.id, municipality.short_name, source.label, e,
+        )
         return []
     finally:
         if scraper:
@@ -84,14 +100,12 @@ async def store_discovered_items(
 
         if existing_doc:
             stats["existing"] += 1
-            # Update last_checked timestamp
-            existing_doc.last_checked_at = datetime.utcnow()
+            existing_doc.last_checked_at = datetime.now(timezone.utc)
             continue
 
         # Find or create meeting record
         meeting_id = None
         if item.meeting_date:
-            meeting_title = f"{item.meeting_type or 'regular'} - {item.meeting_date}"
             result = await db.execute(
                 select(Meeting).where(
                     Meeting.municipality_id == municipality.id,
@@ -111,10 +125,8 @@ async def store_discovered_items(
                 await db.flush()
             meeting_id = meeting.id
 
-        # Compute content hash from URL (will be updated with actual content later)
         content_hash = hashlib.sha256(item.url.encode()).hexdigest()
 
-        # For video items, store timestamps and description as raw_text
         raw_text = None
         video_timestamps = None
         video_duration = None
@@ -136,7 +148,7 @@ async def store_discovered_items(
             video_duration=video_duration,
             is_new=True,
             is_processed=False,
-            first_seen_at=datetime.utcnow(),
+            first_seen_at=datetime.now(timezone.utc),
         )
         db.add(doc)
         new_docs.append(doc)
@@ -159,7 +171,6 @@ async def run_discovery(db: AsyncSession, municipality_filter: str | None = None
     Returns:
         Summary dict with results per municipality.
     """
-    # Get all active sources with their municipalities
     query = (
         select(Source, Municipality)
         .join(Municipality, Source.municipality_id == Municipality.id)
@@ -177,36 +188,32 @@ async def run_discovery(db: AsyncSession, municipality_filter: str | None = None
 
     for source, municipality in source_munis:
         muni_name = municipality.short_name
-        print(f"[Poller] Polling {source.label}...")
+        logger.info("Polling %s / %s", muni_name, source.label)
 
-        # Create scrape run record
         scrape_run = ScrapeRun(source_id=source.id)
         db.add(scrape_run)
         await db.flush()
 
         try:
             items = await poll_source(source, municipality)
-
-            # Store items — now also returns new Document objects
             stats, new_docs = await store_discovered_items(db, items, source, municipality)
             all_new_docs.extend(new_docs)
 
-            # Update scrape run
-            scrape_run.finished_at = datetime.utcnow()
+            scrape_run.finished_at = datetime.now(timezone.utc)
             scrape_run.status = "success"
             scrape_run.documents_found = stats["total"]
             scrape_run.new_documents = stats["new"]
 
-            # Update source status
             source.scrape_status = ScrapeStatus.ACTIVE
-            source.last_scraped_at = datetime.utcnow()
+            source.last_scraped_at = datetime.now(timezone.utc)
             source.last_error = None
 
             results[f"{muni_name}/{source.label}"] = stats
-            print(f"  Found {stats['total']} items ({stats['new']} new)")
+            logger.info("  %s/%s: %d items (%d new)", muni_name, source.label, stats["total"], stats["new"])
 
         except Exception as e:
-            scrape_run.finished_at = datetime.utcnow()
+            logger.error("Error during poll of %s/%s: %s", muni_name, source.label, e)
+            scrape_run.finished_at = datetime.now(timezone.utc)
             scrape_run.status = "error"
             scrape_run.error_message = str(e)
 
@@ -214,7 +221,6 @@ async def run_discovery(db: AsyncSession, municipality_filter: str | None = None
             source.scrape_status = ScrapeStatus.BROKEN
 
             results[f"{muni_name}/{source.label}"] = {"error": str(e)}
-            print(f"  Error: {e}")
 
         await db.commit()
 
@@ -226,9 +232,9 @@ async def run_discovery(db: AsyncSession, municipality_filter: str | None = None
         try:
             alert_stats = await send_immediate_alerts_for_documents(db, all_new_docs)
             results["_immediate_alerts"] = alert_stats
-            print(f"[Poller] Immediate alerts: {alert_stats['alerts_sent']} sent")
+            logger.info("Immediate alerts: %d sent", alert_stats["alerts_sent"])
         except Exception as e:
-            print(f"[Poller] Error sending immediate alerts: {e}")
+            logger.error("Error sending immediate alerts: %s", e)
             results["_immediate_alerts"] = {"error": str(e)}
 
     return results

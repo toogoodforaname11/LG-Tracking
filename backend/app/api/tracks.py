@@ -1,5 +1,7 @@
 """User opt-in tracks API — CRUD for tracking preferences."""
 
+from datetime import datetime
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
@@ -44,8 +46,8 @@ class TrackOut(BaseModel):
     keywords: list[str]
     is_active: bool
     notify_email: bool
-    created_at: str
-    updated_at: str
+    created_at: datetime
+    updated_at: datetime
 
     model_config = {"from_attributes": True}
 
@@ -60,7 +62,7 @@ class TrackMatchOut(BaseModel):
     matched_keywords: list[str] | None
     summary: str | None
     verification_status: str | None
-    notified_at: str | None
+    notified_at: datetime | None
 
     model_config = {"from_attributes": True}
 

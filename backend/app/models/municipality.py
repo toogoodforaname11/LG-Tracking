@@ -1,5 +1,5 @@
 import enum
-from datetime import datetime
+from datetime import datetime, timezone
 
 from sqlalchemy import String, Text, Enum, DateTime, Integer, Boolean, ForeignKey, Index
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -55,9 +55,14 @@ class Municipality(Base):
     website_url: Mapped[str | None] = mapped_column(Text)
     population: Mapped[int | None] = mapped_column(Integer)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        default=lambda: datetime.now(timezone.utc),
+    )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
+        DateTime(timezone=True),
+        default=lambda: datetime.now(timezone.utc),
+        onupdate=lambda: datetime.now(timezone.utc),
     )
 
     sources: Mapped[list["Source"]] = relationship(back_populates="municipality", cascade="all")
@@ -81,11 +86,16 @@ class Source(Base):
         Enum(ScrapeStatus), default=ScrapeStatus.PENDING
     )
     scrape_config: Mapped[str | None] = mapped_column(Text)  # JSON config for scraper
-    last_scraped_at: Mapped[datetime | None] = mapped_column(DateTime)
+    last_scraped_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     last_error: Mapped[str | None] = mapped_column(Text)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        default=lambda: datetime.now(timezone.utc),
+    )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
+        DateTime(timezone=True),
+        default=lambda: datetime.now(timezone.utc),
+        onupdate=lambda: datetime.now(timezone.utc),
     )
 
     municipality: Mapped["Municipality"] = relationship(back_populates="sources")
@@ -103,8 +113,11 @@ class ScrapeRun(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     source_id: Mapped[int] = mapped_column(Integer, ForeignKey("sources.id"), nullable=False)
-    started_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
-    finished_at: Mapped[datetime | None] = mapped_column(DateTime)
+    started_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        default=lambda: datetime.now(timezone.utc),
+    )
+    finished_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     status: Mapped[str] = mapped_column(String(20), default="running")  # running, success, error
     error_message: Mapped[str | None] = mapped_column(Text)
     documents_found: Mapped[int] = mapped_column(Integer, default=0)

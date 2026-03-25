@@ -15,6 +15,7 @@ from app.api.alerts import router as alerts_router
 from app.api.search import router as search_router
 from app.api.subscribe import router as subscribe_router
 from app.api.cron import router as cron_router
+from app.api.costs import router as costs_router
 
 
 @asynccontextmanager
@@ -33,9 +34,15 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+# Parse comma-separated allowed origins from config.
+# Starlette's CORSMiddleware does NOT support wildcard patterns (e.g. "https://*.vercel.app")
+# when allow_credentials=True — the origin list must contain exact strings only.
+# Set ALLOWED_ORIGINS env var to a comma-separated list of your production domains.
+allowed_origins = [o.strip() for o in settings.allowed_origins.split(",") if o.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "https://*.vercel.app"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -50,3 +57,4 @@ app.include_router(alerts_router, prefix="/api/v1/alerts", tags=["alerts"])
 app.include_router(search_router, prefix="/api/v1", tags=["search"])
 app.include_router(subscribe_router, prefix="/api/v1", tags=["subscribe"])
 app.include_router(cron_router, prefix="/api/v1/cron", tags=["cron"])
+app.include_router(costs_router, prefix="/api/v1", tags=["costs"])

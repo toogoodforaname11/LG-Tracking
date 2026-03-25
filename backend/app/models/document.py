@@ -1,5 +1,5 @@
 import enum
-from datetime import datetime
+from datetime import datetime, timezone
 
 from sqlalchemy import String, Text, Enum, DateTime, Integer, Boolean, ForeignKey, Index, JSON
 from sqlalchemy.orm import Mapped, mapped_column
@@ -34,10 +34,13 @@ class Meeting(Base):
     )
     title: Mapped[str] = mapped_column(String(300), nullable=False)
     meeting_date: Mapped[str | None] = mapped_column(String(10))  # YYYY-MM-DD
-    meeting_time: Mapped[str | None] = mapped_column(String(5))  # HH:MM
+    meeting_time: Mapped[str | None] = mapped_column(String(5))   # HH:MM
     meeting_type: Mapped[MeetingType | None] = mapped_column(Enum(MeetingType))
     source_url: Mapped[str | None] = mapped_column(Text)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        default=lambda: datetime.now(timezone.utc),
+    )
 
     __table_args__ = (
         Index("ix_meetings_muni_date", "municipality_id", "meeting_date"),
@@ -58,12 +61,15 @@ class Document(Base):
     url: Mapped[str] = mapped_column(Text, nullable=False)
     content_hash: Mapped[str | None] = mapped_column(String(64))  # SHA-256
     raw_text: Mapped[str | None] = mapped_column(Text)  # Extracted text for AI processing
-    video_timestamps: Mapped[list | None] = mapped_column(JSON)  # [{t: "0:15:30", label: "Public Hearing - OCP"}, ...]
+    video_timestamps: Mapped[list | None] = mapped_column(JSON)  # [{t: "0:15:30", label: "..."}, ...]
     video_duration: Mapped[str | None] = mapped_column(String(10))  # HH:MM:SS
     is_new: Mapped[bool] = mapped_column(Boolean, default=True)
     is_processed: Mapped[bool] = mapped_column(Boolean, default=False)  # AI processing done
-    first_seen_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
-    last_checked_at: Mapped[datetime | None] = mapped_column(DateTime)
+    first_seen_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        default=lambda: datetime.now(timezone.utc),
+    )
+    last_checked_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
     __table_args__ = (
         Index("ix_documents_muni_url", "municipality_id", "url", unique=True),

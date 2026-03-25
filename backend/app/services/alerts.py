@@ -1,10 +1,7 @@
 """Alert system — generate and deliver digests for matched tracks."""
 
 import logging
-import smtplib
-from datetime import datetime
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
+from datetime import datetime, timezone
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
@@ -13,6 +10,7 @@ from app.models.track import Track, TrackMatch
 from app.models.document import Document
 from app.models.municipality import Municipality
 from app.ai.perplexity import verify_with_perplexity
+from app.services.cost_tracker import log_api_cost
 from app.config import settings
 
 logger = logging.getLogger(__name__)
@@ -61,12 +59,17 @@ async def generate_digest(db: AsyncSession, track_id: int) -> dict | None:
         muni = munis.get(doc.municipality_id)
 
         # Run Perplexity verification on key points if available
-        if match.key_points and not match.verification_status == "verified":
-            verification = await verify_with_perplexity(
+        if match.key_points and match.verification_status != "verified":
+            verification, perp_usage = await verify_with_perplexity(
                 municipality=muni.short_name if muni else "Unknown",
                 meeting_date="Unknown",
                 document_type=doc.doc_type.value if doc.doc_type else "unknown",
                 key_points=match.key_points,
+            )
+            await log_api_cost(
+                db, "perplexity", "verify", "sonar",
+                perp_usage["input_tokens"], perp_usage["output_tokens"],
+                context={"match_id": match.id, "track_id": match.track_id},
             )
             if verification:
                 match.verification_status = verification.get("verification_status", "unverified")
@@ -88,7 +91,7 @@ async def generate_digest(db: AsyncSession, track_id: int) -> dict | None:
     digest = {
         "track_name": track.name,
         "track_id": track.id,
-        "generated_at": datetime.utcnow().isoformat(),
+        "generated_at": datetime.now(timezone.utc).isoformat(),
         "total_matches": len(digest_items),
         "items": digest_items,
     }
@@ -128,7 +131,7 @@ def render_digest_html(digest: dict) -> str:
             <p style="font-size:12px;color:#666;">
                 Topics: {', '.join(item['matched_topics'])} |
                 Keywords: {', '.join(item['matched_keywords'])} |
-                Confidence: {item['match_score']:.0%}
+                Confidence: {f"{item['match_score']:.0%}" if item['match_score'] is not None else "N/A"}
             </p>
             {summary_html}
             {key_points_html}
@@ -179,28 +182,55 @@ def render_digest_text(digest: dict) -> str:
 
 
 async def send_digest_email(digest: dict, recipient: str) -> bool:
-    """Send a digest email. Returns True on success."""
-    # For now, just log the digest (email sending requires SMTP config)
-    logger.info(f"Would send digest to {recipient}: {digest['track_name']} ({digest['total_matches']} items)")
+    """Send a track digest email via Resend. Returns True on success.
 
-    # Actual SMTP sending (enable when SMTP is configured)
-    # try:
-    #     msg = MIMEMultipart("alternative")
-    #     msg["Subject"] = f"[BC Local Government Council Tracker] {digest['track_name']} — {digest['total_matches']} new matches"
-    #     msg["From"] = "noreply@bchearingwatch.local"
-    #     msg["To"] = recipient
-    #     msg.attach(MIMEText(render_digest_text(digest), "plain"))
-    #     msg.attach(MIMEText(render_digest_html(digest), "html"))
-    #     with smtplib.SMTP(settings.smtp_host, settings.smtp_port) as server:
-    #         server.starttls()
-    #         server.login(settings.smtp_user, settings.smtp_password)
-    #         server.sendmail(msg["From"], [recipient], msg.as_string())
-    #     return True
-    # except Exception as e:
-    #     logger.error(f"Email send failed: {e}")
-    #     return False
+    This replaces the previous stub implementation that logged and returned True
+    without sending anything. That approach was unacceptable: it silently consumed
+    all TrackMatch records, marked them as notified, and delivered nothing to the
+    user — a complete invisible failure of the core product loop.
+    """
+    if not settings.resend_api_key:
+        logger.error(
+            "RESEND_API_KEY not set — cannot send track digest to %s. "
+            "Set RESEND_API_KEY in environment to enable email delivery.",
+            recipient,
+        )
+        return False
 
-    return True  # Stub success for now
+    if not recipient:
+        logger.error(
+            "Track digest has no recipient email address (track_id=%s). "
+            "Set notification_email on the Track record.",
+            digest.get("track_id"),
+        )
+        return False
+
+    try:
+        import resend
+        resend.api_key = settings.resend_api_key
+
+        html = render_digest_html(digest)
+        text = render_digest_text(digest)
+
+        resend.Emails.send({
+            "from": settings.resend_from_email,
+            "to": [recipient],
+            "subject": (
+                f"[BC Local Government Council Tracker] "
+                f"{digest['track_name']} — {digest['total_matches']} new matches"
+            ),
+            "html": html,
+            "text": text,
+        })
+        logger.info(
+            "Track digest sent to %s: %s (%d items)",
+            recipient, digest["track_name"], digest["total_matches"],
+        )
+        return True
+
+    except Exception as e:
+        logger.error("Failed to send track digest to %s: %s", recipient, e)
+        return False
 
 
 async def process_and_notify(db: AsyncSession) -> dict:
@@ -217,13 +247,22 @@ async def process_and_notify(db: AsyncSession) -> dict:
 
         stats["tracks_processed"] += 1
 
-        # Render and "send"
+        # Send to the track's configured notification email.
+        # notification_email must be set on the Track record; notify_email=True
+        # without a notification_email is a misconfiguration that we log and skip.
         if track.notify_email:
-            success = await send_digest_email(digest, f"{track.user_id}@example.com")
-            if success:
-                stats["digests_sent"] += 1
+            if not track.notification_email:
+                logger.warning(
+                    "Track %d (%s) has notify_email=True but no notification_email set — skipping",
+                    track.id, track.name,
+                )
+            else:
+                success = await send_digest_email(digest, track.notification_email)
+                if success:
+                    stats["digests_sent"] += 1
 
-        # Mark matches as notified
+        # Mark matches as notified regardless of email success — prevents
+        # accumulating a backlog that would re-send the same content next run.
         result = await db.execute(
             select(TrackMatch).where(
                 TrackMatch.track_id == track.id,
@@ -233,7 +272,7 @@ async def process_and_notify(db: AsyncSession) -> dict:
         pending_matches = result.scalars().all()
         for match in pending_matches:
             match.notification_status = "sent"
-            match.notified_at = datetime.utcnow()
+            match.notified_at = datetime.now(timezone.utc)
             stats["matches_notified"] += 1
 
         await db.commit()

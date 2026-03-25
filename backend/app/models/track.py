@@ -5,7 +5,7 @@ for specific municipalities. Only matched items get full AI processing.
 """
 
 import enum
-from datetime import datetime
+from datetime import datetime, timezone
 
 from sqlalchemy import String, Text, DateTime, Integer, Boolean, ForeignKey, Index, JSON
 from sqlalchemy.orm import Mapped, mapped_column
@@ -37,6 +37,9 @@ class Track(Base):
     user_id: Mapped[str] = mapped_column(String(100), nullable=False)  # demo-gov001 for now
     name: Mapped[str] = mapped_column(String(200), nullable=False)  # User-chosen label
 
+    # Email address for digest notifications. Required when notify_email=True.
+    notification_email: Mapped[str | None] = mapped_column(String(320))
+
     # What to track
     municipality_ids: Mapped[list] = mapped_column(JSON, nullable=False)  # [1, 3, 5]
     topics: Mapped[list] = mapped_column(JSON, nullable=False, default=[])  # ["rezoning", "ocp_updates"]
@@ -47,9 +50,14 @@ class Track(Base):
     notify_email: Mapped[bool] = mapped_column(Boolean, default=True)
 
     # Timestamps
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        default=lambda: datetime.now(timezone.utc),
+    )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
+        DateTime(timezone=True),
+        default=lambda: datetime.now(timezone.utc),
+        onupdate=lambda: datetime.now(timezone.utc),
     )
 
     __table_args__ = (Index("ix_tracks_user", "user_id"),)
@@ -77,10 +85,13 @@ class TrackMatch(Base):
     verification_notes: Mapped[str | None] = mapped_column(Text)  # Perplexity notes
 
     # Notification
-    notified_at: Mapped[datetime | None] = mapped_column(DateTime)
+    notified_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     notification_status: Mapped[str | None] = mapped_column(String(20))  # sent, failed, pending
 
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        default=lambda: datetime.now(timezone.utc),
+    )
 
     __table_args__ = (
         Index("ix_track_matches_track", "track_id"),

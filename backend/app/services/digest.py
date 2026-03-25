@@ -1,7 +1,8 @@
 """Weekly digest service — run discovery, process, and email all active subscribers."""
 
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
+from urllib.parse import quote
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
@@ -9,7 +10,6 @@ from sqlalchemy import select
 from app.models.subscriber import Subscriber
 from app.models.document import Document
 from app.models.municipality import Municipality
-from app.models.track import TrackMatch
 from app.config import settings
 
 logger = logging.getLogger(__name__)
@@ -96,7 +96,7 @@ def render_digest_email(
     <body style="font-family:system-ui,-apple-system,sans-serif;max-width:600px;margin:0 auto;padding:20px;color:#1a1a1a;background:#f9fafb;">
         <div style="background:white;border-radius:12px;padding:24px;border:1px solid #e5e7eb;">
             <div style="border-bottom:3px solid #1e40af;padding-bottom:16px;margin-bottom:24px;">
-                <h1 style="color:#1e40af;margin:0;font-size:24px;">BC Hearing Watch</h1>
+                <h1 style="color:#1e40af;margin:0;font-size:24px;">BC Local Government Council Tracker</h1>
                 <p style="color:#6b7280;margin:4px 0 0;font-size:14px;">Your Weekly Municipal Digest</p>
             </div>
 
@@ -134,7 +134,7 @@ async def get_recent_documents(
     since_days: int = 7,
 ) -> list[tuple[Document, Municipality]]:
     """Get documents from the past N days for given municipalities."""
-    cutoff = datetime.utcnow() - timedelta(days=since_days)
+    cutoff = datetime.now(timezone.utc) - timedelta(days=since_days)
 
     # Get municipality IDs by short_name
     result = await db.execute(
@@ -165,19 +165,128 @@ def build_digest_items(
 ) -> list[dict]:
     """Build digest items from documents, filtering by subscriber preferences.
 
-    Uses simple keyword matching for the prototype.
-    Gemini matching can be integrated later for better relevance.
+    Uses keyword matching aligned to AVAILABLE_TOPICS from the track model.
+    Each topic maps to the keywords likely to appear in matching documents.
     """
     items = []
     kw_list = [k.strip().lower() for k in (subscriber_keywords or "").split(",") if k.strip()]
 
-    # Topic → keyword mapping for basic matching
-    topic_keywords = {
-        "ocp_updates": ["ocp", "official community plan", "community plan", "land use"],
-        "rezoning_housing": ["rezoning", "rezone", "housing", "density", "zoning", "subdivision"],
-        "environment": ["environment", "climate", "tree", "watershed", "stormwater", "green"],
-        "development_permits": ["development permit", "building permit", "variance", "development application"],
-        "other": [],  # matches everything not matched above
+    # Topic → keyword mapping.
+    #
+    # Keys MUST match the topic IDs sent by the frontend (page.tsx AVAILABLE_TOPICS).
+    # A mismatch causes every subscriber topic to silently match zero documents.
+    #
+    # Keyword strategy: BC councils rarely name legislation in full. Agendas and
+    # minutes use bylaw numbers, bill numbers, acronyms, and staff-report shorthand.
+    # Each list captures the realistic surface forms a document will contain.
+    #
+    # Provincial legislation reference (BC):
+    #   Bill 44 → Housing Statutes (Residential Development) Amendment Act — SSMUH
+    #   Bill 47 → Housing Statutes (Transit-Oriented Areas) Amendment Act — TOA
+    #   Bill 46 → Housing Statutes (Housing Needs Reports) Amendment Act
+    #   Bill 35 → Short-Term Rental Accommodations Act
+    topic_keywords: dict[str, list[str]] = {
+        # Transit Oriented Development (broad)
+        "tod": [
+            "transit-oriented development", "transit oriented development",
+            "tod", "transit hub", "transit node",
+        ],
+        # Transit Oriented Areas — BC Bill 47 station-area zones
+        "toa_impl": [
+            "transit-oriented area", "transit oriented area",
+            "toa", "bill 47",
+            "station area", "station precinct", "skytrain area",
+            "frequent transit", "frequent transit network", "ftn",
+            "400 metre", "400m", "800 metre", "800m",
+            "bus exchange", "rapid transit station",
+        ],
+        # Local area / neighbourhood plans
+        "area_plans": [
+            "area plan", "neighbourhood plan", "local area plan",
+            "community plan amendment", "area structure plan",
+            "neighbourhood planning", "district plan",
+        ],
+        # Bus Rapid Transit / bus priority
+        "brt": [
+            "bus rapid transit", "brt", "bus priority",
+            "rapid bus", "b-line", "bus lane", "queue jump",
+            "bus exchange", "transit corridor",
+        ],
+        # Multimodal / active transportation
+        "multimodal": [
+            "multimodal", "active transportation", "cycling infrastructure",
+            "bike lane", "cycle track", "cycling network",
+            "pedestrian", "walkability", "greenway", "shared path",
+            "complete streets", "sidewalk improvement",
+        ],
+        # Provincial housing targets / Housing Needs Reports (Bill 46)
+        "provincial_targets": [
+            "housing needs report", "housing needs assessment",
+            "provincial housing target", "housing target",
+            "hnr", "bill 46", "housing supply",
+            "housing action plan", "housing strategy",
+        ],
+        # Small-Scale Multi-Unit Housing — BC Bill 44
+        "ssmuh": [
+            "small-scale multi-unit", "ssmuh",
+            "bill 44",
+            "duplex", "triplex", "fourplex", "multiplex", "sixplex",
+            "missing middle", "gentle density",
+            "secondary suite", "garden suite", "carriage house",
+            "infill housing", "laneway home",
+        ],
+        # Housing Statutes Amendment Act / Related Bylaws
+        # Bill 44 (2023): SSMUH — small-scale multi-unit housing
+        # Bill 46 (2023): Development financing, amenity cost charges
+        # Bill 47 (2023): Transit-oriented areas, density near rapid transit
+        # Bill 16 (2024): Zoning bylaws, development approvals, tenant protection
+        # Bill 25 (2025): SSMUH alignment, short-term rental rules, parking limits
+        "housing_statutes": [
+            "housing statutes", "housing statute", "housing statutes amendment",
+            "bill 44", "bill 46", "bill 47", "bill 16", "bill 25",
+            "provincial housing legislation", "housing legislation",
+            "housing amendment", "amenity cost charge",
+            "parking requirement", "excessive parking",
+            "development approval", "tenant protection",
+            "residential infill", "as-of-right", "as of right",
+        ],
+        # OCP updates (any official community plan work)
+        "ocp_housing": [
+            "official community plan", "ocp",
+            "ocp amendment", "community plan amendment",
+            "land use designation", "future land use",
+            "ocp bylaw", "plan amendment",
+        ],
+        # Zoning / rezoning for housing density
+        "zoning_density": [
+            "rezoning", "rezone", "zoning bylaw amendment",
+            "zoning amendment", "density bonus",
+            "floor area ratio", "far", "floor space ratio", "fsr",
+            "height increase", "density increase",
+            "comprehensive development zone", "cd zone",
+        ],
+        # Development permits affecting housing supply
+        "dev_permits_housing": [
+            "development permit", "development variance permit", "dvp",
+            "building permit", "construction permit",
+            "development application", "form and character",
+            "amenity contribution",
+        ],
+        # Development Cost Charges / affordability incentives
+        "dev_cost_charges": [
+            "development cost charge", "dcc", "development cost levy",
+            "community amenity contribution", "cac",
+            "amenity contribution", "density bonusing",
+            "affordable housing reserve", "affordability incentive",
+            "waiver of fees", "fee waiver",
+        ],
+        # Broad housing/transit bucket — catches anything not above
+        "other_housing_transit": [
+            "housing", "affordable housing", "rental housing",
+            "market rental", "below-market", "below market",
+            "transit", "bus route", "skytrain", "rapid transit",
+            "transportation plan", "mobility",
+        ],
     }
 
     for doc, muni in docs_with_munis:
@@ -187,23 +296,19 @@ def build_digest_items(
 
         matched_topics = []
         for topic in subscriber_topics:
-            if topic == "other":
-                matched_topics.append("other")
-                continue
             topic_kws = topic_keywords.get(topic, [])
-            if any(kw in searchable for kw in topic_kws):
+            if topic_kws and any(kw in searchable for kw in topic_kws):
                 matched_topics.append(topic)
 
         matched_keywords = [kw for kw in kw_list if kw in searchable]
 
-        # Include if any topic or keyword matched, or if "other" is selected
         if matched_topics or matched_keywords:
             items.append({
                 "municipality": muni.short_name,
                 "doc_type": doc.doc_type.value if doc.doc_type else "document",
                 "title": doc.title or "Untitled",
                 "url": doc.url or "#",
-                "summary": None,  # Gemini summary can be added later
+                "summary": None,
                 "key_points": None,
                 "matched_topics": matched_topics,
                 "matched_keywords": matched_keywords,
@@ -230,7 +335,7 @@ def send_digest_via_resend(
         resend.Emails.send({
             "from": settings.resend_from_email,
             "to": [to_email],
-            "subject": f"Your BC Hearing Watch Digest \u2013 {date_str}",
+            "subject": f"Your BC Local Government Council Tracker Digest \u2013 {date_str}",
             "html": html,
         })
         logger.info(f"Digest email sent to {to_email}")
@@ -240,7 +345,7 @@ def send_digest_via_resend(
         return False
 
 
-async def run_weekly_digest(db: AsyncSession, base_url: str = "") -> dict:
+async def run_weekly_digest(db: AsyncSession) -> dict:
     """Main weekly digest job: for each active subscriber, gather docs, match, and email.
 
     Returns stats dict.
@@ -262,7 +367,7 @@ async def run_weekly_digest(db: AsyncSession, base_url: str = "") -> dict:
         logger.info("No active subscribers — skipping digest")
         return stats
 
-    date_str = datetime.utcnow().strftime("%B %d, %Y")
+    date_str = datetime.now(timezone.utc).strftime("%B %d, %Y")
 
     for subscriber in subscribers:
         stats["subscribers_processed"] += 1
@@ -280,8 +385,11 @@ async def run_weekly_digest(db: AsyncSession, base_url: str = "") -> dict:
         items = build_digest_items(docs_with_munis, topics, subscriber.keywords)
         stats["total_items"] += len(items)
 
-        # Build unsubscribe URL
-        unsubscribe_url = f"{base_url}/api/v1/unsubscribe?email={subscriber.email}"
+        # Build token-based unsubscribe URL
+        unsubscribe_url = (
+            f"{settings.app_base_url}/api/v1/unsubscribe"
+            f"?token={quote(subscriber.unsubscribe_token)}"
+        )
 
         # Render email
         html = render_digest_email(

@@ -8,6 +8,7 @@ Portal structure:
   - /filepro/documents/ — document search
 """
 
+import logging
 import re
 from datetime import datetime
 from urllib.parse import urljoin, urlparse
@@ -15,6 +16,8 @@ from urllib.parse import urljoin, urlparse
 from bs4 import BeautifulSoup
 
 from app.discovery.base import BaseScraper, DiscoveredItem
+
+logger = logging.getLogger(__name__)
 
 
 # CivicWeb meeting type keywords for classification
@@ -83,8 +86,7 @@ class CivicWebScraper(BaseScraper):
             soup = BeautifulSoup(html, "lxml")
             items = self._parse_meeting_list(soup, url)
         except Exception as e:
-            # Log and try alternative URL patterns
-            print(f"[CivicWeb] MeetingSchedule failed for {self.municipality}: {e}")
+            logger.warning("MeetingSchedule failed for %s: %s", self.municipality, e)
 
         return items
 
@@ -115,7 +117,7 @@ class CivicWebScraper(BaseScraper):
                     continue
 
         except Exception as e:
-            print(f"[CivicWeb] MeetingTypeList failed for {self.municipality}: {e}")
+            logger.warning("MeetingTypeList failed for %s: %s", self.municipality, e)
 
         return items
 
@@ -249,5 +251,5 @@ class CivicWebScraper(BaseScraper):
             soup = BeautifulSoup(html, "lxml")
             return self._parse_meeting_list(soup, meeting_url)
         except Exception as e:
-            print(f"[CivicWeb] Failed to scrape meeting page {meeting_url}: {e}")
+            logger.error("Failed to scrape meeting page %s: %s", meeting_url, e)
             return []
