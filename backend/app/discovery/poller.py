@@ -14,6 +14,7 @@ from app.models.document import Document, Meeting, DocType, MeetingType
 from app.discovery.base import BaseScraper, DiscoveredItem
 from app.discovery.civicweb import CivicWebScraper
 from app.discovery.granicus import GranicusScraper
+from app.discovery.escribe import EScribeScraper
 from app.discovery.youtube import YouTubeScraper
 from app.discovery.custom_saanich import SaanichScraper
 from app.discovery.custom_sidney import SidneyScraper
@@ -273,6 +274,9 @@ async def poll_source(source: Source, municipality: Municipality) -> list[Discov
             return await scraper.discover()
         elif source.platform == Platform.GRANICUS:
             scraper = GranicusScraper(municipality.short_name, source.url)
+            return await scraper.discover()
+        elif source.platform == Platform.ESCRIBE:
+            scraper = EScribeScraper(municipality.short_name, source.url)
             return await scraper.discover()
         elif source.platform == Platform.CUSTOM:
             scraper = _get_custom_scraper(municipality.short_name, source.url)
