@@ -242,7 +242,7 @@ def keyword_fallback_match(
         ],
         "brt": [
             "bus rapid transit", "brt", "bus priority", "bus lane",
-            "transit priority", "rapid bus",
+            "transit priority", "rapid bus", "rapid transit",
         ],
         "multimodal": [
             "multimodal", "multi-modal", "active transportation", "cycling",
@@ -278,11 +278,8 @@ def keyword_fallback_match(
             "density bonus", "affordability incentive", "fee waiver",
             "amenity contribution",
         ],
-        "other_housing_transit": [
-            "housing", "affordable housing", "rental", "housing strategy",
-            "housing bylaw", "housing policy", "residential", "shelter",
-            "supportive housing", "social housing", "housing agreement",
-            "transit", "transportation",
+        "transportation_plan": [
+            "transportation plan", "transportation study",
         ],
     }
 

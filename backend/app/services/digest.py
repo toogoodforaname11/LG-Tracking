@@ -210,7 +210,7 @@ def build_digest_items(
         "brt": [
             "bus rapid transit", "brt", "bus priority",
             "rapid bus", "b-line", "bus lane", "queue jump",
-            "bus exchange", "transit corridor",
+            "bus exchange", "transit corridor", "rapid transit",
         ],
         # Multimodal / active transportation
         "multimodal": [
@@ -280,12 +280,9 @@ def build_digest_items(
             "affordable housing reserve", "affordability incentive",
             "waiver of fees", "fee waiver",
         ],
-        # Broad housing/transit bucket — catches anything not above
-        "other_housing_transit": [
-            "housing", "affordable housing", "rental housing",
-            "market rental", "below-market", "below market",
-            "transit", "bus route", "skytrain", "rapid transit",
-            "transportation plan", "mobility",
+        # Transportation plan or study
+        "transportation_plan": [
+            "transportation plan", "transportation study",
         ],
     }
 

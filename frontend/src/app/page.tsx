@@ -18,7 +18,7 @@ const AVAILABLE_TOPICS = [
   { id: "zoning_density", label: "Zoning / Rezoning for Housing Density" },
   { id: "dev_permits_housing", label: "Development Permits Affecting Housing Supply" },
   { id: "dev_cost_charges", label: "Development Cost Charges or Affordability Incentives" },
-  { id: "other_housing_transit", label: "Other Housing or Transit-Related Bylaws / Legislation" },
+  { id: "transportation_plan", label: "Transportation Plan or Transportation Study" },
 ] as const;
 
 // Keywords searched per topic — mirrors backend build_digest_items topic_keywords exactly
@@ -42,7 +42,7 @@ const TOPIC_KEYWORDS: Record<string, string[]> = {
   brt: [
     "bus rapid transit", "BRT", "bus priority",
     "rapid bus", "B-Line", "bus lane", "queue jump",
-    "bus exchange", "transit corridor",
+    "bus exchange", "transit corridor", "rapid transit",
   ],
   multimodal: [
     "multimodal", "active transportation", "cycling infrastructure",
@@ -95,11 +95,8 @@ const TOPIC_KEYWORDS: Record<string, string[]> = {
     "affordable housing reserve", "affordability incentive",
     "waiver of fees", "fee waiver",
   ],
-  other_housing_transit: [
-    "housing", "affordable housing", "rental housing",
-    "market rental", "below-market",
-    "transit", "bus route", "SkyTrain", "rapid transit",
-    "transportation plan", "mobility",
+  transportation_plan: [
+    "transportation plan", "transportation study",
   ],
 };
 
