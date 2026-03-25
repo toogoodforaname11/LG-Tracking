@@ -34,9 +34,15 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+# Parse comma-separated allowed origins from config.
+# Starlette's CORSMiddleware does NOT support wildcard patterns (e.g. "https://*.vercel.app")
+# when allow_credentials=True — the origin list must contain exact strings only.
+# Set ALLOWED_ORIGINS env var to a comma-separated list of your production domains.
+allowed_origins = [o.strip() for o in settings.allowed_origins.split(",") if o.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "https://*.vercel.app"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

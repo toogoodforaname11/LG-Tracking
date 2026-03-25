@@ -1,7 +1,8 @@
 """Weekly digest service — run discovery, process, and email all active subscribers."""
 
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
+from urllib.parse import quote
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
@@ -9,7 +10,6 @@ from sqlalchemy import select
 from app.models.subscriber import Subscriber
 from app.models.document import Document
 from app.models.municipality import Municipality
-from app.models.track import TrackMatch
 from app.config import settings
 
 logger = logging.getLogger(__name__)
@@ -96,7 +96,7 @@ def render_digest_email(
     <body style="font-family:system-ui,-apple-system,sans-serif;max-width:600px;margin:0 auto;padding:20px;color:#1a1a1a;background:#f9fafb;">
         <div style="background:white;border-radius:12px;padding:24px;border:1px solid #e5e7eb;">
             <div style="border-bottom:3px solid #1e40af;padding-bottom:16px;margin-bottom:24px;">
-                <h1 style="color:#1e40af;margin:0;font-size:24px;">BC Hearing Watch</h1>
+                <h1 style="color:#1e40af;margin:0;font-size:24px;">BC Local Government Council Tracker</h1>
                 <p style="color:#6b7280;margin:4px 0 0;font-size:14px;">Your Weekly Municipal Digest</p>
             </div>
 
@@ -134,7 +134,7 @@ async def get_recent_documents(
     since_days: int = 7,
 ) -> list[tuple[Document, Municipality]]:
     """Get documents from the past N days for given municipalities."""
-    cutoff = datetime.utcnow() - timedelta(days=since_days)
+    cutoff = datetime.now(timezone.utc) - timedelta(days=since_days)
 
     # Get municipality IDs by short_name
     result = await db.execute(
@@ -165,19 +165,38 @@ def build_digest_items(
 ) -> list[dict]:
     """Build digest items from documents, filtering by subscriber preferences.
 
-    Uses simple keyword matching for the prototype.
-    Gemini matching can be integrated later for better relevance.
+    Uses keyword matching aligned to AVAILABLE_TOPICS from the track model.
+    Each topic maps to the keywords likely to appear in matching documents.
     """
     items = []
     kw_list = [k.strip().lower() for k in (subscriber_keywords or "").split(",") if k.strip()]
 
-    # Topic → keyword mapping for basic matching
-    topic_keywords = {
+    # Topic → keyword mapping. Keys must match AVAILABLE_TOPICS in models/track.py exactly.
+    topic_keywords: dict[str, list[str]] = {
         "ocp_updates": ["ocp", "official community plan", "community plan", "land use"],
-        "rezoning_housing": ["rezoning", "rezone", "housing", "density", "zoning", "subdivision"],
+        "rezoning": ["rezoning", "rezone", "zoning amendment", "zoning change", "zone"],
+        "development_permits": [
+            "development permit", "building permit", "variance",
+            "development application", "dp application",
+        ],
+        "public_hearings": ["public hearing"],
+        "bylaws": ["bylaw", "by-law"],
+        "budget": ["budget", "financial plan", "levy", "taxation", "five-year"],
         "environment": ["environment", "climate", "tree", "watershed", "stormwater", "green"],
-        "development_permits": ["development permit", "building permit", "variance", "development application"],
-        "other": [],  # matches everything not matched above
+        "transportation": [
+            "road", "transit", "cycling", "pedestrian", "traffic",
+            "highway", "sidewalk", "active transportation",
+        ],
+        "housing": [
+            "housing", "affordable housing", "rental", "density",
+            "subdivision", "secondary suite", "laneway",
+        ],
+        "parks_recreation": [
+            "park", "trail", "recreation", "community centre",
+            "community center", "playground", "sports field",
+        ],
+        "utilities": ["water", "sewer", "stormwater utility", "solid waste", "sanitary"],
+        "governance": ["election", "council procedure", "boundary", "amalgamation", "bylaw"],
     }
 
     for doc, muni in docs_with_munis:
@@ -187,23 +206,19 @@ def build_digest_items(
 
         matched_topics = []
         for topic in subscriber_topics:
-            if topic == "other":
-                matched_topics.append("other")
-                continue
             topic_kws = topic_keywords.get(topic, [])
-            if any(kw in searchable for kw in topic_kws):
+            if topic_kws and any(kw in searchable for kw in topic_kws):
                 matched_topics.append(topic)
 
         matched_keywords = [kw for kw in kw_list if kw in searchable]
 
-        # Include if any topic or keyword matched, or if "other" is selected
         if matched_topics or matched_keywords:
             items.append({
                 "municipality": muni.short_name,
                 "doc_type": doc.doc_type.value if doc.doc_type else "document",
                 "title": doc.title or "Untitled",
                 "url": doc.url or "#",
-                "summary": None,  # Gemini summary can be added later
+                "summary": None,
                 "key_points": None,
                 "matched_topics": matched_topics,
                 "matched_keywords": matched_keywords,
@@ -230,7 +245,7 @@ def send_digest_via_resend(
         resend.Emails.send({
             "from": settings.resend_from_email,
             "to": [to_email],
-            "subject": f"Your BC Hearing Watch Digest \u2013 {date_str}",
+            "subject": f"Your BC Local Government Council Tracker Digest \u2013 {date_str}",
             "html": html,
         })
         logger.info(f"Digest email sent to {to_email}")
@@ -240,7 +255,7 @@ def send_digest_via_resend(
         return False
 
 
-async def run_weekly_digest(db: AsyncSession, base_url: str = "") -> dict:
+async def run_weekly_digest(db: AsyncSession) -> dict:
     """Main weekly digest job: for each active subscriber, gather docs, match, and email.
 
     Returns stats dict.
@@ -262,7 +277,7 @@ async def run_weekly_digest(db: AsyncSession, base_url: str = "") -> dict:
         logger.info("No active subscribers — skipping digest")
         return stats
 
-    date_str = datetime.utcnow().strftime("%B %d, %Y")
+    date_str = datetime.now(timezone.utc).strftime("%B %d, %Y")
 
     for subscriber in subscribers:
         stats["subscribers_processed"] += 1
@@ -280,8 +295,11 @@ async def run_weekly_digest(db: AsyncSession, base_url: str = "") -> dict:
         items = build_digest_items(docs_with_munis, topics, subscriber.keywords)
         stats["total_items"] += len(items)
 
-        # Build unsubscribe URL
-        unsubscribe_url = f"{base_url}/api/v1/unsubscribe?email={subscriber.email}"
+        # Build token-based unsubscribe URL
+        unsubscribe_url = (
+            f"{settings.app_base_url}/api/v1/unsubscribe"
+            f"?token={quote(subscriber.unsubscribe_token)}"
+        )
 
         # Render email
         html = render_digest_email(

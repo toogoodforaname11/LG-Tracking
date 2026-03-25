@@ -4,6 +4,7 @@ Uses YouTube RSS feed for discovery + oEmbed/page scrape for timestamps.
 Timestamps are extracted from video descriptions (chapter markers like "0:15:30 Public Hearing").
 """
 
+import logging
 import re
 from datetime import datetime
 from xml.etree import ElementTree
@@ -11,6 +12,8 @@ from xml.etree import ElementTree
 import httpx
 
 from app.discovery.base import BaseScraper, DiscoveredItem
+
+logger = logging.getLogger(__name__)
 
 
 # YouTube RSS feed URL pattern (no API key needed)
@@ -135,7 +138,8 @@ async def fetch_video_description(video_id: str) -> str | None:
 
             return meta_desc or None
 
-    except Exception:
+    except Exception as e:
+        logger.debug("Failed to fetch description for video %s: %s", video_id, e)
         return None
 
 
@@ -157,8 +161,8 @@ async def fetch_video_duration(video_id: str) -> str | None:
                 if hours > 0:
                     return f"{hours}:{minutes:02d}:{seconds:02d}"
                 return f"{minutes}:{seconds:02d}"
-    except Exception:
-        pass
+    except Exception as e:
+        logger.debug("Failed to fetch duration for video %s: %s", video_id, e)
     return None
 
 
@@ -182,7 +186,7 @@ class YouTubeScraper(BaseScraper):
             xml_text = await self.fetch(self.feed_url)
             items = await self._parse_feed(xml_text)
         except Exception as e:
-            print(f"[YouTube] Feed fetch failed for {self.municipality}: {e}")
+            logger.error("YouTube feed fetch failed for %s: %s", self.municipality, e)
 
         return items
 
@@ -198,7 +202,7 @@ class YouTubeScraper(BaseScraper):
         try:
             root = ElementTree.fromstring(xml_text)
         except ElementTree.ParseError as e:
-            print(f"[YouTube] XML parse error for {self.municipality}: {e}")
+            logger.error("YouTube XML parse error for %s: %s", self.municipality, e)
             return items
 
         for entry in root.findall("atom:entry", ns):

@@ -1,7 +1,7 @@
 """Instant alert service — send immediate email alerts when new matching items are detected."""
 
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 from urllib.parse import quote
 
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -69,7 +69,7 @@ def render_alert_email(
     <body style="font-family:system-ui,-apple-system,sans-serif;max-width:600px;margin:0 auto;padding:20px;color:#1a1a1a;background:#f9fafb;">
         <div style="background:white;border-radius:12px;padding:24px;border:1px solid #e5e7eb;">
             <div style="border-bottom:3px solid #1e40af;padding-bottom:16px;margin-bottom:24px;">
-                <h1 style="color:#1e40af;margin:0;font-size:24px;">BC Hearing Watch</h1>
+                <h1 style="color:#1e40af;margin:0;font-size:24px;">BC Local Government Council Tracker</h1>
                 <p style="color:#6b7280;margin:4px 0 0;font-size:14px;">Immediate Alert</p>
             </div>
 
@@ -132,7 +132,7 @@ def send_alert_via_resend(
         resend.Emails.send({
             "from": settings.resend_from_email,
             "to": [to_email],
-            "subject": f"BC Hearing Alert \u2013 {municipality_name} {date_str}",
+            "subject": f"BC Local Government Alert \u2013 {municipality_name} {date_str}",
             "html": html,
         })
         logger.info(f"Immediate alert sent to {to_email} for {municipality_name}")
@@ -145,7 +145,6 @@ def send_alert_via_resend(
 async def send_immediate_alerts_for_documents(
     db: AsyncSession,
     new_documents: list[Document],
-    base_url: str = "",
 ) -> dict:
     """Send immediate alerts to subscribers who have immediate_alerts=True.
 
@@ -191,7 +190,7 @@ async def send_immediate_alerts_for_documents(
         if doc.municipality_id in munis
     ]
 
-    date_str = datetime.utcnow().strftime("%B %d, %Y")
+    date_str = datetime.now(timezone.utc).strftime("%B %d, %Y")
 
     for subscriber in subscribers:
         stats["subscribers_checked"] += 1
@@ -219,8 +218,11 @@ async def send_immediate_alerts_for_documents(
 
         stats["documents_matched"] += len(matched_items)
 
-        # Build unsubscribe URL
-        unsubscribe_url = f"{base_url}/api/v1/unsubscribe?email={quote(subscriber.email)}"
+        # Build token-based unsubscribe URL
+        unsubscribe_url = (
+            f"{settings.app_base_url}/api/v1/unsubscribe"
+            f"?token={quote(subscriber.unsubscribe_token)}"
+        )
 
         # Send one alert email per matched item
         for item in matched_items:

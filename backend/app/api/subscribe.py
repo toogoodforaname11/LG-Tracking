@@ -1,9 +1,10 @@
 """Subscribe API — upsert subscriber preferences, unsubscribe, send confirmation."""
 
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
+from urllib.parse import quote
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
 from pydantic import BaseModel, EmailStr
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
@@ -39,7 +40,7 @@ class UnsubscribeResponse(BaseModel):
     message: str
 
 
-# --- Resend email helper ---
+# --- Email helper ---
 
 
 def send_confirmation_email(
@@ -47,11 +48,16 @@ def send_confirmation_email(
     municipalities: list[str],
     topics: list[str],
     immediate_alerts: bool,
-) -> bool:
-    """Send a confirmation email via Resend. Returns True on success."""
+    unsubscribe_url: str,
+) -> None:
+    """Send a confirmation email via Resend.
+
+    Called as a BackgroundTask so it never blocks the API response.
+    Logs errors but does not propagate — the subscribe action already succeeded.
+    """
     if not settings.resend_api_key:
         logger.warning("RESEND_API_KEY not set — skipping confirmation email")
-        return False
+        return
 
     try:
         import resend
@@ -75,7 +81,7 @@ def send_confirmation_email(
         <html>
         <body style="font-family:system-ui,-apple-system,sans-serif;max-width:600px;margin:0 auto;padding:20px;color:#1a1a1a;">
             <div style="border-bottom:3px solid #1e40af;padding-bottom:16px;margin-bottom:24px;">
-                <h1 style="color:#1e40af;margin:0;font-size:24px;">BC Hearing Watch</h1>
+                <h1 style="color:#1e40af;margin:0;font-size:24px;">BC Local Government Council Tracker</h1>
                 <p style="color:#6b7280;margin:4px 0 0;font-size:14px;">Municipal Council Alerts &amp; Digest</p>
             </div>
 
@@ -98,7 +104,7 @@ def send_confirmation_email(
             </p>
 
             <p style="color:#374151;line-height:1.6;">
-                To update your preferences, just visit the form again and submit with the same email address.
+                To update your preferences, visit the form again and submit with the same email address.
             </p>
 
             <hr style="border:none;border-top:1px solid #e5e7eb;margin:24px 0;">
@@ -107,7 +113,7 @@ def send_confirmation_email(
                 This is an experimental personal tool using public data.
                 AI summaries may contain errors. Always verify with original municipal sources.
                 Not official government communication.<br><br>
-                <a href="{{{{unsubscribe_url}}}}" style="color:#6b7280;">Unsubscribe from all emails</a>
+                <a href="{unsubscribe_url}" style="color:#6b7280;">Unsubscribe from all emails</a>
             </p>
         </body>
         </html>
@@ -116,22 +122,24 @@ def send_confirmation_email(
         resend.Emails.send({
             "from": settings.resend_from_email,
             "to": [email],
-            "subject": "BC Hearing Watch — Subscription Confirmed",
+            "subject": "BC Local Government Council Tracker — Subscription Confirmed",
             "html": html,
         })
         logger.info(f"Confirmation email sent to {email}")
-        return True
 
     except Exception as e:
-        logger.error(f"Failed to send confirmation email: {e}")
-        return False
+        logger.error(f"Failed to send confirmation email to {email}: {e}")
 
 
 # --- Endpoints ---
 
 
 @router.post("/subscribe", response_model=SubscribeResponse)
-async def subscribe(req: SubscribeRequest, db: AsyncSession = Depends(get_db)):
+async def subscribe(
+    req: SubscribeRequest,
+    background_tasks: BackgroundTasks,
+    db: AsyncSession = Depends(get_db),
+):
     """Subscribe or update preferences. Same email = overwrite."""
     result = await db.execute(
         select(Subscriber).where(Subscriber.email == req.email)
@@ -144,7 +152,8 @@ async def subscribe(req: SubscribeRequest, db: AsyncSession = Depends(get_db)):
         existing.keywords = req.keywords
         existing.immediate_alerts = req.immediate_alerts
         existing.active = True
-        existing.updated_at = datetime.utcnow()
+        existing.updated_at = datetime.now(timezone.utc)
+        subscriber = existing
         action = "updated"
     else:
         subscriber = Subscriber(
@@ -159,9 +168,23 @@ async def subscribe(req: SubscribeRequest, db: AsyncSession = Depends(get_db)):
         action = "created"
 
     await db.commit()
+    await db.refresh(subscriber)
 
-    # Send confirmation email (best-effort)
-    send_confirmation_email(req.email, req.municipalities, req.topics, req.immediate_alerts)
+    # Build token-based unsubscribe URL — never exposes the email in the URL.
+    unsubscribe_url = (
+        f"{settings.app_base_url}/api/v1/unsubscribe?token={quote(subscriber.unsubscribe_token)}"
+    )
+
+    # Send confirmation email in background — does not block the API response
+    # and does not cause the subscribe action to fail if email delivery fails.
+    background_tasks.add_task(
+        send_confirmation_email,
+        req.email,
+        req.municipalities,
+        req.topics,
+        req.immediate_alerts,
+        unsubscribe_url,
+    )
 
     alerts_msg = ""
     if req.immediate_alerts:
@@ -177,18 +200,23 @@ async def subscribe(req: SubscribeRequest, db: AsyncSession = Depends(get_db)):
 
 
 @router.get("/unsubscribe")
-async def unsubscribe(email: str, db: AsyncSession = Depends(get_db)):
-    """One-click unsubscribe — sets active=false."""
+async def unsubscribe(token: str, db: AsyncSession = Depends(get_db)):
+    """One-click unsubscribe via signed token — sets active=False.
+
+    The token parameter is the subscriber's unsubscribe_token (UUID), not their
+    email address. This prevents any caller who knows someone's email from
+    unsubscribing them without their consent.
+    """
     result = await db.execute(
-        select(Subscriber).where(Subscriber.email == email)
+        select(Subscriber).where(Subscriber.unsubscribe_token == token)
     )
     subscriber = result.scalar_one_or_none()
 
     if not subscriber:
-        raise HTTPException(status_code=404, detail="Subscriber not found")
+        raise HTTPException(status_code=404, detail="Invalid unsubscribe token")
 
     subscriber.active = False
-    subscriber.updated_at = datetime.utcnow()
+    subscriber.updated_at = datetime.now(timezone.utc)
     await db.commit()
 
     return UnsubscribeResponse(
