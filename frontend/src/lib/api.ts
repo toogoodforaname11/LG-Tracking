@@ -20,14 +20,12 @@ export interface SubscribeRequest {
   topics: string[];
   keywords: string;
   immediate_alerts: boolean;
-  edit_token?: string; // Required when updating an existing subscription
 }
 
 export interface SubscribeResponse {
   status: string;
   email: string;
   message: string;
-  edit_token?: string; // Returned on new subscription for future updates
 }
 
 export async function subscribe(

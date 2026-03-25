@@ -16,6 +16,7 @@ from app.api.search import router as search_router
 from app.api.subscribe import router as subscribe_router
 from app.api.cron import router as cron_router
 from app.api.costs import router as costs_router
+from app.api.auth import router as auth_router
 
 
 @asynccontextmanager
@@ -63,3 +64,4 @@ app.include_router(search_router, prefix="/api/v1", tags=["search"])
 app.include_router(subscribe_router, prefix="/api/v1", tags=["subscribe"])
 app.include_router(cron_router, prefix="/api/v1/cron", tags=["cron"])
 app.include_router(costs_router, prefix="/api/v1", tags=["costs"])
+app.include_router(auth_router, prefix="/api/v1", tags=["auth"])

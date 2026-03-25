@@ -93,46 +93,30 @@ async def test_cron_secret_accepts_correct_header():
 
 
 # ---------------------------------------------------------------------------
-# 2. Subscription edit_token enforcement
+# 2. Subscription update requires magic-link verification
 # ---------------------------------------------------------------------------
 
 
-def test_subscribe_request_has_edit_token_field():
-    """SubscribeRequest must accept an optional edit_token."""
-    from app.api.subscribe import SubscribeRequest
+def test_magic_link_token_model_exists():
+    """MagicLinkToken model must exist for email-verified preference updates."""
+    from app.models.magic_link import MagicLinkToken
 
-    req = SubscribeRequest(
-        email="test@example.com",
-        municipalities=["Colwood"],
-        topics=["housing"],
-        edit_token="some-token",
-    )
-    assert req.edit_token == "some-token"
+    assert hasattr(MagicLinkToken, "token")
+    assert hasattr(MagicLinkToken, "email")
+    assert hasattr(MagicLinkToken, "pending_preferences")
+    assert hasattr(MagicLinkToken, "expires_at")
 
 
-def test_subscribe_request_edit_token_defaults_none():
-    """edit_token should default to None for new subscriptions."""
-    from app.api.subscribe import SubscribeRequest
-
-    req = SubscribeRequest(
-        email="test@example.com",
-        municipalities=["Colwood"],
-        topics=["housing"],
-    )
-    assert req.edit_token is None
-
-
-def test_subscribe_response_has_edit_token_field():
-    """SubscribeResponse must include an optional edit_token."""
+def test_subscribe_response_supports_magic_link_status():
+    """SubscribeResponse must support 'magic_link_sent' status for existing subscribers."""
     from app.api.subscribe import SubscribeResponse
 
     resp = SubscribeResponse(
-        status="ok",
+        status="magic_link_sent",
         email="test@example.com",
-        message="Created!",
-        edit_token="abc-123",
+        message="A confirmation link has been sent.",
     )
-    assert resp.edit_token == "abc-123"
+    assert resp.status == "magic_link_sent"
 
 
 # ---------------------------------------------------------------------------
