@@ -1,7 +1,7 @@
 """Subscribe API — upsert subscriber preferences, unsubscribe, send confirmation."""
 
 import logging
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from urllib.parse import quote
 
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
@@ -11,11 +11,14 @@ from sqlalchemy import select
 
 from app.db.database import get_db
 from app.models.subscriber import Subscriber
+from app.models.magic_link import MagicLinkToken
 from app.config import settings
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
+
+MAGIC_LINK_TTL_HOURS = 24
 
 
 # --- Pydantic schemas ---
@@ -40,7 +43,7 @@ class UnsubscribeResponse(BaseModel):
     message: str
 
 
-# --- Email helper ---
+# --- Email helpers ---
 
 
 def send_confirmation_email(
@@ -50,10 +53,9 @@ def send_confirmation_email(
     immediate_alerts: bool,
     unsubscribe_url: str,
 ) -> None:
-    """Send a confirmation email via Resend.
+    """Send a new-subscriber confirmation email via Resend.
 
     Called as a BackgroundTask so it never blocks the API response.
-    Logs errors but does not propagate — the subscribe action already succeeded.
     """
     if not settings.resend_api_key:
         logger.warning("RESEND_API_KEY not set — skipping confirmation email")
@@ -103,10 +105,6 @@ def send_confirmation_email(
                 with AI-summarized updates from your selected municipalities.
             </p>
 
-            <p style="color:#374151;line-height:1.6;">
-                To update your preferences, visit the form again and submit with the same email address.
-            </p>
-
             <hr style="border:none;border-top:1px solid #e5e7eb;margin:24px 0;">
 
             <p style="font-size:11px;color:#9ca3af;line-height:1.5;">
@@ -125,10 +123,71 @@ def send_confirmation_email(
             "subject": "BC Local Government Council Tracker — Subscription Confirmed",
             "html": html,
         })
-        logger.info(f"Confirmation email sent to {email}")
+        logger.info("Confirmation email sent to %s", email)
 
     except Exception as e:
-        logger.error(f"Failed to send confirmation email to {email}: {e}")
+        logger.error("Failed to send confirmation email to %s: %s", email, e)
+
+
+def send_magic_link_email(email: str, confirm_url: str) -> None:
+    """Send a magic link email so the subscriber can confirm their preference update.
+
+    Called as a BackgroundTask. Errors are logged but do not surface to the caller —
+    the pending token has already been stored in the database.
+    """
+    if not settings.resend_api_key:
+        logger.warning("RESEND_API_KEY not set — skipping magic link email (token stored in DB)")
+        return
+
+    try:
+        import resend
+        resend.api_key = settings.resend_api_key
+
+        html = f"""
+        <html>
+        <body style="font-family:system-ui,-apple-system,sans-serif;max-width:600px;margin:0 auto;padding:20px;color:#1a1a1a;">
+            <div style="border-bottom:3px solid #1e40af;padding-bottom:16px;margin-bottom:24px;">
+                <h1 style="color:#1e40af;margin:0;font-size:24px;">BC Local Government Council Tracker</h1>
+                <p style="color:#6b7280;margin:4px 0 0;font-size:14px;">Municipal Council Alerts &amp; Digest</p>
+            </div>
+
+            <h2 style="color:#111;font-size:20px;">Confirm Your Preference Update</h2>
+            <p style="color:#374151;line-height:1.6;">
+                We received a request to update your subscription preferences.
+                Click the button below to confirm the changes. This link expires in 24 hours.
+            </p>
+
+            <div style="text-align:center;margin:32px 0;">
+                <a href="{confirm_url}"
+                   style="background:#1e40af;color:#fff;padding:14px 32px;border-radius:8px;
+                          text-decoration:none;font-size:16px;font-weight:600;display:inline-block;">
+                    Confirm Preference Update
+                </a>
+            </div>
+
+            <p style="color:#6b7280;font-size:13px;line-height:1.6;">
+                If you did not request this change, you can safely ignore this email —
+                your existing preferences will not be changed.
+            </p>
+
+            <p style="color:#6b7280;font-size:12px;">
+                Or copy this link into your browser:<br>
+                <span style="word-break:break-all;">{confirm_url}</span>
+            </p>
+        </body>
+        </html>
+        """
+
+        resend.Emails.send({
+            "from": settings.resend_from_email,
+            "to": [email],
+            "subject": "BC Local Government Council Tracker — Confirm Your Preference Update",
+            "html": html,
+        })
+        logger.info("Magic link email sent to %s", email)
+
+    except Exception as e:
+        logger.error("Failed to send magic link email to %s: %s", email, e)
 
 
 # --- Endpoints ---
@@ -140,43 +199,73 @@ async def subscribe(
     background_tasks: BackgroundTasks,
     db: AsyncSession = Depends(get_db),
 ):
-    """Subscribe or update preferences. Same email = overwrite."""
+    """Subscribe or update preferences.
+
+    - New email → subscriber created immediately, confirmation email sent.
+    - Existing email → pending preferences stored as a magic link token,
+      confirmation email sent to that address. Changes are only applied
+      after the subscriber clicks the link, preventing anyone from changing
+      another person's preferences without access to their inbox.
+    """
     result = await db.execute(
         select(Subscriber).where(Subscriber.email == req.email)
     )
     existing = result.scalar_one_or_none()
 
     if existing:
-        existing.municipalities = req.municipalities
-        existing.topics = req.topics
-        existing.keywords = req.keywords
-        existing.immediate_alerts = req.immediate_alerts
-        existing.active = True
-        existing.updated_at = datetime.now(timezone.utc)
-        subscriber = existing
-        action = "updated"
-    else:
-        subscriber = Subscriber(
+        # --- Existing subscriber: require email verification ---
+        expires_at = datetime.now(timezone.utc) + timedelta(hours=MAGIC_LINK_TTL_HOURS)
+        token = MagicLinkToken(
             email=req.email,
-            municipalities=req.municipalities,
-            topics=req.topics,
-            keywords=req.keywords,
-            immediate_alerts=req.immediate_alerts,
-            active=True,
+            pending_preferences={
+                "municipalities": req.municipalities,
+                "topics": req.topics,
+                "keywords": req.keywords,
+                "immediate_alerts": req.immediate_alerts,
+            },
+            expires_at=expires_at,
         )
-        db.add(subscriber)
-        action = "created"
+        db.add(token)
+        await db.commit()
+        await db.refresh(token)
 
+        confirm_url = (
+            f"{settings.app_base_url}/api/v1/auth/confirm"
+            f"?token={quote(token.token)}"
+        )
+        background_tasks.add_task(send_magic_link_email, req.email, confirm_url)
+
+        return SubscribeResponse(
+            status="magic_link_sent",
+            email=req.email,
+            message=(
+                "A confirmation link has been sent to your email. "
+                "Click it to apply your updated preferences."
+            ),
+        )
+
+    # --- New subscriber: create immediately ---
+    subscriber = Subscriber(
+        email=req.email,
+        municipalities=req.municipalities,
+        topics=req.topics,
+        keywords=req.keywords,
+        immediate_alerts=req.immediate_alerts,
+        active=True,
+    )
+    db.add(subscriber)
     await db.commit()
     await db.refresh(subscriber)
 
-    # Build token-based unsubscribe URL — never exposes the email in the URL.
     unsubscribe_url = (
-        f"{settings.app_base_url}/api/v1/unsubscribe?token={quote(subscriber.unsubscribe_token)}"
+        f"{settings.app_base_url}/api/v1/unsubscribe"
+        f"?token={quote(subscriber.unsubscribe_token)}"
     )
 
-    # Send confirmation email in background — does not block the API response
-    # and does not cause the subscribe action to fail if email delivery fails.
+    alerts_msg = ""
+    if req.immediate_alerts:
+        alerts_msg = " You will also receive immediate alerts when new matching items are detected."
+
     background_tasks.add_task(
         send_confirmation_email,
         req.email,
@@ -186,16 +275,10 @@ async def subscribe(
         unsubscribe_url,
     )
 
-    alerts_msg = ""
-    if req.immediate_alerts:
-        alerts_msg = " You will also receive immediate alerts when new matching items are detected."
-
     return SubscribeResponse(
-        status="ok",
+        status="created",
         email=req.email,
-        message=(
-            f"Preferences {action}! You will receive weekly digests every Sunday.{alerts_msg}"
-        ),
+        message=f"Preferences saved! You will receive weekly digests every Sunday.{alerts_msg}",
     )
 
 
