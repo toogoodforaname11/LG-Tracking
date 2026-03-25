@@ -7,14 +7,14 @@ const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 // Topics — housing, transit, and provincial priority topics
 const AVAILABLE_TOPICS = [
   { id: "tod", label: "Transit Oriented Development (TOD)" },
-  { id: "toa_impl", label: "Transit Oriented Areas (TOA) Implementation" },
+  { id: "toa_impl", label: "Transit Oriented Areas (TOA)" },
   { id: "area_plans", label: "Area Plans (Local Area or Neighbourhood Plans)" },
   { id: "brt", label: "BRT (Bus Rapid Transit) or Bus Priority Infrastructure" },
   { id: "multimodal", label: "Multimodal Transport and Active Transportation" },
   { id: "provincial_targets", label: "Alignment with Provincial Housing Targets / Housing Needs Reports" },
   { id: "ssmuh", label: "Small-Scale Multi-Unit Housing (SSMUH) / Duplex-Triplex-Fourplex" },
-  { id: "housing_statutes", label: "Housing Statutes Amendment Bills / Related Legislation" },
-  { id: "ocp_housing", label: "Official Community Plan (OCP) Housing-Related Updates" },
+  { id: "housing_statutes", label: "Housing Statutes Amendment Act / Related Bylaws" },
+  { id: "ocp_housing", label: "OCP Updates" },
   { id: "zoning_density", label: "Zoning / Rezoning for Housing Density" },
   { id: "dev_permits_housing", label: "Development Permits Affecting Housing Supply" },
   { id: "dev_cost_charges", label: "Development Cost Charges or Affordability Incentives" },
