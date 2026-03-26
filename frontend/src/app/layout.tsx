@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -25,9 +26,17 @@ export default function RootLayout({
                 Municipal Council Alerts &amp; Digest
               </p>
             </div>
-            <span className="rounded bg-amber-100 px-2 py-1 text-xs font-medium text-amber-800">
-              Experimental
-            </span>
+            <div className="flex items-center gap-3">
+              <Link
+                href="/feedback"
+                className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
+              >
+                Feedback
+              </Link>
+              <span className="rounded bg-amber-100 px-2 py-1 text-xs font-medium text-amber-800">
+                Experimental
+              </span>
+            </div>
           </div>
         </header>
         <main className="mx-auto max-w-2xl px-6 py-8">{children}</main>
@@ -39,6 +48,14 @@ export default function RootLayout({
               municipal sources. Not official government communication. This
               tool tracks publicly available council meeting agendas, minutes,
               and videos from BC municipalities.
+            </p>
+            <p className="mt-2 text-xs text-gray-500">
+              <Link
+                href="/feedback"
+                className="text-blue-600 hover:text-blue-800 hover:underline"
+              >
+                Report Issues / Share Ideas
+              </Link>
             </p>
           </div>
         </footer>
