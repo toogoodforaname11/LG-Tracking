@@ -407,42 +407,43 @@ export default function SubscribePage() {
 
   if (formState === "success") {
     return (
-      <div className="rounded-lg border bg-white p-8 text-center shadow-sm">
-        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
-          <svg
-            className="h-8 w-8 text-green-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
+      <div className="rounded-lg border border-gray-200 bg-white p-8 shadow-sm">
+        <div className="text-center">
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-green-100">
+            <svg className="h-7 w-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h2 className="mb-2 text-xl font-bold text-gray-900">Preferences Saved</h2>
+          <p className="mb-6 text-sm text-gray-500">
+            Confirmation sent to <strong className="text-gray-700">{email}</strong>
+          </p>
         </div>
-        <h2 className="mb-2 text-2xl font-bold text-gray-900">
-          Preferences Saved!
-        </h2>
-        <p className="mb-4 text-gray-600">
-          You will receive{" "}
-          {immediateAlerts ? (
-            <>
-              <strong>immediate alerts</strong> (if enabled) +{" "}
-            </>
-          ) : null}
-          <strong>weekly digests every Sunday</strong>. Re-visit this page
-          anytime to edit.
-        </p>
-        <p className="mb-6 text-sm text-gray-500">
-          If email delivery is configured, a confirmation will be sent to <strong>{email}</strong>.
-        </p>
+
+        <div className="mb-6 space-y-2">
+          <div className="flex items-center gap-3 rounded-lg border border-gray-100 bg-gray-50 px-4 py-3">
+            <svg className="h-4 w-4 shrink-0 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <span className="text-sm text-gray-700">Weekly digest every Sunday at 8 PM Pacific</span>
+          </div>
+          {immediateAlerts && (
+            <div className="flex items-center gap-3 rounded-lg border border-gray-100 bg-gray-50 px-4 py-3">
+              <svg className="h-4 w-4 shrink-0 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              <span className="text-sm text-gray-700">Immediate alerts enabled</span>
+            </div>
+          )}
+        </div>
+
         <button
           onClick={() => setFormState("idle")}
-          className="rounded-lg bg-blue-800 px-6 py-2 text-sm font-medium text-white hover:bg-blue-900"
+          className="flex w-full items-center justify-center gap-2 rounded-lg border border-gray-300 px-6 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
         >
+          <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+          </svg>
           Edit Preferences
         </button>
       </div>
@@ -451,37 +452,36 @@ export default function SubscribePage() {
 
   if (formState === "magic_link_sent") {
     return (
-      <div className="rounded-lg border bg-white p-8 text-center shadow-sm">
-        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
-          <svg
-            className="h-8 w-8 text-blue-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-            />
-          </svg>
+      <div className="rounded-lg border border-gray-200 bg-white p-8 shadow-sm">
+        <div className="text-center">
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-blue-100">
+            <svg className="h-7 w-7 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h2 className="mb-2 text-xl font-bold text-gray-900">Check Your Inbox</h2>
+          <p className="mb-4 text-sm text-gray-600">
+            A confirmation link has been sent to <strong className="text-gray-800">{email}</strong>.
+            Click it to apply your updated preferences.
+          </p>
         </div>
-        <h2 className="mb-2 text-2xl font-bold text-gray-900">
-          Check Your Inbox
-        </h2>
-        <p className="mb-4 text-gray-600">
-          A confirmation link has been sent to{" "}
-          <strong>{email}</strong>. Click it to apply your updated preferences.
-        </p>
-        <p className="mb-6 text-sm text-gray-500">
-          The link expires in 24 hours. If you did not request this change,
-          you can safely ignore the email.
-        </p>
+
+        <div className="mb-6 flex items-start gap-2.5 rounded-lg border border-gray-100 bg-gray-50 p-3">
+          <svg className="mt-0.5 h-4 w-4 shrink-0 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <p className="text-xs text-gray-500">
+            The link expires in 24 hours. If you did not request this change, you can safely ignore the email.
+          </p>
+        </div>
+
         <button
           onClick={() => setFormState("idle")}
-          className="rounded-lg border border-gray-300 px-6 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          className="flex w-full items-center justify-center gap-2 rounded-lg border border-gray-300 px-6 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
         >
+          <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
           Back
         </button>
       </div>
@@ -490,32 +490,25 @@ export default function SubscribePage() {
 
   if (formState === "confirmed") {
     return (
-      <div className="rounded-lg border bg-white p-8 text-center shadow-sm">
-        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
-          <svg
-            className="h-8 w-8 text-green-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
+      <div className="rounded-lg border border-gray-200 bg-white p-8 shadow-sm">
+        <div className="text-center">
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-green-100">
+            <svg className="h-7 w-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h2 className="mb-2 text-xl font-bold text-gray-900">Preferences Confirmed</h2>
+          <p className="mb-6 text-sm text-gray-500">
+            Your subscription preferences have been verified and saved.
+          </p>
         </div>
-        <h2 className="mb-2 text-2xl font-bold text-gray-900">
-          Preferences Updated!
-        </h2>
-        <p className="mb-6 text-gray-600">
-          Your subscription preferences have been confirmed and saved.
-        </p>
         <button
           onClick={() => setFormState("idle")}
-          className="rounded-lg bg-blue-800 px-6 py-2 text-sm font-medium text-white hover:bg-blue-900"
+          className="flex w-full items-center justify-center gap-2 rounded-lg border border-gray-300 px-6 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
         >
+          <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+          </svg>
           Edit Preferences
         </button>
       </div>
@@ -523,109 +516,90 @@ export default function SubscribePage() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="rounded-lg border bg-white p-6 shadow-sm">
-        <h2 className="mb-1 text-xl font-bold text-gray-900">
-          BC Local Government Watch &mdash; Housing, Transit &amp; Provincial
-          Priority Updates
-        </h2>
-        <p className="mb-6 text-sm text-gray-500">
-          Subscribe to updates on housing, transit, and local government
-          hearings. Enter the same email to update your preferences anytime.
-        </p>
-
-        {/* Email */}
-        <div className="mb-5">
-          <label
-            htmlFor="email"
-            className="mb-1 block text-sm font-medium text-gray-700"
-          >
-            Email Address <span className="text-red-500">*</span>
-          </label>
-          <input
-            id="email"
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@example.com"
-            className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
-          />
-        </div>
-
-        {/* Keywords / Bylaw / Bill Tracking — MOST PROMINENT FIELD */}
-        <div className="mb-6 rounded-xl border-2 border-blue-500 bg-blue-50 p-5 shadow-md">
-          <label
-            htmlFor="keywords"
-            className="mb-2 block text-lg font-bold text-blue-900"
-          >
-            Track Specific Bills, Bylaws, or Keywords
-          </label>
-          <input
-            id="keywords"
-            type="text"
-            value={keywords}
-            onChange={(e) => setKeywords(e.target.value)}
-            placeholder="e.g. Bylaw 1700, Bill 44, TOA zoning, affordable housing"
-            className="w-full rounded-lg border-2 border-blue-400 bg-white px-4 py-3 text-base focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
-          />
-          <div className="mt-3 rounded-lg border border-blue-200 bg-white px-4 py-3 text-sm leading-relaxed text-blue-800">
-            Enter specific bylaw numbers, bill names, or keywords you want to
-            track (e.g. &lsquo;Bylaw 1700&rsquo;, &lsquo;Housing Statutes
-            Amendment Act&rsquo;, &lsquo;TOA zoning&rsquo;, &lsquo;TOD area
-            plan&rsquo;). The system will alert you every time these exact terms
-            are mentioned in any hearing.
+    <form onSubmit={handleSubmit} className="space-y-4">
+      {/* How it works — brief intro above the form */}
+      <div className="rounded-lg border border-gray-200 bg-white p-4">
+        <div className="flex items-start gap-3">
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-100">
+            <svg className="h-4 w-4 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
           </div>
-          <p className="mt-2 text-xs text-blue-600">
-            Comma-separated. We&apos;ll match these against meeting agendas,
-            minutes, and videos.
-          </p>
+          <div className="text-sm text-gray-600">
+            <p className="mb-1 font-medium text-gray-800">Get alerts when BC councils discuss topics you care about</p>
+            <p className="leading-relaxed">
+              We scan council agendas, minutes, and videos every 30 min. AI matches your topics and keywords, then delivers
+              <strong> immediate alerts</strong> and a <strong>weekly Sunday digest</strong>. Re-submit with the same email anytime to update.
+            </p>
+          </div>
         </div>
+      </div>
 
-        {/* Municipalities — multi-select dropdown */}
-        <div className="mb-5">
-          <label className="mb-1 block text-sm font-medium text-gray-700">
-            Municipalities
-          </label>
-          <div className="relative" data-muni-dropdown>
-            <button
-              type="button"
-              onClick={() => setMuniDropdownOpen(!muniDropdownOpen)}
-              className="flex w-full items-center justify-between rounded-lg border border-gray-300 px-4 py-2.5 text-left text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
-            >
-              <span className="text-gray-600">
-                {selectedMunicipalities.length === 0
-                  ? "Select municipalities..."
-                  : `${selectedMunicipalities.length} selected`}
-              </span>
-              <svg
-                className={`h-4 w-4 text-gray-400 transition-transform ${muniDropdownOpen ? "rotate-180" : ""}`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 9l-7 7-7-7"
-                />
+      {/* ── Section 1: Email ── */}
+      <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
+        <div className="mb-4 flex items-center gap-2.5">
+          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-800 text-xs font-bold text-white">1</span>
+          <h2 className="text-sm font-semibold text-gray-900">Your Email</h2>
+        </div>
+        <input
+          id="email"
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="you@example.com"
+          className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+        />
+        <p className="mt-1.5 text-xs text-gray-400">
+          Enter the same email to update existing preferences.
+        </p>
+      </div>
+
+      {/* ── Section 2: Municipalities ── */}
+      <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
+        <div className="mb-4 flex items-center gap-2.5">
+          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-800 text-xs font-bold text-white">2</span>
+          <h2 className="text-sm font-semibold text-gray-900">Municipalities</h2>
+          <span className="text-xs text-gray-400">Which councils to monitor</span>
+        </div>
+        <div className="relative" data-muni-dropdown>
+          <button
+            type="button"
+            onClick={() => setMuniDropdownOpen(!muniDropdownOpen)}
+            className="flex w-full items-center justify-between rounded-lg border border-gray-300 px-4 py-2.5 text-left text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+          >
+            <span className="flex items-center gap-2 text-gray-600">
+              <svg className="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
-            </button>
+              {selectedMunicipalities.length === 0
+                ? "Search and select municipalities..."
+                : `${selectedMunicipalities.length} municipality${selectedMunicipalities.length !== 1 ? "ies" : ""} selected`}
+            </span>
+            <svg
+              className={`h-4 w-4 text-gray-400 transition-transform ${muniDropdownOpen ? "rotate-180" : ""}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
 
-            {muniDropdownOpen && (
-              <div className="absolute z-10 mt-1 max-h-72 w-full overflow-hidden rounded-lg border border-gray-200 bg-white shadow-lg">
-                <div className="sticky top-0 border-b border-gray-100 bg-white p-2">
-                  <input
-                    type="text"
-                    value={muniSearch}
-                    onChange={(e) => setMuniSearch(e.target.value)}
-                    placeholder="Search municipalities..."
-                    className="w-full rounded border border-gray-200 px-3 py-1.5 text-sm focus:border-blue-400 focus:outline-none"
-                    onClick={(e) => e.stopPropagation()}
-                  />
-                </div>
-                <div className="max-h-60 overflow-y-auto">
+          {muniDropdownOpen && (
+            <div className="absolute z-10 mt-1 max-h-72 w-full overflow-hidden rounded-lg border border-gray-200 bg-white shadow-lg">
+              <div className="sticky top-0 border-b border-gray-100 bg-white p-2">
+                <input
+                  type="text"
+                  value={muniSearch}
+                  onChange={(e) => setMuniSearch(e.target.value)}
+                  placeholder="Type to filter..."
+                  className="w-full rounded border border-gray-200 px-3 py-1.5 text-sm focus:border-blue-400 focus:outline-none"
+                  onClick={(e) => e.stopPropagation()}
+                  autoFocus
+                />
+              </div>
+              <div className="max-h-60 overflow-y-auto">
                 {MUNICIPALITIES.filter((name) =>
                   name.toLowerCase().includes(muniSearch.toLowerCase())
                 ).map((name) => (
@@ -642,14 +616,25 @@ export default function SubscribePage() {
                     <span className="text-sm text-gray-700">{name}</span>
                   </label>
                 ))}
-                </div>
               </div>
-            )}
-          </div>
+            </div>
+          )}
+        </div>
 
-          {/* Selected pills */}
-          {selectedMunicipalities.length > 0 && (
-            <div className="mt-2 flex flex-wrap gap-1.5">
+        {/* Selected pills */}
+        {selectedMunicipalities.length > 0 && (
+          <div className="mt-2.5">
+            <div className="mb-1.5 flex items-center justify-between">
+              <span className="text-xs text-gray-400">{selectedMunicipalities.length} selected</span>
+              <button
+                type="button"
+                onClick={() => setSelectedMunicipalities([])}
+                className="text-xs text-gray-400 hover:text-red-500"
+              >
+                Clear all
+              </button>
+            </div>
+            <div className="flex flex-wrap gap-1.5">
               {selectedMunicipalities.map((name) => (
                 <span
                   key={name}
@@ -666,191 +651,230 @@ export default function SubscribePage() {
                 </span>
               ))}
             </div>
-          )}
-        </div>
-
-        {/* Topics — checkboxes with expandable keyword list */}
-        <div className="mb-5">
-          <label className="mb-2 block text-sm font-medium text-gray-700">
-            Topics
-          </label>
-          <p className="mb-3 text-xs text-gray-500">
-            Tap the arrow on any topic to see the keywords it searches for.
-          </p>
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-            {AVAILABLE_TOPICS.map((topic) => {
-              const isSelected = selectedTopics.includes(topic.id);
-              const isExpanded = expandedTopics.has(topic.id);
-              const kws = TOPIC_KEYWORDS[topic.id] ?? [];
-
-              return (
-                <div
-                  key={topic.id}
-                  className={`rounded-lg border text-sm transition-colors ${
-                    isSelected
-                      ? "border-blue-500 bg-blue-50"
-                      : "border-gray-200 bg-white"
-                  }`}
-                >
-                  {/* Top row: checkbox + label + chevron */}
-                  <div className="flex items-center">
-                    {/* Checkbox area — clicking this toggles selection */}
-                    <label className="flex flex-1 cursor-pointer items-center gap-2 px-3 py-2.5">
-                      <input
-                        type="checkbox"
-                        checked={isSelected}
-                        onChange={() => toggleTopic(topic.id)}
-                        className="h-4 w-4 shrink-0 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                      />
-                      <span className={isSelected ? "text-blue-800" : "text-gray-700"}>
-                        {topic.label}
-                      </span>
-                    </label>
-
-                    {/* Chevron — clicking this toggles keyword expansion only */}
-                    <button
-                      type="button"
-                      onClick={() => toggleExpanded(topic.id)}
-                      aria-label={isExpanded ? "Hide search terms" : "Show search terms"}
-                      className={`flex h-full shrink-0 items-center px-3 py-2.5 transition-colors ${
-                        isExpanded
-                          ? "text-blue-600"
-                          : "text-gray-400 hover:text-gray-600"
-                      }`}
-                    >
-                      <svg
-                        className={`h-4 w-4 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-
-                  {/* Expanded section */}
-                  {isExpanded && topic.id === "housing_statutes" ? (
-                    <div className="border-t border-gray-100 px-3 pb-3 pt-2">
-                      <p className="mb-2 text-xs font-medium text-gray-500">
-                        Filter by specific bill (leave all unchecked to match any):
-                      </p>
-                      <div className="space-y-1.5">
-                        {HOUSING_BILLS.map((bill) => (
-                          <label
-                            key={bill.id}
-                            className="flex cursor-pointer items-start gap-2"
-                          >
-                            <input
-                              type="checkbox"
-                              checked={selectedBills.has(bill.id)}
-                              onChange={() => toggleBill(bill.id)}
-                              className="mt-0.5 h-4 w-4 shrink-0 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                            />
-                            <span className="text-xs text-gray-700">
-                              <span className="font-semibold">{bill.label}</span>
-                              {" — "}
-                              {bill.description}
-                            </span>
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-                  ) : isExpanded && kws.length > 0 ? (
-                    <div className="border-t border-gray-100 px-3 pb-3 pt-2">
-                      <p className="mb-1.5 text-xs font-medium text-gray-500">
-                        Searches for:
-                      </p>
-                      <div className="flex flex-wrap gap-1">
-                        {kws.map((kw) => (
-                          <span
-                            key={kw}
-                            className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600"
-                          >
-                            {kw}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  ) : null}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Immediate Alerts checkbox */}
-        <div className="mb-6 rounded-lg border border-amber-200 bg-amber-50 p-4">
-          <label className="flex cursor-pointer items-start gap-3">
-            <input
-              type="checkbox"
-              checked={immediateAlerts}
-              onChange={(e) => setImmediateAlerts(e.target.checked)}
-              className="mt-0.5 h-4 w-4 rounded border-gray-300 text-amber-600 focus:ring-amber-500"
-            />
-            <div>
-              <span className="text-sm font-medium text-amber-900">
-                Send me immediate alerts after each matching council meeting
-              </span>
-              <p className="mt-1 text-xs text-amber-700">
-                We poll sources every 30 minutes. When a new matching item is
-                detected, you&apos;ll receive an email right away. Weekly
-                digests are always sent regardless of this setting.
-              </p>
-            </div>
-          </label>
-        </div>
-
-        {/* Error */}
-        {formState === "error" && (
-          <div className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-700">
-            {errorMessage}
           </div>
         )}
-
-        {/* Submit */}
-        <button
-          type="submit"
-          disabled={formState === "submitting" || !email}
-          className="w-full rounded-lg bg-blue-800 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-900 disabled:cursor-not-allowed disabled:opacity-50"
-        >
-          {formState === "submitting"
-            ? "Saving..."
-            : "Subscribe / Update My Preferences"}
-        </button>
       </div>
 
-      {/* Info box */}
-      <div className="rounded-lg border border-blue-100 bg-blue-50 p-4 text-sm text-blue-800">
-        <p className="mb-2 font-medium">How it works:</p>
-        <ul className="list-inside list-disc space-y-1 text-blue-700">
-          <li>
-            We scan council agendas, minutes, and meeting videos from your
-            selected municipalities every 30 minutes
-          </li>
-          <li>
-            AI summarizes relevant items matching your topics and keywords
-          </li>
-          <li>
-            <strong>Immediate alerts</strong> (default ON): get emailed within
-            minutes when a new matching item appears
-          </li>
-          <li>
-            <strong>Weekly digest</strong> (always): full summary every Sunday
-            at 8 PM Pacific
-          </li>
-          <li>
-            To change preferences, just submit this form again with the same
-            email
-          </li>
-          <li>Every email includes a one-click unsubscribe link</li>
-        </ul>
+      {/* ── Section 3: Topics ── */}
+      <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
+        <div className="mb-4 flex items-center gap-2.5">
+          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-800 text-xs font-bold text-white">3</span>
+          <h2 className="text-sm font-semibold text-gray-900">Topics</h2>
+          <span className="text-xs text-gray-400">What subjects to track</span>
+        </div>
+        <p className="mb-3 flex items-center gap-1.5 text-xs text-gray-500">
+          <svg className="h-3.5 w-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          Click the arrow on any topic to see the exact keywords it matches.
+        </p>
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+          {AVAILABLE_TOPICS.map((topic) => {
+            const isSelected = selectedTopics.includes(topic.id);
+            const isExpanded = expandedTopics.has(topic.id);
+            const kws = TOPIC_KEYWORDS[topic.id] ?? [];
+
+            return (
+              <div
+                key={topic.id}
+                className={`rounded-lg border text-sm transition-colors ${
+                  isSelected
+                    ? "border-blue-500 bg-blue-50"
+                    : "border-gray-200 bg-white hover:border-gray-300"
+                }`}
+              >
+                {/* Top row: checkbox + label + chevron */}
+                <div className="flex items-center">
+                  <label className="flex flex-1 cursor-pointer items-center gap-2 px-3 py-2.5">
+                    <input
+                      type="checkbox"
+                      checked={isSelected}
+                      onChange={() => toggleTopic(topic.id)}
+                      className="h-4 w-4 shrink-0 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span className={isSelected ? "font-medium text-blue-800" : "text-gray-700"}>
+                      {topic.label}
+                    </span>
+                  </label>
+
+                  <button
+                    type="button"
+                    onClick={() => toggleExpanded(topic.id)}
+                    aria-label={isExpanded ? "Hide search terms" : "Show search terms"}
+                    className={`flex shrink-0 items-center gap-1 px-3 py-2.5 text-xs transition-colors ${
+                      isExpanded
+                        ? "font-medium text-blue-600"
+                        : "text-gray-400 hover:text-gray-600"
+                    }`}
+                  >
+                    <svg
+                      className={`h-3.5 w-3.5 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                </div>
+
+                {/* Expanded section */}
+                {isExpanded && topic.id === "housing_statutes" ? (
+                  <div className="border-t border-gray-100 px-3 pb-3 pt-2">
+                    <p className="mb-2 text-xs font-medium text-gray-500">
+                      Filter by specific bill (leave all unchecked to match any):
+                    </p>
+                    <div className="space-y-1.5">
+                      {HOUSING_BILLS.map((bill) => (
+                        <label
+                          key={bill.id}
+                          className="flex cursor-pointer items-start gap-2"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={selectedBills.has(bill.id)}
+                            onChange={() => toggleBill(bill.id)}
+                            className="mt-0.5 h-4 w-4 shrink-0 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                          />
+                          <span className="text-xs text-gray-700">
+                            <span className="font-semibold">{bill.label}</span>
+                            {" -- "}
+                            {bill.description}
+                          </span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                ) : isExpanded && kws.length > 0 ? (
+                  <div className="border-t border-gray-100 px-3 pb-3 pt-2">
+                    <p className="mb-1.5 text-xs font-medium text-gray-500">
+                      Searches for:
+                    </p>
+                    <div className="flex flex-wrap gap-1">
+                      {kws.map((kw) => (
+                        <span
+                          key={kw}
+                          className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600"
+                        >
+                          {kw}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+            );
+          })}
+        </div>
       </div>
+
+      {/* ── Section 4: Keywords & Bills ── */}
+      <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
+        <div className="mb-4 flex items-center gap-2.5">
+          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-800 text-xs font-bold text-white">4</span>
+          <h2 className="text-sm font-semibold text-gray-900">Custom Keywords</h2>
+          <span className="rounded bg-blue-100 px-1.5 py-0.5 text-xs font-medium text-blue-700">Highest priority</span>
+        </div>
+        <p className="mb-3 text-xs text-gray-500">
+          Track specific bylaw numbers, bill names, or phrases. These get the highest match priority -- you will be alerted every time these exact terms appear.
+        </p>
+        <input
+          id="keywords"
+          type="text"
+          value={keywords}
+          onChange={(e) => setKeywords(e.target.value)}
+          placeholder="e.g. Bylaw 1700, Bill 44, TOA zoning, affordable housing"
+          className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+        />
+        <p className="mt-1.5 text-xs text-gray-400">
+          Comma-separated. Matched against agendas, minutes, and videos.
+        </p>
+      </div>
+
+      {/* ── Section 5: Delivery Preferences ── */}
+      <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
+        <div className="mb-4 flex items-center gap-2.5">
+          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-800 text-xs font-bold text-white">5</span>
+          <h2 className="text-sm font-semibold text-gray-900">Delivery Preferences</h2>
+        </div>
+
+        {/* Weekly digest — always on */}
+        <div className="mb-3 flex items-start gap-3 rounded-lg border border-gray-200 bg-gray-50 p-3">
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-100">
+            <svg className="h-4 w-4 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <div>
+            <span className="text-sm font-medium text-gray-800">Weekly Digest</span>
+            <span className="ml-2 rounded bg-green-100 px-1.5 py-0.5 text-xs font-medium text-green-700">Always on</span>
+            <p className="mt-0.5 text-xs text-gray-500">Full summary every Sunday at 8 PM Pacific.</p>
+          </div>
+        </div>
+
+        {/* Immediate alerts — toggleable */}
+        <label className="flex cursor-pointer items-start gap-3 rounded-lg border border-gray-200 bg-white p-3 transition-colors hover:bg-gray-50">
+          <input
+            type="checkbox"
+            checked={immediateAlerts}
+            onChange={(e) => setImmediateAlerts(e.target.checked)}
+            className="mt-1 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+          />
+          <div>
+            <div className="flex items-center gap-2">
+              <svg className="h-4 w-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              <span className="text-sm font-medium text-gray-800">Immediate Alerts</span>
+              {immediateAlerts && (
+                <span className="rounded bg-blue-100 px-1.5 py-0.5 text-xs font-medium text-blue-700">On</span>
+              )}
+            </div>
+            <p className="mt-0.5 text-xs text-gray-500">
+              Get emailed within minutes when a new matching item is detected. Sources are polled every 30 minutes.
+            </p>
+          </div>
+        </label>
+      </div>
+
+      {/* Error */}
+      {formState === "error" && (
+        <div className="flex items-center gap-2.5 rounded-lg border border-red-200 bg-red-50 p-3.5 text-sm text-red-700">
+          <svg className="h-5 w-5 shrink-0 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          {errorMessage}
+        </div>
+      )}
+
+      {/* Submit */}
+      <button
+        type="submit"
+        disabled={formState === "submitting" || !email}
+        className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-800 px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-blue-900 disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        {formState === "submitting" ? (
+          <>
+            <svg className="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+            </svg>
+            Saving...
+          </>
+        ) : (
+          <>
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+            Save Preferences
+          </>
+        )}
+      </button>
+
+      {/* Footer note */}
+      <p className="text-center text-xs text-gray-400">
+        Every email includes a one-click unsubscribe link.
+      </p>
     </form>
   );
 }
