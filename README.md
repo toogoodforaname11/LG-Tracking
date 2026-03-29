@@ -34,8 +34,8 @@ You can track specific bylaws by name or number (e.g. "Bylaw 1700" or "Housing S
 - **AI**: Gemini 1.5 Flash (matching + summaries)
 - **Verification**: Perplexity Search API (fact-checking)
 - **Discovery**: CivicWeb scraper + YouTube RSS (agendas, minutes, videos)
-- **Polling**: Every 30 minutes via Vercel Cron
-- **Deploy**: Vercel (free tier)
+- **Polling**: Every 30 minutes via cron
+- **Deploy**: Hostinger VPS (Ubuntu 22.04) or Vercel (free tier)
 
 ## Quick Start
 
@@ -144,6 +144,105 @@ Starting with Capital Regional District (CRD) — 14 municipalities:
 - `POST /api/v1/seed` — Seed CRD municipality registry
 - `GET /api/v1/municipalities` — List municipalities
 - `POST /api/v1/discovery/poll` — Manual discovery poll
+
+## Hostinger VPS Deployment
+
+Deploy the full stack (frontend + backend) on a single Hostinger VPS running Ubuntu 22.04.
+
+### Requirements
+
+| Resource | Minimum | Recommended |
+|----------|---------|-------------|
+| **OS** | Ubuntu 22.04 LTS | Ubuntu 22.04 LTS |
+| **RAM** | 2 GB | 4 GB |
+| **CPU** | 1 vCPU | 2 vCPU |
+| **Storage** | 20 GB SSD | 40 GB SSD |
+| **Hostinger Plan** | KVM 2 | KVM 4 |
+
+### Prerequisites
+
+- A **domain name** with an A record pointing to your VPS IP
+- SSH root access to your VPS
+- API keys ready (see [Environment Variables](#environment-variables))
+
+### One-Command Deploy
+
+```bash
+# 1. SSH into your VPS
+ssh root@your-vps-ip
+
+# 2. Download and edit the deploy script
+curl -O https://raw.githubusercontent.com/toogoodforaname11/lg-tracking/main/deploy/deploy.sh
+
+# 3. Set your domain at the top of deploy.sh
+nano deploy.sh   # change DOMAIN="" to DOMAIN="yourdomain.com"
+
+# 4. Run it
+bash deploy.sh
+```
+
+This installs everything: Python 3.11, Node.js 20, Nginx, Certbot (SSL), clones the repo, builds the frontend as static files, and sets up the systemd service.
+
+### Post-Deploy Setup
+
+```bash
+# 1. Configure your secrets
+cp /var/www/lg-tracking/backend/.env.example /var/www/lg-tracking/backend/.env
+nano /var/www/lg-tracking/backend/.env
+
+# 2. Set up cron jobs (replace <YOUR_CRON_SECRET> first)
+nano /var/www/lg-tracking/deploy/crontab
+crontab -u www-data /var/www/lg-tracking/deploy/crontab
+
+# 3. Start the backend
+systemctl start bc-hearing-watch
+
+# 4. Seed the municipality database
+curl -X POST http://127.0.0.1:8000/api/v1/seed
+
+# 5. Verify everything works
+curl http://127.0.0.1:8000/health
+# Then visit https://yourdomain.com in your browser
+```
+
+### Updating
+
+```bash
+bash /var/www/lg-tracking/deploy/update.sh
+```
+
+This pulls the latest code, rebuilds the frontend, reinstalls dependencies, and restarts the backend.
+
+### What Gets Deployed
+
+| Component | How it runs |
+|-----------|-------------|
+| **Frontend** | Static HTML/CSS/JS served by Nginx from `/var/www/lg-tracking/frontend/out/` |
+| **Backend** | Uvicorn (FastAPI) on port 8000, managed by systemd |
+| **Nginx** | Reverse proxy on ports 80/443 — serves frontend, proxies `/api/*` to backend |
+| **SSL** | Free Let's Encrypt certificate via Certbot (auto-renews) |
+| **Cron** | Linux crontab polls sources every 30 min, sends weekly digest on Sundays |
+| **Database** | Neon serverless Postgres (external, configured via `DATABASE_URL`) |
+
+### Useful Commands
+
+```bash
+# Service management
+systemctl status bc-hearing-watch      # Check backend status
+systemctl restart bc-hearing-watch     # Restart backend
+journalctl -u bc-hearing-watch -f      # Stream backend logs
+
+# Nginx
+nginx -t                               # Test config
+systemctl reload nginx                 # Reload after config changes
+
+# Cron logs
+tail -f /var/log/lg-tracking-poll.log
+tail -f /var/log/lg-tracking-digest.log
+
+# SSL renewal (auto, but you can test)
+certbot renew --dry-run
+```
 
 ## Disclaimer
 
