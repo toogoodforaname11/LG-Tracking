@@ -1,5 +1,5 @@
 #!/bin/bash
-# update.sh — pull latest code and restart the backend service
+# update.sh — pull latest code, rebuild frontend, and restart the backend service
 # Run from anywhere on the server: bash /var/www/lg-tracking/deploy/update.sh
 
 set -euo pipefail
@@ -11,10 +11,18 @@ echo "=== Updating BC Local Government Council Tracker ==="
 # Pull latest code
 sudo -u www-data git -C "$APP_DIR" pull
 
-# Install any new/updated dependencies
+# Install any new/updated Python dependencies
 sudo -u www-data "$APP_DIR/venv/bin/pip" install -r "$APP_DIR/backend/requirements.txt"
 
-# Restart service
+# Rebuild frontend (static export)
+echo "Rebuilding frontend..."
+cd "$APP_DIR/frontend"
+sudo -u www-data npm install
+sudo -u www-data STATIC_EXPORT=true npm run build
+cd -
+echo "Frontend rebuilt → $APP_DIR/frontend/out/"
+
+# Restart backend service
 systemctl restart bc-hearing-watch
 sleep 2
 systemctl status bc-hearing-watch --no-pager

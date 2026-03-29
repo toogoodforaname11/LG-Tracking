@@ -1,5 +1,5 @@
 #!/bin/bash
-# deploy.sh — initial Hostinger VPS setup for BC Local Government Council Tracker backend
+# deploy.sh — initial Hostinger VPS setup for BC Local Government Council Tracker
 # Run once as root on a fresh Ubuntu 22.04 VPS:
 #   bash deploy/deploy.sh
 #
@@ -13,7 +13,7 @@ set -euo pipefail
 REPO_URL="https://github.com/toogoodforaname11/lg-tracking.git"
 APP_DIR="/var/www/lg-tracking"
 PYTHON="python3.11"
-DOMAIN=""   # Set this before running, e.g. "api.bchearingwatch.ca"
+DOMAIN=""   # Set this before running, e.g. "bchearingwatch.ca"
 
 echo "=== BC Local Government Council Tracker — Hostinger VPS Deploy ==="
 
@@ -22,6 +22,15 @@ apt-get update -q
 apt-get install -y python3.11 python3.11-venv python3.11-dev \
     nginx certbot python3-certbot-nginx \
     git curl build-essential libpq-dev
+
+# --- Node.js 20.x (for frontend build) ---
+if ! command -v node &> /dev/null; then
+    echo "Installing Node.js 20.x..."
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+    apt-get install -y nodejs
+fi
+echo "Node.js version: $(node --version)"
+echo "npm version: $(npm --version)"
 
 # --- App directory ---
 mkdir -p "$APP_DIR"
@@ -45,6 +54,14 @@ fi
 echo "Installing Python dependencies..."
 sudo -u www-data "$APP_DIR/venv/bin/pip" install --upgrade pip
 sudo -u www-data "$APP_DIR/venv/bin/pip" install -r "$APP_DIR/backend/requirements.txt"
+
+# --- Frontend build (static export) ---
+echo "Building frontend..."
+cd "$APP_DIR/frontend"
+sudo -u www-data npm install
+sudo -u www-data STATIC_EXPORT=true npm run build
+cd -
+echo "Frontend built → $APP_DIR/frontend/out/"
 
 # --- Environment file ---
 if [ ! -f "$APP_DIR/backend/.env" ]; then
@@ -95,3 +112,4 @@ echo "  4. Start the service: systemctl start bc-hearing-watch"
 echo "  5. Check status:      systemctl status bc-hearing-watch"
 echo "  6. View logs:         journalctl -u bc-hearing-watch -f"
 echo "  7. Test health:       curl http://127.0.0.1:8000/health"
+echo "  8. Visit your site:   https://$DOMAIN"
