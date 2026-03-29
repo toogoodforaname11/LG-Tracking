@@ -19,13 +19,13 @@ export default function RootLayout({
           <div className="mx-auto flex max-w-2xl items-center justify-between">
             <div>
               <h1 className="text-xl font-bold text-blue-800">
-                                    BC Local Government Council Tracker
+                BC Local Government Council Tracker
               </h1>
               <p className="text-xs text-gray-500">
                 Municipal Council Alerts &amp; Digest
               </p>
             </div>
-            <span className="rounded bg-amber-100 px-2 py-1 text-xs font-medium text-amber-800">
+            <span className="rounded bg-gray-100 px-2 py-1 text-xs font-medium text-gray-500">
               Experimental
             </span>
           </div>
