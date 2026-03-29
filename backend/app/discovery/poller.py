@@ -11,9 +11,114 @@ from sqlalchemy import select
 
 from app.models.municipality import Municipality, Source, ScrapeStatus, Platform, ScrapeRun
 from app.models.document import Document, Meeting, DocType, MeetingType
-from app.discovery.base import DiscoveredItem
+from app.discovery.base import BaseScraper, DiscoveredItem
 from app.discovery.civicweb import CivicWebScraper
+from app.discovery.granicus import GranicusScraper
+from app.discovery.escribe import EScribeScraper
 from app.discovery.youtube import YouTubeScraper
+from app.discovery.custom_saanich import SaanichScraper
+from app.discovery.custom_sidney import SidneyScraper
+from app.discovery.custom_esquimalt import EsquimaltScraper
+from app.discovery.custom_viewroyal import ViewRoyalScraper
+from app.discovery.custom_langford import LangfordScraper
+from app.discovery.custom_highlands import HighlandsScraper
+from app.discovery.custom_crd import CRDScraper
+from app.discovery.custom_100milehouse import HundredMileHouseScraper
+from app.discovery.custom_armstrong import ArmstrongScraper
+from app.discovery.custom_castlegar import CastlegarScraper
+from app.discovery.custom_enderby import EnderbyScraper
+from app.discovery.custom_fernie import FernieScraper
+from app.discovery.custom_grandforks import GrandForksScraper
+from app.discovery.custom_nelson import NelsonScraper
+from app.discovery.custom_princerupert import PrinceRupertScraper
+from app.discovery.custom_quesnel import QuesnelScraper
+from app.discovery.custom_salmonarm import SalmonArmScraper
+from app.discovery.custom_surrey import SurreyScraper
+from app.discovery.custom_terrace import TerraceScraper
+from app.discovery.custom_trail import TrailScraper
+from app.discovery.custom_williamslake import WilliamsLakeScraper
+from app.discovery.custom_ainsworthhotsprings import AinsworthHotSpringsScraper
+from app.discovery.custom_alertbay import AlertBayScraper
+from app.discovery.custom_ashcroft import AshcroftScraper
+from app.discovery.custom_balfour import BalfourScraper
+from app.discovery.custom_barriere import BarriereScraper
+from app.discovery.custom_cachecreek import CacheCreekScraper
+from app.discovery.custom_canalflats import CanalFlatsScraper
+from app.discovery.custom_chase import ChaseScraper
+from app.discovery.custom_chetwynd import ChetwyndScraper
+from app.discovery.custom_christinalake import ChristinaLakeScraper
+from app.discovery.custom_clearwater import ClearwaterScraper
+from app.discovery.custom_clinton import ClintonScraper
+from app.discovery.custom_coldstream import ColdstreamScraper
+from app.discovery.custom_cranbrook import CranbrookScraper
+from app.discovery.custom_creston import CrestonScraper
+from app.discovery.custom_cumberland import CumberlandScraper
+from app.discovery.custom_elkford import ElkfordScraper
+from app.discovery.custom_fortnelson import FortNelsonScraper
+from app.discovery.custom_fortstjames import FortStJamesScraper
+from app.discovery.custom_fruitvale import FruitvaleScraper
+from app.discovery.custom_gibsons import GibsonsScraper
+from app.discovery.custom_goldriver import GoldRiverScraper
+from app.discovery.custom_golden import GoldenScraper
+from app.discovery.custom_granisle import GranisleScraper
+from app.discovery.custom_greenwood import GreenwoodScraper
+from app.discovery.custom_harrisonhotsprings import HarrisonHotSpringsScraper
+from app.discovery.custom_hazelton import HazeltonScraper
+from app.discovery.custom_hope import HopeScraper
+from app.discovery.custom_houston import HoustonScraper
+from app.discovery.custom_hudsonshope import HudsonsHopeScraper
+from app.discovery.custom_invermere import InvermereScraper
+from app.discovery.custom_kaslo import KasloScraper
+from app.discovery.custom_kent import KentScraper
+from app.discovery.custom_keremeos import KeremeosScraper
+from app.discovery.custom_kimberley import KimberleyScraper
+from app.discovery.custom_kitimat import KitimatScraper
+from app.discovery.custom_lillooet import LillooetScraper
+from app.discovery.custom_lionsbay import LionsBayScraper
+from app.discovery.custom_loganlake import LoganLakeScraper
+from app.discovery.custom_lumby import LumbyScraper
+from app.discovery.custom_mackenzie import MackenzieScraper
+from app.discovery.custom_mcbride import McBrideScraper
+from app.discovery.custom_midway import MidwayScraper
+from app.discovery.custom_montrose import MontroseScraper
+from app.discovery.custom_nakusp import NakuspScraper
+from app.discovery.custom_newdenver import NewDenverScraper
+from app.discovery.custom_newhazelton import NewHazeltonScraper
+from app.discovery.custom_northernrockies import NorthernRockiesScraper
+from app.discovery.custom_pemberton import PembertonScraper
+from app.discovery.custom_portedward import PortEdwardScraper
+from app.discovery.custom_porthardy import PortHardyScraper
+from app.discovery.custom_portmcneill import PortMcNeillScraper
+from app.discovery.custom_princeton import PrincetonScraper
+from app.discovery.custom_radiumhotsprings import RadiumHotSpringsScraper
+from app.discovery.custom_revelstoke import RevelstokeScraper
+from app.discovery.custom_riondel import RiondelScraper
+from app.discovery.custom_rossland import RosslandScraper
+from app.discovery.custom_salmo import SalmoScraper
+from app.discovery.custom_sicamous import SicamousScraper
+from app.discovery.custom_silverton import SilvertonScraper
+from app.discovery.custom_slocan import SlocanScraper
+from app.discovery.custom_smithers import SmithersScraper
+from app.discovery.custom_spallumcheen import SpallumcheenScraper
+from app.discovery.custom_sparwood import SparwoodScraper
+from app.discovery.custom_stewart import StewartScraper
+from app.discovery.custom_tahsis import TahsisScraper
+from app.discovery.custom_telkwa import TelkwaScraper
+from app.discovery.custom_tumblerridge import TumblerRidgeScraper
+from app.discovery.custom_valemount import ValemountScraper
+from app.discovery.custom_vanderhoof import VanderhoofScraper
+from app.discovery.custom_warfield import WarfieldScraper
+from app.discovery.custom_wells import WellsScraper
+from app.discovery.custom_zeballos import ZeballosScraper
+from app.discovery.custom_belcarra import BelcarraScraper
+from app.discovery.custom_burnslake import BurnsLakeScraper
+from app.discovery.custom_fraserlake import FraserLakeScraper
+from app.discovery.custom_anmore import AnmoreScraper
+from app.discovery.custom_masset import MassetScraper
+from app.discovery.custom_portalice import PortAliceScraper
+from app.discovery.custom_portclements import PortClementsScraper
+from app.discovery.custom_poucecoupe import PouceCoupeScraper
+from app.discovery.custom_sayward import SaywardScraper
 from app.config import settings
 from app.services.instant_alerts import send_immediate_alerts_for_documents
 
@@ -35,6 +140,128 @@ MEETING_TYPE_MAP = {
     "committee": MeetingType.COMMITTEE,
     "committee_of_the_whole": MeetingType.COW,
 }
+
+
+# Registry of custom scrapers keyed by municipality short_name
+CUSTOM_SCRAPER_MAP: dict[str, type] = {
+    # CRD municipalities
+    "Saanich": SaanichScraper,
+    "Sidney": SidneyScraper,
+    "Esquimalt": EsquimaltScraper,
+    "View Royal": ViewRoyalScraper,
+    "Langford": LangfordScraper,
+    "Highlands": HighlandsScraper,
+    "CRD": CRDScraper,
+    # BC municipalities — Batch 1+2
+    "100 Mile House": HundredMileHouseScraper,
+    "Armstrong": ArmstrongScraper,
+    "Castlegar": CastlegarScraper,
+    "Enderby": EnderbyScraper,
+    # BC municipalities — Phase 3
+    "Fernie": FernieScraper,
+    "Grand Forks": GrandForksScraper,
+    "Nelson": NelsonScraper,
+    # BC municipalities — Phase 4
+    "Prince Rupert": PrinceRupertScraper,
+    "Quesnel": QuesnelScraper,
+    "Salmon Arm": SalmonArmScraper,
+    "Surrey": SurreyScraper,
+    "Terrace": TerraceScraper,
+    "Trail": TrailScraper,
+    "Williams Lake": WilliamsLakeScraper,
+    # BC municipalities — Phases 7-11
+    "Ainsworth Hot Springs": AinsworthHotSpringsScraper,
+    "Alert Bay": AlertBayScraper,
+    "Ashcroft": AshcroftScraper,
+    "Balfour": BalfourScraper,
+    "Barriere": BarriereScraper,
+    "Cache Creek": CacheCreekScraper,
+    "Canal Flats": CanalFlatsScraper,
+    "Chase": ChaseScraper,
+    "Chetwynd": ChetwyndScraper,
+    "Christina Lake": ChristinaLakeScraper,
+    "Clearwater": ClearwaterScraper,
+    "Clinton": ClintonScraper,
+    "Coldstream": ColdstreamScraper,
+    "Cranbrook": CranbrookScraper,
+    "Creston": CrestonScraper,
+    "Cumberland": CumberlandScraper,
+    "Elkford": ElkfordScraper,
+    "Fort Nelson": FortNelsonScraper,
+    "Fort St. James": FortStJamesScraper,
+    "Fruitvale": FruitvaleScraper,
+    "Gibsons": GibsonsScraper,
+    "Gold River": GoldRiverScraper,
+    "Golden": GoldenScraper,
+    "Granisle": GranisleScraper,
+    "Greenwood": GreenwoodScraper,
+    "Harrison Hot Springs": HarrisonHotSpringsScraper,
+    "Hazelton": HazeltonScraper,
+    "Hope": HopeScraper,
+    "Houston": HoustonScraper,
+    "Hudson's Hope": HudsonsHopeScraper,
+    "Invermere": InvermereScraper,
+    "Kaslo": KasloScraper,
+    "Kent": KentScraper,
+    "Keremeos": KeremeosScraper,
+    "Kimberley": KimberleyScraper,
+    "Kitimat": KitimatScraper,
+    "Lillooet": LillooetScraper,
+    "Lions Bay": LionsBayScraper,
+    "Logan Lake": LoganLakeScraper,
+    "Lumby": LumbyScraper,
+    "Mackenzie": MackenzieScraper,
+    "McBride": McBrideScraper,
+    "Midway": MidwayScraper,
+    "Montrose": MontroseScraper,
+    "Nakusp": NakuspScraper,
+    "New Denver": NewDenverScraper,
+    "New Hazelton": NewHazeltonScraper,
+    "Northern Rockies": NorthernRockiesScraper,
+    "Pemberton": PembertonScraper,
+    "Port Edward": PortEdwardScraper,
+    "Port Hardy": PortHardyScraper,
+    "Port McNeill": PortMcNeillScraper,
+    "Princeton": PrincetonScraper,
+    "Radium Hot Springs": RadiumHotSpringsScraper,
+    "Revelstoke": RevelstokeScraper,
+    "Riondel": RiondelScraper,
+    "Rossland": RosslandScraper,
+    "Salmo": SalmoScraper,
+    "Sicamous": SicamousScraper,
+    "Silverton": SilvertonScraper,
+    "Slocan": SlocanScraper,
+    "Smithers": SmithersScraper,
+    "Spallumcheen": SpallumcheenScraper,
+    "Sparwood": SparwoodScraper,
+    "Stewart": StewartScraper,
+    "Tahsis": TahsisScraper,
+    "Telkwa": TelkwaScraper,
+    "Tumbler Ridge": TumblerRidgeScraper,
+    "Valemount": ValemountScraper,
+    "Vanderhoof": VanderhoofScraper,
+    "Warfield": WarfieldScraper,
+    "Wells": WellsScraper,
+    "Zeballos": ZeballosScraper,
+    # BC municipalities — Batch 17 (previously missing)
+    "Anmore": AnmoreScraper,
+    "Belcarra": BelcarraScraper,
+    "Burns Lake": BurnsLakeScraper,
+    "Fraser Lake": FraserLakeScraper,
+    "Masset": MassetScraper,
+    "Port Alice": PortAliceScraper,
+    "Port Clements": PortClementsScraper,
+    "Pouce Coupe": PouceCoupeScraper,
+    "Sayward": SaywardScraper,
+}
+
+
+def _get_custom_scraper(short_name: str, url: str) -> BaseScraper | None:
+    """Look up and instantiate a custom scraper for a municipality."""
+    scraper_cls = CUSTOM_SCRAPER_MAP.get(short_name)
+    if scraper_cls:
+        return scraper_cls(short_name, url)
+    return None
 
 
 async def poll_source(source: Source, municipality: Municipality) -> list[DiscoveredItem]:
@@ -64,6 +291,21 @@ async def poll_source(source: Source, municipality: Municipality) -> list[Discov
 
             scraper = YouTubeScraper(municipality.short_name, channel_id)
             return await scraper.discover()
+        elif source.platform == Platform.GRANICUS:
+            scraper = GranicusScraper(municipality.short_name, source.url)
+            return await scraper.discover()
+        elif source.platform == Platform.ESCRIBE:
+            scraper = EScribeScraper(municipality.short_name, source.url)
+            return await scraper.discover()
+        elif source.platform == Platform.CUSTOM:
+            scraper = _get_custom_scraper(municipality.short_name, source.url)
+            if scraper:
+                return await scraper.discover()
+            logger.warning(
+                "No custom scraper for %s (source %d: %s)",
+                municipality.short_name, source.id, source.label,
+            )
+            return []
         else:
             logger.warning(
                 "Unsupported platform %s for source %d (%s/%s)",
