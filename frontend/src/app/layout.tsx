@@ -28,7 +28,7 @@ export default function RootLayout({
                   BC Local Government Council Tracker
                 </h1>
                 <p className="text-xs text-gray-500">
-                  Housing, Transit &amp; Policy Monitoring for BC Municipalities
+                  Municipal Council Alerts &amp; Digest
                 </p>
               </div>
             </div>
