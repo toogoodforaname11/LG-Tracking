@@ -571,6 +571,27 @@ export default function SubscribePage() {
           </p>
         </div>
 
+        {/* Custom Keywords */}
+        <div className="border-t border-gray-100 p-5">
+          <h2 className="mb-1 text-sm font-semibold text-gray-900">
+            Custom Keywords
+          </h2>
+          <p className="mb-3 text-xs text-gray-500">
+            Track specific bylaw numbers, bill names, or phrases. You&apos;ll be notified every time these exact terms appear in council documents.
+          </p>
+          <input
+            id="keywords"
+            type="text"
+            value={keywords}
+            onChange={(e) => setKeywords(e.target.value)}
+            placeholder="e.g. Bylaw 1700, Bill 44, TOA zoning, affordable housing"
+            className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+          />
+          <p className="mt-1.5 text-xs text-gray-400">
+            Comma-separated. Matched against agendas, minutes, and videos.
+          </p>
+        </div>
+
         {/* Municipalities */}
         <div className="border-t border-gray-100 p-5">
           <h2 className="mb-3 text-sm font-semibold text-gray-900">
@@ -666,12 +687,15 @@ export default function SubscribePage() {
           )}
         </div>
 
-        {/* Topics */}
-        <div className="border-t border-gray-100 p-5">
-          <h2 className="mb-3 text-sm font-semibold text-gray-900">
-            Topics <span className="font-normal text-gray-400">(optional)</span>
-          </h2>
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+        {/* Topics — collapsible */}
+        <details className="group border-t border-gray-100">
+          <summary className="flex cursor-pointer items-center gap-2 p-5 text-sm font-semibold text-gray-900 hover:text-gray-700">
+            <svg className="h-4 w-4 text-gray-400 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+            Sample Topics <span className="font-normal text-gray-400">(optional)</span>
+          </summary>
+          <div className="grid grid-cols-1 gap-2 px-5 pb-5 sm:grid-cols-2">
             {AVAILABLE_TOPICS.map((topic) => {
               const isSelected = selectedTopics.includes(topic.id);
               const isExpanded = expandedTopics.has(topic.id);
@@ -770,28 +794,8 @@ export default function SubscribePage() {
               );
             })}
           </div>
-        </div>
+        </details>
 
-        {/* Custom Keywords */}
-        <div className="border-t border-gray-100 p-5">
-          <h2 className="mb-1 text-sm font-semibold text-gray-900">
-            Custom Keywords <span className="font-normal text-gray-400">(optional)</span>
-          </h2>
-          <p className="mb-3 text-xs text-gray-500">
-            Track specific bylaw numbers, bill names, or phrases. You&apos;ll be notified every time these exact terms appear in council documents.
-          </p>
-          <input
-            id="keywords"
-            type="text"
-            value={keywords}
-            onChange={(e) => setKeywords(e.target.value)}
-            placeholder="e.g. Bylaw 1700, Bill 44, TOA zoning, affordable housing"
-            className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
-          />
-          <p className="mt-1.5 text-xs text-gray-400">
-            Comma-separated. Matched against agendas, minutes, and videos.
-          </p>
-        </div>
       </div>
 
       {/* ── Delivery + Submit card ── */}
