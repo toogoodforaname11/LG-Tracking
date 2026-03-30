@@ -1,11 +1,12 @@
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, func
+from sqlalchemy import select, func, case, literal_column
+from sqlalchemy.orm import selectinload
 
 from app.db.database import get_db
 from app.discovery.poller import run_discovery
 from app.models.document import Document, Meeting
-from app.models.municipality import Municipality, ScrapeRun
+from app.models.municipality import Municipality, Source, ScrapeRun, ScrapeStatus
 from app.api.dependencies import verify_cron_secret
 
 router = APIRouter()
@@ -108,3 +109,70 @@ async def list_scrape_runs(limit: int = 20, db: AsyncSession = Depends(get_db)):
         }
         for r in runs
     ]
+
+
+@router.get("/source-health")
+async def source_health(
+    status: str | None = Query(None, description="Filter by scrape status (ACTIVE, BROKEN, PENDING)"),
+    platform: str | None = Query(None, description="Filter by platform"),
+    db: AsyncSession = Depends(get_db),
+):
+    """Per-source health dashboard: shows each source with its last scrape result.
+
+    Returns aggregate counts and per-source details including last scrape time,
+    consecutive failures, and most recent error.
+    """
+    # Build the latest scrape run subquery
+    latest_run = (
+        select(
+            ScrapeRun.source_id,
+            func.max(ScrapeRun.started_at).label("last_run_at"),
+        )
+        .group_by(ScrapeRun.source_id)
+        .subquery()
+    )
+
+    # Main query: sources with municipality names and latest run info
+    query = (
+        select(Source, Municipality.short_name.label("municipality_name"), latest_run.c.last_run_at)
+        .join(Municipality, Source.municipality_id == Municipality.id)
+        .outerjoin(latest_run, Source.id == latest_run.c.source_id)
+        .order_by(Municipality.short_name, Source.platform)
+    )
+
+    if status:
+        try:
+            status_enum = ScrapeStatus(status.upper())
+            query = query.where(Source.scrape_status == status_enum)
+        except ValueError:
+            pass
+    if platform:
+        query = query.where(Source.platform == platform.upper())
+
+    result = await db.execute(query)
+    rows = result.all()
+
+    # Aggregate counts
+    status_counts: dict[str, int] = {}
+    sources_list = []
+    for source, muni_name, last_run_at in rows:
+        s_status = source.scrape_status.value if source.scrape_status else "UNKNOWN"
+        status_counts[s_status] = status_counts.get(s_status, 0) + 1
+        sources_list.append({
+            "source_id": source.id,
+            "municipality": muni_name,
+            "platform": source.platform.value if source.platform else None,
+            "label": source.label,
+            "url": source.url,
+            "scrape_status": s_status,
+            "consecutive_failures": source.consecutive_failures,
+            "last_scraped_at": source.last_scraped_at.isoformat() if source.last_scraped_at else None,
+            "last_run_at": last_run_at.isoformat() if last_run_at else None,
+            "last_error": source.last_error,
+        })
+
+    return {
+        "total_sources": len(sources_list),
+        "status_counts": status_counts,
+        "sources": sources_list,
+    }

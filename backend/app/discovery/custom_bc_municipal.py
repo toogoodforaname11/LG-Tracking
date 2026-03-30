@@ -193,3 +193,123 @@ class BCMunicipalScraper(BaseScraper):
                     )
 
         return items
+
+
+# ---------------------------------------------------------------------------
+# Config-driven generic scraper registry
+# ---------------------------------------------------------------------------
+# Maps municipality short_name -> extra subpage keywords beyond the base set.
+# Municipalities not listed here get just the base keywords.
+
+GENERIC_SCRAPER_KEYWORDS: dict[str, list[str]] = {
+    "100 Mile House": ["council-meetings", "council meetings"],
+    "Ainsworth Hot Springs": ["rdkb"],
+    "Alert Bay": ["council"],
+    "Anmore": ["council", "agendas-minutes"],
+    "Armstrong": ["council", "bylaws"],
+    "Ashcroft": ["council"],
+    "Balfour": ["rdkb"],
+    "Barriere": ["council"],
+    "Belcarra": ["council"],
+    "Burns Lake": ["council"],
+    "Cache Creek": ["council"],
+    "Canal Flats": ["council"],
+    "Castlegar": ["council", "bylaws"],
+    "Chase": ["council"],
+    "Chetwynd": ["council"],
+    "Christina Lake": ["rdkb"],
+    "Clearwater": ["council"],
+    "Clinton": ["council"],
+    "Coldstream": ["council"],
+    "Cranbrook": ["council"],
+    "Creston": ["council"],
+    "Cumberland": ["council"],
+    "Elkford": ["council"],
+    "Enderby": ["council", "bylaws"],
+    "Fernie": ["council-meetings", "council meetings"],
+    "Fort Nelson": ["council"],
+    "Fort St. James": ["council"],
+    "Fraser Lake": ["council"],
+    "Fruitvale": ["council"],
+    "Gibsons": ["council"],
+    "Gold River": ["council"],
+    "Golden": ["council"],
+    "Grand Forks": ["council", "bylaws"],
+    "Granisle": ["council"],
+    "Greenwood": ["council"],
+    "Harrison Hot Springs": ["council"],
+    "Hazelton": ["council"],
+    "Hope": ["council"],
+    "Houston": ["council"],
+    "Hudson's Hope": ["council"],
+    "Invermere": ["council"],
+    "Kaslo": ["council"],
+    "Kent": ["council"],
+    "Keremeos": ["council"],
+    "Kimberley": ["council"],
+    "Kitimat": ["council"],
+    "Lillooet": ["council"],
+    "Lions Bay": ["council"],
+    "Logan Lake": ["council"],
+    "Lumby": ["council"],
+    "Mackenzie": ["council"],
+    "Masset": ["council"],
+    "McBride": ["council"],
+    "Midway": ["council"],
+    "Montrose": ["council"],
+    "Nakusp": ["council"],
+    "Nelson": ["council", "bylaws"],
+    "New Denver": ["council"],
+    "New Hazelton": ["council"],
+    "Northern Rockies": ["council"],
+    "Pemberton": ["council"],
+    "Port Alice": ["council"],
+    "Port Clements": ["council"],
+    "Port Edward": ["council"],
+    "Port Hardy": ["council"],
+    "Port McNeill": ["council"],
+    "Pouce Coupe": ["council"],
+    "Prince Rupert": ["council-meetings", "council meetings"],
+    "Princeton": ["council"],
+    "Quesnel": ["council", "bylaws"],
+    "Radium Hot Springs": ["council"],
+    "Revelstoke": ["council"],
+    "Riondel": ["council"],
+    "Rossland": ["council"],
+    "Salmo": ["council"],
+    "Salmon Arm": ["council", "bylaws"],
+    "Sayward": ["council"],
+    "Sicamous": ["council"],
+    "Silverton": ["council"],
+    "Slocan": ["council"],
+    "Smithers": ["council"],
+    "Spallumcheen": ["council"],
+    "Sparwood": ["council"],
+    "Stewart": ["council"],
+    "Surrey": ["council", "bylaws", "public-hearing"],
+    "Tahsis": ["council"],
+    "Telkwa": ["council"],
+    "Terrace": ["council", "bylaws"],
+    "Trail": ["council", "bylaws"],
+    "Tumbler Ridge": ["council"],
+    "Valemount": ["council"],
+    "Vanderhoof": ["council"],
+    "Warfield": ["council"],
+    "Wells": ["council"],
+    "Williams Lake": ["council", "bylaws"],
+    "Zeballos": ["council"],
+}
+
+
+def make_generic_scraper(short_name: str, url: str) -> BCMunicipalScraper | None:
+    """Create a BCMunicipalScraper with config-driven keywords for a municipality.
+
+    Returns None if the municipality has no entry in GENERIC_SCRAPER_KEYWORDS.
+    """
+    extra_keywords = GENERIC_SCRAPER_KEYWORDS.get(short_name)
+    if extra_keywords is None:
+        return None
+
+    scraper = BCMunicipalScraper(short_name, url)
+    scraper._subpage_keywords = [*BCMunicipalScraper._subpage_keywords, *extra_keywords]
+    return scraper

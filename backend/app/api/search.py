@@ -1,4 +1,4 @@
-"""Search API — keyword search now, vector RAG search later."""
+"""Search API — keyword search across documents and match summaries."""
 
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -19,7 +19,7 @@ async def search_documents(
 ):
     """Search across discovered documents and match summaries.
 
-    Currently uses SQL LIKE. Will be upgraded to Pinecone vector search.
+    Uses SQL LIKE for full-text keyword matching.
     """
     pattern = f"%{q}%"
 
@@ -73,5 +73,5 @@ async def search_documents(
             for m in match_results
         ],
         "total": len(docs) + len(match_results),
-        "search_type": "keyword",  # Will be "vector" when Pinecone is configured
+        "search_type": "keyword",
     }

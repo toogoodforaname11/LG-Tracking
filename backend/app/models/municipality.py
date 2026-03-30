@@ -88,6 +88,7 @@ class Source(Base):
     scrape_config: Mapped[str | None] = mapped_column(Text)  # JSON config for scraper
     last_scraped_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     last_error: Mapped[str | None] = mapped_column(Text)
+    consecutive_failures: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         default=lambda: datetime.now(timezone.utc),

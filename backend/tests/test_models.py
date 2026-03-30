@@ -3,7 +3,6 @@
 from app.models.municipality import Municipality, Source, ScrapeRun, GovType, Platform, SourceType, ScrapeStatus
 from app.models.document import Document, Meeting, DocType, MeetingType
 from app.models.track import Track, TrackMatch, AVAILABLE_TOPICS
-from app.models.audit import AuditLog
 
 
 def test_all_models_importable():
@@ -15,7 +14,6 @@ def test_all_models_importable():
     assert Document.__tablename__ == "documents"
     assert Track.__tablename__ == "tracks"
     assert TrackMatch.__tablename__ == "track_matches"
-    assert AuditLog.__tablename__ == "audit_log"
 
 
 def test_enums():

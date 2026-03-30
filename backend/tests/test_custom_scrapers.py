@@ -71,6 +71,17 @@ def test_get_custom_scraper_returns_correct_type():
     assert scraper is None
 
 
+def test_get_custom_scraper_returns_generic_for_config_municipalities():
+    """Config-driven municipalities should get BCMunicipalScraper instances."""
+    from app.discovery.custom_bc_municipal import BCMunicipalScraper
+
+    scraper = _get_custom_scraper("Surrey", "https://www.surrey.ca/council")
+    assert isinstance(scraper, BCMunicipalScraper)
+    assert "council" in scraper._subpage_keywords
+    assert "bylaws" in scraper._subpage_keywords
+    assert "public-hearing" in scraper._subpage_keywords
+
+
 # --- Scraper instantiation ---
 
 

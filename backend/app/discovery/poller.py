@@ -16,6 +16,8 @@ from app.discovery.civicweb import CivicWebScraper
 from app.discovery.granicus import GranicusScraper
 from app.discovery.escribe import EScribeScraper
 from app.discovery.youtube import YouTubeScraper
+from app.discovery.custom_bc_municipal import make_generic_scraper, GENERIC_SCRAPER_KEYWORDS
+# Substantive custom scrapers with real parsing logic (not just keyword configs)
 from app.discovery.custom_saanich import SaanichScraper
 from app.discovery.custom_sidney import SidneyScraper
 from app.discovery.custom_esquimalt import EsquimaltScraper
@@ -23,106 +25,18 @@ from app.discovery.custom_viewroyal import ViewRoyalScraper
 from app.discovery.custom_langford import LangfordScraper
 from app.discovery.custom_highlands import HighlandsScraper
 from app.discovery.custom_crd import CRDScraper
-from app.discovery.custom_100milehouse import HundredMileHouseScraper
-from app.discovery.custom_armstrong import ArmstrongScraper
-from app.discovery.custom_castlegar import CastlegarScraper
-from app.discovery.custom_enderby import EnderbyScraper
-from app.discovery.custom_fernie import FernieScraper
-from app.discovery.custom_grandforks import GrandForksScraper
-from app.discovery.custom_nelson import NelsonScraper
-from app.discovery.custom_princerupert import PrinceRupertScraper
-from app.discovery.custom_quesnel import QuesnelScraper
-from app.discovery.custom_salmonarm import SalmonArmScraper
-from app.discovery.custom_surrey import SurreyScraper
-from app.discovery.custom_terrace import TerraceScraper
-from app.discovery.custom_trail import TrailScraper
-from app.discovery.custom_williamslake import WilliamsLakeScraper
-from app.discovery.custom_ainsworthhotsprings import AinsworthHotSpringsScraper
-from app.discovery.custom_alertbay import AlertBayScraper
-from app.discovery.custom_ashcroft import AshcroftScraper
-from app.discovery.custom_balfour import BalfourScraper
-from app.discovery.custom_barriere import BarriereScraper
-from app.discovery.custom_cachecreek import CacheCreekScraper
-from app.discovery.custom_canalflats import CanalFlatsScraper
-from app.discovery.custom_chase import ChaseScraper
-from app.discovery.custom_chetwynd import ChetwyndScraper
-from app.discovery.custom_christinalake import ChristinaLakeScraper
-from app.discovery.custom_clearwater import ClearwaterScraper
-from app.discovery.custom_clinton import ClintonScraper
-from app.discovery.custom_coldstream import ColdstreamScraper
-from app.discovery.custom_cranbrook import CranbrookScraper
-from app.discovery.custom_creston import CrestonScraper
-from app.discovery.custom_cumberland import CumberlandScraper
-from app.discovery.custom_elkford import ElkfordScraper
-from app.discovery.custom_fortnelson import FortNelsonScraper
-from app.discovery.custom_fortstjames import FortStJamesScraper
-from app.discovery.custom_fruitvale import FruitvaleScraper
-from app.discovery.custom_gibsons import GibsonsScraper
-from app.discovery.custom_goldriver import GoldRiverScraper
-from app.discovery.custom_golden import GoldenScraper
-from app.discovery.custom_granisle import GranisleScraper
-from app.discovery.custom_greenwood import GreenwoodScraper
-from app.discovery.custom_harrisonhotsprings import HarrisonHotSpringsScraper
-from app.discovery.custom_hazelton import HazeltonScraper
-from app.discovery.custom_hope import HopeScraper
-from app.discovery.custom_houston import HoustonScraper
-from app.discovery.custom_hudsonshope import HudsonsHopeScraper
-from app.discovery.custom_invermere import InvermereScraper
-from app.discovery.custom_kaslo import KasloScraper
-from app.discovery.custom_kent import KentScraper
-from app.discovery.custom_keremeos import KeremeosScraper
-from app.discovery.custom_kimberley import KimberleyScraper
-from app.discovery.custom_kitimat import KitimatScraper
-from app.discovery.custom_lillooet import LillooetScraper
-from app.discovery.custom_lionsbay import LionsBayScraper
-from app.discovery.custom_loganlake import LoganLakeScraper
-from app.discovery.custom_lumby import LumbyScraper
-from app.discovery.custom_mackenzie import MackenzieScraper
-from app.discovery.custom_mcbride import McBrideScraper
-from app.discovery.custom_midway import MidwayScraper
-from app.discovery.custom_montrose import MontroseScraper
-from app.discovery.custom_nakusp import NakuspScraper
-from app.discovery.custom_newdenver import NewDenverScraper
-from app.discovery.custom_newhazelton import NewHazeltonScraper
-from app.discovery.custom_northernrockies import NorthernRockiesScraper
-from app.discovery.custom_pemberton import PembertonScraper
-from app.discovery.custom_portedward import PortEdwardScraper
-from app.discovery.custom_porthardy import PortHardyScraper
-from app.discovery.custom_portmcneill import PortMcNeillScraper
-from app.discovery.custom_princeton import PrincetonScraper
-from app.discovery.custom_radiumhotsprings import RadiumHotSpringsScraper
-from app.discovery.custom_revelstoke import RevelstokeScraper
-from app.discovery.custom_riondel import RiondelScraper
-from app.discovery.custom_rossland import RosslandScraper
-from app.discovery.custom_salmo import SalmoScraper
-from app.discovery.custom_sicamous import SicamousScraper
-from app.discovery.custom_silverton import SilvertonScraper
-from app.discovery.custom_slocan import SlocanScraper
-from app.discovery.custom_smithers import SmithersScraper
-from app.discovery.custom_spallumcheen import SpallumcheenScraper
-from app.discovery.custom_sparwood import SparwoodScraper
-from app.discovery.custom_stewart import StewartScraper
-from app.discovery.custom_tahsis import TahsisScraper
-from app.discovery.custom_telkwa import TelkwaScraper
-from app.discovery.custom_tumblerridge import TumblerRidgeScraper
-from app.discovery.custom_valemount import ValemountScraper
-from app.discovery.custom_vanderhoof import VanderhoofScraper
-from app.discovery.custom_warfield import WarfieldScraper
-from app.discovery.custom_wells import WellsScraper
-from app.discovery.custom_zeballos import ZeballosScraper
-from app.discovery.custom_belcarra import BelcarraScraper
-from app.discovery.custom_burnslake import BurnsLakeScraper
-from app.discovery.custom_fraserlake import FraserLakeScraper
-from app.discovery.custom_anmore import AnmoreScraper
-from app.discovery.custom_masset import MassetScraper
-from app.discovery.custom_portalice import PortAliceScraper
-from app.discovery.custom_portclements import PortClementsScraper
-from app.discovery.custom_poucecoupe import PouceCoupeScraper
-from app.discovery.custom_sayward import SaywardScraper
 from app.config import settings
 from app.services.instant_alerts import send_immediate_alerts_for_documents
 
 logger = logging.getLogger(__name__)
+
+# Number of consecutive poll failures before a source is marked BROKEN.
+BROKEN_THRESHOLD = 5
+
+# Maximum number of sources polled concurrently.  Keeps total outbound
+# connections reasonable while dramatically reducing overall poll time
+# compared to sequential execution.
+MAX_CONCURRENT_POLLS = 8
 
 
 # Map item_type strings to DocType enum
@@ -142,9 +56,9 @@ MEETING_TYPE_MAP = {
 }
 
 
-# Registry of custom scrapers keyed by municipality short_name
+# Substantive custom scrapers with municipality-specific parsing logic.
+# These override discover() or _parse_page() beyond simple keyword config.
 CUSTOM_SCRAPER_MAP: dict[str, type] = {
-    # CRD municipalities
     "Saanich": SaanichScraper,
     "Sidney": SidneyScraper,
     "Esquimalt": EsquimaltScraper,
@@ -152,116 +66,20 @@ CUSTOM_SCRAPER_MAP: dict[str, type] = {
     "Langford": LangfordScraper,
     "Highlands": HighlandsScraper,
     "CRD": CRDScraper,
-    # BC municipalities — Batch 1+2
-    "100 Mile House": HundredMileHouseScraper,
-    "Armstrong": ArmstrongScraper,
-    "Castlegar": CastlegarScraper,
-    "Enderby": EnderbyScraper,
-    # BC municipalities — Phase 3
-    "Fernie": FernieScraper,
-    "Grand Forks": GrandForksScraper,
-    "Nelson": NelsonScraper,
-    # BC municipalities — Phase 4
-    "Prince Rupert": PrinceRupertScraper,
-    "Quesnel": QuesnelScraper,
-    "Salmon Arm": SalmonArmScraper,
-    "Surrey": SurreyScraper,
-    "Terrace": TerraceScraper,
-    "Trail": TrailScraper,
-    "Williams Lake": WilliamsLakeScraper,
-    # BC municipalities — Phases 7-11
-    "Ainsworth Hot Springs": AinsworthHotSpringsScraper,
-    "Alert Bay": AlertBayScraper,
-    "Ashcroft": AshcroftScraper,
-    "Balfour": BalfourScraper,
-    "Barriere": BarriereScraper,
-    "Cache Creek": CacheCreekScraper,
-    "Canal Flats": CanalFlatsScraper,
-    "Chase": ChaseScraper,
-    "Chetwynd": ChetwyndScraper,
-    "Christina Lake": ChristinaLakeScraper,
-    "Clearwater": ClearwaterScraper,
-    "Clinton": ClintonScraper,
-    "Coldstream": ColdstreamScraper,
-    "Cranbrook": CranbrookScraper,
-    "Creston": CrestonScraper,
-    "Cumberland": CumberlandScraper,
-    "Elkford": ElkfordScraper,
-    "Fort Nelson": FortNelsonScraper,
-    "Fort St. James": FortStJamesScraper,
-    "Fruitvale": FruitvaleScraper,
-    "Gibsons": GibsonsScraper,
-    "Gold River": GoldRiverScraper,
-    "Golden": GoldenScraper,
-    "Granisle": GranisleScraper,
-    "Greenwood": GreenwoodScraper,
-    "Harrison Hot Springs": HarrisonHotSpringsScraper,
-    "Hazelton": HazeltonScraper,
-    "Hope": HopeScraper,
-    "Houston": HoustonScraper,
-    "Hudson's Hope": HudsonsHopeScraper,
-    "Invermere": InvermereScraper,
-    "Kaslo": KasloScraper,
-    "Kent": KentScraper,
-    "Keremeos": KeremeosScraper,
-    "Kimberley": KimberleyScraper,
-    "Kitimat": KitimatScraper,
-    "Lillooet": LillooetScraper,
-    "Lions Bay": LionsBayScraper,
-    "Logan Lake": LoganLakeScraper,
-    "Lumby": LumbyScraper,
-    "Mackenzie": MackenzieScraper,
-    "McBride": McBrideScraper,
-    "Midway": MidwayScraper,
-    "Montrose": MontroseScraper,
-    "Nakusp": NakuspScraper,
-    "New Denver": NewDenverScraper,
-    "New Hazelton": NewHazeltonScraper,
-    "Northern Rockies": NorthernRockiesScraper,
-    "Pemberton": PembertonScraper,
-    "Port Edward": PortEdwardScraper,
-    "Port Hardy": PortHardyScraper,
-    "Port McNeill": PortMcNeillScraper,
-    "Princeton": PrincetonScraper,
-    "Radium Hot Springs": RadiumHotSpringsScraper,
-    "Revelstoke": RevelstokeScraper,
-    "Riondel": RiondelScraper,
-    "Rossland": RosslandScraper,
-    "Salmo": SalmoScraper,
-    "Sicamous": SicamousScraper,
-    "Silverton": SilvertonScraper,
-    "Slocan": SlocanScraper,
-    "Smithers": SmithersScraper,
-    "Spallumcheen": SpallumcheenScraper,
-    "Sparwood": SparwoodScraper,
-    "Stewart": StewartScraper,
-    "Tahsis": TahsisScraper,
-    "Telkwa": TelkwaScraper,
-    "Tumbler Ridge": TumblerRidgeScraper,
-    "Valemount": ValemountScraper,
-    "Vanderhoof": VanderhoofScraper,
-    "Warfield": WarfieldScraper,
-    "Wells": WellsScraper,
-    "Zeballos": ZeballosScraper,
-    # BC municipalities — Batch 17 (previously missing)
-    "Anmore": AnmoreScraper,
-    "Belcarra": BelcarraScraper,
-    "Burns Lake": BurnsLakeScraper,
-    "Fraser Lake": FraserLakeScraper,
-    "Masset": MassetScraper,
-    "Port Alice": PortAliceScraper,
-    "Port Clements": PortClementsScraper,
-    "Pouce Coupe": PouceCoupeScraper,
-    "Sayward": SaywardScraper,
 }
 
 
 def _get_custom_scraper(short_name: str, url: str) -> BaseScraper | None:
-    """Look up and instantiate a custom scraper for a municipality."""
+    """Look up and instantiate a custom scraper for a municipality.
+
+    First checks the substantive scraper map (for municipalities with custom
+    parsing logic), then falls back to the config-driven generic scraper
+    factory (for municipalities that only need extra subpage keywords).
+    """
     scraper_cls = CUSTOM_SCRAPER_MAP.get(short_name)
     if scraper_cls:
         return scraper_cls(short_name, url)
-    return None
+    return make_generic_scraper(short_name, url)
 
 
 async def poll_source(source: Source, municipality: Municipality) -> list[DiscoveredItem]:
@@ -301,8 +119,9 @@ async def poll_source(source: Source, municipality: Municipality) -> list[Discov
             scraper = _get_custom_scraper(municipality.short_name, source.url)
             if scraper:
                 return await scraper.discover()
-            logger.warning(
-                "No custom scraper for %s (source %d: %s)",
+            logger.error(
+                "No custom scraper registered for %s (source %d: %s). "
+                "Add an entry to CUSTOM_SCRAPER_MAP in poller.py.",
                 municipality.short_name, source.id, source.label,
             )
             return []
@@ -430,8 +249,30 @@ async def store_discovered_items(
     return stats, new_docs
 
 
+async def _poll_one(
+    sem: asyncio.Semaphore,
+    source: Source,
+    municipality: Municipality,
+) -> tuple[Source, Municipality, list[DiscoveredItem] | None, Exception | None]:
+    """Poll a single source with semaphore-bounded concurrency.
+
+    Returns (source, municipality, items_or_None, error_or_None).
+    HTTP fetching happens concurrently; DB writes are done by the caller.
+    """
+    async with sem:
+        try:
+            items = await poll_source(source, municipality)
+            return source, municipality, items, None
+        except Exception as e:
+            return source, municipality, None, e
+
+
 async def run_discovery(db: AsyncSession, municipality_filter: str | None = None) -> dict:
     """Run discovery across all active sources.
+
+    Sources are polled concurrently (bounded by MAX_CONCURRENT_POLLS) for
+    speed, then results are stored sequentially through the shared DB
+    session to avoid concurrency issues with SQLAlchemy.
 
     After polling, sends immediate alerts for any new documents to subscribers
     who have immediate_alerts enabled.
@@ -446,7 +287,7 @@ async def run_discovery(db: AsyncSession, municipality_filter: str | None = None
     query = (
         select(Source, Municipality)
         .join(Municipality, Source.municipality_id == Municipality.id)
-        .where(Source.scrape_status.in_([ScrapeStatus.ACTIVE, ScrapeStatus.PENDING]))
+        .where(Source.scrape_status.in_([ScrapeStatus.ACTIVE, ScrapeStatus.PENDING, ScrapeStatus.BROKEN]))
         .where(Municipality.is_active.is_(True))
     )
     if municipality_filter:
@@ -455,51 +296,69 @@ async def run_discovery(db: AsyncSession, municipality_filter: str | None = None
     result = await db.execute(query)
     source_munis = result.all()
 
+    if not source_munis:
+        return {}
+
+    # Phase 1: Poll all sources concurrently (HTTP only, no DB writes).
+    sem = asyncio.Semaphore(MAX_CONCURRENT_POLLS)
+    tasks = [
+        _poll_one(sem, source, municipality)
+        for source, municipality in source_munis
+    ]
+    poll_results = await asyncio.gather(*tasks)
+
+    # Phase 2: Store results sequentially through the shared DB session.
     results = {}
     all_new_docs: list[Document] = []
 
-    for source, municipality in source_munis:
+    for source, municipality, items, error in poll_results:
         muni_name = municipality.short_name
-        logger.info("Polling %s / %s", muni_name, source.label)
 
         scrape_run = ScrapeRun(source_id=source.id)
         db.add(scrape_run)
         await db.flush()
 
-        try:
-            items = await poll_source(source, municipality)
-            stats, new_docs = await store_discovered_items(db, items, source, municipality)
-            all_new_docs.extend(new_docs)
+        if error is None and items is not None:
+            try:
+                stats, new_docs = await store_discovered_items(db, items, source, municipality)
+                all_new_docs.extend(new_docs)
 
-            scrape_run.finished_at = datetime.now(timezone.utc)
-            scrape_run.status = "success"
-            scrape_run.documents_found = stats["total"]
-            scrape_run.new_documents = stats["new"]
+                scrape_run.finished_at = datetime.now(timezone.utc)
+                scrape_run.status = "success"
+                scrape_run.documents_found = stats["total"]
+                scrape_run.new_documents = stats["new"]
 
-            source.scrape_status = ScrapeStatus.ACTIVE
-            source.last_scraped_at = datetime.now(timezone.utc)
-            source.last_error = None
+                source.scrape_status = ScrapeStatus.ACTIVE
+                source.last_scraped_at = datetime.now(timezone.utc)
+                source.last_error = None
+                source.consecutive_failures = 0
 
-            results[f"{muni_name}/{source.label}"] = stats
-            logger.info("  %s/%s: %d items (%d new)", muni_name, source.label, stats["total"], stats["new"])
+                results[f"{muni_name}/{source.label}"] = stats
+                logger.info("  %s/%s: %d items (%d new)", muni_name, source.label, stats["total"], stats["new"])
+            except Exception as e:
+                # store_discovered_items failed — treat as poll error
+                error = e
 
-        except Exception as e:
-            logger.error("Error during poll of %s/%s: %s", muni_name, source.label, e)
+        if error is not None:
+            logger.error("Error during poll of %s/%s: %s", muni_name, source.label, error)
             scrape_run.finished_at = datetime.now(timezone.utc)
             scrape_run.status = "error"
-            scrape_run.error_message = str(e)
+            scrape_run.error_message = str(error)
 
-            source.last_error = str(e)
-            source.scrape_status = ScrapeStatus.BROKEN
+            source.last_error = str(error)
+            source.consecutive_failures = (source.consecutive_failures or 0) + 1
+            if source.consecutive_failures >= BROKEN_THRESHOLD:
+                source.scrape_status = ScrapeStatus.BROKEN
+                logger.warning(
+                    "%s/%s marked BROKEN after %d consecutive failures",
+                    muni_name, source.label, source.consecutive_failures,
+                )
 
-            results[f"{muni_name}/{source.label}"] = {"error": str(e)}
+            results[f"{muni_name}/{source.label}"] = {"error": str(error)}
 
         await db.commit()
 
-        # Rate limiting between sources
-        await asyncio.sleep(settings.request_delay_seconds)
-
-    # Send immediate alerts for all new documents discovered in this run
+    # Phase 3: Send immediate alerts for all new documents discovered in this run.
     if all_new_docs:
         try:
             alert_stats = await send_immediate_alerts_for_documents(db, all_new_docs)

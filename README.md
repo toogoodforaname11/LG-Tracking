@@ -4,15 +4,56 @@ Subscribe to **immediate alerts** and **weekly AI-summarized digests** of BC mun
 
 **This is an experimental personal tool using public data. AI summaries may contain errors. Always verify with original municipal sources. Not official government communication.**
 
+## Coverage
+
+**166 BC municipalities** tracked across 5 scraper platforms:
+
+| Platform | Municipalities | Discovery Method |
+|----------|---------------|-----------------|
+| CivicWeb | ~60 | Multi-strategy HTML scraping (schedule, type list, detail pages) |
+| Custom | ~103 | Per-municipality HTML scrapers via `BCMunicipalScraper` base class |
+| Granicus | ~11 | Multi-path HTML scraping |
+| YouTube | ~10 | RSS feed + timestamp extraction (no API key needed) |
+| eScribe | ~3 | Multi-path HTML scraping |
+
+### CRD Municipalities (14)
+
+| Municipality | Platform | Status |
+|---|---|---|
+| Colwood | CivicWeb + YouTube | Active |
+| Victoria | CivicWeb + eScribe | Active |
+| Central Saanich | CivicWeb + Granicus | Active |
+| North Saanich | CivicWeb | Active |
+| Oak Bay | CivicWeb | Active |
+| Metchosin | CivicWeb | Active |
+| Sooke | CivicWeb | Active |
+| Saanich | Custom + Granicus | Active |
+| Sidney | Custom + CivicWeb | Active |
+| Esquimalt | Custom + CivicWeb | Active |
+| View Royal | Custom + CivicWeb | Active |
+| Langford | Custom + CivicWeb | Active |
+| Highlands | Custom + CivicWeb | Active |
+| CRD Board | Custom | Active |
+
+### BC-Wide Coverage
+
+An additional 150+ municipalities across Metro Vancouver, Fraser Valley, Vancouver Island, Interior, Kootenays, and Northern BC. The full list is available via the `GET /api/v1/municipalities` endpoint or in the frontend subscription form.
+
 ## Topics Tracked
 
-- **Transit Oriented Areas (TOA)** — TOA designations, density near transit
+- **Transit Oriented Development (TOD)** — TOD designations, density near transit
+- **Transit Oriented Areas (TOA) / Bill 47** — increased density near rapid transit stations
 - **Small-Scale Multi-Unit Housing (SSMUH)** — duplex, triplex, fourplex, missing middle
-- **Housing Statutes Amendment Bills** — Bill 44, Bill 46, Bill 47, related provincial legislation
+- **Housing Statutes Amendment Bills** — Bill 44, Bill 46, Bill 47, Bill 16, Bill 25
 - **Official Community Plan (OCP)** — housing-related OCP amendments and updates
 - **Zoning / Rezoning for Housing Density** — upzoning, density bonuses, zoning bylaw changes
 - **Development Permits Affecting Housing** — residential DP applications and variances
-- **Other Housing-Related Bylaws / Legislation** — anything else housing-related
+- **Area Plans** — local area or neighbourhood plans
+- **BRT / Bus Rapid Transit** — bus priority infrastructure
+- **Multimodal Transport & Active Transportation**
+- **Provincial Housing Targets / Housing Needs Reports**
+- **Development Cost Charges / Affordability Incentives**
+- **Transportation Plans / Studies**
 
 ### Specific Bylaw Tracking
 
@@ -21,7 +62,7 @@ You can track specific bylaws by name or number (e.g. "Bylaw 1700" or "Housing S
 ## How It Works
 
 1. **Subscribe**: Visit the form at `/`, enter your email, pick municipalities, housing topics, and optionally enable immediate alerts
-2. **Edit**: Submit the same form with the same email — your preferences are overwritten instantly
+2. **Edit**: Submit the same form with the same email — a magic link is sent to confirm changes
 3. **Immediate Alerts** (opt-in): Sources are polled every 30 minutes. When a new matching council item is detected, you get an email right away
 4. **Weekly Digest** (always): Every Sunday at 8 PM Pacific, you receive a full summary of the week's matching council updates
 5. **Unsubscribe**: One-click link in every email
@@ -31,11 +72,26 @@ You can track specific bylaws by name or number (e.g. "Bylaw 1700" or "Housing S
 - **Frontend**: Next.js 15 + Tailwind CSS — single subscription form page
 - **Backend**: FastAPI + SQLAlchemy (async) + Neon Postgres
 - **Email**: Resend SDK for transactional emails (alerts + digests)
-- **AI**: Gemini 1.5 Flash (matching + summaries)
-- **Verification**: Perplexity Search API (fact-checking)
-- **Discovery**: CivicWeb scraper + YouTube RSS (agendas, minutes, videos)
+- **AI**: Gemini 1.5 Flash (matching + summaries) with keyword fallback
+- **Verification**: Perplexity Search API (optional fact-checking)
+- **Discovery**: CivicWeb, Granicus, eScribe, YouTube RSS, and custom HTML scrapers
 - **Polling**: Every 30 minutes via cron
-- **Deploy**: Hostinger VPS (Ubuntu 22.04) or Vercel (free tier)
+- **Deploy**: Hostinger VPS (Ubuntu 22.04) or Vercel
+
+### Scraper Architecture
+
+All scrapers live in `backend/app/discovery/`:
+
+| File | Purpose |
+|------|---------|
+| `base.py` | Abstract base class with HTTP client, retries, and `DiscoveredItem` dataclass |
+| `civicweb.py` | CivicWeb/Diligent portal scraper (multi-strategy) |
+| `granicus.py` | Granicus meeting management scraper |
+| `escribe.py` | eScribe meeting portal scraper |
+| `youtube.py` | YouTube RSS feed + timestamp extraction |
+| `custom_bc_municipal.py` | Base class for custom municipal website scrapers |
+| `custom_*.py` | Per-municipality scrapers extending `BCMunicipalScraper` |
+| `poller.py` | Orchestrator — polls all active sources, stores results, triggers alerts |
 
 ## Quick Start
 
@@ -79,12 +135,15 @@ curl "http://localhost:8000/api/v1/cron/trigger-alerts?email=you@example.com"
 
 | Variable | Required | Description |
 |---|---|---|
-| `DATABASE_URL` | Yes | Neon Postgres async connection string |
+| `DATABASE_URL` | Yes | Neon Postgres async connection string (`postgresql+asyncpg://...`) |
+| `APP_BASE_URL` | **Yes** | Your public domain (e.g. `https://yourdomain.com`). **All email features are disabled if this is empty.** |
+| `CRON_SECRET` | **Yes** (prod) | Random string protecting cron/admin endpoints. Generate with: `python -c "import secrets; print(secrets.token_urlsafe(32))"` |
 | `RESEND_API_KEY` | Yes | Resend API key for sending emails |
 | `RESEND_FROM_EMAIL` | No | Sender address (default: `BC Hearing Watch <noreply@bchearingwatch.ca>`) |
-| `GEMINI_API_KEY` | No | Google Gemini for AI matching/summaries |
+| `GEMINI_API_KEY` | No | Google Gemini for AI matching/summaries (falls back to keyword matching) |
 | `PERPLEXITY_API_KEY` | No | Perplexity for fact verification |
-| `PINECONE_API_KEY` | No | Pinecone for vector search (future) |
+| `ALLOWED_ORIGINS` | No | Comma-separated CORS origins (default: `http://localhost:3000`) |
+| `REQUEST_DELAY_SECONDS` | No | Delay between source polls (default: `2.0`) |
 
 ### Resend Setup
 
@@ -101,38 +160,20 @@ curl "http://localhost:8000/api/v1/cron/trigger-alerts?email=you@example.com"
 | **Weekly Digest** | Sundays at 8 PM Pacific | Always sent to all active subscribers |
 | **Confirmation** | On subscribe/update | Sent via Resend after form submission |
 
-## Coverage
-
-Starting with Capital Regional District (CRD) — 14 municipalities:
-
-| Municipality | Platform | Status |
-|---|---|---|
-| Colwood | CivicWeb + YouTube | Active |
-| Victoria | CivicWeb | Active |
-| Central Saanich | CivicWeb | Active |
-| North Saanich | CivicWeb | Active |
-| Oak Bay | CivicWeb | Active |
-| Metchosin | CivicWeb | Active |
-| Sooke | CivicWeb | Active |
-| Saanich | Custom | Pending |
-| Sidney | Custom | Pending |
-| Esquimalt | Custom | Pending |
-| View Royal | Custom | Pending |
-| Langford | Custom | Pending |
-| Highlands | Custom | Pending |
-| CRD Board | Custom | Pending |
-
 ### Adding a New Municipality
 
-1. Add an entry to `backend/app/services/seed_registry.py` in the `CRD_MUNICIPALITIES` list
-2. Re-run the seed endpoint: `curl -X POST http://localhost:8000/api/v1/seed`
-3. Add the `short_name` to the `MUNICIPALITIES` array in `frontend/src/app/page.tsx`
+1. Add an entry to `backend/app/services/seed_registry.py` in the appropriate batch list
+2. If the municipality uses a custom website (not CivicWeb/Granicus/eScribe), create a scraper file `backend/app/discovery/custom_<name>.py` extending `BCMunicipalScraper`
+3. If custom: add the scraper to `CUSTOM_SCRAPER_MAP` in `backend/app/discovery/poller.py`
+4. Add the `short_name` to the `MUNICIPALITIES` array in `frontend/src/app/page.tsx`
+5. Re-run the seed endpoint: `curl -X POST http://localhost:8000/api/v1/seed`
 
 ## API Endpoints
 
 ### Subscription
 - `POST /api/v1/subscribe` — Create/update subscription (email = primary key)
-- `GET /api/v1/unsubscribe?email=...` — One-click unsubscribe
+- `GET /api/v1/unsubscribe?token=...` — One-click unsubscribe (token-based)
+- `GET /api/v1/auth/confirm?token=...` — Confirm preference changes via magic link
 
 ### Cron Jobs (Vercel Cron or manual)
 - `POST /api/v1/cron/poll` — Poll sources + send immediate alerts (every 30 min)
@@ -141,9 +182,12 @@ Starting with Capital Regional District (CRD) — 14 municipalities:
 - `GET /api/v1/cron/trigger-alerts?email=...` — Manual test for alert emails
 
 ### Registry & Discovery
-- `POST /api/v1/seed` — Seed CRD municipality registry
-- `GET /api/v1/municipalities` — List municipalities
+- `POST /api/v1/seed` — Seed municipality registry (requires `X-Cron-Secret`)
+- `GET /api/v1/municipalities` — List municipalities (optional `?region=CRD`)
 - `POST /api/v1/discovery/poll` — Manual discovery poll
+
+### AI Processing
+- `POST /api/v1/ai/process` — Trigger document matching and summarization
 
 ## Hostinger VPS Deployment
 

@@ -9,11 +9,9 @@ from app.discovery.custom_bc_municipal import (
     BCMunicipalScraper,
     extract_date as bc_extract_date,
     classify_link as bc_classify_link,
+    GENERIC_SCRAPER_KEYWORDS,
+    make_generic_scraper,
 )
-from app.discovery.custom_100milehouse import HundredMileHouseScraper
-from app.discovery.custom_armstrong import ArmstrongScraper
-from app.discovery.custom_castlegar import CastlegarScraper
-from app.discovery.custom_enderby import EnderbyScraper
 from app.discovery.poller import CUSTOM_SCRAPER_MAP, _get_custom_scraper
 
 
@@ -72,14 +70,11 @@ def test_bc_municipal_extends_base():
     assert isinstance(scraper, BaseScraper)
 
 
-def test_custom_scrapers_extend_bc_municipal():
-    scrapers = [
-        HundredMileHouseScraper("100 Mile House", "https://example.com"),
-        ArmstrongScraper("Armstrong", "https://example.com"),
-        CastlegarScraper("Castlegar", "https://example.com"),
-        EnderbyScraper("Enderby", "https://example.com"),
-    ]
-    for scraper in scrapers:
+def test_generic_scrapers_extend_bc_municipal():
+    """Config-driven generic scrapers should be BCMunicipalScraper instances."""
+    for name in ["100 Mile House", "Armstrong", "Castlegar", "Enderby"]:
+        scraper = make_generic_scraper(name, "https://example.com")
+        assert scraper is not None, f"No generic scraper for {name}"
         assert isinstance(scraper, BCMunicipalScraper)
         assert isinstance(scraper, BaseScraper)
         assert hasattr(scraper, "discover")
@@ -88,20 +83,19 @@ def test_custom_scrapers_extend_bc_municipal():
 # --- Custom scraper map updated ---
 
 
-def test_batch2_custom_scrapers_in_map():
-    assert "100 Mile House" in CUSTOM_SCRAPER_MAP
-    assert "Armstrong" in CUSTOM_SCRAPER_MAP
-    assert "Castlegar" in CUSTOM_SCRAPER_MAP
-    assert "Enderby" in CUSTOM_SCRAPER_MAP
-    assert CUSTOM_SCRAPER_MAP["100 Mile House"] is HundredMileHouseScraper
+def test_batch2_custom_scrapers_in_config():
+    assert "100 Mile House" in GENERIC_SCRAPER_KEYWORDS
+    assert "Armstrong" in GENERIC_SCRAPER_KEYWORDS
+    assert "Castlegar" in GENERIC_SCRAPER_KEYWORDS
+    assert "Enderby" in GENERIC_SCRAPER_KEYWORDS
 
 
 def test_get_custom_scraper_batch2():
     scraper = _get_custom_scraper("100 Mile House", "https://example.com")
-    assert isinstance(scraper, HundredMileHouseScraper)
+    assert isinstance(scraper, BCMunicipalScraper)
 
     scraper = _get_custom_scraper("Armstrong", "https://example.com")
-    assert isinstance(scraper, ArmstrongScraper)
+    assert isinstance(scraper, BCMunicipalScraper)
 
 
 # --- HTML parsing tests ---
