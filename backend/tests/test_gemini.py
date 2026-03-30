@@ -5,18 +5,18 @@ from app.ai.gemini import keyword_fallback_match
 
 def test_keyword_match_exact():
     content = "The council will hold a public hearing on the OCP amendment bylaw."
-    result = keyword_fallback_match(content, ["ocp_updates", "rezoning"], ["OCP"])
+    result = keyword_fallback_match(content, ["ocp_housing", "zoning_density"], ["OCP"])
     assert result["is_match"] is True
-    assert "ocp_updates" in result["matched_topics"]
+    assert "ocp_housing" in result["matched_topics"]
     assert "OCP" in result["matched_keywords"]
     assert result["confidence"] > 0
 
 
 def test_keyword_match_topic_only():
     content = "Discussion of the official community plan update for 2026."
-    result = keyword_fallback_match(content, ["ocp_updates"], [])
+    result = keyword_fallback_match(content, ["ocp_housing"], [])
     assert result["is_match"] is True
-    assert "ocp_updates" in result["matched_topics"]
+    assert "ocp_housing" in result["matched_topics"]
 
 
 def test_keyword_match_keyword_only():
@@ -37,19 +37,17 @@ def test_keyword_match_multiple_topics():
     content = "Public hearing on rezoning bylaw amendment for affordable housing development."
     result = keyword_fallback_match(
         content,
-        ["rezoning", "public_hearings", "housing", "bylaws"],
+        ["zoning_density", "other_housing_transit"],
         ["affordable housing"],
     )
     assert result["is_match"] is True
-    assert "rezoning" in result["matched_topics"]
-    assert "public_hearings" in result["matched_topics"]
-    assert "housing" in result["matched_topics"]
-    assert "bylaws" in result["matched_topics"]
+    assert "zoning_density" in result["matched_topics"]
+    assert "other_housing_transit" in result["matched_topics"]
     assert "affordable housing" in result["matched_keywords"]
     assert result["confidence"] > 0.5
 
 
 def test_keyword_case_insensitive():
     content = "REZONING APPLICATION for 456 Oak Street"
-    result = keyword_fallback_match(content, ["rezoning"], [])
+    result = keyword_fallback_match(content, ["zoning_density"], [])
     assert result["is_match"] is True
