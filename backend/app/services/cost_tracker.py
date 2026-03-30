@@ -12,9 +12,9 @@ logger = logging.getLogger(__name__)
 # USD cost per token for each service/model
 _PRICING: dict[str, dict[str, dict[str, float]]] = {
     "gemini": {
-        "gemini-1.5-flash": {
-            "input": 0.075 / 1_000_000,   # $0.075 per 1M input tokens
-            "output": 0.300 / 1_000_000,   # $0.30  per 1M output tokens
+        "gemini-2.5-flash": {
+            "input": 0.15 / 1_000_000,    # $0.15 per 1M input tokens
+            "output": 0.60 / 1_000_000,   # $0.60 per 1M output tokens
         },
     },
     "perplexity": {
