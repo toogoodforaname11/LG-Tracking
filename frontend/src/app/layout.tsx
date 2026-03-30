@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "BC Local Government Council Tracker – Housing, Transit & Provincial Priority Updates",
+  title: "BC Local Government Council Tracker",
   description:
-    "Subscribe to updates on housing, transit, and local government hearings from BC municipalities.",
+    "Subscribe to alerts and weekly digests from BC municipal council meetings.",
 };
 
 export default function RootLayout({
