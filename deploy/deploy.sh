@@ -168,7 +168,14 @@ chown www-data:www-data /var/log/lg-tracking-poll.log /var/log/lg-tracking-diges
 
 # --- Start the service ---
 systemctl start bc-hearing-watch
-sleep 2
+sleep 3
+
+# --- Seed the database with BC municipalities ---
+echo "Seeding database with BC municipalities..."
+CRON_SECRET_VAL=$(grep '^CRON_SECRET=' "$APP_DIR/backend/.env" | cut -d= -f2-)
+curl -s -X POST http://127.0.0.1:8000/api/v1/seed -H "X-Cron-Secret: $CRON_SECRET_VAL"
+echo ""
+echo "Database seeded."
 
 echo ""
 echo "=== Deploy complete ==="
