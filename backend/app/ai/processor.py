@@ -301,6 +301,7 @@ async def process_new_documents(db: AsyncSession) -> dict:
                     matched_keywords=match_result.get("matched_keywords", []),
                     summary=summary_result.get("summary") if summary_result else None,
                     key_points=summary_result.get("key_points") if summary_result else None,
+                    relevant_timestamps=summary_result.get("relevant_timestamps") if summary_result else None,
                     verification_status="unverified",
                     notification_status="pending",
                 )

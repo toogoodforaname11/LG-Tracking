@@ -10,6 +10,8 @@ from sqlalchemy import select
 from app.models.subscriber import Subscriber
 from app.models.document import Document
 from app.models.municipality import Municipality
+from app.models.track import TrackMatch
+from app.services.email import render_timestamp_links_html
 from app.config import settings
 
 logger = logging.getLogger(__name__)
@@ -71,6 +73,8 @@ def render_digest_email(
                     f'<span style="font-size:12px;color:#6b7280;">Topics: {topics}</span>'
                 )
 
+            timestamps_html = render_timestamp_links_html(item.get("relevant_timestamps"))
+
             items_html += f"""
             <div style="border:1px solid #e5e7eb;border-radius:8px;padding:16px;margin-bottom:12px;">
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
@@ -88,6 +92,7 @@ def render_digest_email(
                 {topics_html}
                 {summary_html}
                 {key_points_html}
+                {timestamps_html}
             </div>
             """
 
@@ -162,8 +167,12 @@ def build_digest_items(
     docs_with_munis: list[tuple[Document, Municipality]],
     subscriber_topics: list[str],
     subscriber_keywords: str,
+    track_matches: list[TrackMatch] | None = None,
 ) -> list[dict]:
     """Build digest items from documents, filtering by subscriber preferences.
+
+    When track_matches is provided, AI summaries, key points, and video
+    timestamps from prior Gemini processing are included in the output.
 
     Uses keyword matching aligned to AVAILABLE_TOPICS from the track model.
     Each topic maps to the keywords likely to appear in matching documents.
@@ -286,6 +295,15 @@ def build_digest_items(
         ],
     }
 
+    # Build a lookup from document ID to the best TrackMatch (highest score)
+    # so we can pull AI summaries, key points, and timestamps from prior processing.
+    track_match_by_doc: dict[int, TrackMatch] = {}
+    if track_matches:
+        for tm in track_matches:
+            existing = track_match_by_doc.get(tm.document_id)
+            if existing is None or (tm.match_score or 0) > (existing.match_score or 0):
+                track_match_by_doc[tm.document_id] = tm
+
     for doc, muni in docs_with_munis:
         content = (doc.raw_text or doc.title or "").lower()
         title = (doc.title or "").lower()
@@ -300,16 +318,35 @@ def build_digest_items(
         matched_keywords = [kw for kw in kw_list if kw in searchable]
 
         if matched_topics or matched_keywords:
+            # Pull AI results from the best TrackMatch for this document
+            tm = track_match_by_doc.get(doc.id)
+            summary = tm.summary if tm else None
+            key_points = tm.key_points if tm else None
+
+            # Build video timestamp deep links
+            video_url = doc.url or ""
+            timestamps = (tm.relevant_timestamps if tm else None) or doc.video_timestamps or []
+            timestamp_links = []
+            for ts in timestamps:
+                seconds = ts.get("seconds")
+                label = ts.get("label", "")
+                t = ts.get("t", "")
+                if seconds is not None and video_url:
+                    sep = "&" if "?" in video_url else "?"
+                    deep_link = f"{video_url}{sep}t={seconds}"
+                    timestamp_links.append({"t": t, "label": label, "url": deep_link})
+
             items.append({
                 "municipality": muni.short_name,
                 "doc_type": doc.doc_type.value if doc.doc_type else "document",
                 "title": doc.title or "Untitled",
                 "url": doc.url or "#",
-                "summary": None,
-                "key_points": None,
+                "summary": summary,
+                "key_points": key_points,
+                "relevant_timestamps": timestamp_links,
                 "matched_topics": matched_topics,
                 "matched_keywords": matched_keywords,
-                "verification_status": "unverified",
+                "verification_status": (tm.verification_status if tm else None) or "unverified",
             })
 
     return items
@@ -366,8 +403,17 @@ async def run_weekly_digest(db: AsyncSession) -> dict:
         # Get recent documents for subscriber's municipalities
         docs_with_munis = await get_recent_documents(db, municipalities)
 
+        # Fetch TrackMatches for these documents so AI summaries are included
+        doc_ids = [doc.id for doc, _ in docs_with_munis]
+        track_matches_for_docs: list[TrackMatch] = []
+        if doc_ids:
+            tm_result = await db.execute(
+                select(TrackMatch).where(TrackMatch.document_id.in_(doc_ids))
+            )
+            track_matches_for_docs = list(tm_result.scalars().all())
+
         # Build matching digest items
-        items = build_digest_items(docs_with_munis, topics, subscriber.keywords)
+        items = build_digest_items(docs_with_munis, topics, subscriber.keywords, track_matches_for_docs)
         stats["total_items"] += len(items)
 
         # Skip email if APP_BASE_URL is not configured — unsubscribe links

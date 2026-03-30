@@ -87,6 +87,7 @@ class TrackMatch(Base):
     # AI processing results
     summary: Mapped[str | None] = mapped_column(Text)  # Gemini-generated summary
     key_points: Mapped[list | None] = mapped_column(JSON)  # Extracted key points
+    relevant_timestamps: Mapped[list | None] = mapped_column(JSON)  # [{t, seconds, label, relevance}]
     verification_status: Mapped[str | None] = mapped_column(String(20))  # verified, unverified
     verification_notes: Mapped[str | None] = mapped_column(Text)  # Perplexity notes
 

@@ -11,6 +11,7 @@ from app.models.subscriber import Subscriber
 from app.models.document import Document
 from app.models.municipality import Municipality
 from app.services.digest import build_digest_items
+from app.services.email import render_timestamp_links_html
 from app.config import settings
 
 logger = logging.getLogger(__name__)
@@ -89,6 +90,7 @@ def render_alert_email(
             {summary_html}
             {key_points_html}
             {topics_html}
+            {render_timestamp_links_html(item.get("relevant_timestamps"))}
 
             <div style="margin-top:20px;">
                 <a href="{url}" style="display:inline-block;background:#1e40af;color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-size:14px;font-weight:500;">

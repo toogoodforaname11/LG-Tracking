@@ -20,6 +20,7 @@ from app.services.instant_alerts import (
     send_alert_via_smtp,
     send_immediate_alerts_for_documents,
 )
+from app.services.email import render_timestamp_links_html, render_timestamp_links_text
 from app.models.document import DocType
 
 
@@ -34,6 +35,7 @@ def _make_document(**kwargs):
     doc.raw_text = kwargs.get("raw_text", "Discussion of rezoning bylaw amendment")
     doc.doc_type = kwargs.get("doc_type", DocType.AGENDA)
     doc.url = kwargs.get("url", "https://example.com/agenda.pdf")
+    doc.video_timestamps = kwargs.get("video_timestamps", None)
     doc.first_seen_at = kwargs.get(
         "first_seen_at",
         datetime.now(timezone.utc) - timedelta(days=1),
@@ -409,3 +411,193 @@ async def test_weekly_digest_sends_email():
     assert stats["emails_sent"] == 1
     assert stats["total_items"] >= 1
     mock_send.assert_called_once()
+
+
+# --- render_timestamp_links_html ---
+
+
+def test_render_timestamp_links_html_with_timestamps():
+    """Timestamp links should render as clickable deep links."""
+    timestamps = [
+        {"t": "0:15:30", "label": "Public Hearing - OCP Amendment", "url": "https://youtube.com/watch?v=X&t=930"},
+        {"t": "1:02:00", "label": "Rezoning Discussion", "url": "https://youtube.com/watch?v=X&t=3720"},
+    ]
+
+    html = render_timestamp_links_html(timestamps)
+
+    assert "Video Timestamps" in html
+    assert "0:15:30" in html
+    assert "Public Hearing - OCP Amendment" in html
+    assert "https://youtube.com/watch?v=X&amp;t=930" in html or "t=930" in html
+    assert "1:02:00" in html
+    assert "Rezoning Discussion" in html
+
+
+def test_render_timestamp_links_html_empty():
+    """No timestamps should return empty string."""
+    assert render_timestamp_links_html(None) == ""
+    assert render_timestamp_links_html([]) == ""
+
+
+def test_render_timestamp_links_text_with_timestamps():
+    """Plain text timestamps should include deep link URLs."""
+    timestamps = [
+        {"t": "0:15:30", "label": "Public Hearing", "url": "https://youtube.com/watch?v=X&t=930"},
+    ]
+
+    text = render_timestamp_links_text(timestamps)
+
+    assert "Video Timestamps" in text
+    assert "0:15:30" in text
+    assert "Public Hearing" in text
+    assert "t=930" in text
+
+
+def test_render_timestamp_links_text_empty():
+    """No timestamps should return empty string."""
+    assert render_timestamp_links_text(None) == ""
+    assert render_timestamp_links_text([]) == ""
+
+
+# --- build_digest_items with TrackMatch AI data ---
+
+
+def _make_track_match(**kwargs):
+    """Create a mock TrackMatch."""
+    tm = MagicMock()
+    tm.document_id = kwargs.get("document_id", 1)
+    tm.match_score = kwargs.get("match_score", 0.85)
+    tm.summary = kwargs.get("summary", "AI-generated summary of the document.")
+    tm.key_points = kwargs.get("key_points", ["Key point 1", "Key point 2"])
+    tm.relevant_timestamps = kwargs.get("relevant_timestamps", None)
+    tm.verification_status = kwargs.get("verification_status", "verified")
+    return tm
+
+
+def test_build_digest_items_includes_ai_summary_from_track_match():
+    """When TrackMatches are provided, items should include AI summaries and key points."""
+    doc = _make_document(id=1, raw_text="Rezoning application for density increase")
+    muni = _make_municipality()
+    tm = _make_track_match(document_id=1, summary="Council approved rezoning", key_points=["Approved"])
+
+    items = build_digest_items([(doc, muni)], ["zoning_density"], "", track_matches=[tm])
+
+    assert len(items) == 1
+    assert items[0]["summary"] == "Council approved rezoning"
+    assert items[0]["key_points"] == ["Approved"]
+    assert items[0]["verification_status"] == "verified"
+
+
+def test_build_digest_items_without_track_matches_has_none_summary():
+    """Without TrackMatches, summary and key_points should be None."""
+    doc = _make_document(id=1, raw_text="Rezoning application for density increase")
+    muni = _make_municipality()
+
+    items = build_digest_items([(doc, muni)], ["zoning_density"], "")
+
+    assert len(items) == 1
+    assert items[0]["summary"] is None
+    assert items[0]["key_points"] is None
+
+
+def test_build_digest_items_includes_video_timestamp_deep_links():
+    """Video documents should include timestamp deep links in digest items."""
+    doc = _make_document(
+        id=1,
+        doc_type=DocType.VIDEO,
+        url="https://youtube.com/watch?v=ABC",
+        raw_text="Rezoning discussion at council meeting",
+        video_timestamps=[
+            {"t": "0:15:30", "seconds": 930, "label": "Rezoning Discussion"},
+        ],
+    )
+    muni = _make_municipality()
+
+    items = build_digest_items([(doc, muni)], ["zoning_density"], "")
+
+    assert len(items) == 1
+    assert len(items[0]["relevant_timestamps"]) == 1
+    ts = items[0]["relevant_timestamps"][0]
+    assert ts["t"] == "0:15:30"
+    assert ts["label"] == "Rezoning Discussion"
+    assert ts["url"] == "https://youtube.com/watch?v=ABC&t=930"
+
+
+def test_build_digest_items_prefers_gemini_timestamps_over_doc_timestamps():
+    """Gemini-extracted timestamps should take precedence over raw doc timestamps."""
+    doc = _make_document(
+        id=1,
+        url="https://youtube.com/watch?v=ABC",
+        raw_text="Rezoning discussion",
+        video_timestamps=[
+            {"t": "0:00:00", "seconds": 0, "label": "Intro"},
+        ],
+    )
+    muni = _make_municipality()
+    tm = _make_track_match(
+        document_id=1,
+        relevant_timestamps=[
+            {"t": "0:45:00", "seconds": 2700, "label": "Relevant Rezoning Section"},
+        ],
+    )
+
+    items = build_digest_items([(doc, muni)], ["zoning_density"], "", track_matches=[tm])
+
+    assert len(items) == 1
+    assert len(items[0]["relevant_timestamps"]) == 1
+    # Should use Gemini timestamps, not the raw doc timestamps
+    assert items[0]["relevant_timestamps"][0]["label"] == "Relevant Rezoning Section"
+    assert items[0]["relevant_timestamps"][0]["url"] == "https://youtube.com/watch?v=ABC&t=2700"
+
+
+# --- Digest email renders timestamps ---
+
+
+def test_render_digest_email_includes_timestamp_links():
+    """Digest email HTML should contain video timestamp deep links."""
+    items = [{
+        "municipality": "Colwood",
+        "doc_type": "video",
+        "title": "Council Meeting Video",
+        "url": "https://youtube.com/watch?v=ABC",
+        "summary": "Meeting discussed rezoning.",
+        "key_points": ["Rezoning approved"],
+        "matched_topics": ["zoning_density"],
+        "matched_keywords": [],
+        "verification_status": "unverified",
+        "relevant_timestamps": [
+            {"t": "0:15:30", "label": "Rezoning Discussion", "url": "https://youtube.com/watch?v=ABC&t=930"},
+        ],
+    }]
+
+    html = render_digest_email("user@example.com", items, "March 30, 2026", "#")
+
+    assert "Video Timestamps" in html
+    assert "0:15:30" in html
+    assert "Rezoning Discussion" in html
+    assert "t=930" in html
+
+
+# --- Alert email renders timestamps ---
+
+
+def test_render_alert_email_includes_timestamp_links():
+    """Alert email HTML should contain video timestamp deep links."""
+    item = {
+        "doc_type": "video",
+        "title": "Council Meeting Video",
+        "url": "https://youtube.com/watch?v=ABC",
+        "summary": "Meeting discussed rezoning.",
+        "key_points": ["Rezoning approved"],
+        "matched_topics": ["zoning_density"],
+        "verification_status": "unverified",
+        "relevant_timestamps": [
+            {"t": "0:15:30", "label": "Rezoning Discussion", "url": "https://youtube.com/watch?v=ABC&t=930"},
+        ],
+    }
+
+    html = render_alert_email(item, "Colwood", "March 30, 2026", "#")
+
+    assert "Video Timestamps" in html
+    assert "0:15:30" in html
+    assert "Rezoning Discussion" in html

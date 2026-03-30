@@ -11,6 +11,7 @@ from app.models.document import Document
 from app.models.municipality import Municipality
 from app.ai.perplexity import verify_with_perplexity
 from app.services.cost_tracker import log_api_cost
+from app.services.email import render_timestamp_links_html, render_timestamp_links_text
 from app.config import settings
 
 logger = logging.getLogger(__name__)
@@ -75,6 +76,19 @@ async def generate_digest(db: AsyncSession, track_id: int) -> dict | None:
                 match.verification_status = verification.get("verification_status", "unverified")
                 match.verification_notes = str(verification.get("claims", []))
 
+        # Build video timestamp deep links if this is a YouTube video
+        video_url = doc.url or ""
+        timestamps = match.relevant_timestamps or doc.video_timestamps or []
+        timestamp_links = []
+        for ts in timestamps:
+            seconds = ts.get("seconds")
+            label = ts.get("label", "")
+            t = ts.get("t", "")
+            if seconds is not None and video_url:
+                sep = "&" if "?" in video_url else "?"
+                deep_link = f"{video_url}{sep}t={seconds}"
+                timestamp_links.append({"t": t, "label": label, "url": deep_link})
+
         digest_items.append({
             "municipality": muni.short_name if muni else "Unknown",
             "doc_type": doc.doc_type.value if doc.doc_type else "unknown",
@@ -85,6 +99,7 @@ async def generate_digest(db: AsyncSession, track_id: int) -> dict | None:
             "matched_keywords": match.matched_keywords or [],
             "summary": match.summary,
             "key_points": match.key_points or [],
+            "relevant_timestamps": timestamp_links,
             "verification_status": match.verification_status or "unverified",
         })
 
@@ -115,6 +130,7 @@ def render_digest_html(digest: dict) -> str:
             key_points_html = f"<ul>{points}</ul>"
 
         summary_html = f"<p>{item['summary']}</p>" if item.get("summary") else ""
+        timestamps_html = render_timestamp_links_html(item.get("relevant_timestamps"))
 
         items_html += f"""
         <div style="border:1px solid #ddd;border-radius:8px;padding:16px;margin-bottom:12px;">
@@ -135,6 +151,7 @@ def render_digest_html(digest: dict) -> str:
             </p>
             {summary_html}
             {key_points_html}
+            {timestamps_html}
         </div>
         """
 
@@ -174,6 +191,9 @@ def render_digest_text(digest: dict) -> str:
         if item["key_points"]:
             for p in item["key_points"]:
                 lines.append(f"    - {p}")
+        ts_text = render_timestamp_links_text(item.get("relevant_timestamps"))
+        if ts_text:
+            lines.append(ts_text)
         lines.append("")
 
     lines.append("---")
