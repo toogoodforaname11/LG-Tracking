@@ -159,7 +159,7 @@ async def run_validation(
     """Validate all source URLs concurrently."""
     semaphore = asyncio.Semaphore(concurrency)
     headers = {
-        "User-Agent": "BCHearingWatch/0.1 (source-validation script)",
+        "User-Agent": "LGTracker/0.1 (source-validation script)",
     }
 
     async with httpx.AsyncClient(

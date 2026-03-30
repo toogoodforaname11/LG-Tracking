@@ -62,7 +62,7 @@ def _validate_config() -> None:
         msg = (
             "APP_BASE_URL is not set. All email features (immediate alerts, "
             "weekly digests, confirmation emails) are DISABLED. "
-            "Set APP_BASE_URL to your public domain (e.g. https://yourdomain.com) "
+            "Set APP_BASE_URL to your public domain (e.g. https://lg-tracker.ca) "
             "to enable email delivery."
         )
         if settings.debug:

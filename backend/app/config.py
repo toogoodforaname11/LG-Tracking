@@ -4,7 +4,7 @@ from pydantic_settings import BaseSettings
 class Settings(BaseSettings):
     app_name: str = "BC Local Government Council Tracker"
     debug: bool = False
-    app_base_url: str = ""  # e.g. https://your-domain.com (no trailing slash)
+    app_base_url: str = ""  # e.g. https://lg-tracker.ca (no trailing slash)
 
     # Neon Postgres
     database_url: str = "postgresql+asyncpg://localhost:5432/hearing_watch"
@@ -25,7 +25,7 @@ class Settings(BaseSettings):
     smtp_from_email: str = "BC Local Government Council Tracker <noreply@lg-tracker.ca>"
 
     # CORS — comma-separated list of allowed origins
-    # e.g. "http://localhost:3000,https://yourdomain.com"
+    # e.g. "http://localhost:3000,https://lg-tracker.ca"
     allowed_origins: str = "http://localhost:3000"
 
     # Cron secret — protects cron and admin endpoints from unauthorized invocation.
@@ -39,7 +39,7 @@ class Settings(BaseSettings):
     # Scraping
     request_delay_seconds: float = 2.0
     scrape_timeout_seconds: int = 30
-    user_agent: str = "BCHearingWatch/0.1 (public-data municipal meeting tracker)"
+    user_agent: str = "LGTracker/0.1 (public-data municipal meeting tracker)"
 
     model_config = {"env_file": ".env", "env_file_encoding": "utf-8"}
 

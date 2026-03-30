@@ -139,7 +139,7 @@ systemctl enable bc-hearing-watch
 
 # --- nginx ---
 if [ -n "$DOMAIN" ]; then
-    sed "s/yourdomain.com/$DOMAIN/g" "$APP_DIR/deploy/nginx.conf" \
+    sed "s/lg-tracker.ca/$DOMAIN/g" "$APP_DIR/deploy/nginx.conf" \
         > /etc/nginx/sites-available/lg-tracking
     ln -sf /etc/nginx/sites-available/lg-tracking /etc/nginx/sites-enabled/lg-tracking
     rm -f /etc/nginx/sites-enabled/default
@@ -192,7 +192,7 @@ echo "To finish setup, add your credentials to .env:"
 echo "  nano $APP_DIR/backend/.env"
 echo ""
 echo "  You need to add:"
-echo "    SMTP_USERNAME=your-hostinger-email@yourdomain.com"
+echo "    SMTP_USERNAME=noreply@lg-tracker.ca"
 echo "    SMTP_PASSWORD=your-email-password"
 echo "    GEMINI_API_KEY=your-gemini-api-key        (optional)"
 echo "    PERPLEXITY_API_KEY=your-perplexity-key    (optional)"
