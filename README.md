@@ -244,6 +244,47 @@ bash /var/www/lg-tracking/deploy/update.sh
 
 This pulls the latest code, rebuilds the frontend, reinstalls dependencies, and restarts the backend.
 
+### Troubleshooting
+
+**"Load failed" on the subscription form**
+
+This means the frontend cannot reach the backend API. Check in order:
+
+```bash
+# 1. Is the backend running?
+systemctl status bc-hearing-watch
+journalctl -u bc-hearing-watch -n 50    # check for startup errors
+
+# 2. Can the backend reach the database?
+curl http://127.0.0.1:8000/health
+
+# 3. Is CORS configured? (must include your domain)
+grep ALLOWED_ORIGINS /var/www/lg-tracking/backend/.env
+# Should contain: https://lg-tracker.ca
+
+# 4. Is APP_BASE_URL set? (required for email features)
+grep APP_BASE_URL /var/www/lg-tracking/backend/.env
+# Should be: https://lg-tracker.ca
+
+# 5. Run the database migration (required after updates)
+cd /var/www/lg-tracking/backend
+../venv/bin/alembic upgrade head
+systemctl restart bc-hearing-watch
+
+# 6. Seed the municipality database (required on first deploy)
+curl -X POST http://127.0.0.1:8000/api/v1/seed
+```
+
+**Emails not sending**
+
+```bash
+# Check SMTP credentials are set
+grep SMTP_ /var/www/lg-tracking/backend/.env
+
+# Test by subscribing and checking logs
+journalctl -u bc-hearing-watch -n 20 | grep -i "email\|smtp"
+```
+
 ### Useful Commands
 
 ```bash
