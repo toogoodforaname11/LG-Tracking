@@ -46,32 +46,12 @@ class UnsubscribeResponse(BaseModel):
 # --- Email helpers ---
 
 
-def send_confirmation_email(
-    email: str,
-    municipalities: list[str],
-    topics: list[str],
-    immediate_alerts: bool,
-    unsubscribe_url: str,
-) -> None:
-    """Send a new-subscriber confirmation email via SMTP.
+def send_confirmation_link_email(email: str, confirm_url: str) -> None:
+    """Send a confirmation email for new subscribers so they verify their address.
 
-    Called as a BackgroundTask so it never blocks the API response.
+    Called as a BackgroundTask. The subscription stays inactive until they click.
     """
     from app.services.email import send_email
-
-    muni_list = ", ".join(municipalities) if municipalities else "None selected"
-    topic_list = ", ".join(topics) if topics else "None selected"
-
-    alerts_note = ""
-    if immediate_alerts:
-        alerts_note = """
-        <div style="background:#fef3c7;border-radius:8px;padding:12px 16px;margin:16px 0;border-left:4px solid #f59e0b;">
-            <p style="margin:0;font-size:14px;color:#92400e;">
-                <strong>Immediate Alerts: ON</strong> — You will receive an email
-                within minutes whenever a new matching council item is detected.
-            </p>
-        </div>
-        """
 
     html = f"""
     <html>
@@ -81,31 +61,28 @@ def send_confirmation_email(
             <p style="color:#6b7280;margin:4px 0 0;font-size:14px;">Municipal Council Alerts &amp; Digest</p>
         </div>
 
-        <h2 style="color:#111;font-size:20px;">Preferences Saved!</h2>
+        <h2 style="color:#111;font-size:20px;">Confirm Your Email</h2>
         <p style="color:#374151;line-height:1.6;">
-            Your subscription has been confirmed. Here's what you signed up for:
+            Thanks for subscribing! Please click the button below to verify your
+            email address and activate your subscription. This link expires in 24 hours.
         </p>
 
-        <div style="background:#f0f4ff;border-radius:8px;padding:16px;margin:16px 0;">
-            <p style="margin:0 0 8px;"><strong>Municipalities:</strong> {muni_list}</p>
-            <p style="margin:0 0 8px;"><strong>Topics:</strong> {topic_list}</p>
-            <p style="margin:0;"><strong>Immediate Alerts:</strong> {'Enabled' if immediate_alerts else 'Disabled'}</p>
+        <div style="text-align:center;margin:32px 0;">
+            <a href="{confirm_url}"
+               style="background:#1e40af;color:#fff;padding:14px 32px;border-radius:8px;
+                      text-decoration:none;font-size:16px;font-weight:600;display:inline-block;">
+                Confirm Subscription
+            </a>
         </div>
 
-        {alerts_note}
-
-        <p style="color:#374151;line-height:1.6;">
-            You will receive weekly digests every <strong>Sunday at 8 PM Pacific</strong>
-            with AI-summarized updates from your selected municipalities.
+        <p style="color:#6b7280;font-size:13px;line-height:1.6;">
+            If you did not sign up for this service, you can safely ignore this email &mdash;
+            no subscription will be created.
         </p>
 
-        <hr style="border:none;border-top:1px solid #e5e7eb;margin:24px 0;">
-
-        <p style="font-size:11px;color:#9ca3af;line-height:1.5;">
-            This is an experimental personal tool using public data.
-            AI summaries may contain errors. Always verify with original municipal sources.
-            Not official government communication.<br><br>
-            <a href="{unsubscribe_url}" style="color:#6b7280;">Unsubscribe from all emails</a>
+        <p style="color:#6b7280;font-size:12px;">
+            Or copy this link into your browser:<br>
+            <span style="word-break:break-all;">{confirm_url}</span>
         </p>
     </body>
     </html>
@@ -113,7 +90,7 @@ def send_confirmation_email(
 
     send_email(
         to_email=email,
-        subject="BC Local Government Council Tracker — Subscription Confirmed",
+        subject="BC Local Government Council Tracker — Confirm Your Email",
         html=html,
     )
 
@@ -177,91 +154,92 @@ async def subscribe(
     background_tasks: BackgroundTasks,
     db: AsyncSession = Depends(get_db),
 ):
-    """Subscribe or update preferences.
+    """Subscribe or update preferences (double opt-in).
 
-    - New email → subscriber created immediately, confirmation email sent.
+    - New email → inactive subscriber created, confirmation link emailed.
+      Subscription activates only after the email owner clicks the link.
     - Existing email → pending preferences stored as a magic link token,
-      confirmation email sent to that address. Changes are only applied
-      after the subscriber clicks the link, preventing anyone from changing
-      another person's preferences without access to their inbox.
+      confirmation link emailed. Changes apply only after clicking the link.
+
+    This prevents anyone from subscribing or modifying preferences for an
+    email address they don't control.
     """
     result = await db.execute(
         select(Subscriber).where(Subscriber.email == req.email)
     )
     existing = result.scalar_one_or_none()
 
-    if existing:
-        # --- Existing subscriber: require email verification ---
-        expires_at = datetime.now(timezone.utc) + timedelta(hours=MAGIC_LINK_TTL_HOURS)
-        token = MagicLinkToken(
+    # Both new and existing subscribers go through email verification.
+    # This prevents anyone from subscribing or changing preferences for
+    # an email address they don't control.
+
+    pending_prefs = {
+        "municipalities": req.municipalities,
+        "topics": req.topics,
+        "keywords": req.keywords,
+        "immediate_alerts": req.immediate_alerts,
+    }
+
+    # An "unverified" subscriber is one that exists but has never confirmed
+    # their email (active=False from initial sign-up).  Treat them the same
+    # as a brand-new subscriber: update their pending prefs and re-send the
+    # confirmation link.
+    is_new = not existing
+    is_unverified = existing and not existing.active
+
+    if is_new:
+        # Create an inactive subscriber row so the confirm endpoint
+        # can activate it once the email owner clicks the link.
+        subscriber = Subscriber(
             email=req.email,
-            pending_preferences={
-                "municipalities": req.municipalities,
-                "topics": req.topics,
-                "keywords": req.keywords,
-                "immediate_alerts": req.immediate_alerts,
-            },
-            expires_at=expires_at,
+            municipalities=req.municipalities,
+            topics=req.topics,
+            keywords=req.keywords,
+            immediate_alerts=req.immediate_alerts,
+            active=False,  # Stays inactive until email is verified
         )
-        db.add(token)
-        await db.commit()
-        await db.refresh(token)
+        db.add(subscriber)
+        await db.flush()
+    elif is_unverified:
+        # Update the inactive row with the latest preferences so the
+        # confirm endpoint applies the most recent choices.
+        existing.municipalities = req.municipalities
+        existing.topics = req.topics
+        existing.keywords = req.keywords
+        existing.immediate_alerts = req.immediate_alerts
 
-        confirm_url = (
-            f"{settings.app_base_url}/api/v1/auth/confirm"
-            f"?token={quote(token.token)}"
-        )
-        background_tasks.add_task(send_magic_link_email, req.email, confirm_url)
-
-        return SubscribeResponse(
-            status="magic_link_sent",
-            email=req.email,
-            message=(
-                "A confirmation link has been sent to your email. "
-                "Click it to apply your updated preferences."
-            ),
-        )
-
-    # --- New subscriber: create immediately ---
-    subscriber = Subscriber(
+    expires_at = datetime.now(timezone.utc) + timedelta(hours=MAGIC_LINK_TTL_HOURS)
+    token = MagicLinkToken(
         email=req.email,
-        municipalities=req.municipalities,
-        topics=req.topics,
-        keywords=req.keywords,
-        immediate_alerts=req.immediate_alerts,
-        active=True,
+        pending_preferences=pending_prefs,
+        expires_at=expires_at,
     )
-    db.add(subscriber)
+    db.add(token)
     await db.commit()
-    await db.refresh(subscriber)
+    await db.refresh(token)
 
-    # Send confirmation email in background — does not block the API response
-    # and does not cause the subscribe action to fail if email delivery fails.
-    # Skip if APP_BASE_URL is not configured (unsubscribe links would be broken).
-    alerts_msg = ""
-    if req.immediate_alerts:
-        alerts_msg = " You will also receive immediate alerts when new matching items are detected."
+    confirm_url = (
+        f"{settings.app_base_url}/api/v1/auth/confirm"
+        f"?token={quote(token.token)}"
+    )
 
-    if settings.app_base_url:
-        unsubscribe_url = (
-            f"{settings.app_base_url}/api/v1/unsubscribe"
-            f"?token={quote(subscriber.unsubscribe_token)}"
-        )
-        background_tasks.add_task(
-            send_confirmation_email,
-            req.email,
-            req.municipalities,
-            req.topics,
-            req.immediate_alerts,
-            unsubscribe_url,
+    if is_new or is_unverified:
+        background_tasks.add_task(send_confirmation_link_email, req.email, confirm_url)
+        message = (
+            "A confirmation link has been sent to your email. "
+            "Click it to activate your subscription."
         )
     else:
-        logger.warning("APP_BASE_URL not set — skipping confirmation email (unsubscribe links would be broken)")
+        background_tasks.add_task(send_magic_link_email, req.email, confirm_url)
+        message = (
+            "A confirmation link has been sent to your email. "
+            "Click it to apply your updated preferences."
+        )
 
     return SubscribeResponse(
-        status="created",
+        status="magic_link_sent",
         email=req.email,
-        message=f"Preferences saved! You will receive weekly digests every Sunday.{alerts_msg}",
+        message=message,
     )
 
 

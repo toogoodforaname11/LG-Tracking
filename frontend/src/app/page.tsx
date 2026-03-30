@@ -494,7 +494,7 @@ export default function SubscribePage() {
           <h2 className="mb-2 text-xl font-bold text-gray-900">Check Your Inbox</h2>
           <p className="mb-4 text-sm text-gray-600">
             A confirmation link has been sent to <strong className="text-gray-800">{email}</strong>.
-            Click it to apply your updated preferences.
+            Click the link in the email to confirm.
           </p>
         </div>
 
@@ -503,7 +503,7 @@ export default function SubscribePage() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           <p className="text-xs text-gray-500">
-            The link expires in 24 hours. If you did not request this change, you can safely ignore the email.
+            The link expires in 24 hours. If you didn&apos;t sign up, you can safely ignore the email.
           </p>
         </div>
 

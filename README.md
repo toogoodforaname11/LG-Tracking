@@ -100,9 +100,17 @@ All scrapers live in `backend/app/discovery/`:
 ```bash
 cd backend
 python -m venv venv && source venv/bin/activate
-pip install -e ".[ai]"
+pip install -r requirements.txt
 cp .env.example .env  # Edit with your credentials
-uvicorn app.main:app --reload
+
+# Create database tables
+alembic upgrade head
+
+# Seed municipalities and sources
+cd .. && python scripts/seed.py
+
+# Start the backend
+cd backend && uvicorn app.main:app --reload
 ```
 
 ### Frontend
@@ -118,8 +126,91 @@ Open `http://localhost:3000` — you'll see the subscription form.
 ### Seed the Municipality Registry
 
 ```bash
+# Standalone script (idempotent — safe to run multiple times)
+python scripts/seed.py
+
+# Or via the API (requires X-Cron-Secret header if CRON_SECRET is set)
 curl -X POST http://localhost:8000/api/v1/seed
 ```
+
+## Deployment
+
+### Prerequisites
+
+1. **PostgreSQL 14+** — create a database and user:
+
+   ```bash
+   sudo -u postgres psql
+   CREATE USER lg_user WITH PASSWORD 'your-secure-password';
+   CREATE DATABASE lg_tracking OWNER lg_user;
+   \q
+   ```
+
+2. **Python 3.11+** and **Node.js 20+**
+
+3. **Environment config** — copy and edit the example:
+
+   ```bash
+   cp backend/.env.example backend/.env
+   nano backend/.env
+   ```
+
+   Required variables (all documented in `.env.example`):
+   - `DATABASE_URL` / `DATABASE_URL_SYNC` — async and sync PostgreSQL URLs
+   - `GEMINI_API_KEY` — for AI matching/summarization (optional)
+   - `PERPLEXITY_API_KEY` — for fact verification (optional)
+   - `SMTP_HOST`, `SMTP_PORT`, `SMTP_USERNAME`, `SMTP_PASSWORD`, `SMTP_FROM_EMAIL` — email delivery
+   - `APP_BASE_URL` — e.g. `https://lg-tracker.ca`
+   - `ALLOWED_ORIGINS` — CORS origins (comma-separated)
+   - `CRON_SECRET` — protects cron/admin endpoints
+   - `DEBUG` — `false` in production
+
+### Deploy Script
+
+The `scripts/deploy.sh` script handles a full fresh deployment **or** redeployment:
+
+```bash
+bash scripts/deploy.sh
+```
+
+It runs these steps in order:
+1. `git pull` (if a remote is configured)
+2. Create/update Python venv and install deps from `backend/requirements.txt`
+3. `alembic upgrade head` — create or migrate all database tables
+4. `python scripts/seed.py` — populate municipalities and sources (idempotent)
+5. `npm install && npm run build` — build the Next.js frontend
+6. `systemctl restart bc-hearing-watch` — restart the backend service
+
+For initial VPS provisioning (installs PostgreSQL, Nginx, Certbot, Node.js, etc.), use `deploy/deploy.sh` instead.
+
+### Nginx Reverse Proxy with SSL
+
+An nginx config is provided in `deploy/nginx.conf`. To set it up:
+
+```bash
+# Copy and customize the server_name
+sudo cp deploy/nginx.conf /etc/nginx/sites-available/lg-tracking
+sudo sed -i 's/lg-tracker.ca/your-domain.com/g' /etc/nginx/sites-available/lg-tracking
+sudo ln -sf /etc/nginx/sites-available/lg-tracking /etc/nginx/sites-enabled/lg-tracking
+sudo rm -f /etc/nginx/sites-enabled/default
+sudo nginx -t && sudo systemctl reload nginx
+
+# SSL via Let's Encrypt
+sudo certbot --nginx -d your-domain.com
+```
+
+The config serves the static frontend from `frontend/out/` and proxies `/api/*` to the FastAPI backend on port 8000.
+
+### DNS Setup
+
+Point an **A record** for your domain to your VPS IP address:
+
+| Type | Name | Value | TTL |
+|------|------|-------|-----|
+| A | `@` | `your.vps.ip.address` | 3600 |
+| A | `www` | `your.vps.ip.address` | 3600 |
+
+Allow 5–30 minutes for DNS propagation before running Certbot.
 
 ### Test Immediate Alerts
 
