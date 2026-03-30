@@ -127,6 +127,11 @@ logger = logging.getLogger(__name__)
 # Number of consecutive poll failures before a source is marked BROKEN.
 BROKEN_THRESHOLD = 5
 
+# Maximum number of sources polled concurrently.  Keeps total outbound
+# connections reasonable while dramatically reducing overall poll time
+# compared to sequential execution.
+MAX_CONCURRENT_POLLS = 8
+
 
 # Map item_type strings to DocType enum
 DOC_TYPE_MAP = {
@@ -434,8 +439,30 @@ async def store_discovered_items(
     return stats, new_docs
 
 
+async def _poll_one(
+    sem: asyncio.Semaphore,
+    source: Source,
+    municipality: Municipality,
+) -> tuple[Source, Municipality, list[DiscoveredItem] | None, Exception | None]:
+    """Poll a single source with semaphore-bounded concurrency.
+
+    Returns (source, municipality, items_or_None, error_or_None).
+    HTTP fetching happens concurrently; DB writes are done by the caller.
+    """
+    async with sem:
+        try:
+            items = await poll_source(source, municipality)
+            return source, municipality, items, None
+        except Exception as e:
+            return source, municipality, None, e
+
+
 async def run_discovery(db: AsyncSession, municipality_filter: str | None = None) -> dict:
     """Run discovery across all active sources.
+
+    Sources are polled concurrently (bounded by MAX_CONCURRENT_POLLS) for
+    speed, then results are stored sequentially through the shared DB
+    session to avoid concurrency issues with SQLAlchemy.
 
     After polling, sends immediate alerts for any new documents to subscribers
     who have immediate_alerts enabled.
@@ -459,42 +486,56 @@ async def run_discovery(db: AsyncSession, municipality_filter: str | None = None
     result = await db.execute(query)
     source_munis = result.all()
 
+    if not source_munis:
+        return {}
+
+    # Phase 1: Poll all sources concurrently (HTTP only, no DB writes).
+    sem = asyncio.Semaphore(MAX_CONCURRENT_POLLS)
+    tasks = [
+        _poll_one(sem, source, municipality)
+        for source, municipality in source_munis
+    ]
+    poll_results = await asyncio.gather(*tasks)
+
+    # Phase 2: Store results sequentially through the shared DB session.
     results = {}
     all_new_docs: list[Document] = []
 
-    for source, municipality in source_munis:
+    for source, municipality, items, error in poll_results:
         muni_name = municipality.short_name
-        logger.info("Polling %s / %s", muni_name, source.label)
 
         scrape_run = ScrapeRun(source_id=source.id)
         db.add(scrape_run)
         await db.flush()
 
-        try:
-            items = await poll_source(source, municipality)
-            stats, new_docs = await store_discovered_items(db, items, source, municipality)
-            all_new_docs.extend(new_docs)
+        if error is None and items is not None:
+            try:
+                stats, new_docs = await store_discovered_items(db, items, source, municipality)
+                all_new_docs.extend(new_docs)
 
-            scrape_run.finished_at = datetime.now(timezone.utc)
-            scrape_run.status = "success"
-            scrape_run.documents_found = stats["total"]
-            scrape_run.new_documents = stats["new"]
+                scrape_run.finished_at = datetime.now(timezone.utc)
+                scrape_run.status = "success"
+                scrape_run.documents_found = stats["total"]
+                scrape_run.new_documents = stats["new"]
 
-            source.scrape_status = ScrapeStatus.ACTIVE
-            source.last_scraped_at = datetime.now(timezone.utc)
-            source.last_error = None
-            source.consecutive_failures = 0
+                source.scrape_status = ScrapeStatus.ACTIVE
+                source.last_scraped_at = datetime.now(timezone.utc)
+                source.last_error = None
+                source.consecutive_failures = 0
 
-            results[f"{muni_name}/{source.label}"] = stats
-            logger.info("  %s/%s: %d items (%d new)", muni_name, source.label, stats["total"], stats["new"])
+                results[f"{muni_name}/{source.label}"] = stats
+                logger.info("  %s/%s: %d items (%d new)", muni_name, source.label, stats["total"], stats["new"])
+            except Exception as e:
+                # store_discovered_items failed — treat as poll error
+                error = e
 
-        except Exception as e:
-            logger.error("Error during poll of %s/%s: %s", muni_name, source.label, e)
+        if error is not None:
+            logger.error("Error during poll of %s/%s: %s", muni_name, source.label, error)
             scrape_run.finished_at = datetime.now(timezone.utc)
             scrape_run.status = "error"
-            scrape_run.error_message = str(e)
+            scrape_run.error_message = str(error)
 
-            source.last_error = str(e)
+            source.last_error = str(error)
             source.consecutive_failures = (source.consecutive_failures or 0) + 1
             if source.consecutive_failures >= BROKEN_THRESHOLD:
                 source.scrape_status = ScrapeStatus.BROKEN
@@ -503,14 +544,11 @@ async def run_discovery(db: AsyncSession, municipality_filter: str | None = None
                     muni_name, source.label, source.consecutive_failures,
                 )
 
-            results[f"{muni_name}/{source.label}"] = {"error": str(e)}
+            results[f"{muni_name}/{source.label}"] = {"error": str(error)}
 
         await db.commit()
 
-        # Rate limiting between sources
-        await asyncio.sleep(settings.request_delay_seconds)
-
-    # Send immediate alerts for all new documents discovered in this run
+    # Phase 3: Send immediate alerts for all new documents discovered in this run.
     if all_new_docs:
         try:
             alert_stats = await send_immediate_alerts_for_documents(db, all_new_docs)

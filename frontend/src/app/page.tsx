@@ -128,8 +128,8 @@ const HOUSING_BILLS = [
   },
 ] as const;
 
-// All BC municipalities sourced from seed registry — alphabetical
-const MUNICIPALITIES = [
+// Fallback municipality list used when the API is unreachable.
+const FALLBACK_MUNICIPALITIES = [
   "100 Mile House",
   "Abbotsford",
   "Ainsworth Hot Springs",
@@ -302,6 +302,7 @@ type FormState = "idle" | "submitting" | "success" | "magic_link_sent" | "confir
 
 export default function SubscribePage() {
   const [email, setEmail] = useState("");
+  const [municipalities, setMunicipalities] = useState<string[]>(FALLBACK_MUNICIPALITIES);
   const [selectedMunicipalities, setSelectedMunicipalities] = useState<string[]>([]);
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
   const [keywords, setKeywords] = useState("");
@@ -321,6 +322,22 @@ export default function SubscribePage() {
       // Clean the query param from the URL without a page reload.
       window.history.replaceState({}, "", window.location.pathname);
     }
+  }, []);
+
+  // Fetch municipality list from API (falls back to hardcoded list on error)
+  useEffect(() => {
+    fetch(`${API_BASE}/api/v1/municipalities`)
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then((data: { municipalities: { short_name: string }[] }) => {
+        const names = data.municipalities.map((m) => m.short_name).sort();
+        if (names.length > 0) setMunicipalities(names);
+      })
+      .catch(() => {
+        // Silently fall back to FALLBACK_MUNICIPALITIES (already set as default)
+      });
   }, []);
 
   // Close dropdown when clicking outside
@@ -594,7 +611,7 @@ export default function SubscribePage() {
                   />
                 </div>
                 <div className="max-h-60 overflow-y-auto">
-                  {MUNICIPALITIES.filter((name) =>
+                  {municipalities.filter((name) =>
                     name.toLowerCase().includes(muniSearch.toLowerCase())
                   ).map((name) => (
                     <label
