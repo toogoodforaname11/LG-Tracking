@@ -67,6 +67,13 @@ CRD_MUNICIPALITIES = [
                 "label": "Victoria CivicWeb Minutes",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
+            {
+                "platform": Platform.ESCRIBE,
+                "source_type": SourceType.AGENDA,
+                "url": "https://pub-victoria.escribemeetings.com",
+                "label": "Victoria eScribe Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
         ],
     },
     {
@@ -82,6 +89,13 @@ CRD_MUNICIPALITIES = [
                 "source_type": SourceType.AGENDA,
                 "url": "https://www.saanich.ca/EN/main/local-government/mayor-council/schedule-agendas-minutes.html",
                 "label": "Saanich Agendas & Minutes",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.GRANICUS,
+                "source_type": SourceType.AGENDA,
+                "url": "https://saanich.ca.granicus.com",
+                "label": "Saanich Granicus Agendas",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
         ],
@@ -108,6 +122,13 @@ CRD_MUNICIPALITIES = [
                 "label": "Central Saanich CivicWeb Minutes",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
+            {
+                "platform": Platform.GRANICUS,
+                "source_type": SourceType.AGENDA,
+                "url": "https://centralsaanich.ca.granicus.com",
+                "label": "Central Saanich Granicus Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
         ],
     },
     {
@@ -132,6 +153,13 @@ CRD_MUNICIPALITIES = [
                 "label": "North Saanich CivicWeb Minutes",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://northsaanich.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "North Saanich CivicWeb Meeting List",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
         ],
     },
     {
@@ -147,6 +175,20 @@ CRD_MUNICIPALITIES = [
                 "source_type": SourceType.AGENDA,
                 "url": "https://www.sidney.ca/government/",
                 "label": "Sidney Council Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://sidney.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Sidney CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://sidney.civicweb.net/filepro/documents/",
+                "label": "Sidney CivicWeb Minutes",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
         ],
@@ -173,6 +215,13 @@ CRD_MUNICIPALITIES = [
                 "label": "Oak Bay CivicWeb Minutes",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://oakbay.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Oak Bay CivicWeb Meeting List",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
         ],
     },
     {
@@ -188,6 +237,20 @@ CRD_MUNICIPALITIES = [
                 "source_type": SourceType.AGENDA,
                 "url": "https://www.esquimalt.ca/municipal-hall/council/agendas-minutes",
                 "label": "Esquimalt Agendas & Minutes",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://esquimalt.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Esquimalt CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://esquimalt.civicweb.net/filepro/documents/",
+                "label": "Esquimalt CivicWeb Minutes",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
         ],
@@ -207,6 +270,20 @@ CRD_MUNICIPALITIES = [
                 "label": "View Royal Council Agendas",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://viewroyal.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "View Royal CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://viewroyal.civicweb.net/filepro/documents/",
+                "label": "View Royal CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
         ],
     },
     {
@@ -222,6 +299,20 @@ CRD_MUNICIPALITIES = [
                 "source_type": SourceType.AGENDA,
                 "url": "https://langford.ca/city-hall/",
                 "label": "Langford Council Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://langford.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Langford CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://langford.civicweb.net/filepro/documents/",
+                "label": "Langford CivicWeb Minutes",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
         ],
@@ -248,6 +339,13 @@ CRD_MUNICIPALITIES = [
                 "label": "Metchosin CivicWeb Minutes",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://metchosin.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Metchosin CivicWeb Meeting List",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
         ],
     },
     {
@@ -272,6 +370,13 @@ CRD_MUNICIPALITIES = [
                 "label": "Sooke CivicWeb Minutes",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://sooke.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Sooke CivicWeb Meeting List",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
         ],
     },
     {
@@ -287,6 +392,20 @@ CRD_MUNICIPALITIES = [
                 "source_type": SourceType.AGENDA,
                 "url": "https://www.highlands.ca/local-government/council",
                 "label": "Highlands Council Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://highlands.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Highlands CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://highlands.civicweb.net/filepro/documents/",
+                "label": "Highlands CivicWeb Minutes",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
         ],
@@ -424,24 +543,6 @@ BC_MUNICIPALITIES_BATCH_1 = [
                 "source_type": SourceType.AGENDA,
                 "url": "https://www.castlegar.ca/council",
                 "label": "Castlegar Council Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-        ],
-    },
-    {
-        "name": "District of Central Saanich",
-        "short_name": "Central Saanich",
-        "gov_type": GovType.DISTRICT,
-        "region": "CRD",
-        "website_url": "https://www.centralsaanich.ca/",
-        "population": 18576,
-        # Also in CRD list above (CivicWeb); Granicus source added here.
-        "sources": [
-            {
-                "platform": Platform.GRANICUS,
-                "source_type": SourceType.AGENDA,
-                "url": "https://centralsaanich.ca.granicus.com",
-                "label": "Central Saanich Granicus Agendas",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
         ],
@@ -804,24 +905,6 @@ BC_MUNICIPALITIES_BATCH_3 = [
         ],
     },
     {
-        "name": "District of Oak Bay",
-        "short_name": "Oak Bay",
-        "gov_type": GovType.DISTRICT,
-        "region": "CRD",
-        "website_url": "https://www.oakbay.ca/",
-        "population": 18094,
-        # Already in CRD list (portal URLs); adding specific meeting-list pages.
-        "sources": [
-            {
-                "platform": Platform.CIVICWEB,
-                "source_type": SourceType.AGENDA,
-                "url": "https://oakbay.civicweb.net/Portal/MeetingTypeList.aspx",
-                "label": "Oak Bay CivicWeb Meeting List",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-        ],
-    },
-    {
         "name": "City of Penticton",
         "short_name": "Penticton",
         "gov_type": GovType.CITY,
@@ -935,24 +1018,6 @@ BC_MUNICIPALITIES_BATCH_4 = [
         ],
     },
     {
-        "name": "District of Saanich",
-        "short_name": "Saanich",
-        "gov_type": GovType.DISTRICT,
-        "region": "CRD",
-        "website_url": "https://www.saanich.ca/",
-        "population": 117735,
-        # Already in CRD list (custom); Granicus source added here.
-        "sources": [
-            {
-                "platform": Platform.GRANICUS,
-                "source_type": SourceType.AGENDA,
-                "url": "https://saanich.ca.granicus.com",
-                "label": "Saanich Granicus Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-        ],
-    },
-    {
         "name": "City of Salmon Arm",
         "short_name": "Salmon Arm",
         "gov_type": GovType.CITY,
@@ -965,6 +1030,13 @@ BC_MUNICIPALITIES_BATCH_4 = [
                 "source_type": SourceType.AGENDA,
                 "url": "https://www.salmonarm.ca/council",
                 "label": "Salmon Arm Council Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.GRANICUS,
+                "source_type": SourceType.AGENDA,
+                "url": "https://salmonarm.ca.granicus.com",
+                "label": "Salmon Arm Granicus Agendas",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
         ],
@@ -1066,24 +1138,6 @@ BC_MUNICIPALITIES_BATCH_4 = [
 # Batch 5 – 10 municipalities with correct specific meeting pages
 BC_MUNICIPALITIES_BATCH_5 = [
     {
-        "name": "City of Victoria",
-        "short_name": "Victoria",
-        "gov_type": GovType.CITY,
-        "region": "CRD",
-        "website_url": "https://www.victoria.ca/",
-        "population": 91867,
-        # Already in CRD list (CivicWeb); eScribe source added here.
-        "sources": [
-            {
-                "platform": Platform.ESCRIBE,
-                "source_type": SourceType.AGENDA,
-                "url": "https://pub-victoria.escribemeetings.com",
-                "label": "Victoria eScribe Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-        ],
-    },
-    {
         "name": "City of West Kelowna",
         "short_name": "West Kelowna",
         "gov_type": GovType.CITY,
@@ -1165,189 +1219,10 @@ BC_MUNICIPALITIES_BATCH_5 = [
             },
         ],
     },
-    {
-        "name": "Town of View Royal",
-        "short_name": "View Royal",
-        "gov_type": GovType.TOWN,
-        "region": "CRD",
-        "website_url": "https://www.viewroyal.ca/",
-        "population": 11575,
-        # Already in CRD list (custom); CivicWeb source added here.
-        "sources": [
-            {
-                "platform": Platform.CIVICWEB,
-                "source_type": SourceType.AGENDA,
-                "url": "https://viewroyal.civicweb.net/Portal/MeetingTypeList.aspx",
-                "label": "View Royal CivicWeb Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-            {
-                "platform": Platform.CIVICWEB,
-                "source_type": SourceType.MINUTES,
-                "url": "https://viewroyal.civicweb.net/filepro/documents/",
-                "label": "View Royal CivicWeb Minutes",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-        ],
-    },
-    {
-        "name": "District of Sooke",
-        "short_name": "Sooke",
-        "gov_type": GovType.DISTRICT,
-        "region": "CRD",
-        "website_url": "https://www.sooke.ca/",
-        "population": 15054,
-        # Already in CRD list; adding specific meeting-list pages.
-        "sources": [
-            {
-                "platform": Platform.CIVICWEB,
-                "source_type": SourceType.AGENDA,
-                "url": "https://sooke.civicweb.net/Portal/MeetingTypeList.aspx",
-                "label": "Sooke CivicWeb Meeting List",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-        ],
-    },
-    {
-        "name": "Town of Sidney",
-        "short_name": "Sidney",
-        "gov_type": GovType.TOWN,
-        "region": "CRD",
-        "website_url": "https://www.sidney.ca/",
-        "population": 12405,
-        # Already in CRD list (custom); CivicWeb source added here.
-        "sources": [
-            {
-                "platform": Platform.CIVICWEB,
-                "source_type": SourceType.AGENDA,
-                "url": "https://sidney.civicweb.net/Portal/MeetingTypeList.aspx",
-                "label": "Sidney CivicWeb Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-            {
-                "platform": Platform.CIVICWEB,
-                "source_type": SourceType.MINUTES,
-                "url": "https://sidney.civicweb.net/filepro/documents/",
-                "label": "Sidney CivicWeb Minutes",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-        ],
-    },
-    {
-        "name": "District of North Saanich",
-        "short_name": "North Saanich",
-        "gov_type": GovType.DISTRICT,
-        "region": "CRD",
-        "website_url": "https://northsaanich.ca/",
-        "population": 12220,
-        # Already in CRD list; adding specific meeting-list pages.
-        "sources": [
-            {
-                "platform": Platform.CIVICWEB,
-                "source_type": SourceType.AGENDA,
-                "url": "https://northsaanich.civicweb.net/Portal/MeetingTypeList.aspx",
-                "label": "North Saanich CivicWeb Meeting List",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-        ],
-    },
-    {
-        "name": "District of Metchosin",
-        "short_name": "Metchosin",
-        "gov_type": GovType.DISTRICT,
-        "region": "CRD",
-        "website_url": "https://www.metchosin.ca/",
-        "population": 5169,
-        # Already in CRD list; adding specific meeting-list pages.
-        "sources": [
-            {
-                "platform": Platform.CIVICWEB,
-                "source_type": SourceType.AGENDA,
-                "url": "https://metchosin.civicweb.net/Portal/MeetingTypeList.aspx",
-                "label": "Metchosin CivicWeb Meeting List",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-        ],
-    },
 ]
 
-# Batch 6 – 10 municipalities with correct specific meeting pages
+# Batch 6 – remaining municipalities with correct specific meeting pages
 BC_MUNICIPALITIES_BATCH_6 = [
-    {
-        "name": "City of Langford",
-        "short_name": "Langford",
-        "gov_type": GovType.CITY,
-        "region": "CRD",
-        "website_url": "https://langford.ca/",
-        "population": 46584,
-        # Already in CRD list (custom); CivicWeb source added here.
-        "sources": [
-            {
-                "platform": Platform.CIVICWEB,
-                "source_type": SourceType.AGENDA,
-                "url": "https://langford.civicweb.net/Portal/MeetingTypeList.aspx",
-                "label": "Langford CivicWeb Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-            {
-                "platform": Platform.CIVICWEB,
-                "source_type": SourceType.MINUTES,
-                "url": "https://langford.civicweb.net/filepro/documents/",
-                "label": "Langford CivicWeb Minutes",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-        ],
-    },
-    {
-        "name": "Township of Esquimalt",
-        "short_name": "Esquimalt",
-        "gov_type": GovType.DISTRICT,
-        "region": "CRD",
-        "website_url": "https://www.esquimalt.ca/",
-        "population": 17655,
-        # Already in CRD list (custom); CivicWeb source added here.
-        "sources": [
-            {
-                "platform": Platform.CIVICWEB,
-                "source_type": SourceType.AGENDA,
-                "url": "https://esquimalt.civicweb.net/Portal/MeetingTypeList.aspx",
-                "label": "Esquimalt CivicWeb Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-            {
-                "platform": Platform.CIVICWEB,
-                "source_type": SourceType.MINUTES,
-                "url": "https://esquimalt.civicweb.net/filepro/documents/",
-                "label": "Esquimalt CivicWeb Minutes",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-        ],
-    },
-    {
-        "name": "District of Highlands",
-        "short_name": "Highlands",
-        "gov_type": GovType.DISTRICT,
-        "region": "CRD",
-        "website_url": "https://www.highlands.ca/",
-        "population": 2373,
-        # Already in CRD list (custom); CivicWeb source added here.
-        "sources": [
-            {
-                "platform": Platform.CIVICWEB,
-                "source_type": SourceType.AGENDA,
-                "url": "https://highlands.civicweb.net/Portal/MeetingTypeList.aspx",
-                "label": "Highlands CivicWeb Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-            {
-                "platform": Platform.CIVICWEB,
-                "source_type": SourceType.MINUTES,
-                "url": "https://highlands.civicweb.net/filepro/documents/",
-                "label": "Highlands CivicWeb Minutes",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-        ],
-    },
     {
         "name": "City of Courtenay",
         "short_name": "Courtenay",
@@ -2032,23 +1907,6 @@ BC_MUNICIPALITIES_BATCH_9 = [
                 "source_type": SourceType.AGENDA,
                 "url": "https://www.sicamous.ca/council",
                 "label": "Sicamous Council Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-        ],
-    },
-    {
-        "name": "City of Salmon Arm",
-        "short_name": "Salmon Arm",
-        "gov_type": GovType.CITY,
-        "region": "BC",
-        "website_url": "https://www.salmonarm.ca/",
-        "population": None,
-        "sources": [
-            {
-                "platform": Platform.GRANICUS,
-                "source_type": SourceType.AGENDA,
-                "url": "https://salmonarm.ca.granicus.com",
-                "label": "Salmon Arm Granicus Agendas",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
         ],

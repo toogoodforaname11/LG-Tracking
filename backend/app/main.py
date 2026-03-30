@@ -1,4 +1,6 @@
+import json
 import logging
+import sys
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -8,6 +10,38 @@ from app.config import settings
 from app.db.database import engine, Base
 import app.models  # noqa: F401 — ensure all models registered before create_all
 
+
+class _JSONFormatter(logging.Formatter):
+    """Emit each log record as a single JSON line."""
+
+    def format(self, record: logging.LogRecord) -> str:
+        entry = {
+            "ts": self.formatTime(record, self.datefmt),
+            "level": record.levelname,
+            "logger": record.name,
+            "msg": record.getMessage(),
+        }
+        if record.exc_info and record.exc_info[0]:
+            entry["exc"] = self.formatException(record.exc_info)
+        return json.dumps(entry, default=str)
+
+
+def _configure_logging() -> None:
+    """Set up root logging based on LOG_FORMAT config."""
+    root = logging.getLogger()
+    root.setLevel(logging.DEBUG if settings.debug else logging.INFO)
+    handler = logging.StreamHandler(sys.stderr)
+    if settings.log_format == "json":
+        handler.setFormatter(_JSONFormatter())
+    else:
+        handler.setFormatter(logging.Formatter(
+            "%(asctime)s %(levelname)-5s [%(name)s] %(message)s",
+            datefmt="%Y-%m-%d %H:%M:%S",
+        ))
+    root.handlers = [handler]
+
+
+_configure_logging()
 logger = logging.getLogger(__name__)
 from app.api.registry import router as registry_router
 from app.api.health import router as health_router

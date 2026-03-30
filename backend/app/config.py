@@ -14,10 +14,6 @@ class Settings(BaseSettings):
     gemini_api_key: str = ""
     gemini_model: str = "gemini-1.5-flash"
 
-    # Pinecone
-    pinecone_api_key: str = ""
-    pinecone_index: str = "hearing-watch"
-
     # Perplexity
     perplexity_api_key: str = ""
 
@@ -33,6 +29,9 @@ class Settings(BaseSettings):
     # Set to any non-empty string in production. Callers must send:
     #   X-Cron-Secret: <value>
     cron_secret: str = ""
+
+    # Logging — "json" for structured JSON output, "text" for human-readable
+    log_format: str = "text"
 
     # Scraping
     request_delay_seconds: float = 2.0

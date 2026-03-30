@@ -22,6 +22,7 @@ from app.services.seed_registry import (
     BC_MUNICIPALITIES_BATCH_17,
 )
 from app.discovery.poller import CUSTOM_SCRAPER_MAP
+from app.discovery.custom_bc_municipal import GENERIC_SCRAPER_KEYWORDS
 
 
 ALL_MUNICIPALITIES = (
@@ -114,7 +115,8 @@ def test_youtube_sources_have_valid_urls():
 
 
 def test_custom_scraper_map_covers_all_custom_sources():
-    """Every municipality with a CUSTOM platform source must have a CUSTOM_SCRAPER_MAP entry."""
+    """Every municipality with a CUSTOM platform source must have either a
+    CUSTOM_SCRAPER_MAP entry (substantive) or a GENERIC_SCRAPER_KEYWORDS entry."""
     missing = []
     seen = set()
     for muni in ALL_MUNICIPALITIES:
@@ -123,11 +125,11 @@ def test_custom_scraper_map_covers_all_custom_sources():
             continue
         seen.add(short)
         has_custom = any(s["platform"] == Platform.CUSTOM for s in muni["sources"])
-        if has_custom and short not in CUSTOM_SCRAPER_MAP:
+        if has_custom and short not in CUSTOM_SCRAPER_MAP and short not in GENERIC_SCRAPER_KEYWORDS:
             missing.append(short)
 
     assert not missing, (
-        f"Municipalities with CUSTOM sources but no CUSTOM_SCRAPER_MAP entry: {missing}"
+        f"Municipalities with CUSTOM sources but no scraper config: {missing}"
     )
 
 
@@ -137,6 +139,15 @@ def test_total_municipality_count():
     assert len(unique_names) >= 160, (
         f"Expected at least 160 unique municipalities, got {len(unique_names)}"
     )
+
+
+def test_no_duplicate_short_names_across_all_batches():
+    """Every municipality should appear exactly once across all batch lists."""
+    from collections import Counter
+
+    names = [m["short_name"] for m in ALL_MUNICIPALITIES]
+    dupes = {n: c for n, c in Counter(names).items() if c > 1}
+    assert not dupes, f"Duplicate short_names found across batches: {dupes}"
 
 
 def test_all_source_urls_are_nonempty():

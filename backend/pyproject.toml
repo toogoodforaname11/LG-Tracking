@@ -28,7 +28,6 @@ dev = [
 ]
 ai = [
     "google-generativeai>=0.8.0",
-    "pinecone-client>=3.0.0",
 ]
 
 [build-system]
