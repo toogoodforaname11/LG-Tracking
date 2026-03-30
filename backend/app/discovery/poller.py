@@ -124,6 +124,9 @@ from app.services.instant_alerts import send_immediate_alerts_for_documents
 
 logger = logging.getLogger(__name__)
 
+# Number of consecutive poll failures before a source is marked BROKEN.
+BROKEN_THRESHOLD = 5
+
 
 # Map item_type strings to DocType enum
 DOC_TYPE_MAP = {
@@ -301,8 +304,9 @@ async def poll_source(source: Source, municipality: Municipality) -> list[Discov
             scraper = _get_custom_scraper(municipality.short_name, source.url)
             if scraper:
                 return await scraper.discover()
-            logger.warning(
-                "No custom scraper for %s (source %d: %s)",
+            logger.error(
+                "No custom scraper registered for %s (source %d: %s). "
+                "Add an entry to CUSTOM_SCRAPER_MAP in poller.py.",
                 municipality.short_name, source.id, source.label,
             )
             return []
@@ -446,7 +450,7 @@ async def run_discovery(db: AsyncSession, municipality_filter: str | None = None
     query = (
         select(Source, Municipality)
         .join(Municipality, Source.municipality_id == Municipality.id)
-        .where(Source.scrape_status.in_([ScrapeStatus.ACTIVE, ScrapeStatus.PENDING]))
+        .where(Source.scrape_status.in_([ScrapeStatus.ACTIVE, ScrapeStatus.PENDING, ScrapeStatus.BROKEN]))
         .where(Municipality.is_active.is_(True))
     )
     if municipality_filter:
@@ -479,6 +483,7 @@ async def run_discovery(db: AsyncSession, municipality_filter: str | None = None
             source.scrape_status = ScrapeStatus.ACTIVE
             source.last_scraped_at = datetime.now(timezone.utc)
             source.last_error = None
+            source.consecutive_failures = 0
 
             results[f"{muni_name}/{source.label}"] = stats
             logger.info("  %s/%s: %d items (%d new)", muni_name, source.label, stats["total"], stats["new"])
@@ -490,7 +495,13 @@ async def run_discovery(db: AsyncSession, municipality_filter: str | None = None
             scrape_run.error_message = str(e)
 
             source.last_error = str(e)
-            source.scrape_status = ScrapeStatus.BROKEN
+            source.consecutive_failures = (source.consecutive_failures or 0) + 1
+            if source.consecutive_failures >= BROKEN_THRESHOLD:
+                source.scrape_status = ScrapeStatus.BROKEN
+                logger.warning(
+                    "%s/%s marked BROKEN after %d consecutive failures",
+                    muni_name, source.label, source.consecutive_failures,
+                )
 
             results[f"{muni_name}/{source.label}"] = {"error": str(e)}
 
