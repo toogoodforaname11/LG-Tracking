@@ -17,7 +17,7 @@ from app.services.digest import (
 )
 from app.services.instant_alerts import (
     render_alert_email,
-    send_alert_via_resend,
+    send_alert_via_smtp,
     send_immediate_alerts_for_documents,
 )
 from app.models.document import DocType
@@ -226,36 +226,30 @@ def test_render_alert_email_partially_verified():
     assert "Partially Verified" in html
 
 
-# --- send_alert_via_resend ---
+# --- send_alert_via_smtp ---
 
 
-def test_send_alert_skips_without_api_key():
-    """Without RESEND_API_KEY, should return False and not attempt send."""
-    with patch("app.services.instant_alerts.settings") as mock_settings:
-        mock_settings.resend_api_key = ""
+def test_send_alert_skips_without_smtp_config():
+    """Without SMTP credentials, should return False and not attempt send."""
+    with patch("app.services.email.settings") as mock_settings:
+        mock_settings.smtp_host = ""
+        mock_settings.smtp_username = ""
+        mock_settings.smtp_password = ""
 
-        result = send_alert_via_resend("user@test.com", "<html></html>", "Colwood", "March 30")
+        result = send_alert_via_smtp("user@test.com", "<html></html>", "Colwood", "March 30")
 
     assert result is False
 
 
-def test_send_alert_with_api_key():
-    """With RESEND_API_KEY, should call Resend API."""
-    import sys
-    mock_resend = MagicMock()
-    sys.modules["resend"] = mock_resend
+def test_send_alert_with_smtp_config():
+    """With SMTP credentials, should send email via SMTP."""
+    with patch("app.services.email.send_email") as mock_send:
+        mock_send.return_value = True
 
-    try:
-        with patch("app.services.instant_alerts.settings") as mock_settings:
-            mock_settings.resend_api_key = "test-key"
-            mock_settings.resend_from_email = "noreply@test.com"
+        result = send_alert_via_smtp("user@test.com", "<html></html>", "Colwood", "March 30")
 
-            result = send_alert_via_resend("user@test.com", "<html></html>", "Colwood", "March 30")
-
-        assert result is True
-        mock_resend.Emails.send.assert_called_once()
-    finally:
-        del sys.modules["resend"]
+    assert result is True
+    mock_send.assert_called_once()
 
 
 # --- send_immediate_alerts_for_documents ---
@@ -339,7 +333,7 @@ async def test_immediate_alerts_matches_subscriber_municipalities():
     with patch("app.services.instant_alerts.settings") as mock_settings:
         mock_settings.app_base_url = "https://example.com"
 
-        with patch("app.services.instant_alerts.send_alert_via_resend") as mock_send:
+        with patch("app.services.instant_alerts.send_alert_via_smtp") as mock_send:
             mock_send.return_value = True
 
             stats = await send_immediate_alerts_for_documents(db, [doc])
@@ -406,7 +400,7 @@ async def test_weekly_digest_sends_email():
         with patch("app.services.digest.get_recent_documents", new_callable=AsyncMock) as mock_docs:
             mock_docs.return_value = [(doc, muni)]
 
-            with patch("app.services.digest.send_digest_via_resend") as mock_send:
+            with patch("app.services.digest.send_digest_via_smtp") as mock_send:
                 mock_send.return_value = True
 
                 stats = await run_weekly_digest(db)

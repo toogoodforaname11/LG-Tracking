@@ -315,31 +315,19 @@ def build_digest_items(
     return items
 
 
-def send_digest_via_resend(
+def send_digest_via_smtp(
     to_email: str,
     html: str,
     date_str: str,
 ) -> bool:
-    """Send digest email via Resend. Returns True on success."""
-    if not settings.resend_api_key:
-        logger.warning("RESEND_API_KEY not set — skipping digest email")
-        return False
+    """Send digest email via SMTP. Returns True on success."""
+    from app.services.email import send_email
 
-    try:
-        import resend
-        resend.api_key = settings.resend_api_key
-
-        resend.Emails.send({
-            "from": settings.resend_from_email,
-            "to": [to_email],
-            "subject": f"Your BC Local Government Council Tracker Digest \u2013 {date_str}",
-            "html": html,
-        })
-        logger.info(f"Digest email sent to {to_email}")
-        return True
-    except Exception as e:
-        logger.error(f"Failed to send digest to {to_email}: {e}")
-        return False
+    return send_email(
+        to_email=to_email,
+        subject=f"Your BC Local Government Council Tracker Digest \u2013 {date_str}",
+        html=html,
+    )
 
 
 async def run_weekly_digest(db: AsyncSession) -> dict:
@@ -403,7 +391,7 @@ async def run_weekly_digest(db: AsyncSession) -> dict:
         )
 
         # Send
-        success = send_digest_via_resend(subscriber.email, html, date_str)
+        success = send_digest_via_smtp(subscriber.email, html, date_str)
         if success:
             stats["emails_sent"] += 1
         else:

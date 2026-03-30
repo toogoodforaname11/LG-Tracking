@@ -114,32 +114,20 @@ def render_alert_email(
     """
 
 
-def send_alert_via_resend(
+def send_alert_via_smtp(
     to_email: str,
     html: str,
     municipality_name: str,
     date_str: str,
 ) -> bool:
-    """Send an immediate alert email via Resend. Returns True on success."""
-    if not settings.resend_api_key:
-        logger.warning("RESEND_API_KEY not set — skipping alert email")
-        return False
+    """Send an immediate alert email via SMTP. Returns True on success."""
+    from app.services.email import send_email
 
-    try:
-        import resend
-        resend.api_key = settings.resend_api_key
-
-        resend.Emails.send({
-            "from": settings.resend_from_email,
-            "to": [to_email],
-            "subject": f"BC Local Government Alert \u2013 {municipality_name} {date_str}",
-            "html": html,
-        })
-        logger.info(f"Immediate alert sent to {to_email} for {municipality_name}")
-        return True
-    except Exception as e:
-        logger.error(f"Failed to send alert to {to_email}: {e}")
-        return False
+    return send_email(
+        to_email=to_email,
+        subject=f"BC Local Government Alert \u2013 {municipality_name} {date_str}",
+        html=html,
+    )
 
 
 async def send_immediate_alerts_for_documents(
@@ -238,7 +226,7 @@ async def send_immediate_alerts_for_documents(
                 unsubscribe_url=unsubscribe_url,
             )
 
-            success = send_alert_via_resend(
+            success = send_alert_via_smtp(
                 to_email=subscriber.email,
                 html=html,
                 municipality_name=item.get("municipality", "Unknown"),

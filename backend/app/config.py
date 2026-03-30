@@ -17,9 +17,12 @@ class Settings(BaseSettings):
     # Perplexity
     perplexity_api_key: str = ""
 
-    # Resend (email)
-    resend_api_key: str = ""
-    resend_from_email: str = "BC Local Government Council Tracker <noreply@bchearingwatch.ca>"
+    # SMTP (Hostinger email)
+    smtp_host: str = "smtp.hostinger.com"
+    smtp_port: int = 465
+    smtp_username: str = ""
+    smtp_password: str = ""
+    smtp_from_email: str = "BC Local Government Council Tracker <noreply@bchearingwatch.ca>"
 
     # CORS — comma-separated list of allowed origins
     # e.g. "http://localhost:3000,https://yourdomain.com"

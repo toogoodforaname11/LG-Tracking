@@ -76,9 +76,9 @@ def _validate_config() -> None:
             "will return 503. Set CRON_SECRET to a random string."
         )
 
-    if not settings.resend_api_key:
+    if not settings.smtp_username or not settings.smtp_password:
         logger.warning(
-            "RESEND_API_KEY is not set. Email sending will fail at runtime."
+            "SMTP credentials not set. Email sending will fail at runtime."
         )
 
 

@@ -182,21 +182,7 @@ def render_digest_text(digest: dict) -> str:
 
 
 async def send_digest_email(digest: dict, recipient: str) -> bool:
-    """Send a track digest email via Resend. Returns True on success.
-
-    This replaces the previous stub implementation that logged and returned True
-    without sending anything. That approach was unacceptable: it silently consumed
-    all TrackMatch records, marked them as notified, and delivered nothing to the
-    user — a complete invisible failure of the core product loop.
-    """
-    if not settings.resend_api_key:
-        logger.error(
-            "RESEND_API_KEY not set — cannot send track digest to %s. "
-            "Set RESEND_API_KEY in environment to enable email delivery.",
-            recipient,
-        )
-        return False
-
+    """Send a track digest email via SMTP. Returns True on success."""
     if not recipient:
         logger.error(
             "Track digest has no recipient email address (track_id=%s). "
@@ -205,32 +191,20 @@ async def send_digest_email(digest: dict, recipient: str) -> bool:
         )
         return False
 
-    try:
-        import resend
-        resend.api_key = settings.resend_api_key
+    from app.services.email import send_email
 
-        html = render_digest_html(digest)
-        text = render_digest_text(digest)
+    html = render_digest_html(digest)
+    text = render_digest_text(digest)
 
-        resend.Emails.send({
-            "from": settings.resend_from_email,
-            "to": [recipient],
-            "subject": (
-                f"[BC Local Government Council Tracker] "
-                f"{digest['track_name']} — {digest['total_matches']} new matches"
-            ),
-            "html": html,
-            "text": text,
-        })
-        logger.info(
-            "Track digest sent to %s: %s (%d items)",
-            recipient, digest["track_name"], digest["total_matches"],
-        )
-        return True
-
-    except Exception as e:
-        logger.error("Failed to send track digest to %s: %s", recipient, e)
-        return False
+    return send_email(
+        to_email=recipient,
+        subject=(
+            f"[BC Local Government Council Tracker] "
+            f"{digest['track_name']} — {digest['total_matches']} new matches"
+        ),
+        html=html,
+        text=text,
+    )
 
 
 async def process_and_notify(db: AsyncSession) -> dict:

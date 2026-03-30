@@ -53,80 +53,69 @@ def send_confirmation_email(
     immediate_alerts: bool,
     unsubscribe_url: str,
 ) -> None:
-    """Send a new-subscriber confirmation email via Resend.
+    """Send a new-subscriber confirmation email via SMTP.
 
     Called as a BackgroundTask so it never blocks the API response.
     """
-    if not settings.resend_api_key:
-        logger.warning("RESEND_API_KEY not set — skipping confirmation email")
-        return
+    from app.services.email import send_email
 
-    try:
-        import resend
-        resend.api_key = settings.resend_api_key
+    muni_list = ", ".join(municipalities) if municipalities else "None selected"
+    topic_list = ", ".join(topics) if topics else "None selected"
 
-        muni_list = ", ".join(municipalities) if municipalities else "None selected"
-        topic_list = ", ".join(topics) if topics else "None selected"
-
-        alerts_note = ""
-        if immediate_alerts:
-            alerts_note = """
-            <div style="background:#fef3c7;border-radius:8px;padding:12px 16px;margin:16px 0;border-left:4px solid #f59e0b;">
-                <p style="margin:0;font-size:14px;color:#92400e;">
-                    <strong>Immediate Alerts: ON</strong> — You will receive an email
-                    within minutes whenever a new matching council item is detected.
-                </p>
-            </div>
-            """
-
-        html = f"""
-        <html>
-        <body style="font-family:system-ui,-apple-system,sans-serif;max-width:600px;margin:0 auto;padding:20px;color:#1a1a1a;">
-            <div style="border-bottom:3px solid #1e40af;padding-bottom:16px;margin-bottom:24px;">
-                <h1 style="color:#1e40af;margin:0;font-size:24px;">BC Local Government Council Tracker</h1>
-                <p style="color:#6b7280;margin:4px 0 0;font-size:14px;">Municipal Council Alerts &amp; Digest</p>
-            </div>
-
-            <h2 style="color:#111;font-size:20px;">Preferences Saved!</h2>
-            <p style="color:#374151;line-height:1.6;">
-                Your subscription has been confirmed. Here's what you signed up for:
+    alerts_note = ""
+    if immediate_alerts:
+        alerts_note = """
+        <div style="background:#fef3c7;border-radius:8px;padding:12px 16px;margin:16px 0;border-left:4px solid #f59e0b;">
+            <p style="margin:0;font-size:14px;color:#92400e;">
+                <strong>Immediate Alerts: ON</strong> — You will receive an email
+                within minutes whenever a new matching council item is detected.
             </p>
-
-            <div style="background:#f0f4ff;border-radius:8px;padding:16px;margin:16px 0;">
-                <p style="margin:0 0 8px;"><strong>Municipalities:</strong> {muni_list}</p>
-                <p style="margin:0 0 8px;"><strong>Topics:</strong> {topic_list}</p>
-                <p style="margin:0;"><strong>Immediate Alerts:</strong> {'Enabled' if immediate_alerts else 'Disabled'}</p>
-            </div>
-
-            {alerts_note}
-
-            <p style="color:#374151;line-height:1.6;">
-                You will receive weekly digests every <strong>Sunday at 8 PM Pacific</strong>
-                with AI-summarized updates from your selected municipalities.
-            </p>
-
-            <hr style="border:none;border-top:1px solid #e5e7eb;margin:24px 0;">
-
-            <p style="font-size:11px;color:#9ca3af;line-height:1.5;">
-                This is an experimental personal tool using public data.
-                AI summaries may contain errors. Always verify with original municipal sources.
-                Not official government communication.<br><br>
-                <a href="{unsubscribe_url}" style="color:#6b7280;">Unsubscribe from all emails</a>
-            </p>
-        </body>
-        </html>
+        </div>
         """
 
-        resend.Emails.send({
-            "from": settings.resend_from_email,
-            "to": [email],
-            "subject": "BC Local Government Council Tracker — Subscription Confirmed",
-            "html": html,
-        })
-        logger.info("Confirmation email sent to %s", email)
+    html = f"""
+    <html>
+    <body style="font-family:system-ui,-apple-system,sans-serif;max-width:600px;margin:0 auto;padding:20px;color:#1a1a1a;">
+        <div style="border-bottom:3px solid #1e40af;padding-bottom:16px;margin-bottom:24px;">
+            <h1 style="color:#1e40af;margin:0;font-size:24px;">BC Local Government Council Tracker</h1>
+            <p style="color:#6b7280;margin:4px 0 0;font-size:14px;">Municipal Council Alerts &amp; Digest</p>
+        </div>
 
-    except Exception as e:
-        logger.error("Failed to send confirmation email to %s: %s", email, e)
+        <h2 style="color:#111;font-size:20px;">Preferences Saved!</h2>
+        <p style="color:#374151;line-height:1.6;">
+            Your subscription has been confirmed. Here's what you signed up for:
+        </p>
+
+        <div style="background:#f0f4ff;border-radius:8px;padding:16px;margin:16px 0;">
+            <p style="margin:0 0 8px;"><strong>Municipalities:</strong> {muni_list}</p>
+            <p style="margin:0 0 8px;"><strong>Topics:</strong> {topic_list}</p>
+            <p style="margin:0;"><strong>Immediate Alerts:</strong> {'Enabled' if immediate_alerts else 'Disabled'}</p>
+        </div>
+
+        {alerts_note}
+
+        <p style="color:#374151;line-height:1.6;">
+            You will receive weekly digests every <strong>Sunday at 8 PM Pacific</strong>
+            with AI-summarized updates from your selected municipalities.
+        </p>
+
+        <hr style="border:none;border-top:1px solid #e5e7eb;margin:24px 0;">
+
+        <p style="font-size:11px;color:#9ca3af;line-height:1.5;">
+            This is an experimental personal tool using public data.
+            AI summaries may contain errors. Always verify with original municipal sources.
+            Not official government communication.<br><br>
+            <a href="{unsubscribe_url}" style="color:#6b7280;">Unsubscribe from all emails</a>
+        </p>
+    </body>
+    </html>
+    """
+
+    send_email(
+        to_email=email,
+        subject="BC Local Government Council Tracker — Subscription Confirmed",
+        html=html,
+    )
 
 
 def send_magic_link_email(email: str, confirm_url: str) -> None:
@@ -135,59 +124,48 @@ def send_magic_link_email(email: str, confirm_url: str) -> None:
     Called as a BackgroundTask. Errors are logged but do not surface to the caller —
     the pending token has already been stored in the database.
     """
-    if not settings.resend_api_key:
-        logger.warning("RESEND_API_KEY not set — skipping magic link email (token stored in DB)")
-        return
+    from app.services.email import send_email
 
-    try:
-        import resend
-        resend.api_key = settings.resend_api_key
+    html = f"""
+    <html>
+    <body style="font-family:system-ui,-apple-system,sans-serif;max-width:600px;margin:0 auto;padding:20px;color:#1a1a1a;">
+        <div style="border-bottom:3px solid #1e40af;padding-bottom:16px;margin-bottom:24px;">
+            <h1 style="color:#1e40af;margin:0;font-size:24px;">BC Local Government Council Tracker</h1>
+            <p style="color:#6b7280;margin:4px 0 0;font-size:14px;">Municipal Council Alerts &amp; Digest</p>
+        </div>
 
-        html = f"""
-        <html>
-        <body style="font-family:system-ui,-apple-system,sans-serif;max-width:600px;margin:0 auto;padding:20px;color:#1a1a1a;">
-            <div style="border-bottom:3px solid #1e40af;padding-bottom:16px;margin-bottom:24px;">
-                <h1 style="color:#1e40af;margin:0;font-size:24px;">BC Local Government Council Tracker</h1>
-                <p style="color:#6b7280;margin:4px 0 0;font-size:14px;">Municipal Council Alerts &amp; Digest</p>
-            </div>
+        <h2 style="color:#111;font-size:20px;">Confirm Your Preference Update</h2>
+        <p style="color:#374151;line-height:1.6;">
+            We received a request to update your subscription preferences.
+            Click the button below to confirm the changes. This link expires in 24 hours.
+        </p>
 
-            <h2 style="color:#111;font-size:20px;">Confirm Your Preference Update</h2>
-            <p style="color:#374151;line-height:1.6;">
-                We received a request to update your subscription preferences.
-                Click the button below to confirm the changes. This link expires in 24 hours.
-            </p>
+        <div style="text-align:center;margin:32px 0;">
+            <a href="{confirm_url}"
+               style="background:#1e40af;color:#fff;padding:14px 32px;border-radius:8px;
+                      text-decoration:none;font-size:16px;font-weight:600;display:inline-block;">
+                Confirm Preference Update
+            </a>
+        </div>
 
-            <div style="text-align:center;margin:32px 0;">
-                <a href="{confirm_url}"
-                   style="background:#1e40af;color:#fff;padding:14px 32px;border-radius:8px;
-                          text-decoration:none;font-size:16px;font-weight:600;display:inline-block;">
-                    Confirm Preference Update
-                </a>
-            </div>
+        <p style="color:#6b7280;font-size:13px;line-height:1.6;">
+            If you did not request this change, you can safely ignore this email —
+            your existing preferences will not be changed.
+        </p>
 
-            <p style="color:#6b7280;font-size:13px;line-height:1.6;">
-                If you did not request this change, you can safely ignore this email —
-                your existing preferences will not be changed.
-            </p>
+        <p style="color:#6b7280;font-size:12px;">
+            Or copy this link into your browser:<br>
+            <span style="word-break:break-all;">{confirm_url}</span>
+        </p>
+    </body>
+    </html>
+    """
 
-            <p style="color:#6b7280;font-size:12px;">
-                Or copy this link into your browser:<br>
-                <span style="word-break:break-all;">{confirm_url}</span>
-            </p>
-        </body>
-        </html>
-        """
-
-        resend.Emails.send({
-            "from": settings.resend_from_email,
-            "to": [email],
-            "subject": "BC Local Government Council Tracker — Confirm Your Preference Update",
-            "html": html,
-        })
-        logger.info("Magic link email sent to %s", email)
-
-    except Exception as e:
-        logger.error("Failed to send magic link email to %s: %s", email, e)
+    send_email(
+        to_email=email,
+        subject="BC Local Government Council Tracker — Confirm Your Preference Update",
+        html=html,
+    )
 
 
 # --- Endpoints ---
