@@ -1,7 +1,7 @@
 """Integration tests for the subscription lifecycle:
 subscribe -> confirm -> update preferences -> unsubscribe.
 
-Tests the full flow using mocked DB sessions and Resend email service.
+Tests the full flow using mocked DB sessions and SMTP email service.
 """
 
 import uuid
@@ -97,7 +97,8 @@ async def test_new_subscriber_created():
 
     with patch("app.api.subscribe.settings") as mock_settings:
         mock_settings.app_base_url = "https://example.com"
-        mock_settings.resend_api_key = "test-key"
+        mock_settings.smtp_username = "test@example.com"
+        mock_settings.smtp_password = "test-password"
 
         response = await subscribe(req, background_tasks, db)
 

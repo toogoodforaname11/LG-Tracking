@@ -70,13 +70,13 @@ You can track specific bylaws by name or number (e.g. "Bylaw 1700" or "Housing S
 ## Architecture
 
 - **Frontend**: Next.js 15 + Tailwind CSS — single subscription form page
-- **Backend**: FastAPI + SQLAlchemy (async) + Neon Postgres
-- **Email**: Resend SDK for transactional emails (alerts + digests)
-- **AI**: Gemini 1.5 Flash (matching + summaries) with keyword fallback
+- **Backend**: FastAPI + SQLAlchemy (async) + PostgreSQL
+- **Email**: Hostinger SMTP (your existing email — no third-party service needed)
+- **AI**: Gemini 2.5 Flash (matching + summaries) with keyword fallback
 - **Verification**: Perplexity Search API (optional fact-checking)
 - **Discovery**: CivicWeb, Granicus, eScribe, YouTube RSS, and custom HTML scrapers
 - **Polling**: Every 30 minutes via cron
-- **Deploy**: Hostinger VPS (Ubuntu 22.04) or Vercel
+- **Deploy**: Hostinger VPS (Ubuntu 22.04) — everything runs on one server
 
 ### Scraper Architecture
 
@@ -93,7 +93,7 @@ All scrapers live in `backend/app/discovery/`:
 | `custom_*.py` | Per-municipality scrapers extending `BCMunicipalScraper` |
 | `poller.py` | Orchestrator — polls all active sources, stores results, triggers alerts |
 
-## Quick Start
+## Quick Start (Local Development)
 
 ### Backend
 
@@ -131,26 +131,142 @@ curl -X POST http://localhost:8000/api/v1/cron/poll
 curl "http://localhost:8000/api/v1/cron/trigger-alerts?email=you@example.com"
 ```
 
+## Hostinger VPS Deployment
+
+Everything runs on a single Hostinger VPS — PostgreSQL, backend, frontend, email. The deploy script handles all the infrastructure automatically. You just need to add your email credentials and (optionally) AI API keys.
+
+### What You Need Before Starting
+
+1. A **Hostinger VPS** (KVM 2 minimum, KVM 4 recommended)
+2. A **domain name** with an A record pointing to your VPS IP
+3. A **Hostinger email address** (e.g. `noreply@lg-tracker.ca`) — create one in Hostinger's email panel
+4. (Optional) A **Gemini API key** from [Google AI Studio](https://aistudio.google.com/apikey) — free tier works
+5. (Optional) A **Perplexity API key** for fact verification
+
+### VPS Requirements
+
+| Resource | Minimum | Recommended |
+|----------|---------|-------------|
+| **OS** | Ubuntu 22.04 LTS | Ubuntu 22.04 LTS |
+| **RAM** | 2 GB | 4 GB |
+| **CPU** | 1 vCPU | 2 vCPU |
+| **Storage** | 20 GB SSD | 40 GB SSD |
+
+### Deploy (One Command)
+
+```bash
+# 1. SSH into your VPS
+ssh root@your-vps-ip
+
+# 2. Download the deploy script
+curl -O https://raw.githubusercontent.com/toogoodforaname11/lg-tracking/main/deploy/deploy.sh
+
+# 3. Run it (DOMAIN is pre-set to lg-tracker.ca)
+bash deploy.sh
+```
+
+The script automatically:
+- Installs Python 3.11, Node.js 20, Nginx, Certbot
+- **Installs and configures PostgreSQL** with a local database and auto-generated credentials
+- Clones the repo, builds the frontend, sets up systemd
+- **Generates your `.env`** with database credentials and cron secret pre-filled
+- Configures SSL via Let's Encrypt
+- Installs cron jobs (poll every 30 min, weekly digest)
+- Starts the backend
+
+### After Deploy — Add Your Credentials
+
+The only thing left is to add your email and (optionally) AI API keys:
+
+```bash
+nano /var/www/lg-tracking/backend/.env
+```
+
+Fill in these lines:
+
+```env
+# Your Hostinger email (required for sending alerts/digests)
+SMTP_USERNAME=noreply@lg-tracker.ca
+SMTP_PASSWORD=your-hostinger-email-password
+
+# Optional — enables AI matching and summarization (free tier available)
+GEMINI_API_KEY=your-gemini-api-key
+
+# Optional — enables fact verification
+PERPLEXITY_API_KEY=your-perplexity-api-key
+```
+
+Then restart and seed the database:
+
+```bash
+systemctl restart bc-hearing-watch
+curl -X POST http://127.0.0.1:8000/api/v1/seed
+curl http://127.0.0.1:8000/health
+```
+
+Visit `https://lg-tracker.ca` — you're live.
+
+### What Gets Deployed
+
+| Component | Details |
+|-----------|---------|
+| **PostgreSQL** | Local database on the VPS (auto-configured, no external service needed) |
+| **Frontend** | Static HTML/CSS/JS served by Nginx from `/var/www/lg-tracking/frontend/out/` |
+| **Backend** | Uvicorn (FastAPI) on port 8000, managed by systemd |
+| **Nginx** | Reverse proxy on ports 80/443 — serves frontend, proxies `/api/*` to backend |
+| **SSL** | Free Let's Encrypt certificate via Certbot (auto-renews) |
+| **Email** | Sent via your Hostinger email over SMTP (port 465 SSL) |
+| **Cron** | Linux crontab polls sources every 30 min, sends weekly digest on Sundays |
+
 ### Environment Variables
 
-| Variable | Required | Description |
+| Variable | Auto-configured? | Description |
 |---|---|---|
-| `DATABASE_URL` | Yes | Neon Postgres async connection string (`postgresql+asyncpg://...`) |
-| `APP_BASE_URL` | **Yes** | Your public domain (e.g. `https://yourdomain.com`). **All email features are disabled if this is empty.** |
-| `CRON_SECRET` | **Yes** (prod) | Random string protecting cron/admin endpoints. Generate with: `python -c "import secrets; print(secrets.token_urlsafe(32))"` |
-| `RESEND_API_KEY` | Yes | Resend API key for sending emails |
-| `RESEND_FROM_EMAIL` | No | Sender address (default: `BC Hearing Watch <noreply@bchearingwatch.ca>`) |
-| `GEMINI_API_KEY` | No | Google Gemini for AI matching/summaries (falls back to keyword matching) |
-| `PERPLEXITY_API_KEY` | No | Perplexity for fact verification |
-| `ALLOWED_ORIGINS` | No | Comma-separated CORS origins (default: `http://localhost:3000`) |
-| `REQUEST_DELAY_SECONDS` | No | Delay between source polls (default: `2.0`) |
+| `DATABASE_URL` | Yes | Local PostgreSQL connection (set by deploy script) |
+| `DATABASE_URL_SYNC` | Yes | Sync version of the above |
+| `CRON_SECRET` | Yes | Random string protecting cron endpoints (auto-generated) |
+| `APP_BASE_URL` | Yes | Your domain URL (set from DOMAIN in deploy script) |
+| `ALLOWED_ORIGINS` | Yes | CORS origins (auto-set) |
+| `SMTP_USERNAME` | **You fill in** | Your Hostinger email address |
+| `SMTP_PASSWORD` | **You fill in** | Your Hostinger email password |
+| `GEMINI_API_KEY` | **You fill in** (optional) | Google Gemini API key for AI features |
+| `PERPLEXITY_API_KEY` | **You fill in** (optional) | Perplexity API key for fact verification |
+| `SMTP_HOST` | Pre-set | `smtp.hostinger.com` (default) |
+| `SMTP_PORT` | Pre-set | `465` (SSL, default) |
+| `SMTP_FROM_EMAIL` | Pre-set | Sender display name |
+| `GEMINI_MODEL` | Pre-set | `gemini-2.5-flash` (default) |
 
-### Resend Setup
+### Updating
 
-1. Create an account at [resend.com](https://resend.com)
-2. Add and verify your sending domain
-3. Generate an API key
-4. Set `RESEND_API_KEY` in `.env`
+```bash
+bash /var/www/lg-tracking/deploy/update.sh
+```
+
+This pulls the latest code, rebuilds the frontend, reinstalls dependencies, and restarts the backend.
+
+### Useful Commands
+
+```bash
+# Service management
+systemctl status bc-hearing-watch      # Check backend status
+systemctl restart bc-hearing-watch     # Restart backend
+journalctl -u bc-hearing-watch -f      # Stream backend logs
+
+# PostgreSQL
+sudo -u postgres psql -d lg_tracking   # Connect to database
+systemctl status postgresql            # Check Postgres status
+
+# Nginx
+nginx -t                               # Test config
+systemctl reload nginx                 # Reload after config changes
+
+# Cron logs
+tail -f /var/log/lg-tracking-poll.log
+tail -f /var/log/lg-tracking-digest.log
+
+# SSL renewal (auto, but you can test)
+certbot renew --dry-run
+```
 
 ## Email Schedule
 
@@ -158,9 +274,9 @@ curl "http://localhost:8000/api/v1/cron/trigger-alerts?email=you@example.com"
 |---|---|---|
 | **Immediate Alert** | Within minutes of detection | Opt-in checkbox; sources polled every 30 min |
 | **Weekly Digest** | Sundays at 8 PM Pacific | Always sent to all active subscribers |
-| **Confirmation** | On subscribe/update | Sent via Resend after form submission |
+| **Confirmation** | On subscribe/update | Sent after form submission |
 
-### Adding a New Municipality
+## Adding a New Municipality
 
 1. Add an entry to `backend/app/services/seed_registry.py` in the appropriate batch list
 2. If the municipality uses a custom website (not CivicWeb/Granicus/eScribe), create a scraper file `backend/app/discovery/custom_<name>.py` extending `BCMunicipalScraper`
@@ -175,7 +291,7 @@ curl "http://localhost:8000/api/v1/cron/trigger-alerts?email=you@example.com"
 - `GET /api/v1/unsubscribe?token=...` — One-click unsubscribe (token-based)
 - `GET /api/v1/auth/confirm?token=...` — Confirm preference changes via magic link
 
-### Cron Jobs (Vercel Cron or manual)
+### Cron Jobs (auto-installed by deploy script)
 - `POST /api/v1/cron/poll` — Poll sources + send immediate alerts (every 30 min)
 - `POST /api/v1/cron/weekly-digest` — Send weekly digest (Sundays 8 PM Pacific)
 - `POST /api/v1/cron/poll-and-digest` — Full pipeline (poll + digest)
@@ -188,105 +304,6 @@ curl "http://localhost:8000/api/v1/cron/trigger-alerts?email=you@example.com"
 
 ### AI Processing
 - `POST /api/v1/ai/process` — Trigger document matching and summarization
-
-## Hostinger VPS Deployment
-
-Deploy the full stack (frontend + backend) on a single Hostinger VPS running Ubuntu 22.04.
-
-### Requirements
-
-| Resource | Minimum | Recommended |
-|----------|---------|-------------|
-| **OS** | Ubuntu 22.04 LTS | Ubuntu 22.04 LTS |
-| **RAM** | 2 GB | 4 GB |
-| **CPU** | 1 vCPU | 2 vCPU |
-| **Storage** | 20 GB SSD | 40 GB SSD |
-| **Hostinger Plan** | KVM 2 | KVM 4 |
-
-### Prerequisites
-
-- A **domain name** with an A record pointing to your VPS IP
-- SSH root access to your VPS
-- API keys ready (see [Environment Variables](#environment-variables))
-
-### One-Command Deploy
-
-```bash
-# 1. SSH into your VPS
-ssh root@your-vps-ip
-
-# 2. Download and edit the deploy script
-curl -O https://raw.githubusercontent.com/toogoodforaname11/lg-tracking/main/deploy/deploy.sh
-
-# 3. Set your domain at the top of deploy.sh
-nano deploy.sh   # change DOMAIN="" to DOMAIN="yourdomain.com"
-
-# 4. Run it
-bash deploy.sh
-```
-
-This installs everything: Python 3.11, Node.js 20, Nginx, Certbot (SSL), clones the repo, builds the frontend as static files, and sets up the systemd service.
-
-### Post-Deploy Setup
-
-```bash
-# 1. Configure your secrets
-cp /var/www/lg-tracking/backend/.env.example /var/www/lg-tracking/backend/.env
-nano /var/www/lg-tracking/backend/.env
-
-# 2. Set up cron jobs (replace <YOUR_CRON_SECRET> first)
-nano /var/www/lg-tracking/deploy/crontab
-crontab -u www-data /var/www/lg-tracking/deploy/crontab
-
-# 3. Start the backend
-systemctl start bc-hearing-watch
-
-# 4. Seed the municipality database
-curl -X POST http://127.0.0.1:8000/api/v1/seed
-
-# 5. Verify everything works
-curl http://127.0.0.1:8000/health
-# Then visit https://yourdomain.com in your browser
-```
-
-### Updating
-
-```bash
-bash /var/www/lg-tracking/deploy/update.sh
-```
-
-This pulls the latest code, rebuilds the frontend, reinstalls dependencies, and restarts the backend.
-
-### What Gets Deployed
-
-| Component | How it runs |
-|-----------|-------------|
-| **Frontend** | Static HTML/CSS/JS served by Nginx from `/var/www/lg-tracking/frontend/out/` |
-| **Backend** | Uvicorn (FastAPI) on port 8000, managed by systemd |
-| **Nginx** | Reverse proxy on ports 80/443 — serves frontend, proxies `/api/*` to backend |
-| **SSL** | Free Let's Encrypt certificate via Certbot (auto-renews) |
-| **Cron** | Linux crontab polls sources every 30 min, sends weekly digest on Sundays |
-| **Database** | Neon serverless Postgres (external, configured via `DATABASE_URL`) |
-
-### Useful Commands
-
-```bash
-# Service management
-systemctl status bc-hearing-watch      # Check backend status
-systemctl restart bc-hearing-watch     # Restart backend
-journalctl -u bc-hearing-watch -f      # Stream backend logs
-
-# Nginx
-nginx -t                               # Test config
-systemctl reload nginx                 # Reload after config changes
-
-# Cron logs
-tail -f /var/log/lg-tracking-poll.log
-tail -f /var/log/lg-tracking-digest.log
-
-# SSL renewal (auto, but you can test)
-certbot renew --dry-run
-```
 
 ## Disclaimer
 
