@@ -1,119 +1,181 @@
-# BC Hearing Watch — Housing & Bylaw Tracking
+# BC Local Government Council Tracker
 
-Subscribe to **immediate alerts** and **weekly AI-summarized digests** of BC municipal council meetings — focused on **housing policy, transit-oriented development, zoning, and specific bylaws**.
+BC Local Government Council Tracker is a full-stack civic technology project for monitoring British Columbia municipal council activity related to housing, zoning, transit-oriented development, bylaws, and related policy topics. It combines public meeting-source discovery, structured subscription preferences, optional AI-assisted matching and summaries, and email alerts/digests.
 
-**This is an experimental personal tool using public data. AI summaries may contain errors. Always verify with original municipal sources. Not official government communication.**
+The project is designed as a portfolio-ready prototype for local government, planning, public policy, civic data, and workflow automation use cases. It demonstrates how public civic information can be collected, normalized, searched, and delivered to users who need to track policy changes across many municipalities.
 
-## Coverage
+> **Important disclaimer:** This is an experimental personal tool using public data. AI-generated summaries may contain errors and should be verified against original municipal sources. This repository is not official government communication.
 
-**166 BC municipalities** tracked across 5 scraper platforms:
+## Purpose / Problem Statement
 
-| Platform | Municipalities | Discovery Method |
-|----------|---------------|-----------------|
-| CivicWeb | ~60 | Multi-strategy HTML scraping (schedule, type list, detail pages) |
-| Custom | ~103 | Per-municipality HTML scrapers via `BCMunicipalScraper` base class |
-| Granicus | ~11 | Multi-path HTML scraping |
-| YouTube | ~10 | RSS feed + timestamp extraction (no API key needed) |
-| eScribe | ~3 | Multi-path HTML scraping |
+Local government agendas, minutes, videos, and bylaw updates are often spread across many municipal websites and meeting platforms. For planners, policy analysts, advocates, researchers, and civic technology teams, manually checking each source is time-consuming and easy to miss.
 
-### CRD Municipalities (14)
+This project explores a structured tracking workflow:
 
-| Municipality | Platform | Status |
-|---|---|---|
-| Colwood | CivicWeb + YouTube | Active |
-| Victoria | CivicWeb + eScribe | Active |
-| Central Saanich | CivicWeb + Granicus | Active |
-| North Saanich | CivicWeb | Active |
-| Oak Bay | CivicWeb | Active |
-| Metchosin | CivicWeb | Active |
-| Sooke | CivicWeb | Active |
-| Saanich | Custom + Granicus | Active |
-| Sidney | Custom + CivicWeb | Active |
-| Esquimalt | Custom + CivicWeb | Active |
-| View Royal | Custom + CivicWeb | Active |
-| Langford | Custom + CivicWeb | Active |
-| Highlands | Custom + CivicWeb | Active |
-| CRD Board | Custom | Active |
+1. Maintain a registry of municipalities and public meeting sources.
+2. Poll agenda, minutes, bylaw, notice, and video sources.
+3. Store discovered documents and meeting metadata.
+4. Match new documents against user-selected municipalities, topics, and keywords.
+5. Send email alerts or weekly digests for relevant updates.
 
-### BC-Wide Coverage
+## Key Features
 
-An additional 150+ municipalities across Metro Vancouver, Fraser Valley, Vancouver Island, Interior, Kootenays, and Northern BC. The full list is available via the `GET /api/v1/municipalities` endpoint or in the frontend subscription form.
+- Subscription form for selecting municipalities, policy topics, custom keywords, and immediate-alert preferences.
+- Backend API for subscription creation, email confirmation, magic-link preference updates, and unsubscribe links.
+- Seeded registry for 166 British Columbia municipalities with 229 public source entries.
+- Scraper modules for CivicWeb, Granicus, eScribe, YouTube RSS, and custom municipal website sources.
+- Topic and keyword matching for housing, zoning, transit-oriented development, OCP updates, housing legislation, development permits, and related planning terms.
+- Optional Gemini integration for AI-assisted matching and summaries.
+- Optional Perplexity integration for claim verification notes.
+- PostgreSQL data model for municipalities, sources, meetings, documents, subscriptions, tracks, track matches, scrape runs, API cost logs, and magic-link tokens.
+- Search endpoint for keyword search across discovered documents and match summaries.
+- Cron endpoints for polling sources, processing new documents, and sending weekly digests.
+- Backend tests covering models, subscriptions, scraping components, digest processing, security behavior, and AI pipeline behavior.
+- Deployment assets for a VPS-style setup with Nginx, systemd, cron, PostgreSQL, and static frontend export.
 
-## Topics Tracked
+## Technical Highlights
 
-- **Transit Oriented Development (TOD)** — TOD designations, density near transit
-- **Transit Oriented Areas (TOA) / Bill 47** — increased density near rapid transit stations
-- **Small-Scale Multi-Unit Housing (SSMUH)** — duplex, triplex, fourplex, missing middle
-- **Housing Statutes Amendment Bills** — Bill 44, Bill 46, Bill 47, Bill 16, Bill 25
-- **Official Community Plan (OCP)** — housing-related OCP amendments and updates
-- **Zoning / Rezoning for Housing Density** — upzoning, density bonuses, zoning bylaw changes
-- **Development Permits Affecting Housing** — residential DP applications and variances
-- **Area Plans** — local area or neighbourhood plans
-- **BRT / Bus Rapid Transit** — bus priority infrastructure
-- **Multimodal Transport & Active Transportation**
-- **Provincial Housing Targets / Housing Needs Reports**
-- **Development Cost Charges / Affordability Incentives**
-- **Transportation Plans / Studies**
+- **Full-stack architecture:** Next.js frontend paired with a FastAPI backend.
+- **Civic data ingestion:** Modular scraper architecture for multiple public-sector meeting platforms and custom municipal websites.
+- **Structured persistence:** SQLAlchemy models and Alembic migrations for relational civic-data records.
+- **User preference workflow:** Double opt-in subscription flow, magic-link updates, and tokenized unsubscribe handling.
+- **Background processing:** Cron-triggered polling, document processing, immediate alerts, and weekly digest workflows.
+- **AI-assisted processing:** Optional Gemini-based matching/summarization with keyword fallback paths in the backend.
+- **Operational awareness:** Environment-based configuration, CORS configuration, structured logging option, deployment scripts, and service files.
+- **Testing discipline:** Pytest-based backend test coverage is present for several core workflows and scraper modules.
 
-### Specific Bylaw Tracking
+## Tech Stack
 
-You can track specific bylaws by name or number (e.g. "Bylaw 1700" or "Housing Statutes Amendment Act") in the keywords field. The system will alert you every time that exact bylaw is mentioned in any hearing, regardless of topic.
+- **Frontend:** Next.js 15, React 19, TypeScript
+- **Styling:** Tailwind CSS 4
+- **Backend:** FastAPI, Pydantic, SQLAlchemy async, Uvicorn
+- **Database:** PostgreSQL, Alembic migrations
+- **Scraping / parsing:** httpx, BeautifulSoup, lxml, PyYAML
+- **AI integrations:** Google Gemini API optional; Perplexity API optional
+- **Email:** SMTP configuration, with Hostinger defaults in the example environment file
+- **Testing:** pytest, pytest-asyncio
+- **Deployment tooling:** Nginx config, systemd service file, cron file, shell deployment/update scripts, Vercel cron configuration
 
-## How It Works
+## Repository Structure
 
-1. **Subscribe**: Visit the form at `/`, enter your email, pick municipalities, housing topics, and optionally enable immediate alerts
-2. **Edit**: Submit the same form with the same email — a magic link is sent to confirm changes
-3. **Immediate Alerts** (opt-in): Sources are polled every 30 minutes. When a new matching council item is detected, you get an email right away
-4. **Weekly Digest** (always): Every Sunday at 8 PM Pacific, you receive a full summary of the week's matching council updates
-5. **Unsubscribe**: One-click link in every email
+```text
+.
+|-- README.md
+|-- backend/
+|   |-- app/
+|   |   |-- ai/              # Gemini, Perplexity, prompts, and document processing
+|   |   |-- api/             # FastAPI routers for subscriptions, registry, cron, search, etc.
+|   |   |-- db/              # SQLAlchemy database setup
+|   |   |-- discovery/       # Source scrapers and polling orchestration
+|   |   |-- models/          # SQLAlchemy models
+|   |   `-- services/        # Email, alerts, digests, seeding, and cost tracking
+|   |-- alembic/             # Database migrations
+|   |-- tests/               # Backend test suite and scraper fixtures
+|   |-- requirements.txt
+|   |-- pyproject.toml
+|   `-- .env.example
+|-- frontend/
+|   |-- src/app/             # Next.js app routes and subscription UI
+|   |-- src/lib/             # Frontend API helpers
+|   |-- package.json
+|   `-- next.config.ts
+|-- deploy/
+|   |-- bc-hearing-watch.service
+|   |-- crontab
+|   |-- deploy.sh
+|   |-- nginx.conf
+|   `-- update.sh
+|-- scripts/
+|   |-- deploy.sh
+|   `-- seed.py
+`-- vercel.json             # Cron route schedule configuration
+```
 
-## Architecture
+## Getting Started
 
-- **Frontend**: Next.js 15 + Tailwind CSS — single subscription form page
-- **Backend**: FastAPI + SQLAlchemy (async) + PostgreSQL
-- **Email**: Hostinger SMTP (your existing email — no third-party service needed)
-- **AI**: Gemini 2.5 Flash (matching + summaries) with keyword fallback
-- **Verification**: Perplexity Search API (optional fact-checking)
-- **Discovery**: CivicWeb, Granicus, eScribe, YouTube RSS, and custom HTML scrapers
-- **Polling**: Every 30 minutes via cron
-- **Deploy**: Hostinger VPS (Ubuntu 22.04) — everything runs on one server
+### Prerequisites
 
-### Scraper Architecture
+- Python 3.11+
+- Node.js 20+
+- PostgreSQL 14+ or compatible PostgreSQL service
+- SMTP credentials if you want to test real email delivery
+- Optional Gemini and Perplexity API keys for AI-assisted features
 
-All scrapers live in `backend/app/discovery/`:
+### 1. Clone the repository
 
-| File | Purpose |
-|------|---------|
-| `base.py` | Abstract base class with HTTP client, retries, and `DiscoveredItem` dataclass |
-| `civicweb.py` | CivicWeb/Diligent portal scraper (multi-strategy) |
-| `granicus.py` | Granicus meeting management scraper |
-| `escribe.py` | eScribe meeting portal scraper |
-| `youtube.py` | YouTube RSS feed + timestamp extraction |
-| `custom_bc_municipal.py` | Base class for custom municipal website scrapers |
-| `custom_*.py` | Per-municipality scrapers extending `BCMunicipalScraper` |
-| `poller.py` | Orchestrator — polls all active sources, stores results, triggers alerts |
+```bash
+git clone https://github.com/toogoodforaname11/LG-Tracking.git
+cd LG-Tracking
+```
 
-## Quick Start (Local Development)
-
-### Backend
+### 2. Configure the backend environment
 
 ```bash
 cd backend
-python -m venv venv && source venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env  # Edit with your credentials
-
-# Create database tables
-alembic upgrade head
-
-# Seed municipalities and sources
-cd .. && python scripts/seed.py
-
-# Start the backend
-cd backend && uvicorn app.main:app --reload
+cp .env.example .env
 ```
 
-### Frontend
+Edit `backend/.env` for your local database and runtime settings.
+
+For local development, set either:
+
+- `DEBUG=true`, or
+- a non-empty `APP_BASE_URL`
+
+The backend validates production-like configuration at startup. If `DEBUG=false` and `APP_BASE_URL` is empty, email-dependent features are intentionally disabled by raising a startup error.
+
+### 3. Install backend dependencies
+
+```bash
+cd backend
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+pip install -e ".[dev]"
+```
+
+### 4. Prepare the database
+
+Create a PostgreSQL database and set `DATABASE_URL` and `DATABASE_URL_SYNC` in `backend/.env`.
+
+Example local values:
+
+```env
+DATABASE_URL=postgresql+asyncpg://lg_user:CHANGE_ME@localhost:5432/lg_tracking
+DATABASE_URL_SYNC=postgresql://lg_user:CHANGE_ME@localhost:5432/lg_tracking
+```
+
+Then run migrations:
+
+```bash
+cd backend
+alembic upgrade head
+```
+
+Seed the municipality registry from the repository root:
+
+```bash
+cd ..
+python3 scripts/seed.py
+```
+
+### 5. Run the backend
+
+```bash
+cd backend
+source venv/bin/activate
+uvicorn app.main:app --reload
+```
+
+By default, the API runs at:
+
+```text
+http://localhost:8000
+```
+
+### 6. Install and run the frontend
+
+Open a second terminal:
 
 ```bash
 cd frontend
@@ -121,322 +183,157 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:3000` — you'll see the subscription form.
+Open:
 
-### Seed the Municipality Registry
+```text
+http://localhost:3000
+```
+
+The Next.js development configuration rewrites `/api/*` requests to `http://localhost:8000` unless `NEXT_PUBLIC_API_URL` is set.
+
+### 7. Build and test
+
+Backend tests:
 
 ```bash
-# Standalone script (idempotent — safe to run multiple times)
-python scripts/seed.py
-
-# Or via the API (requires X-Cron-Secret header if CRON_SECRET is set)
-curl -X POST http://localhost:8000/api/v1/seed
+cd backend
+source venv/bin/activate
+python -m pytest
 ```
 
-## Deployment
-
-### Prerequisites
-
-1. **PostgreSQL 14+** — create a database and user:
-
-   ```bash
-   sudo -u postgres psql
-   CREATE USER lg_user WITH PASSWORD 'your-secure-password';
-   CREATE DATABASE lg_tracking OWNER lg_user;
-   \q
-   ```
-
-2. **Python 3.11+** and **Node.js 20+**
-
-3. **Environment config** — copy and edit the example:
-
-   ```bash
-   cp backend/.env.example backend/.env
-   nano backend/.env
-   ```
-
-   Required variables (all documented in `.env.example`):
-   - `DATABASE_URL` / `DATABASE_URL_SYNC` — async and sync PostgreSQL URLs
-   - `GEMINI_API_KEY` — for AI matching/summarization (optional)
-   - `PERPLEXITY_API_KEY` — for fact verification (optional)
-   - `SMTP_HOST`, `SMTP_PORT`, `SMTP_USERNAME`, `SMTP_PASSWORD`, `SMTP_FROM_EMAIL` — email delivery
-   - `APP_BASE_URL` — e.g. `https://lg-tracker.ca`
-   - `ALLOWED_ORIGINS` — CORS origins (comma-separated)
-   - `CRON_SECRET` — protects cron/admin endpoints
-   - `DEBUG` — `false` in production
-
-### Deploy Script
-
-The `scripts/deploy.sh` script handles a full fresh deployment **or** redeployment:
+Frontend build:
 
 ```bash
-bash scripts/deploy.sh
+cd frontend
+npm run build
 ```
 
-It runs these steps in order:
-1. `git pull` (if a remote is configured)
-2. Create/update Python venv and install deps from `backend/requirements.txt`
-3. `alembic upgrade head` — create or migrate all database tables
-4. `python scripts/seed.py` — populate municipalities and sources (idempotent)
-5. `npm install && npm run build` — build the Next.js frontend
-6. `systemctl restart bc-hearing-watch` — restart the backend service
-
-For initial VPS provisioning (installs PostgreSQL, Nginx, Certbot, Node.js, etc.), use `deploy/deploy.sh` instead.
-
-### Nginx Reverse Proxy with SSL
-
-An nginx config is provided in `deploy/nginx.conf`. To set it up:
-
-```bash
-# Copy and customize the server_name
-sudo cp deploy/nginx.conf /etc/nginx/sites-available/lg-tracking
-sudo sed -i 's/lg-tracker.ca/your-domain.com/g' /etc/nginx/sites-available/lg-tracking
-sudo ln -sf /etc/nginx/sites-available/lg-tracking /etc/nginx/sites-enabled/lg-tracking
-sudo rm -f /etc/nginx/sites-enabled/default
-sudo nginx -t && sudo systemctl reload nginx
-
-# SSL via Let's Encrypt
-sudo certbot --nginx -d your-domain.com
-```
-
-The config serves the static frontend from `frontend/out/` and proxies `/api/*` to the FastAPI backend on port 8000.
-
-### DNS Setup
-
-Point an **A record** for your domain to your VPS IP address:
-
-| Type | Name | Value | TTL |
-|------|------|-------|-----|
-| A | `@` | `your.vps.ip.address` | 3600 |
-| A | `www` | `your.vps.ip.address` | 3600 |
-
-Allow 5–30 minutes for DNS propagation before running Certbot.
-
-### Test Immediate Alerts
-
-```bash
-# 1. Poll sources for new documents
-curl -X POST http://localhost:8000/api/v1/cron/poll
-
-# 2. Trigger a test alert email
-curl "http://localhost:8000/api/v1/cron/trigger-alerts?email=you@example.com"
-```
-
-## Hostinger VPS Deployment
-
-Everything runs on a single Hostinger VPS — PostgreSQL, backend, frontend, email. The deploy script handles all the infrastructure automatically. You just need to add your email credentials and (optionally) AI API keys.
-
-### What You Need Before Starting
-
-1. A **Hostinger VPS** (KVM 2 minimum, KVM 4 recommended)
-2. A **domain name** with an A record pointing to your VPS IP
-3. A **Hostinger email address** (e.g. `noreply@lg-tracker.ca`) — create one in Hostinger's email panel
-4. (Optional) A **Gemini API key** from [Google AI Studio](https://aistudio.google.com/apikey) — free tier works
-5. (Optional) A **Perplexity API key** for fact verification
-
-### VPS Requirements
-
-| Resource | Minimum | Recommended |
-|----------|---------|-------------|
-| **OS** | Ubuntu 22.04 LTS | Ubuntu 22.04 LTS |
-| **RAM** | 2 GB | 4 GB |
-| **CPU** | 1 vCPU | 2 vCPU |
-| **Storage** | 20 GB SSD | 40 GB SSD |
-
-### Deploy (One Command)
-
-```bash
-# 1. SSH into your VPS
-ssh root@your-vps-ip
-
-# 2. Download the deploy script
-curl -O https://raw.githubusercontent.com/toogoodforaname11/lg-tracking/main/deploy/deploy.sh
-
-# 3. Run it (DOMAIN is pre-set to lg-tracker.ca)
-bash deploy.sh
-```
-
-The script automatically:
-- Installs Python 3.11, Node.js 20, Nginx, Certbot
-- **Installs and configures PostgreSQL** with a local database and auto-generated credentials
-- Clones the repo, builds the frontend, sets up systemd
-- **Generates your `.env`** with database credentials and cron secret pre-filled
-- Configures SSL via Let's Encrypt
-- Installs cron jobs (poll every 30 min, weekly digest)
-- Starts the backend
-
-### After Deploy — Add Your Credentials
-
-The only thing left is to add your email and (optionally) AI API keys:
-
-```bash
-nano /var/www/lg-tracking/backend/.env
-```
-
-Fill in these lines:
-
-```env
-# Your Hostinger email (required for sending alerts/digests)
-SMTP_USERNAME=noreply@lg-tracker.ca
-SMTP_PASSWORD=your-hostinger-email-password
-
-# Optional — enables AI matching and summarization (free tier available)
-GEMINI_API_KEY=your-gemini-api-key
-
-# Optional — enables fact verification
-PERPLEXITY_API_KEY=your-perplexity-api-key
-```
-
-Then restart and seed the database:
-
-```bash
-systemctl restart bc-hearing-watch
-curl -X POST http://127.0.0.1:8000/api/v1/seed
-curl http://127.0.0.1:8000/health
-```
-
-Visit `https://lg-tracker.ca` — you're live.
-
-### What Gets Deployed
-
-| Component | Details |
-|-----------|---------|
-| **PostgreSQL** | Local database on the VPS (auto-configured, no external service needed) |
-| **Frontend** | Static HTML/CSS/JS served by Nginx from `/var/www/lg-tracking/frontend/out/` |
-| **Backend** | Uvicorn (FastAPI) on port 8000, managed by systemd |
-| **Nginx** | Reverse proxy on ports 80/443 — serves frontend, proxies `/api/*` to backend |
-| **SSL** | Free Let's Encrypt certificate via Certbot (auto-renews) |
-| **Email** | Sent via your Hostinger email over SMTP (port 465 SSL) |
-| **Cron** | Linux crontab polls sources every 30 min, sends weekly digest on Sundays |
-
-### Environment Variables
-
-| Variable | Auto-configured? | Description |
-|---|---|---|
-| `DATABASE_URL` | Yes | Local PostgreSQL connection (set by deploy script) |
-| `DATABASE_URL_SYNC` | Yes | Sync version of the above |
-| `CRON_SECRET` | Yes | Random string protecting cron endpoints (auto-generated) |
-| `APP_BASE_URL` | Yes | Your domain URL (set from DOMAIN in deploy script) |
-| `ALLOWED_ORIGINS` | Yes | CORS origins (auto-set) |
-| `SMTP_USERNAME` | **You fill in** | Your Hostinger email address |
-| `SMTP_PASSWORD` | **You fill in** | Your Hostinger email password |
-| `GEMINI_API_KEY` | **You fill in** (optional) | Google Gemini API key for AI features |
-| `PERPLEXITY_API_KEY` | **You fill in** (optional) | Perplexity API key for fact verification |
-| `SMTP_HOST` | Pre-set | `smtp.hostinger.com` (default) |
-| `SMTP_PORT` | Pre-set | `465` (SSL, default) |
-| `SMTP_FROM_EMAIL` | Pre-set | Sender display name |
-| `GEMINI_MODEL` | Pre-set | `gemini-2.5-flash` (default) |
-
-### Updating
-
-```bash
-bash /var/www/lg-tracking/deploy/update.sh
-```
-
-This pulls the latest code, rebuilds the frontend, reinstalls dependencies, and restarts the backend.
-
-### Troubleshooting
-
-**"Load failed" on the subscription form**
-
-This means the frontend cannot reach the backend API. Check in order:
-
-```bash
-# 1. Is the backend running?
-systemctl status bc-hearing-watch
-journalctl -u bc-hearing-watch -n 50    # check for startup errors
-
-# 2. Can the backend reach the database?
-curl http://127.0.0.1:8000/health
-
-# 3. Is CORS configured? (must include your domain)
-grep ALLOWED_ORIGINS /var/www/lg-tracking/backend/.env
-# Should contain: https://lg-tracker.ca
-
-# 4. Is APP_BASE_URL set? (required for email features)
-grep APP_BASE_URL /var/www/lg-tracking/backend/.env
-# Should be: https://lg-tracker.ca
-
-# 5. Run the database migration (required after updates)
-cd /var/www/lg-tracking/backend
-../venv/bin/alembic upgrade head
-systemctl restart bc-hearing-watch
-
-# 6. Seed the municipality database (required on first deploy)
-curl -X POST http://127.0.0.1:8000/api/v1/seed
-```
-
-**Emails not sending**
-
-```bash
-# Check SMTP credentials are set
-grep SMTP_ /var/www/lg-tracking/backend/.env
-
-# Test by subscribing and checking logs
-journalctl -u bc-hearing-watch -n 20 | grep -i "email\|smtp"
-```
-
-### Useful Commands
-
-```bash
-# Service management
-systemctl status bc-hearing-watch      # Check backend status
-systemctl restart bc-hearing-watch     # Restart backend
-journalctl -u bc-hearing-watch -f      # Stream backend logs
-
-# PostgreSQL
-sudo -u postgres psql -d lg_tracking   # Connect to database
-systemctl status postgresql            # Check Postgres status
-
-# Nginx
-nginx -t                               # Test config
-systemctl reload nginx                 # Reload after config changes
-
-# Cron logs
-tail -f /var/log/lg-tracking-poll.log
-tail -f /var/log/lg-tracking-digest.log
-
-# SSL renewal (auto, but you can test)
-certbot renew --dry-run
-```
-
-## Email Schedule
-
-| Type | Frequency | Trigger |
-|---|---|---|
-| **Immediate Alert** | Within minutes of detection | Opt-in checkbox; sources polled every 30 min |
-| **Weekly Digest** | Sundays at 8 PM Pacific | Always sent to all active subscribers |
-| **Confirmation** | On subscribe/update | Sent after form submission |
-
-## Adding a New Municipality
-
-1. Add an entry to `backend/app/services/seed_registry.py` in the appropriate batch list
-2. If the municipality uses a custom website (not CivicWeb/Granicus/eScribe), create a scraper file `backend/app/discovery/custom_<name>.py` extending `BCMunicipalScraper`
-3. If custom: add the scraper to `CUSTOM_SCRAPER_MAP` in `backend/app/discovery/poller.py`
-4. Add the `short_name` to the `MUNICIPALITIES` array in `frontend/src/app/page.tsx`
-5. Re-run the seed endpoint: `curl -X POST http://localhost:8000/api/v1/seed`
-
-## API Endpoints
-
-### Subscription
-- `POST /api/v1/subscribe` — Create/update subscription (email = primary key)
-- `GET /api/v1/unsubscribe?token=...` — One-click unsubscribe (token-based)
-- `GET /api/v1/auth/confirm?token=...` — Confirm preference changes via magic link
-
-### Cron Jobs (auto-installed by deploy script)
-- `POST /api/v1/cron/poll` — Poll sources + send immediate alerts (every 30 min)
-- `POST /api/v1/cron/weekly-digest` — Send weekly digest (Sundays 8 PM Pacific)
-- `POST /api/v1/cron/poll-and-digest` — Full pipeline (poll + digest)
-- `GET /api/v1/cron/trigger-alerts?email=...` — Manual test for alert emails
-
-### Registry & Discovery
-- `POST /api/v1/seed` — Seed municipality registry (requires `X-Cron-Secret`)
-- `GET /api/v1/municipalities` — List municipalities (optional `?region=CRD`)
-- `POST /api/v1/discovery/poll` — Manual discovery poll
-
-### AI Processing
-- `POST /api/v1/ai/process` — Trigger document matching and summarization
-
-## Disclaimer
-
-This is an experimental personal tool using public data. AI summaries may contain errors. Always verify with original municipal sources. Not official government communication. This tool tracks publicly available council meeting agendas, minutes, and videos from BC municipalities.
+No dedicated frontend test runner was identified beyond the existing build and lint-related package scripts.
+
+## Environment Variables
+
+Variables identified from `backend/.env.example`, backend settings, and frontend API configuration:
+
+| Variable | Required? | Description |
+|---|---:|---|
+| `DATABASE_URL` | Yes | Async PostgreSQL connection string used by the FastAPI application. |
+| `DATABASE_URL_SYNC` | Yes | Sync PostgreSQL connection string used by Alembic and database utilities. |
+| `GEMINI_API_KEY` | Optional | Enables Gemini-based matching and summarization when configured. |
+| `GEMINI_MODEL` | Optional | Gemini model name. Defaults to `gemini-2.5-flash`. |
+| `PERPLEXITY_API_KEY` | Optional | Enables optional claim verification notes when configured. |
+| `SMTP_HOST` | Email features | SMTP host. Example default is `smtp.hostinger.com`. |
+| `SMTP_PORT` | Email features | SMTP port. Example default is `465`. |
+| `SMTP_USERNAME` | Email features | SMTP username for sending alerts, confirmations, and digests. |
+| `SMTP_PASSWORD` | Email features | SMTP password for email delivery. |
+| `SMTP_FROM_EMAIL` | Email features | Sender address/display name used in outgoing emails. |
+| `APP_BASE_URL` | Production / email links | Public app URL used to build confirmation and unsubscribe links. |
+| `ALLOWED_ORIGINS` | Yes | Comma-separated list of allowed frontend origins for CORS. |
+| `CRON_SECRET` | Production cron/admin routes | Protects cron and admin endpoints with the `X-Cron-Secret` header. |
+| `DEBUG` | Recommended | Enables development behavior such as table auto-creation and relaxed startup validation. Use `false` in production. |
+| `LOG_FORMAT` | Optional | Supports text or JSON-style logging through backend settings. |
+| `REQUEST_DELAY_SECONDS` | Optional | Scraper request delay setting. |
+| `SCRAPE_TIMEOUT_SECONDS` | Optional | Scraper timeout setting. |
+| `USER_AGENT` | Optional | User agent string used by scraping requests. |
+| `NEXT_PUBLIC_API_URL` | Optional frontend setting | Overrides the frontend API base URL. Useful when the backend is hosted separately. |
+
+## Usage
+
+Once the app is running locally, a user can:
+
+1. Enter an email address.
+2. Select municipalities to monitor.
+3. Choose policy topics such as transit-oriented development, OCP updates, zoning density, SSMUH, housing legislation, development permits, and development cost charges.
+4. Add custom keywords such as bylaw numbers, bill names, or policy phrases.
+5. Opt into immediate alerts.
+6. Submit the form and confirm the subscription by email.
+
+Administrators or scheduled jobs can use protected API endpoints to seed municipality data, poll sources, process new documents, send immediate alerts, and trigger weekly digests.
+
+Selected API routes include:
+
+- `GET /health`
+- `GET /api/v1/municipalities`
+- `POST /api/v1/seed`
+- `POST /api/v1/subscribe`
+- `GET /api/v1/unsubscribe?token=...`
+- `GET /api/v1/auth/confirm?token=...`
+- `GET /api/v1/search?q=...`
+- `POST /api/v1/cron/poll`
+- `POST /api/v1/cron/weekly-digest`
+- `POST /api/v1/cron/poll-and-digest`
+
+## Screenshots / Demo
+
+Screenshots can be added here to show the dashboard, tracking workflow, subscription form, and key UI screens.
+
+Suggested additions:
+
+- Subscription form with municipality selection.
+- Topic and keyword selection workflow.
+- Confirmation or magic-link update state.
+- Example digest or alert email with sensitive information removed.
+
+## Deployment Notes
+
+The repository includes deployment assets for a single-server VPS style deployment:
+
+- `deploy/deploy.sh` for initial provisioning.
+- `deploy/update.sh` for updates.
+- `deploy/nginx.conf` for reverse proxy and static frontend serving.
+- `deploy/bc-hearing-watch.service` for systemd backend process management.
+- `deploy/crontab` for scheduled polling and digest jobs.
+- `vercel.json` with cron route schedules.
+
+No live deployment URL was verified from the repository alone. Treat deployment status as **to verify** unless a current public URL and environment configuration are provided.
+
+## Project Status
+
+This repository appears to be a **portfolio project / work-in-progress prototype** with substantial backend implementation, a working subscription-oriented frontend, database migrations, scraper modules, tests, and deployment scripts.
+
+Evidence supporting this status:
+
+- Core application code, models, migrations, APIs, scraper modules, and tests are present.
+- Deployment assets exist, but a live production deployment was not verified.
+- README screenshots and demo artifacts are not currently present.
+- No license file was identified.
+- Some operational details, such as current test pass status in a clean environment and live deployment status, should be verified before presenting the project as production-ready.
+
+## Roadmap
+
+Practical next steps to make the project stronger for technical reviewers:
+
+- Add screenshots or a short demo GIF of the subscription flow.
+- Add sample anonymized digest and alert email outputs.
+- Add a concise architecture diagram showing frontend, backend, database, scrapers, cron jobs, and email delivery.
+- Verify and document the current backend test status in a clean environment.
+- Add CI/CD for linting, backend tests, and frontend builds.
+- Add frontend tests for the subscription workflow.
+- Add sample seed data or a lightweight local development fixture for faster reviewer evaluation.
+- Clarify deployment options: local-only, VPS, Vercel cron, or another hosted environment.
+- Add API documentation examples for the main endpoints.
+- Add validation and observability notes for scraper failures and source health.
+- Add a license file if the project is intended for public reuse.
+
+## Skills Demonstrated
+
+This project demonstrates skills relevant to software engineering, data, planning, policy, and civic technology roles:
+
+- Full-stack web application development.
+- FastAPI backend design and API routing.
+- React/Next.js frontend implementation.
+- Relational data modelling with SQLAlchemy and PostgreSQL.
+- Database migration management with Alembic.
+- Public data ingestion from heterogeneous civic information sources.
+- Modular scraper design for CivicWeb, Granicus, eScribe, YouTube RSS, and custom HTML pages.
+- Subscription, confirmation, magic-link, and unsubscribe workflows.
+- Email alert and digest workflow design.
+- Search and filtering over structured civic records.
+- Optional AI integration for document matching and summarization.
+- Policy-domain modelling for housing, zoning, transit, bylaws, and local government workflows.
+- Test organization for backend services, models, scrapers, and pipelines.
+- Deployment-oriented thinking with Nginx, systemd, cron, and environment-based configuration.
+- Technical documentation for both recruiters and engineering reviewers.
+
+## License
+
+No license file was identified in the repository. Add a license before encouraging reuse or external contributions.
