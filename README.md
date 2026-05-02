@@ -60,35 +60,35 @@ This project explores a structured tracking workflow:
 
 ```text
 .
-├── README.md
-├── backend/
-│   ├── app/
-│   │   ├── ai/              # Gemini, Perplexity, prompts, and document processing
-│   │   ├── api/             # FastAPI routers for subscriptions, registry, cron, search, etc.
-│   │   ├── db/              # SQLAlchemy database setup
-│   │   ├── discovery/       # Source scrapers and polling orchestration
-│   │   ├── models/          # SQLAlchemy models
-│   │   └── services/        # Email, alerts, digests, seeding, and cost tracking
-│   ├── alembic/             # Database migrations
-│   ├── tests/               # Backend test suite and scraper fixtures
-│   ├── requirements.txt
-│   ├── pyproject.toml
-│   └── .env.example
-├── frontend/
-│   ├── src/app/             # Next.js app routes and subscription UI
-│   ├── src/lib/             # Frontend API helpers
-│   ├── package.json
-│   └── next.config.ts
-├── deploy/
-│   ├── bc-hearing-watch.service
-│   ├── crontab
-│   ├── deploy.sh
-│   ├── nginx.conf
-│   └── update.sh
-├── scripts/
-│   ├── deploy.sh
-│   └── seed.py
-└── vercel.json             # Cron route schedule configuration
+|-- README.md
+|-- backend/
+|   |-- app/
+|   |   |-- ai/              # Gemini, Perplexity, prompts, and document processing
+|   |   |-- api/             # FastAPI routers for subscriptions, registry, cron, search, etc.
+|   |   |-- db/              # SQLAlchemy database setup
+|   |   |-- discovery/       # Source scrapers and polling orchestration
+|   |   |-- models/          # SQLAlchemy models
+|   |   `-- services/        # Email, alerts, digests, seeding, and cost tracking
+|   |-- alembic/             # Database migrations
+|   |-- tests/               # Backend test suite and scraper fixtures
+|   |-- requirements.txt
+|   |-- pyproject.toml
+|   `-- .env.example
+|-- frontend/
+|   |-- src/app/             # Next.js app routes and subscription UI
+|   |-- src/lib/             # Frontend API helpers
+|   |-- package.json
+|   `-- next.config.ts
+|-- deploy/
+|   |-- bc-hearing-watch.service
+|   |-- crontab
+|   |-- deploy.sh
+|   |-- nginx.conf
+|   `-- update.sh
+|-- scripts/
+|   |-- deploy.sh
+|   `-- seed.py
+`-- vercel.json             # Cron route schedule configuration
 ```
 
 ## Getting Started
