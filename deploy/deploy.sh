@@ -166,6 +166,22 @@ fi
 touch /var/log/lg-tracking-poll.log /var/log/lg-tracking-digest.log
 chown www-data:www-data /var/log/lg-tracking-poll.log /var/log/lg-tracking-digest.log
 
+# --- Database migrations ---
+# Run Alembic before starting the service so the schema is in place.
+# Without this the service comes up against an empty database (DEBUG=false
+# means the lifespan handler does NOT create tables) and every API call
+# that touches a table will fail.
+echo "Running database migrations..."
+sudo -u www-data bash -c "cd '$APP_DIR/backend' && '$APP_DIR/venv/bin/alembic' upgrade head"
+
+# --- Seed the registry ---
+# Idempotent — existing municipalities are skipped, new sources are added.
+# Non-fatal: a seed failure during deploy should not abort the whole script,
+# the operator can re-run scripts/seed.py manually.
+echo "Seeding the BC municipality registry..."
+sudo -u www-data bash -c "cd '$APP_DIR' && '$APP_DIR/venv/bin/python' scripts/seed.py" \
+    || echo "Seed step failed (non-fatal — re-run 'python scripts/seed.py' from $APP_DIR after deploy)."
+
 # --- Start the service ---
 systemctl start bc-hearing-watch
 sleep 2
@@ -181,6 +197,8 @@ echo ""
 echo "What's already done:"
 echo "  - PostgreSQL installed and running with local database"
 echo "  - .env created with database credentials and cron secret"
+echo "  - Database schema migrated (alembic upgrade head)"
+echo "  - BC municipality registry seeded (scripts/seed.py)"
 echo "  - Frontend built and served by Nginx"
 echo "  - Backend running via systemd"
 echo "  - Cron jobs installed (poll every 30 min, weekly digest)"
@@ -197,7 +215,6 @@ echo "    SMTP_PASSWORD=your-email-password"
 echo "    GEMINI_API_KEY=your-gemini-api-key        (optional)"
 echo "    PERPLEXITY_API_KEY=your-perplexity-key    (optional)"
 echo ""
-echo "Then restart and seed:"
+echo "Then restart the service so the new credentials are picked up:"
 echo "  systemctl restart bc-hearing-watch"
-echo "  curl -X POST http://127.0.0.1:8000/api/v1/seed"
 echo "  curl http://127.0.0.1:8000/health"
