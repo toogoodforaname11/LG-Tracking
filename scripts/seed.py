@@ -2,14 +2,15 @@
 """Seed the database with BC municipality and source data.
 
 Usage (from the repo root):
-    cd backend && python -m scripts.seed_runner
+    python3 scripts/seed.py
 
 Or using the deploy script which calls this automatically.
 
 Idempotent — safe to run multiple times.  Existing municipalities
 (matched by short_name) are skipped; new sources are added.
 
-Requires DATABASE_URL_SYNC in backend/.env (or as an environment variable).
+Requires DATABASE_URL (and DATABASE_URL_SYNC for migrations) in backend/.env
+(or as environment variables).
 """
 
 import asyncio
