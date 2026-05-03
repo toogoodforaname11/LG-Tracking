@@ -1,8 +1,8 @@
 # BC Local Government Council Tracker
 
-BC Local Government Council Tracker is a full-stack civic technology project for monitoring British Columbia municipal council activity related to housing, zoning, transit-oriented development, bylaws, and related policy topics. It combines public meeting-source discovery, structured subscription preferences, optional AI-assisted matching and summaries, and email alerts/digests.
+BC Local Government Council Tracker is a full-stack civic technology application for monitoring British Columbia municipal council activity related to housing, zoning, transit-oriented development, bylaws, and related policy topics. It combines public meeting-source discovery, structured subscription preferences, optional AI-assisted matching and summaries, and email alerts/digests.
 
-The project is designed as a portfolio-ready prototype for local government, planning, public policy, civic data, and workflow automation use cases. It demonstrates how public civic information can be collected, normalized, searched, and delivered to users who need to track policy changes across many municipalities.
+The application is intended for local government, planning, public policy, civic data, and workflow automation use cases where users need to track policy changes across many municipalities.
 
 > **Important disclaimer:** This is an experimental personal tool using public data. AI-generated summaries may contain errors and should be verified against original municipal sources. This repository is not official government communication.
 
@@ -288,7 +288,7 @@ No live deployment URL was verified from the repository alone. Treat deployment 
 
 ## Project Status
 
-This repository appears to be a **portfolio project / work-in-progress prototype** with substantial backend implementation, a working subscription-oriented frontend, database migrations, scraper modules, tests, and deployment scripts.
+This repository appears to be a **work-in-progress prototype** with substantial backend implementation, a working subscription-oriented frontend, database migrations, scraper modules, tests, and deployment scripts.
 
 Evidence supporting this status:
 
@@ -296,43 +296,23 @@ Evidence supporting this status:
 - Deployment assets exist, but a live production deployment was not verified.
 - README screenshots and demo artifacts are not currently present.
 - No license file was identified.
-- Some operational details, such as current test pass status in a clean environment and live deployment status, should be verified before presenting the project as production-ready.
+- Some operational details, such as current test pass status in a clean environment and live deployment status, should be verified before treating the project as production-ready.
 
-## Roadmap
+## Future Enhancements
 
-Practical next steps to make the project stronger for technical reviewers:
+Potential improvements for future development include:
 
-- Add screenshots or a short demo GIF of the subscription flow.
+- Add screenshots or a short demo GIF showing the subscription workflow.
 - Add sample anonymized digest and alert email outputs.
-- Add a concise architecture diagram showing frontend, backend, database, scrapers, cron jobs, and email delivery.
-- Verify and document the current backend test status in a clean environment.
+- Add an architecture diagram showing the frontend, backend, database, scrapers, scheduled jobs, and email delivery flow.
+- Document backend test coverage and expected test commands.
 - Add CI/CD for linting, backend tests, and frontend builds.
 - Add frontend tests for the subscription workflow.
-- Add sample seed data or a lightweight local development fixture for faster reviewer evaluation.
-- Clarify deployment options: local-only, VPS, Vercel cron, or another hosted environment.
-- Add API documentation examples for the main endpoints.
-- Add validation and observability notes for scraper failures and source health.
+- Provide sample seed data or a local development fixture.
+- Clarify supported deployment options.
+- Add API examples for the main endpoints.
+- Document scraper failure handling, source health checks, and observability practices.
 - Add a license file if the project is intended for public reuse.
-
-## Skills Demonstrated
-
-This project demonstrates skills relevant to software engineering, data, planning, policy, and civic technology roles:
-
-- Full-stack web application development.
-- FastAPI backend design and API routing.
-- React/Next.js frontend implementation.
-- Relational data modelling with SQLAlchemy and PostgreSQL.
-- Database migration management with Alembic.
-- Public data ingestion from heterogeneous civic information sources.
-- Modular scraper design for CivicWeb, Granicus, eScribe, YouTube RSS, and custom HTML pages.
-- Subscription, confirmation, magic-link, and unsubscribe workflows.
-- Email alert and digest workflow design.
-- Search and filtering over structured civic records.
-- Optional AI integration for document matching and summarization.
-- Policy-domain modelling for housing, zoning, transit, bylaws, and local government workflows.
-- Test organization for backend services, models, scrapers, and pipelines.
-- Deployment-oriented thinking with Nginx, systemd, cron, and environment-based configuration.
-- Technical documentation for both recruiters and engineering reviewers.
 
 ## License
 
