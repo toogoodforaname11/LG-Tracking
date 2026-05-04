@@ -76,6 +76,7 @@ class EScribeScraper(BaseScraper):
         """Discover meeting documents from an eScribe portal."""
         items: list[DiscoveredItem] = []
         seen_urls: set[str] = set()
+        last_html: str | None = None
 
         for path in ESCRIBE_PATHS:
             url = self.base_url.rstrip("/") + path
@@ -84,6 +85,7 @@ class EScribeScraper(BaseScraper):
                 if resp.status_code != 200:
                     continue
 
+                last_html = resp.text
                 soup = BeautifulSoup(resp.text, "html.parser")
                 page_items = self._parse_meeting_list(soup, url)
 
@@ -114,6 +116,56 @@ class EScribeScraper(BaseScraper):
         if not items:
             items = await self._try_detail_pages(seen_urls)
 
+        # JSON-rendered fallback: modern eSCRIBE deployments (Calgary, Edmonton,
+        # Lethbridge, Wood Buffalo, ...) ship the meeting grid as JSON inside
+        # a <script> block consumed by Syncfusion. BeautifulSoup never sees
+        # the resulting links because they're never emitted as <a href>. Pull
+        # them out with a flat regex from the raw HTML, then crawl the
+        # detail page for each meeting to harvest agendas/minutes.
+        if not items and last_html:
+            items = await self._scrape_meetings_from_json(last_html, seen_urls)
+
+        return items
+
+    async def _scrape_meetings_from_json(
+        self, html: str, seen_urls: set[str],
+    ) -> list[DiscoveredItem]:
+        """Extract Meeting.aspx?Id=GUID links embedded in the JSON grid and
+        crawl each meeting detail page for agenda/minutes documents.
+        """
+        items: list[DiscoveredItem] = []
+        ids = set(re.findall(r"Meeting\.aspx\?Id=([a-fA-F0-9-]{36})", html))
+        if not ids:
+            return items
+
+        root_url = self.base_url.rstrip("/") + "/"
+        # Cap fan-out — eSCRIBE portals can list 100+ historical meetings.
+        for mid in list(ids)[:20]:
+            detail_url = urljoin(root_url, f"Meeting.aspx?Id={mid}")
+            if detail_url in seen_urls:
+                continue
+            seen_urls.add(detail_url)
+            try:
+                resp = await self.client.get(detail_url, follow_redirects=True)
+                if resp.status_code != 200:
+                    continue
+                detail_soup = BeautifulSoup(resp.text, "html.parser")
+                page_items = self._parse_meeting_list(detail_soup, detail_url)
+                for item in page_items:
+                    if item.url not in seen_urls:
+                        seen_urls.add(item.url)
+                        items.append(item)
+                await asyncio.sleep(settings.request_delay_seconds * 0.5)
+            except Exception as e:
+                logger.debug(
+                    "%s: error fetching JSON-fallback detail %s: %s",
+                    self.municipality, detail_url, e,
+                )
+        if items:
+            logger.info(
+                "%s: found %d items via JSON-fallback (%d meetings inspected)",
+                self.municipality, len(items), min(len(ids), 20),
+            )
         return items
 
     def _parse_meeting_list(

@@ -3390,9 +3390,12 @@ ALBERTA_MUNICIPALITIES_PHASE_1 = [
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
             {
+                # Calgary's actual handle is @thecityofcalgary; the prior
+                # @cityofcalgary handle 404s. URL preserved through resolver
+                # cache in Source.scrape_config.
                 "platform": Platform.YOUTUBE,
                 "source_type": SourceType.VIDEO,
-                "url": "https://www.youtube.com/@cityofcalgary",
+                "url": "https://www.youtube.com/@thecityofcalgary",
                 "label": "Calgary YouTube Council Meetings",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
@@ -3431,6 +3434,9 @@ ALBERTA_MUNICIPALITIES_PHASE_1 = [
         ],
     },
     {
+        # Red Deer publishes meetings on eSCRIBE, not CivicWeb (the original
+        # reddeer.civicweb.net subdomain doesn't exist). YouTube channel is
+        # @TheCityofRedDeer (not @CityofRedDeer).
         "name": "City of Red Deer",
         "short_name": "Red Deer",
         "gov_type": GovType.CITY,
@@ -3440,23 +3446,23 @@ ALBERTA_MUNICIPALITIES_PHASE_1 = [
         "population": 100844,
         "sources": [
             {
-                "platform": Platform.CIVICWEB,
+                "platform": Platform.ESCRIBE,
                 "source_type": SourceType.AGENDA,
-                "url": "https://reddeer.civicweb.net/Portal/MeetingTypeList.aspx",
-                "label": "Red Deer CivicWeb Agendas",
+                "url": "https://pub-reddeer.escribemeetings.com",
+                "label": "Red Deer eScribe Agendas",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
             {
-                "platform": Platform.CIVICWEB,
+                "platform": Platform.ESCRIBE,
                 "source_type": SourceType.MINUTES,
-                "url": "https://reddeer.civicweb.net/filepro/documents/",
-                "label": "Red Deer CivicWeb Minutes",
+                "url": "https://pub-reddeer.escribemeetings.com",
+                "label": "Red Deer eScribe Minutes",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
             {
                 "platform": Platform.YOUTUBE,
                 "source_type": SourceType.VIDEO,
-                "url": "https://www.youtube.com/@CityofRedDeer",
+                "url": "https://www.youtube.com/@TheCityofRedDeer",
                 "label": "Red Deer YouTube Council Meetings",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
@@ -3518,9 +3524,11 @@ ALBERTA_MUNICIPALITIES_PHASE_1 = [
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
             {
+                # Real handle is @CityMedicineHat (no "of"); the prior
+                # @CityofMedicineHatAB handle 404s.
                 "platform": Platform.YOUTUBE,
                 "source_type": SourceType.VIDEO,
-                "url": "https://www.youtube.com/@CityofMedicineHatAB",
+                "url": "https://www.youtube.com/@CityMedicineHat",
                 "label": "Medicine Hat YouTube Council Meetings",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
@@ -3550,15 +3558,20 @@ ALBERTA_MUNICIPALITIES_PHASE_1 = [
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
             {
+                # Airdrie has no discoverable public council-meetings YouTube
+                # channel; eSCRIBE is the source of truth. Demoted to PENDING
+                # until/unless an official handle surfaces.
                 "platform": Platform.YOUTUBE,
                 "source_type": SourceType.VIDEO,
                 "url": "https://www.youtube.com/@CityofAirdrie",
                 "label": "Airdrie YouTube Council Meetings",
-                "scrape_status": ScrapeStatus.ACTIVE,
+                "scrape_status": ScrapeStatus.PENDING,
             },
         ],
     },
     {
+        # Spruce Grove uses eSCRIBE, not CivicWeb. The original
+        # sprucegrove.civicweb.net subdomain doesn't exist.
         "name": "City of Spruce Grove",
         "short_name": "Spruce Grove",
         "gov_type": GovType.CITY,
@@ -3568,17 +3581,17 @@ ALBERTA_MUNICIPALITIES_PHASE_1 = [
         "population": 39348,
         "sources": [
             {
-                "platform": Platform.CIVICWEB,
+                "platform": Platform.ESCRIBE,
                 "source_type": SourceType.AGENDA,
-                "url": "https://sprucegrove.civicweb.net/Portal/MeetingTypeList.aspx",
-                "label": "Spruce Grove CivicWeb Agendas",
+                "url": "https://pub-sprucegrove.escribemeetings.com",
+                "label": "Spruce Grove eScribe Agendas",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
             {
-                "platform": Platform.CIVICWEB,
+                "platform": Platform.ESCRIBE,
                 "source_type": SourceType.MINUTES,
-                "url": "https://sprucegrove.civicweb.net/filepro/documents/",
-                "label": "Spruce Grove CivicWeb Minutes",
+                "url": "https://pub-sprucegrove.escribemeetings.com",
+                "label": "Spruce Grove eScribe Minutes",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
             {
@@ -3600,29 +3613,37 @@ ALBERTA_MUNICIPALITIES_PHASE_1 = [
         "population": 64141,
         "sources": [
             {
+                # Real eSCRIBE subdomain is pub-cityofgp; the prior
+                # pub-grandeprairie subdomain doesn't exist.
                 "platform": Platform.ESCRIBE,
                 "source_type": SourceType.AGENDA,
-                "url": "https://pub-grandeprairie.escribemeetings.com",
+                "url": "https://pub-cityofgp.escribemeetings.com",
                 "label": "Grande Prairie eScribe Agendas",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
             {
                 "platform": Platform.ESCRIBE,
                 "source_type": SourceType.MINUTES,
-                "url": "https://pub-grandeprairie.escribemeetings.com",
+                "url": "https://pub-cityofgp.escribemeetings.com",
                 "label": "Grande Prairie eScribe Minutes",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
             {
+                # YouTube channel published under /user/GrandePrairieCA.
                 "platform": Platform.YOUTUBE,
                 "source_type": SourceType.VIDEO,
-                "url": "https://www.youtube.com/@CityofGrandePrairie",
+                "url": "https://www.youtube.com/user/GrandePrairieCA",
                 "label": "Grande Prairie YouTube Council Meetings",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
         ],
     },
     {
+        # St. Albert publishes agendas/minutes via Legistar (stalbert.ca.legistar.com)
+        # which we do not yet have a scraper for. The Legistar-platform sources
+        # ship as CUSTOM/PENDING placeholders so they appear in the registry
+        # and can be activated in a follow-up phase. YouTube remains ACTIVE
+        # via the legacy /user/CityofStAlbert URL (it's a real channel).
         "name": "City of St. Albert",
         "short_name": "St. Albert",
         "gov_type": GovType.CITY,
@@ -3632,23 +3653,23 @@ ALBERTA_MUNICIPALITIES_PHASE_1 = [
         "population": 68232,
         "sources": [
             {
-                "platform": Platform.CIVICWEB,
+                "platform": Platform.CUSTOM,
                 "source_type": SourceType.AGENDA,
-                "url": "https://stalbert.civicweb.net/Portal/MeetingTypeList.aspx",
-                "label": "St. Albert CivicWeb Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
+                "url": "https://stalbert.ca.legistar.com/Calendar.aspx",
+                "label": "St. Albert Legistar Agendas (pending Legistar scraper)",
+                "scrape_status": ScrapeStatus.PENDING,
             },
             {
-                "platform": Platform.CIVICWEB,
+                "platform": Platform.CUSTOM,
                 "source_type": SourceType.MINUTES,
-                "url": "https://stalbert.civicweb.net/filepro/documents/",
-                "label": "St. Albert CivicWeb Minutes",
-                "scrape_status": ScrapeStatus.ACTIVE,
+                "url": "https://stalbert.ca.legistar.com/Calendar.aspx",
+                "label": "St. Albert Legistar Minutes (pending Legistar scraper)",
+                "scrape_status": ScrapeStatus.PENDING,
             },
             {
                 "platform": Platform.YOUTUBE,
                 "source_type": SourceType.VIDEO,
-                "url": "https://www.youtube.com/@cityofstalbert",
+                "url": "https://www.youtube.com/user/CityofStAlbert",
                 "label": "St. Albert YouTube Council Meetings",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
@@ -3678,9 +3699,11 @@ ALBERTA_MUNICIPALITIES_PHASE_1 = [
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
             {
+                # Wood Buffalo's YouTube channel is published under
+                # /user/rmwbwebmaster (legacy URL form, still active).
                 "platform": Platform.YOUTUBE,
                 "source_type": SourceType.VIDEO,
-                "url": "https://www.youtube.com/@RegionalMunicipalityofWoodBuffalo",
+                "url": "https://www.youtube.com/user/rmwbwebmaster",
                 "label": "Wood Buffalo YouTube Council Meetings",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },

@@ -79,7 +79,10 @@ async def resolve_channel_id(channel_url_or_handle: str) -> str | None:
         logger.warning("YouTube channel-id resolution failed for %s: %s", candidate, e)
         return None
 
-    # Strategy 1: meta itemprop=channelId is the most stable signal.
+    # Strategy 1: meta itemprop=channelId is the most stable signal. YouTube
+    # also ships ``<meta property="og:url" content="…/channel/UCxxx">`` and a
+    # canonical link with the same shape — try those before falling back to
+    # JSON-embedded ids (which can match unrelated sidebar channels).
     m = re.search(
         r'<meta\s+itemprop="(?:identifier|channelId)"\s+content="(UC[A-Za-z0-9_-]{22})"',
         html,
@@ -87,13 +90,28 @@ async def resolve_channel_id(channel_url_or_handle: str) -> str | None:
     if m:
         return m.group(1)
 
-    # Strategy 2: ytInitialData / ytInitialPlayerResponse embeds the id as a JSON field.
-    m = re.search(r'"channelId":"(UC[A-Za-z0-9_-]{22})"', html)
-    if m:
-        return m.group(1)
+    # Strategy 2: rssUrl / browse_id / externalId — fields that name the
+    # *current* page's channel, never a sidebar/related-channel id.
+    for pattern in (
+        r'"rssUrl":"https?://www\.youtube\.com/feeds/videos\.xml\?channel_id=(UC[A-Za-z0-9_-]{22})',
+        r'"externalId":"(UC[A-Za-z0-9_-]{22})"',
+        r'"browseId":"(UC[A-Za-z0-9_-]{22})"',
+    ):
+        m = re.search(pattern, html)
+        if m:
+            return m.group(1)
 
     # Strategy 3: canonical link to /channel/UCxxx.
     m = re.search(r'href="https://www\.youtube\.com/channel/(UC[A-Za-z0-9_-]{22})"', html)
+    if m:
+        return m.group(1)
+
+    # Strategy 4 (last resort): ytInitialData / ytInitialPlayerResponse JSON.
+    # Multiple unrelated ``"channelId":"UCxxx"`` entries can appear on the
+    # page (sidebar, recommendations); we already ruled out all the more
+    # reliable signals above, so accepting the first match here is the best
+    # we can do without YouTube Data API access.
+    m = re.search(r'"channelId":"(UC[A-Za-z0-9_-]{22})"', html)
     if m:
         return m.group(1)
 
