@@ -12,6 +12,11 @@ async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
   return res.json();
 }
 
+// --- Province ---
+
+// Mirrors the backend's PROVINCE_BC / PROVINCE_AB constants exactly.
+export type Province = "BC" | "Alberta";
+
 // --- Subscribe ---
 
 export interface SubscribeRequest {
@@ -20,6 +25,9 @@ export interface SubscribeRequest {
   topics: string[];
   keywords: string;
   immediate_alerts: boolean;
+  // Optional for backward compatibility with older callers; the backend
+  // defaults to "BC" when omitted.
+  province?: Province;
 }
 
 export interface SubscribeResponse {
@@ -55,6 +63,7 @@ export interface Municipality {
   short_name: string;
   gov_type: string;
   region: string;
+  province: string;
   website_url: string | null;
   population: number | null;
   is_active: boolean;
@@ -66,6 +75,14 @@ export interface MunicipalityListResponse {
   total: number;
 }
 
-export async function getMunicipalities(): Promise<MunicipalityListResponse> {
-  return apiFetch("/api/v1/municipalities");
+/**
+ * Fetch the registered municipalities, optionally scoped to one province.
+ * Pass ``"all"`` to bypass the default-BC filter and return every province
+ * in one call (used by admin tooling).
+ */
+export async function getMunicipalities(
+  province?: Province | "all"
+): Promise<MunicipalityListResponse> {
+  const qs = province ? `?province=${encodeURIComponent(province)}` : "";
+  return apiFetch(`/api/v1/municipalities${qs}`);
 }

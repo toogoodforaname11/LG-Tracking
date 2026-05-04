@@ -20,6 +20,63 @@ from app.api.subscribe import (
 from app.api.auth import confirm_magic_link
 
 
+def _muni_validation_result(known_short_names):
+    """Build the result returned by the municipality-existence check.
+
+    The subscribe handler runs ``select(Municipality.short_name).where(...)``
+    and consumes the result via ``scalars().all()``; this helper produces a
+    MagicMock that satisfies that exact shape with the supplied known names.
+    """
+    result = MagicMock()
+    scalars = MagicMock()
+    scalars.all.return_value = list(known_short_names)
+    result.scalars.return_value = scalars
+    return result
+
+
+def _make_subscribe_db_mock(*, existing_subscriber, known_municipalities):
+    """Build an AsyncMock DB whose ``execute`` returns the right results in
+    the order the subscribe handler calls them: (1) municipality validation,
+    (2) existing subscriber lookup.
+
+    Subsequent execute calls (none today) reuse the subscriber-lookup result
+    so tests don't crash if the production code ever adds another query.
+    Also installs a ``refresh`` impl that backfills SQLAlchemy server defaults
+    (``unsubscribe_token`` on Subscriber and ``token`` on MagicLinkToken)
+    which would normally only populate after a flush against a real DB.
+    """
+    db = AsyncMock()
+    # db.add is a synchronous SQLAlchemy method; AsyncMock turns every
+    # attribute into a coroutine by default which leaks RuntimeWarnings when
+    # the production code (correctly) does not await it.
+    db.add = MagicMock()
+    db.commit = AsyncMock()
+
+    sub_result = MagicMock()
+    sub_result.scalar_one_or_none.return_value = existing_subscriber
+    muni_result = _muni_validation_result(known_municipalities)
+
+    call_count = {"n": 0}
+
+    async def fake_execute(_query):
+        call_count["n"] += 1
+        # First call validates municipalities, second looks up the subscriber.
+        if call_count["n"] == 1:
+            return muni_result
+        return sub_result
+
+    db.execute = AsyncMock(side_effect=fake_execute)
+
+    async def fake_refresh(obj):
+        if hasattr(obj, "unsubscribe_token") and getattr(obj, "unsubscribe_token", None) is None:
+            obj.unsubscribe_token = str(uuid.uuid4())
+        if hasattr(obj, "token") and getattr(obj, "token", None) is None:
+            obj.token = str(uuid.uuid4())
+
+    db.refresh = AsyncMock(side_effect=fake_refresh)
+    return db
+
+
 # --- Helpers ---
 
 
@@ -32,6 +89,7 @@ def _make_subscriber(**kwargs):
     sub.keywords = kwargs.get("keywords", "rezoning")
     sub.immediate_alerts = kwargs.get("immediate_alerts", False)
     sub.active = kwargs.get("active", True)
+    sub.province = kwargs.get("province", "BC")
     sub.unsubscribe_token = kwargs.get("unsubscribe_token", str(uuid.uuid4()))
     sub.created_at = datetime.now(timezone.utc)
     sub.updated_at = datetime.now(timezone.utc)
@@ -67,6 +125,7 @@ def _make_subscribe_request(**kwargs):
         topics=kwargs.get("topics", ["ocp_housing"]),
         keywords=kwargs.get("keywords", ""),
         immediate_alerts=kwargs.get("immediate_alerts", False),
+        province=kwargs.get("province", "BC"),
     )
 
 
@@ -75,23 +134,12 @@ def _make_subscribe_request(**kwargs):
 
 @pytest.mark.asyncio
 async def test_new_subscriber_created():
-    """New email should create subscriber immediately with status='created'."""
-    db = AsyncMock()
+    """New email should create subscriber and send confirmation magic link."""
+    db = _make_subscribe_db_mock(
+        existing_subscriber=None,
+        known_municipalities=["Colwood"],
+    )
     background_tasks = MagicMock()
-
-    # No existing subscriber
-    mock_result = MagicMock()
-    mock_result.scalar_one_or_none.return_value = None
-    db.execute = AsyncMock(return_value=mock_result)
-    db.commit = AsyncMock()
-
-    # db.refresh needs to set the unsubscribe_token (SQLAlchemy default
-    # only fires at flush, not __init__)
-    async def fake_refresh(obj):
-        if hasattr(obj, "unsubscribe_token") and obj.unsubscribe_token is None:
-            obj.unsubscribe_token = str(uuid.uuid4())
-
-    db.refresh = AsyncMock(side_effect=fake_refresh)
 
     req = _make_subscribe_request()
 
@@ -102,7 +150,8 @@ async def test_new_subscriber_created():
 
         response = await subscribe(req, background_tasks, db)
 
-    assert response.status == "created"
+    # All subscribe paths now go through the magic-link flow (double opt-in).
+    assert response.status == "magic_link_sent"
     assert response.email == "new@example.com"
     assert db.add.called
     assert db.commit.called
@@ -110,55 +159,25 @@ async def test_new_subscriber_created():
 
 @pytest.mark.asyncio
 async def test_new_subscriber_sends_confirmation_email():
-    """New subscriber should trigger a confirmation email via BackgroundTasks."""
-    db = AsyncMock()
+    """New subscriber should trigger a confirmation magic-link email."""
+    db = _make_subscribe_db_mock(
+        existing_subscriber=None,
+        known_municipalities=["Colwood"],
+    )
     background_tasks = MagicMock()
-
-    mock_result = MagicMock()
-    mock_result.scalar_one_or_none.return_value = None
-    db.execute = AsyncMock(return_value=mock_result)
-    db.commit = AsyncMock()
-
-    async def fake_refresh(obj):
-        if hasattr(obj, "unsubscribe_token") and obj.unsubscribe_token is None:
-            obj.unsubscribe_token = str(uuid.uuid4())
-
-    db.refresh = AsyncMock(side_effect=fake_refresh)
 
     req = _make_subscribe_request()
 
     with patch("app.api.subscribe.settings") as mock_settings:
         mock_settings.app_base_url = "https://example.com"
 
-        response = await subscribe(req, background_tasks, db)
+        await subscribe(req, background_tasks, db)
 
     background_tasks.add_task.assert_called_once()
     task_args = background_tasks.add_task.call_args
-    # First arg is the function (send_confirmation_email)
-    assert task_args[0][0].__name__ == "send_confirmation_email"
-
-
-@pytest.mark.asyncio
-async def test_new_subscriber_skips_email_without_base_url():
-    """Without APP_BASE_URL, confirmation email should be skipped."""
-    db = AsyncMock()
-    background_tasks = MagicMock()
-
-    mock_result = MagicMock()
-    mock_result.scalar_one_or_none.return_value = None
-    db.execute = AsyncMock(return_value=mock_result)
-    db.commit = AsyncMock()
-    db.refresh = AsyncMock()
-
-    req = _make_subscribe_request()
-
-    with patch("app.api.subscribe.settings") as mock_settings:
-        mock_settings.app_base_url = ""
-
-        response = await subscribe(req, background_tasks, db)
-
-    assert response.status == "created"
-    background_tasks.add_task.assert_not_called()
+    # First positional arg is the email-sending function used for new
+    # subscribers — must match the actual function exported by the module.
+    assert task_args[0][0].__name__ == "send_confirmation_link_email"
 
 
 # --- Existing subscriber flow (magic link) ---
@@ -167,20 +186,12 @@ async def test_new_subscriber_skips_email_without_base_url():
 @pytest.mark.asyncio
 async def test_existing_subscriber_gets_magic_link():
     """Existing email should create a magic link token, not modify subscriber directly."""
-    db = AsyncMock()
-    background_tasks = MagicMock()
-
     existing = _make_subscriber()
-    mock_result = MagicMock()
-    mock_result.scalar_one_or_none.return_value = existing
-    db.execute = AsyncMock(return_value=mock_result)
-    db.commit = AsyncMock()
-
-    async def fake_refresh(obj):
-        if hasattr(obj, "token") and obj.token is None:
-            obj.token = str(uuid.uuid4())
-
-    db.refresh = AsyncMock(side_effect=fake_refresh)
+    db = _make_subscribe_db_mock(
+        existing_subscriber=existing,
+        known_municipalities=["Colwood"],
+    )
+    background_tasks = MagicMock()
 
     req = _make_subscribe_request(email="test@example.com")
 
@@ -192,6 +203,10 @@ async def test_existing_subscriber_gets_magic_link():
     assert response.status == "magic_link_sent"
     assert db.add.called
     background_tasks.add_task.assert_called_once()
+    # Existing-subscriber path uses the magic-link template, not the
+    # confirmation template.
+    task_args = background_tasks.add_task.call_args
+    assert task_args[0][0].__name__ == "send_magic_link_email"
 
 
 # --- Magic link confirmation ---
@@ -331,20 +346,12 @@ async def test_unsubscribe_invalid_token():
 
 @pytest.mark.asyncio
 async def test_new_subscriber_with_immediate_alerts():
-    """Subscriber with immediate_alerts=True should get appropriate message."""
-    db = AsyncMock()
+    """Subscriber with immediate_alerts=True still goes through magic link."""
+    db = _make_subscribe_db_mock(
+        existing_subscriber=None,
+        known_municipalities=["Colwood"],
+    )
     background_tasks = MagicMock()
-
-    mock_result = MagicMock()
-    mock_result.scalar_one_or_none.return_value = None
-    db.execute = AsyncMock(return_value=mock_result)
-    db.commit = AsyncMock()
-
-    async def fake_refresh(obj):
-        if hasattr(obj, "unsubscribe_token") and obj.unsubscribe_token is None:
-            obj.unsubscribe_token = str(uuid.uuid4())
-
-    db.refresh = AsyncMock(side_effect=fake_refresh)
 
     req = _make_subscribe_request(immediate_alerts=True)
 
@@ -353,5 +360,118 @@ async def test_new_subscriber_with_immediate_alerts():
 
         response = await subscribe(req, background_tasks, db)
 
-    assert response.status == "created"
-    assert "immediate alerts" in response.message.lower()
+    assert response.status == "magic_link_sent"
+    # Either path should send a confirmation email.
+    background_tasks.add_task.assert_called_once()
+
+
+# --- Province handling ---
+
+
+@pytest.mark.asyncio
+async def test_subscribe_with_alberta_province():
+    """Alberta subscription should validate against AB munis and persist province."""
+    db = _make_subscribe_db_mock(
+        existing_subscriber=None,
+        known_municipalities=["Calgary", "Edmonton"],
+    )
+    background_tasks = MagicMock()
+
+    req = _make_subscribe_request(
+        email="ab@example.com",
+        province="Alberta",
+        municipalities=["Calgary", "Edmonton"],
+    )
+
+    with patch("app.api.subscribe.settings") as mock_settings:
+        mock_settings.app_base_url = "https://example.com"
+
+        response = await subscribe(req, background_tasks, db)
+
+    assert response.status == "magic_link_sent"
+    # The newly-added Subscriber model object should carry province="Alberta".
+    from app.models.subscriber import Subscriber as SubscriberModel
+    from app.models.magic_link import MagicLinkToken as TokenModel
+
+    added_objects = [call.args[0] for call in db.add.call_args_list]
+    new_subs = [o for o in added_objects if isinstance(o, SubscriberModel)]
+    assert len(new_subs) == 1
+    assert new_subs[0].province == "Alberta"
+    assert new_subs[0].email == "ab@example.com"
+    # The magic-link token should also remember the province for replay-safety.
+    tokens = [o for o in added_objects if isinstance(o, TokenModel)]
+    assert len(tokens) == 1
+    assert tokens[0].pending_preferences["province"] == "Alberta"
+
+
+def test_subscribe_request_rejects_unknown_province():
+    """Pydantic should reject province values outside VALID_PROVINCES."""
+    with pytest.raises(Exception):
+        SubscribeRequest(
+            email="x@example.com",
+            municipalities=["Toronto"],
+            topics=[],
+            province="Ontario",  # not supported
+        )
+
+
+@pytest.mark.asyncio
+async def test_subscribe_rejects_municipality_outside_province():
+    """Posting Calgary with province=BC should be a 422."""
+    db = _make_subscribe_db_mock(
+        existing_subscriber=None,
+        # The validation query in the BC branch wouldn't return Calgary
+        # because Calgary lives in Alberta — simulate that here.
+        known_municipalities=[],
+    )
+    background_tasks = MagicMock()
+
+    req = _make_subscribe_request(
+        email="bad@example.com",
+        province="BC",
+        municipalities=["Calgary"],
+    )
+
+    with pytest.raises(HTTPException) as exc_info:
+        await subscribe(req, background_tasks, db)
+
+    assert exc_info.value.status_code == 422
+    assert "Calgary" in str(exc_info.value.detail)
+
+
+@pytest.mark.asyncio
+async def test_confirm_magic_link_applies_province():
+    """Magic-link confirmation should propagate province from pending_preferences."""
+    token = _make_magic_link_token(pending_preferences={
+        "municipalities": ["Calgary"],
+        "topics": ["tod"],
+        "keywords": "",
+        "immediate_alerts": False,
+        "province": "Alberta",
+    })
+    subscriber = _make_subscriber(province="BC")
+
+    db = AsyncMock()
+    call_count = 0
+
+    async def mock_execute(_query):
+        nonlocal call_count
+        call_count += 1
+        result = MagicMock()
+        if call_count == 1:
+            result.scalar_one_or_none.return_value = token
+        else:
+            result.scalar_one_or_none.return_value = subscriber
+        return result
+
+    db.execute = AsyncMock(side_effect=mock_execute)
+    db.commit = AsyncMock()
+
+    with patch("app.api.auth.settings") as mock_settings:
+        mock_settings.app_base_url = ""
+
+        result = await confirm_magic_link(token.token, db)
+
+    assert result["status"] == "ok"
+    assert subscriber.province == "Alberta"
+    assert subscriber.municipalities == ["Calgary"]

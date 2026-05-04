@@ -1,6 +1,17 @@
 """Test model imports and enum consistency."""
 
-from app.models.municipality import Municipality, Source, ScrapeRun, GovType, Platform, SourceType, ScrapeStatus
+from app.models.municipality import (
+    Municipality,
+    Source,
+    ScrapeRun,
+    GovType,
+    Platform,
+    SourceType,
+    ScrapeStatus,
+    PROVINCE_BC,
+    PROVINCE_AB,
+    VALID_PROVINCES,
+)
 from app.models.document import Document, Meeting, DocType, MeetingType
 from app.models.track import Track, TrackMatch, AVAILABLE_TOPICS
 
@@ -30,3 +41,12 @@ def test_available_topics():
     assert "ocp_housing" in AVAILABLE_TOPICS
     assert "zoning_density" in AVAILABLE_TOPICS
     assert "tod" in AVAILABLE_TOPICS
+
+
+def test_province_constants():
+    """Province literals must match the wire format consumed by the frontend."""
+    assert PROVINCE_BC == "BC"
+    assert PROVINCE_AB == "Alberta"
+    assert PROVINCE_BC in VALID_PROVINCES
+    assert PROVINCE_AB in VALID_PROVINCES
+    assert "Ontario" not in VALID_PROVINCES

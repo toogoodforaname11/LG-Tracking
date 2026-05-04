@@ -4,6 +4,16 @@ import { useState, useEffect } from "react";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "";
 
+// Provinces supported by the backend. Keep these as literal strings (matching
+// the API's PROVINCE_BC / PROVINCE_AB constants) rather than enums so the wire
+// format never drifts from compile-time values.
+type Province = "BC" | "Alberta";
+
+const PROVINCE_OPTIONS: { id: Province; label: string; shortLabel: string }[] = [
+  { id: "BC", label: "British Columbia", shortLabel: "BC" },
+  { id: "Alberta", label: "Alberta", shortLabel: "AB" },
+];
+
 // Topics — housing, transit, and provincial priority topics
 const AVAILABLE_TOPICS = [
   { id: "tod", label: "Transit Oriented Development (TOD)" },
@@ -298,10 +308,318 @@ const FALLBACK_MUNICIPALITIES = [
   "Zeballos",
 ];
 
+// Fallback Alberta municipality list used when the API is unreachable.
+// Mirrors the short_names emitted by the backend seed (BC and AB are kept
+// in separate lists so each tab has a sensible offline default). Summer
+// villages are prefixed "SV " to disambiguate from regular villages.
+const FALLBACK_MUNICIPALITIES_AB = [
+  "Acme",
+  "Airdrie",
+  "Alberta Beach",
+  "Alix",
+  "Alliance",
+  "Andrew",
+  "Arrowwood",
+  "Athabasca County",
+  "Banff",
+  "Barnwell",
+  "Barons",
+  "Barrhead",
+  "Bassano",
+  "Bawlf",
+  "Beaumont",
+  "Beaver County",
+  "Bentley",
+  "Berwyn",
+  "Big Lakes County",
+  "Big Valley",
+  "Birch Hills County",
+  "Bittern Lake",
+  "Black Diamond",
+  "Blackfalds",
+  "Bon Accord",
+  "Bonnyville",
+  "Bow Island",
+  "Bowden",
+  "Boyle",
+  "Brazeau County",
+  "Brooks",
+  "Bruderheim",
+  "Buffalo Lake",
+  "Calgary",
+  "Camrose",
+  "Camrose County",
+  "Canmore",
+  "Carbon",
+  "Cardston",
+  "Cardston County",
+  "Carmangay",
+  "Caroline",
+  "Carstairs",
+  "Castor",
+  "Chauvin",
+  "Chestermere",
+  "Chipman",
+  "Claresholm",
+  "Clear Hills County",
+  "Clearwater County",
+  "Clive",
+  "Clyde",
+  "Coaldale",
+  "Coalhurst",
+  "Cold Lake",
+  "Coronation",
+  "County of Barrhead",
+  "County of Grande Prairie",
+  "County of Minburn",
+  "County of Newell",
+  "County of Northern Lights",
+  "County of Stettler",
+  "Crossfield",
+  "Crowsnest Pass",
+  "Cypress County",
+  "Czar",
+  "Daysland",
+  "Delburne",
+  "Delia",
+  "Devon",
+  "Dewberry",
+  "Didsbury",
+  "Donalda",
+  "Duchess",
+  "East Prairie",
+  "Eckville",
+  "Edgerton",
+  "Edmonton",
+  "Edson",
+  "Elizabeth",
+  "Elk Point",
+  "Elnora",
+  "Fairview",
+  "Falher",
+  "Ferintosh",
+  "Fishing Lake",
+  "Flagstaff County",
+  "Foothills County",
+  "Foremost",
+  "Fort Macleod",
+  "Fort McMurray",
+  "Fox Creek",
+  "Gibbons",
+  "Gift Lake",
+  "Girouxville",
+  "Glendon",
+  "Grand Centre",
+  "Grande Prairie",
+  "Granum",
+  "Grimshaw",
+  "Halkirk",
+  "Hanna",
+  "Hardisty",
+  "Hay Lakes",
+  "Heisler",
+  "High Level",
+  "High Prairie",
+  "High River",
+  "Hill Spring",
+  "Hines Creek",
+  "Hinton",
+  "Hughenden",
+  "Hussar",
+  "Hythe",
+  "Improvement District No. 9",
+  "Innisfail",
+  "Irricana",
+  "Jasper",
+  "Kikino",
+  "Killam",
+  "Kitscoty",
+  "Kneehill County",
+  "Lac La Biche",
+  "Lac La Biche County",
+  "Lac Ste. Anne County",
+  "Lacombe",
+  "Lacombe (former town)",
+  "Lamont",
+  "Lamont County",
+  "Leduc",
+  "Leduc County",
+  "Legal",
+  "Lethbridge",
+  "Linden",
+  "Lloydminster",
+  "Lomond",
+  "Longview",
+  "Lougheed",
+  "Mackenzie County",
+  "Magrath",
+  "Manning",
+  "Mannville",
+  "Marwayne",
+  "Mayerthorpe",
+  "Medicine Hat",
+  "Milk River",
+  "Millet",
+  "Milo",
+  "Minburn",
+  "Morinville",
+  "Morrin",
+  "Mountain View County",
+  "Mundare",
+  "Myrnam",
+  "Nampa",
+  "Nanton",
+  "Nobleford",
+  "Northern Sunrise County",
+  "Olds",
+  "Onoway",
+  "Oyen",
+  "Paddle Prairie",
+  "Paradise Valley",
+  "Parkland County",
+  "Peace River",
+  "Peavine",
+  "Penhold",
+  "Picture Butte",
+  "Pincher Creek",
+  "Ponoka",
+  "Ponoka County",
+  "Provost",
+  "Rainbow Lake",
+  "Raymond",
+  "Red Deer",
+  "Red Deer County",
+  "Redcliff",
+  "Rimbey",
+  "Rocky Mountain House",
+  "Rocky View County",
+  "Rockyford",
+  "Rosalind",
+  "Rycroft",
+  "Ryley",
+  "SV Argentia Beach",
+  "SV Betula Beach",
+  "SV Birch Cove",
+  "SV Birchcliff",
+  "SV Bondiss",
+  "SV Bonnyville Beach",
+  "SV Brentwood",
+  "SV Burnstick Lake",
+  "SV Castle Island",
+  "SV Crystal Springs",
+  "SV Ghost Lake",
+  "SV Golden Days",
+  "SV Grandview",
+  "SV Gull Lake",
+  "SV Half Moon Bay",
+  "SV Horseshoe Bay",
+  "SV Island Lake",
+  "SV Island Lake South",
+  "SV Itaska Beach",
+  "SV Jarvis Bay",
+  "SV Kapasiwin",
+  "SV Lakeview",
+  "SV Larkspur",
+  "SV Ma-Me-O Beach",
+  "SV Mewatha Beach",
+  "SV Nakamun Park",
+  "SV Norglenwold",
+  "SV Norris Beach",
+  "SV Parkland Beach",
+  "SV Pelican Narrows",
+  "SV Point Alison",
+  "SV Poplar Bay",
+  "SV Rochon Sands",
+  "SV Ross Haven",
+  "SV Seba Beach",
+  "SV Silver Beach",
+  "SV Silver Sands",
+  "SV South Baptiste",
+  "SV South View",
+  "SV Sunbreaker Cove",
+  "SV Sundance Beach",
+  "SV Sunridge",
+  "SV Sunrise Beach",
+  "SV Sunset Beach",
+  "SV Sunset Point",
+  "SV Val Quentin",
+  "SV Waiparous",
+  "SV West Baptiste",
+  "SV West Cove",
+  "SV Whispering Hills",
+  "SV White Sands",
+  "SV Yellowstone",
+  "Saddle Hills County",
+  "Sexsmith",
+  "Slave Lake",
+  "Smoky Lake",
+  "Smoky Lake County",
+  "Special Area No. 2",
+  "Special Area No. 3",
+  "Special Area No. 4",
+  "Spirit River",
+  "Spring Lake",
+  "Spruce Grove",
+  "St. Albert",
+  "St. Paul",
+  "Standard",
+  "Starland County",
+  "Stavely",
+  "Stettler",
+  "Stirling",
+  "Stony Plain",
+  "Strathcona County",
+  "Strathmore",
+  "Sturgeon County",
+  "Sundre",
+  "Swan Hills",
+  "Sylvan Lake",
+  "Taber",
+  "Thorhild County",
+  "Thorsby",
+  "Three Hills",
+  "Tofield",
+  "Turner Valley",
+  "Two Hills",
+  "Two Hills County",
+  "Valhalla Centre",
+  "Vauxhall",
+  "Vegreville",
+  "Vermilion",
+  "Vermilion River County",
+  "Veteran",
+  "Vilna",
+  "Vulcan",
+  "Vulcan County",
+  "Wabamun",
+  "Wainwright",
+  "Warburg",
+  "Warner",
+  "Westlock",
+  "Westlock County",
+  "Wetaskiwin",
+  "Wetaskiwin County",
+  "Wheatland County",
+  "Whitecourt",
+  "Willingdon",
+  "Yellowhead County",
+  "Youngstown",
+];
+
+function fallbackForProvince(province: Province): string[] {
+  switch (province) {
+    case "BC":
+      return FALLBACK_MUNICIPALITIES;
+    case "Alberta":
+      return FALLBACK_MUNICIPALITIES_AB;
+  }
+}
+
 type FormState = "idle" | "submitting" | "success" | "magic_link_sent" | "confirmed" | "error";
 
 export default function SubscribePage() {
   const [email, setEmail] = useState("");
+  const [selectedProvince, setSelectedProvince] = useState<Province>("BC");
   const [municipalities, setMunicipalities] = useState<string[]>(FALLBACK_MUNICIPALITIES);
   const [selectedMunicipalities, setSelectedMunicipalities] = useState<string[]>([]);
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
@@ -324,21 +642,47 @@ export default function SubscribePage() {
     }
   }, []);
 
-  // Fetch municipality list from API (falls back to hardcoded list on error)
+  // Fetch the municipality list for the currently-selected province from the
+  // API. Falls back to the bundled hardcoded list when the API is unreachable
+  // so the form is still usable offline / on a misconfigured deployment.
   useEffect(() => {
-    fetch(`${API_BASE}/api/v1/municipalities`)
+    let cancelled = false;
+    // Optimistically render the offline fallback for the new province while
+    // the API call is in-flight. Avoids leaving a stale BC list visible after
+    // the user toggles to Alberta.
+    setMunicipalities(fallbackForProvince(selectedProvince));
+
+    fetch(`${API_BASE}/api/v1/municipalities?province=${encodeURIComponent(selectedProvince)}`)
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
       })
       .then((data: { municipalities: { short_name: string }[] }) => {
+        if (cancelled) return;
         const names = data.municipalities.map((m) => m.short_name).sort();
         if (names.length > 0) setMunicipalities(names);
       })
       .catch(() => {
-        // Silently fall back to FALLBACK_MUNICIPALITIES (already set as default)
+        if (cancelled) return;
+        // Province-specific fallback was already set above; nothing else to do.
       });
-  }, []);
+
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedProvince]);
+
+  // When the user toggles the province tab, clear any prior selections so a
+  // BC-side selection can't accidentally be POSTed alongside an Alberta
+  // province (the backend would reject this anyway, but we want the UI state
+  // to be consistent).
+  const switchProvince = (next: Province) => {
+    if (next === selectedProvince) return;
+    setSelectedProvince(next);
+    setSelectedMunicipalities([]);
+    setMuniSearch("");
+    setMuniDropdownOpen(false);
+  };
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -409,6 +753,7 @@ export default function SubscribePage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email,
+          province: selectedProvince,
           municipalities: selectedMunicipalities,
           topics: selectedTopics,
           keywords: allKeywords,
@@ -597,7 +942,39 @@ export default function SubscribePage() {
           <h2 className="mb-3 text-sm font-semibold text-gray-900">
             Municipalities <span className="font-normal text-gray-400">(optional)</span>
           </h2>
-          <div className="relative" data-muni-dropdown>
+
+          {/* Province tabs — switch the active municipality list. Switching
+              clears any prior selections so we never POST a mixed-province
+              subscription. */}
+          <div
+            role="tablist"
+            aria-label="Province"
+            className="mb-3 inline-flex rounded-lg border border-gray-200 bg-gray-50 p-0.5"
+          >
+            {PROVINCE_OPTIONS.map((option) => {
+              const isActive = selectedProvince === option.id;
+              return (
+                <button
+                  key={option.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-controls="muni-selector"
+                  onClick={() => switchProvince(option.id)}
+                  className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
+                    isActive
+                      ? "bg-white text-blue-800 shadow-sm"
+                      : "text-gray-500 hover:text-gray-700"
+                  }`}
+                >
+                  <span className="hidden sm:inline">{option.label}</span>
+                  <span className="sm:hidden">{option.shortLabel}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div id="muni-selector" className="relative" data-muni-dropdown>
             <button
               type="button"
               onClick={() => setMuniDropdownOpen(!muniDropdownOpen)}

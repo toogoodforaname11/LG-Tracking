@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Seed the database with BC municipality and source data.
+"""Seed the database with BC + Alberta municipality and source data.
 
 Usage (from the repo root):
     python3 scripts/seed.py
@@ -7,7 +7,7 @@ Usage (from the repo root):
 Or using the deploy script which calls this automatically.
 
 Idempotent — safe to run multiple times.  Existing municipalities
-(matched by short_name) are skipped; new sources are added.
+(matched by ``(short_name, province)``) are skipped; new sources are added.
 
 Requires DATABASE_URL (and DATABASE_URL_SYNC for migrations) in backend/.env
 (or as environment variables).
@@ -29,7 +29,7 @@ from app.services.seed_registry import seed_registry  # noqa: E402
 
 
 async def main() -> None:
-    print("Seeding database with BC municipality data...")
+    print("Seeding database with BC + Alberta municipality data...")
     async with async_session() as session:
         stats = await seed_registry(session)
 
