@@ -33,6 +33,14 @@ AVAILABLE_TOPICS = [
     "dev_permits_housing",  # Development permits affecting housing supply
     "dev_cost_charges",     # Development cost charges / affordability incentives
     "other_housing_transit", # Other housing or transit-related
+
+    # --- Ontario-specific topics ---
+    # Each appears in digest.py topic_keywords and gemini.py keyword_fallback_match;
+    # adding a topic here without updating those is a regression caught by
+    # tests/test_security.py.
+    "official_plans",                # Ontario Official Plan / OP updates
+    "secondary_plan_op_amendment",   # Secondary plan, OP amendment, OPA
+    "bill23_more_homes",             # Bill 23 (More Homes Built Faster Act)
 ]
 
 

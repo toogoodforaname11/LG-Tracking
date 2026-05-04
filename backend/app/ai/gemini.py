@@ -297,6 +297,17 @@ def keyword_fallback_match(
             "rental housing", "social housing", "bus rapid transit",
             "light rail", "cycling infrastructure", "active transportation",
         ],
+        # --- Ontario-specific topics ---
+        "official_plans": [
+            "official plan", "op review", "comprehensive review",
+        ],
+        "secondary_plan_op_amendment": [
+            "secondary plan", "official plan amendment", "opa",
+        ],
+        "bill23_more_homes": [
+            "bill 23", "more homes built faster",
+            "community benefits charge", "as-of-right zoning",
+        ],
     }
 
     matched_topics = []

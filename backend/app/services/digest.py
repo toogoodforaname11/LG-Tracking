@@ -293,6 +293,24 @@ def build_digest_items(
         "transportation_plan": [
             "transportation plan", "transportation study",
         ],
+        # --- Ontario-specific topics ---
+        # Ontario Official Plan terminology — distinct from BC's "OCP".
+        "official_plans": [
+            "official plan", "official plan update", "official plan review",
+            "OP review", "OP", "comprehensive review",
+        ],
+        "secondary_plan_op_amendment": [
+            "secondary plan", "official plan amendment", "OPA",
+            "neighbourhood plan", "tertiary plan",
+        ],
+        # Ontario Bill 23 (More Homes Built Faster Act, 2022) +
+        # downstream community-benefits-charge rules.
+        "bill23_more_homes": [
+            "bill 23", "more homes built faster",
+            "more homes built faster act",
+            "community benefits charge", "CBC",
+            "as-of-right zoning",
+        ],
     }
 
     # Build a lookup from document ID to the best TrackMatch (highest score)

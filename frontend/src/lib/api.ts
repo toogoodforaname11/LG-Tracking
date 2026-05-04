@@ -14,8 +14,13 @@ async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
 
 // --- Province ---
 
-// Mirrors the backend's PROVINCE_BC / PROVINCE_AB constants exactly.
-export type Province = "BC" | "Alberta";
+// Mirrors the backend's PROVINCE_BC / PROVINCE_AB / PROVINCE_ON constants
+// exactly.
+export type Province = "BC" | "Alberta" | "Ontario";
+
+// Mirrors the backend's TIER_UPPER / TIER_LOWER / TIER_SINGLE constants.
+// Optional on Municipality because older API responses may omit it.
+export type Tier = "upper" | "lower" | "single";
 
 // --- Subscribe ---
 
@@ -64,6 +69,12 @@ export interface Municipality {
   gov_type: string;
   region: string;
   province: string;
+  /**
+   * Ontario-flavoured tier ("upper", "lower", "single"). Defaults to
+   * "single" for BC/AB rows on the backend; optional here to keep the
+   * type tolerant of older deployments.
+   */
+  tier?: Tier;
   website_url: string | null;
   population: number | null;
   is_active: boolean;

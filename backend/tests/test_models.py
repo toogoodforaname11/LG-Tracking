@@ -42,10 +42,15 @@ def test_enums():
 
 
 def test_available_topics():
-    assert len(AVAILABLE_TOPICS) == 13
+    # 13 BC topics (incl. other_housing_transit) + 3 ON topics = 16
+    assert len(AVAILABLE_TOPICS) == 16
     assert "ocp_housing" in AVAILABLE_TOPICS
     assert "zoning_density" in AVAILABLE_TOPICS
     assert "tod" in AVAILABLE_TOPICS
+    # Ontario topics
+    assert "official_plans" in AVAILABLE_TOPICS
+    assert "secondary_plan_op_amendment" in AVAILABLE_TOPICS
+    assert "bill23_more_homes" in AVAILABLE_TOPICS
 
 
 def test_province_constants():

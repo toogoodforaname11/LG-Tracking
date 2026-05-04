@@ -5,14 +5,32 @@ import { useState, useEffect } from "react";
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "";
 
 // Provinces supported by the backend. Keep these as literal strings (matching
-// the API's PROVINCE_BC / PROVINCE_AB constants) rather than enums so the wire
-// format never drifts from compile-time values.
-type Province = "BC" | "Alberta";
+// the API's PROVINCE_BC / PROVINCE_AB / PROVINCE_ON constants) rather than
+// enums so the wire format never drifts from compile-time values.
+type Province = "BC" | "Alberta" | "Ontario";
 
 const PROVINCE_OPTIONS: { id: Province; label: string; shortLabel: string }[] = [
   { id: "BC", label: "British Columbia", shortLabel: "BC" },
   { id: "Alberta", label: "Alberta", shortLabel: "AB" },
+  { id: "Ontario", label: "Ontario", shortLabel: "ON" },
 ];
+
+// Optional tier badge shown next to each municipality name in the dropdown.
+// Mirrors VALID_TIERS in the backend: "upper" (county/region), "lower"
+// (lower-tier municipality inside an upper-tier), "single" (stand-alone).
+type Tier = "upper" | "lower" | "single";
+
+const TIER_LABEL: Record<Tier, string> = {
+  upper: "Upper-tier",
+  lower: "Lower-tier",
+  single: "Single-tier",
+};
+
+const TIER_TOOLTIP: Record<Tier, string> = {
+  upper: "Upper-tier: a county or regional municipality.",
+  lower: "Lower-tier: a city/town/township that sits inside an upper-tier.",
+  single: "Single-tier: a stand-alone municipality not part of an upper-tier.",
+};
 
 // Topics — housing, transit, and provincial priority topics
 const AVAILABLE_TOPICS = [
@@ -29,6 +47,13 @@ const AVAILABLE_TOPICS = [
   { id: "dev_permits_housing", label: "Development Permits Affecting Housing Supply" },
   { id: "dev_cost_charges", label: "Development Cost Charges or Affordability Incentives" },
   { id: "transportation_plan", label: "Transportation Plan or Transportation Study" },
+  // --- Ontario-specific topics ---
+  // Backend recognises these in app/services/digest.py topic_keywords and
+  // app/ai/gemini.py keyword_fallback_match — adding new IDs here without
+  // updating those is a regression caught by tests/test_security.py.
+  { id: "official_plans", label: "Official Plan / OP Review (Ontario)" },
+  { id: "secondary_plan_op_amendment", label: "Secondary Plan / OP Amendment (Ontario)" },
+  { id: "bill23_more_homes", label: "Bill 23 — More Homes Built Faster Act (Ontario)" },
 ] as const;
 
 // Keywords searched per topic — mirrors backend build_digest_items topic_keywords exactly
@@ -107,6 +132,21 @@ const TOPIC_KEYWORDS: Record<string, string[]> = {
   ],
   transportation_plan: [
     "transportation plan", "transportation study",
+  ],
+  // --- Ontario topics — keyword lists kept in sync with backend digest.py.
+  official_plans: [
+    "Official Plan", "Official Plan Update", "Official Plan Review",
+    "OP Review", "OP", "comprehensive review",
+  ],
+  secondary_plan_op_amendment: [
+    "secondary plan", "Official Plan Amendment", "OPA",
+    "neighbourhood plan", "tertiary plan",
+  ],
+  bill23_more_homes: [
+    "Bill 23", "More Homes Built Faster",
+    "More Homes Built Faster Act",
+    "community benefits charge", "CBC",
+    "as-of-right zoning",
   ],
 };
 
@@ -606,12 +646,39 @@ const FALLBACK_MUNICIPALITIES_AB = [
   "Youngstown",
 ];
 
-function fallbackForProvince(province: Province): string[] {
+// Ontario fallback covers the 10 Phase-1 single-tier cities plus the four
+// largest upper-tier regions, so the dropdown is usable offline. Real data
+// from /api/v1/municipalities?province=Ontario replaces this on success.
+const FALLBACK_MUNICIPALITIES_ON: MuniOption[] = [
+  { short_name: "Toronto",     tier: "single" },
+  { short_name: "Ottawa",      tier: "single" },
+  { short_name: "Mississauga", tier: "lower"  },
+  { short_name: "Brampton",    tier: "lower"  },
+  { short_name: "Hamilton",    tier: "single" },
+  { short_name: "London",      tier: "single" },
+  { short_name: "Markham",     tier: "lower"  },
+  { short_name: "Vaughan",     tier: "lower"  },
+  { short_name: "Kitchener",   tier: "lower"  },
+  { short_name: "Windsor",     tier: "single" },
+  { short_name: "Peel Region",    tier: "upper" },
+  { short_name: "York Region",    tier: "upper" },
+  { short_name: "Durham Region",  tier: "upper" },
+  { short_name: "Halton Region",  tier: "upper" },
+];
+
+// MuniOption is the in-memory shape of a row in the dropdown. The optional
+// ``tier`` is only set for Ontario today (BC/AB rows leave it undefined and
+// the dropdown skips the badge).
+type MuniOption = { short_name: string; tier?: Tier };
+
+function fallbackForProvince(province: Province): MuniOption[] {
   switch (province) {
     case "BC":
-      return FALLBACK_MUNICIPALITIES;
+      return FALLBACK_MUNICIPALITIES.map((short_name) => ({ short_name }));
     case "Alberta":
-      return FALLBACK_MUNICIPALITIES_AB;
+      return FALLBACK_MUNICIPALITIES_AB.map((short_name) => ({ short_name }));
+    case "Ontario":
+      return FALLBACK_MUNICIPALITIES_ON;
   }
 }
 
@@ -620,7 +687,9 @@ type FormState = "idle" | "submitting" | "success" | "magic_link_sent" | "confir
 export default function SubscribePage() {
   const [email, setEmail] = useState("");
   const [selectedProvince, setSelectedProvince] = useState<Province>("BC");
-  const [municipalities, setMunicipalities] = useState<string[]>(FALLBACK_MUNICIPALITIES);
+  const [municipalities, setMunicipalities] = useState<MuniOption[]>(
+    FALLBACK_MUNICIPALITIES.map((short_name) => ({ short_name })),
+  );
   const [selectedMunicipalities, setSelectedMunicipalities] = useState<string[]>([]);
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
   const [keywords, setKeywords] = useState("");
@@ -657,10 +726,21 @@ export default function SubscribePage() {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
       })
-      .then((data: { municipalities: { short_name: string }[] }) => {
+      .then((data: { municipalities: { short_name: string; tier?: string }[] }) => {
         if (cancelled) return;
-        const names = data.municipalities.map((m) => m.short_name).sort();
-        if (names.length > 0) setMunicipalities(names);
+        const options: MuniOption[] = data.municipalities
+          .map((m) => ({
+            short_name: m.short_name,
+            // Only carry the tier badge through if it's a recognised value
+            // (single/lower/upper). Older API responses without the field
+            // simply leave the badge off.
+            tier:
+              m.tier === "upper" || m.tier === "lower" || m.tier === "single"
+                ? (m.tier as Tier)
+                : undefined,
+          }))
+          .sort((a, b) => a.short_name.localeCompare(b.short_name));
+        if (options.length > 0) setMunicipalities(options);
       })
       .catch(() => {
         if (cancelled) return;
@@ -1009,22 +1089,32 @@ export default function SubscribePage() {
                   />
                 </div>
                 <div className="max-h-60 overflow-y-auto">
-                  {municipalities.filter((name) =>
-                    name.toLowerCase().includes(muniSearch.toLowerCase())
-                  ).map((name) => (
-                    <label
-                      key={name}
-                      className="flex cursor-pointer items-center px-4 py-2 hover:bg-blue-50"
-                    >
-                      <input
-                        type="checkbox"
-                        checked={selectedMunicipalities.includes(name)}
-                        onChange={() => toggleMunicipality(name)}
-                        className="mr-3 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                      />
-                      <span className="text-sm text-gray-700">{name}</span>
-                    </label>
-                  ))}
+                  {municipalities
+                    .filter((m) =>
+                      m.short_name.toLowerCase().includes(muniSearch.toLowerCase())
+                    )
+                    .map((m) => (
+                      <label
+                        key={m.short_name}
+                        className="flex cursor-pointer items-center px-4 py-2 hover:bg-blue-50"
+                      >
+                        <input
+                          type="checkbox"
+                          checked={selectedMunicipalities.includes(m.short_name)}
+                          onChange={() => toggleMunicipality(m.short_name)}
+                          className="mr-3 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                        />
+                        <span className="text-sm text-gray-700">{m.short_name}</span>
+                        {m.tier && m.tier !== "single" ? (
+                          <span
+                            title={TIER_TOOLTIP[m.tier]}
+                            className="ml-2 rounded-full bg-gray-100 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-gray-500"
+                          >
+                            {TIER_LABEL[m.tier]}
+                          </span>
+                        ) : null}
+                      </label>
+                    ))}
                 </div>
               </div>
             )}
