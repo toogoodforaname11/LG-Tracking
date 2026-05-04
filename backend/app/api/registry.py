@@ -11,6 +11,7 @@ from app.models.municipality import (
     ScrapeStatus,
     PROVINCE_BC,
     VALID_PROVINCES,
+    VALID_TIERS,
 )
 from app.services.seed_registry import seed_registry
 from app.api.dependencies import verify_cron_secret
@@ -45,6 +46,7 @@ class MunicipalityOut(BaseModel):
     gov_type: str
     region: str
     province: str
+    tier: str
     website_url: str | None = None
     population: int | None = None
     is_active: bool
@@ -79,16 +81,22 @@ class SeedResult(BaseModel):
 async def list_municipalities(
     region: str | None = None,
     province: str | None = None,
+    tier: str | None = None,
     active_only: bool = True,
     db: AsyncSession = Depends(get_db),
 ):
-    """List municipalities, optionally filtered by region and/or province.
+    """List municipalities, optionally filtered by region, province and tier.
 
     ``province`` semantics:
     - omitted → defaults to ``"BC"`` for backward compatibility with clients
-      that were written before Alberta support.
-    - one of ``VALID_PROVINCES`` (``"BC"``, ``"Alberta"``) → strict filter.
+      that were written before multi-province support shipped.
+    - one of ``VALID_PROVINCES`` (``"BC"``, ``"Alberta"``, ``"Ontario"``) → strict filter.
     - ``"all"`` → no province filter; returns every province.
+    - any other value → ``HTTP 422``.
+
+    ``tier`` (Ontario-flavoured but valid for any province):
+    - omitted → no tier filter.
+    - one of ``VALID_TIERS`` (``"upper"``, ``"lower"``, ``"single"``) → strict filter.
     - any other value → ``HTTP 422``.
     """
     # Validate the province query parameter before running the query.
@@ -100,10 +108,19 @@ async def list_municipalities(
                 f"Must be one of: {sorted(VALID_PROVINCES) + [PROVINCE_QUERY_ALL]}"
             ),
         )
+    if tier is not None and tier not in VALID_TIERS:
+        raise HTTPException(
+            status_code=422,
+            detail=(
+                f"Invalid tier '{tier}'. Must be one of: {sorted(VALID_TIERS)}"
+            ),
+        )
 
     query = select(Municipality).options(selectinload(Municipality.sources))
     if region:
         query = query.where(Municipality.region == region)
+    if tier:
+        query = query.where(Municipality.tier == tier)
 
     # Default to BC so existing /municipalities callers (legacy frontends,
     # internal scripts) keep getting the BC list they expect.

@@ -409,9 +409,9 @@ def test_subscribe_request_rejects_unknown_province():
     with pytest.raises(Exception):
         SubscribeRequest(
             email="x@example.com",
-            municipalities=["Toronto"],
+            municipalities=["Wherever"],
             topics=[],
-            province="Ontario",  # not supported
+            province="Saskatchewan",  # not supported (yet)
         )
 
 

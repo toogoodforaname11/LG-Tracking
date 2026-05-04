@@ -15,7 +15,18 @@ from app.db.database import Base
 # source of truth for valid province values.
 PROVINCE_BC = "BC"
 PROVINCE_AB = "Alberta"
-VALID_PROVINCES: frozenset[str] = frozenset({PROVINCE_BC, PROVINCE_AB})
+PROVINCE_ON = "Ontario"
+VALID_PROVINCES: frozenset[str] = frozenset({PROVINCE_BC, PROVINCE_AB, PROVINCE_ON})
+
+
+# Tier constants — Ontario distinguishes upper-tier (counties/regions),
+# lower-tier (cities/towns/townships within an upper-tier) and single-tier
+# (stand-alone municipalities). BC and AB rows default to "single" via the
+# server_default on the column.
+TIER_UPPER = "upper"
+TIER_LOWER = "lower"
+TIER_SINGLE = "single"
+VALID_TIERS: frozenset[str] = frozenset({TIER_UPPER, TIER_LOWER, TIER_SINGLE})
 
 
 class GovType(str, enum.Enum):
@@ -73,6 +84,15 @@ class Municipality(Base):
         nullable=False,
         default=PROVINCE_BC,
         server_default=PROVINCE_BC,
+        index=True,
+    )
+    # Tier captures Ontario's upper/lower/single municipal hierarchy. BC
+    # and AB rows default to "single" via the server_default below.
+    tier: Mapped[str] = mapped_column(
+        String(20),
+        nullable=False,
+        default=TIER_SINGLE,
+        server_default=TIER_SINGLE,
         index=True,
     )
     website_url: Mapped[str | None] = mapped_column(Text)

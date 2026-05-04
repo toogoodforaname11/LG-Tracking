@@ -10,7 +10,12 @@ from app.models.municipality import (
     ScrapeStatus,
     PROVINCE_BC,
     PROVINCE_AB,
+    PROVINCE_ON,
     VALID_PROVINCES,
+    TIER_UPPER,
+    TIER_LOWER,
+    TIER_SINGLE,
+    VALID_TIERS,
 )
 from app.models.document import Document, Meeting, DocType, MeetingType
 from app.models.track import Track, TrackMatch, AVAILABLE_TOPICS
@@ -47,6 +52,19 @@ def test_province_constants():
     """Province literals must match the wire format consumed by the frontend."""
     assert PROVINCE_BC == "BC"
     assert PROVINCE_AB == "Alberta"
+    assert PROVINCE_ON == "Ontario"
     assert PROVINCE_BC in VALID_PROVINCES
     assert PROVINCE_AB in VALID_PROVINCES
-    assert "Ontario" not in VALID_PROVINCES
+    assert PROVINCE_ON in VALID_PROVINCES
+    # Saskatchewan / Quebec aren't supported yet; guard against silent
+    # additions to VALID_PROVINCES sneaking through review.
+    assert "Saskatchewan" not in VALID_PROVINCES
+    assert "Quebec" not in VALID_PROVINCES
+
+
+def test_tier_constants():
+    """Tier literals match the wire format used by the registry endpoint."""
+    assert TIER_UPPER == "upper"
+    assert TIER_LOWER == "lower"
+    assert TIER_SINGLE == "single"
+    assert VALID_TIERS == frozenset({"upper", "lower", "single"})
