@@ -36,6 +36,7 @@ from app.models.municipality import (  # noqa: E402
 )
 from app.services.seed_registry import (  # noqa: E402
     ALBERTA_MUNICIPALITIES_REMAINDER,
+    ONTARIO_MUNICIPALITIES_REMAINDER,
     seed_registry,
 )
 
@@ -43,8 +44,16 @@ from app.services.seed_registry import (  # noqa: E402
 PHASE_SIZE = 10
 
 
-def _select_phase_munis(phase: int) -> list[dict]:
-    """Slice the alphabetical AB remainder roster for the given phase number.
+def _remainder_for(province: str) -> list[dict]:
+    if province == "Alberta":
+        return list(ALBERTA_MUNICIPALITIES_REMAINDER)
+    if province == "Ontario":
+        return list(ONTARIO_MUNICIPALITIES_REMAINDER)
+    raise SystemExit(f"Unknown province {province!r} for phase_runner")
+
+
+def _select_phase_munis(phase: int, province: str) -> list[dict]:
+    """Slice the alphabetical remainder roster for the given phase number.
 
     Phase 2 covers indexes 0..9, phase 3 covers 10..19, etc.
     """
@@ -53,9 +62,7 @@ def _select_phase_munis(phase: int) -> list[dict]:
             f"Phase {phase} doesn't exist — Phase 1 was the 10 large cities, "
             "subsequent phases iterate the remainder roster starting at phase 2."
         )
-    sorted_remainder = sorted(
-        ALBERTA_MUNICIPALITIES_REMAINDER, key=lambda m: m["short_name"]
-    )
+    sorted_remainder = sorted(_remainder_for(province), key=lambda m: m["short_name"])
     start = (phase - 2) * PHASE_SIZE
     if start >= len(sorted_remainder):
         return []
@@ -143,20 +150,26 @@ async def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("phase", type=int)
     parser.add_argument(
+        "--province",
+        choices=("Alberta", "Ontario"),
+        default="Alberta",
+        help="Which province's remainder roster to slice (default: Alberta).",
+    )
+    parser.add_argument(
         "--out",
         default=None,
         help="Append the markdown summary to this file. Stdout if omitted.",
     )
     args = parser.parse_args()
 
-    munis = _select_phase_munis(args.phase)
+    munis = _select_phase_munis(args.phase, args.province)
     if not munis:
-        print(f"Phase {args.phase}: no more municipalities to roll out.")
+        print(f"[{args.province}] Phase {args.phase}: no more municipalities to roll out.")
         return 0
 
     short_names = [m["short_name"] for m in munis]
     print(
-        f"Phase {args.phase}: {len(munis)} munis -> "
+        f"[{args.province}] Phase {args.phase}: {len(munis)} munis -> "
         f"{', '.join(short_names)}",
         flush=True,
     )

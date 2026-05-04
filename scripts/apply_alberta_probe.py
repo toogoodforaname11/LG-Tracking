@@ -43,8 +43,14 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 REPO_ROOT = HERE.parent
-DEFAULT_IN = REPO_ROOT / "docs" / "alberta-probe-report.json"
-DEFAULT_OUT = REPO_ROOT / "backend" / "app" / "services" / "_ab_remainder_patches.py"
+DEFAULT_IN_BY_PROVINCE = {
+    "Alberta": REPO_ROOT / "docs" / "alberta-probe-report.json",
+    "Ontario": REPO_ROOT / "docs" / "ontario-probe-report.json",
+}
+DEFAULT_OUT_BY_PROVINCE = {
+    "Alberta": REPO_ROOT / "backend" / "app" / "services" / "_ab_remainder_patches.py",
+    "Ontario": REPO_ROOT / "backend" / "app" / "services" / "_on_remainder_patches.py",
+}
 
 
 # Map probe-platform-key -> seed enum value (Platform.X) we'll emit as a
@@ -175,15 +181,22 @@ def render_python(patches: dict) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--in", dest="in_path", default=str(DEFAULT_IN))
-    parser.add_argument("--out", dest="out_path", default=str(DEFAULT_OUT))
+    parser.add_argument(
+        "--province", choices=("Alberta", "Ontario"), default="Alberta",
+        help="Which province's probe report to process (default: Alberta).",
+    )
+    parser.add_argument("--in", dest="in_path", default=None)
+    parser.add_argument("--out", dest="out_path", default=None)
     args = parser.parse_args()
 
-    probe = json.loads(Path(args.in_path).read_text(encoding="utf-8"))
+    in_path = Path(args.in_path) if args.in_path else DEFAULT_IN_BY_PROVINCE[args.province]
+    out_path = Path(args.out_path) if args.out_path else DEFAULT_OUT_BY_PROVINCE[args.province]
+
+    probe = json.loads(in_path.read_text(encoding="utf-8"))
     patches = build_patches(probe)
     text = render_python(patches)
-    Path(args.out_path).write_text(text, encoding="utf-8")
-    print(f"Wrote {len(patches)} patches to {args.out_path}")
+    out_path.write_text(text, encoding="utf-8")
+    print(f"[{args.province}] Wrote {len(patches)} patches to {out_path}")
     return 0
 
 

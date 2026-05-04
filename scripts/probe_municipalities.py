@@ -40,6 +40,8 @@ import httpx  # noqa: E402
 from app.services.seed_registry import (  # noqa: E402
     ALBERTA_MUNICIPALITIES_PHASE_1,
     ALBERTA_MUNICIPALITIES_REMAINDER,
+    ONTARIO_MUNICIPALITIES_PHASE_1,
+    ONTARIO_MUNICIPALITIES_REMAINDER,
 )
 
 
@@ -287,7 +289,7 @@ async def main() -> int:
     parser.add_argument(
         "--include-phase-1",
         action="store_true",
-        help="Also probe the 10 Phase 1 munis (skipped by default).",
+        help="Also probe the Phase 1 munis (skipped by default).",
     )
     parser.add_argument(
         "--concurrency",
@@ -295,12 +297,24 @@ async def main() -> int:
         default=6,
         help="Parallel HTTP requests (default: 6 — be polite).",
     )
+    parser.add_argument(
+        "--province",
+        choices=["Alberta", "Ontario"],
+        default="Alberta",
+        help="Which province's roster to probe (default: Alberta).",
+    )
     args = parser.parse_args()
 
-    phase_1 = list(ALBERTA_MUNICIPALITIES_PHASE_1)
-    remainder = sorted(
-        ALBERTA_MUNICIPALITIES_REMAINDER, key=lambda m: m["short_name"]
-    )
+    if args.province == "Alberta":
+        phase_1 = list(ALBERTA_MUNICIPALITIES_PHASE_1)
+        remainder = sorted(
+            ALBERTA_MUNICIPALITIES_REMAINDER, key=lambda m: m["short_name"]
+        )
+    else:
+        phase_1 = list(ONTARIO_MUNICIPALITIES_PHASE_1)
+        remainder = sorted(
+            ONTARIO_MUNICIPALITIES_REMAINDER, key=lambda m: m["short_name"]
+        )
 
     munis: list[dict]
     if args.short_name:
