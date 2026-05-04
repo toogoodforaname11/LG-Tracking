@@ -12,6 +12,10 @@ from app.models.municipality import (
     ScrapeStatus,
     PROVINCE_BC,
     PROVINCE_AB,
+    PROVINCE_ON,
+    TIER_UPPER,
+    TIER_LOWER,
+    TIER_SINGLE,
 )
 
 # Complete CRD municipality registry with confirmed sources
@@ -4105,6 +4109,795 @@ ALBERTA_MUNICIPALITIES_REMAINDER: list[dict] = _apply_remainder_patches(
 )
 
 
+# =============================================================================
+# Ontario — Phase 1 (10 cities, fully configured for active scraping)
+# =============================================================================
+#
+# Ontario's two dominant council-meeting platforms are eSCRIBE and CivicWeb.
+# Toronto runs a bespoke portal at secure.toronto.ca/council that needs a
+# new scraper (tracked as ON-001 in docs/ontario-rollout-tracker.md); the
+# initial Toronto seed source ships PENDING. Other Phase 1 cities use
+# eSCRIBE or CivicWeb directly and the existing platform scrapers handle
+# them with no code changes.
+#
+# Each Phase 1 muni has 2 source rows:
+#   - one platform/portal entry (eSCRIBE / CivicWeb / CUSTOM-pending)
+#   - one YouTube entry
+# That mirrors the Alberta Phase 1 shape so phase_runner.py / tracker
+# tooling stays consistent across provinces.
+ONTARIO_MUNICIPALITIES_PHASE_1 = [
+    {
+        # Toronto's own portal (secure.toronto.ca/council) needs a custom
+        # scraper. Until ON-001 lands the portal source ships PENDING and
+        # YouTube remains ACTIVE for video coverage.
+        "name": "City of Toronto",
+        "short_name": "Toronto",
+        "gov_type": GovType.CITY,
+        "region": "Ontario",
+        "province": PROVINCE_ON,
+        "tier": TIER_SINGLE,
+        "website_url": "https://www.toronto.ca/",
+        "population": 2794356,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": "https://secure.toronto.ca/council/",
+                "label": "Toronto Council Portal (pending custom scraper)",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@cityoftoronto",
+                "label": "Toronto YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "City of Ottawa",
+        "short_name": "Ottawa",
+        "gov_type": GovType.CITY,
+        "region": "Ontario",
+        "province": PROVINCE_ON,
+        "tier": TIER_SINGLE,
+        "website_url": "https://ottawa.ca/",
+        "population": 1017449,
+        "sources": [
+            {
+                "platform": Platform.ESCRIBE,
+                "source_type": SourceType.AGENDA,
+                "url": "https://app06.ottawa.ca/sirepub/meet.aspx",
+                "label": "Ottawa eScribe Portal",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@cityofottawa",
+                "label": "Ottawa YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "City of Mississauga",
+        "short_name": "Mississauga",
+        "gov_type": GovType.CITY,
+        "region": "Ontario",
+        "province": PROVINCE_ON,
+        "tier": TIER_LOWER,
+        "website_url": "https://www.mississauga.ca/",
+        "population": 717961,
+        "sources": [
+            {
+                "platform": Platform.ESCRIBE,
+                "source_type": SourceType.AGENDA,
+                "url": "https://pub-mississauga.escribemeetings.com",
+                "label": "Mississauga eScribe Portal",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@cityofmississauga",
+                "label": "Mississauga YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "City of Brampton",
+        "short_name": "Brampton",
+        "gov_type": GovType.CITY,
+        "region": "Ontario",
+        "province": PROVINCE_ON,
+        "tier": TIER_LOWER,
+        "website_url": "https://www.brampton.ca/",
+        "population": 656480,
+        "sources": [
+            {
+                "platform": Platform.ESCRIBE,
+                "source_type": SourceType.AGENDA,
+                "url": "https://pub-brampton.escribemeetings.com",
+                "label": "Brampton eScribe Portal",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@cityofbrampton",
+                "label": "Brampton YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "City of Hamilton",
+        "short_name": "Hamilton",
+        "gov_type": GovType.CITY,
+        "region": "Ontario",
+        "province": PROVINCE_ON,
+        "tier": TIER_SINGLE,
+        "website_url": "https://www.hamilton.ca/",
+        "population": 569353,
+        "sources": [
+            {
+                "platform": Platform.ESCRIBE,
+                "source_type": SourceType.AGENDA,
+                "url": "https://pub-hamilton.escribemeetings.com",
+                "label": "Hamilton eScribe Portal",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@cityofhamilton",
+                "label": "Hamilton YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "City of London",
+        "short_name": "London",
+        "gov_type": GovType.CITY,
+        "region": "Ontario",
+        "province": PROVINCE_ON,
+        "tier": TIER_SINGLE,
+        "website_url": "https://london.ca/",
+        "population": 422324,
+        "sources": [
+            {
+                "platform": Platform.ESCRIBE,
+                "source_type": SourceType.AGENDA,
+                "url": "https://pub-london.escribemeetings.com",
+                "label": "London eScribe Portal",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@cityoflondonont",
+                "label": "London YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "City of Markham",
+        "short_name": "Markham",
+        "gov_type": GovType.CITY,
+        "region": "Ontario",
+        "province": PROVINCE_ON,
+        "tier": TIER_LOWER,
+        "website_url": "https://www.markham.ca/",
+        "population": 338503,
+        "sources": [
+            {
+                "platform": Platform.ESCRIBE,
+                "source_type": SourceType.AGENDA,
+                "url": "https://pub-markham.escribemeetings.com",
+                "label": "Markham eScribe Portal",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@cityofmarkham",
+                "label": "Markham YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "City of Vaughan",
+        "short_name": "Vaughan",
+        "gov_type": GovType.CITY,
+        "region": "Ontario",
+        "province": PROVINCE_ON,
+        "tier": TIER_LOWER,
+        "website_url": "https://www.vaughan.ca/",
+        "population": 323103,
+        "sources": [
+            {
+                "platform": Platform.ESCRIBE,
+                "source_type": SourceType.AGENDA,
+                "url": "https://pub-vaughan.escribemeetings.com",
+                "label": "Vaughan eScribe Portal",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@cityofvaughan",
+                "label": "Vaughan YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "City of Kitchener",
+        "short_name": "Kitchener",
+        "gov_type": GovType.CITY,
+        "region": "Ontario",
+        "province": PROVINCE_ON,
+        "tier": TIER_LOWER,
+        "website_url": "https://www.kitchener.ca/",
+        "population": 256885,
+        "sources": [
+            {
+                "platform": Platform.ESCRIBE,
+                "source_type": SourceType.AGENDA,
+                "url": "https://pub-kitchener.escribemeetings.com",
+                "label": "Kitchener eScribe Portal",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@cityofkitchener",
+                "label": "Kitchener YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "City of Windsor",
+        "short_name": "Windsor",
+        "gov_type": GovType.CITY,
+        "region": "Ontario",
+        "province": PROVINCE_ON,
+        "tier": TIER_SINGLE,
+        "website_url": "https://www.citywindsor.ca/",
+        "population": 229660,
+        "sources": [
+            {
+                "platform": Platform.ESCRIBE,
+                "source_type": SourceType.AGENDA,
+                "url": "https://pub-windsor.escribemeetings.com",
+                "label": "Windsor eScribe Portal",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@cityofwindsor",
+                "label": "Windsor YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+]
+
+
+# =============================================================================
+# Ontario — Remainder seed (PENDING placeholders for the 30 upper-tier
+# regions/counties + ~200 lower/single-tier munis from the public registry)
+# =============================================================================
+_ONTARIO_DIRECTORY_URL = "https://www.amo.on.ca/about-us/who-we-are/member-municipalities"
+
+
+def _on_pending(
+    *,
+    name: str,
+    short_name: str,
+    gov_type: GovType,
+    tier: str,
+    website_url: str | None = None,
+) -> dict:
+    """Build a placeholder Ontario municipality entry for Phase 2+ rollout."""
+    return {
+        "name": name,
+        "short_name": short_name,
+        "gov_type": gov_type,
+        "region": "Ontario",
+        "province": PROVINCE_ON,
+        "tier": tier,
+        "website_url": website_url,
+        "population": None,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": f"{_ONTARIO_DIRECTORY_URL}#{short_name.replace(' ', '-')}",
+                "label": f"{short_name} council meetings (pending)",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    }
+
+
+# 30 upper-tier municipalities (counties + regional municipalities). These
+# all run their own councils that publish agendas/minutes via eSCRIBE or
+# CivicWeb — Phases 2+ will patch in the real portal URLs.
+_ON_UPPER_TIER = [
+    # Regional Municipalities (8)
+    ("Regional Municipality of Durham", "Durham Region"),
+    ("Regional Municipality of Halton", "Halton Region"),
+    ("Regional Municipality of Niagara", "Niagara Region"),
+    ("Regional Municipality of Peel", "Peel Region"),
+    ("Regional Municipality of Waterloo", "Waterloo Region"),
+    ("Regional Municipality of York", "York Region"),
+    ("County of Bruce", "Bruce County"),
+    ("County of Dufferin", "Dufferin County"),
+    # Counties (22)
+    ("County of Elgin", "Elgin County"),
+    ("County of Essex", "Essex County"),
+    ("County of Frontenac", "Frontenac County"),
+    ("County of Grey", "Grey County"),
+    ("County of Haliburton", "Haliburton County"),
+    ("Haldimand-Norfolk", "Haldimand-Norfolk"),
+    ("County of Hastings", "Hastings County"),
+    ("County of Huron", "Huron County"),
+    ("County of Lambton", "Lambton County"),
+    ("Counties of Leeds and Grenville", "Leeds and Grenville"),
+    ("County of Lanark", "Lanark County"),
+    ("County of Lennox and Addington", "Lennox and Addington"),
+    ("County of Middlesex", "Middlesex County"),
+    ("Muskoka District", "Muskoka"),
+    ("County of Northumberland", "Northumberland County"),
+    ("Oxford County", "Oxford County"),
+    ("County of Perth", "Perth County"),
+    ("County of Peterborough", "Peterborough County"),
+    ("United Counties of Prescott and Russell", "Prescott and Russell"),
+    ("United Counties of Stormont, Dundas and Glengarry", "SDG Counties"),
+    ("County of Renfrew", "Renfrew County"),
+    ("County of Simcoe", "Simcoe County"),
+    ("County of Wellington", "Wellington County"),
+]
+
+
+# Lower / single-tier municipalities derived from Wikipedia's public list
+# (List of municipalities in Ontario). This is not the full 444 — about
+# ~210 entries — but covers all the cities/towns/townships with a public
+# council page. Tier classification follows OMAFRA's official list:
+#   - Single-tier: stand-alone (e.g. Toronto, Ottawa, Hamilton, Greater
+#     Sudbury, Kawartha Lakes, Norfolk County, Prince Edward County)
+#   - Lower-tier: located inside one of the 30 upper-tier regions/counties
+#
+# Phase 1 munis (Toronto..Windsor) are excluded so they aren't double-seeded.
+_ON_PHASE_1_SHORT_NAMES = {m["short_name"] for m in ONTARIO_MUNICIPALITIES_PHASE_1}
+_ON_REMAINDER_SINGLE = [
+    # Stand-alone single-tier munis (all are Cities unless noted).
+    ("City of Barrie", "Barrie"),
+    ("City of Belleville", "Belleville"),
+    ("City of Brant", "Brant"),
+    ("City of Brantford", "Brantford"),
+    ("City of Brockville", "Brockville"),
+    ("City of Cornwall", "Cornwall"),
+    ("City of Greater Sudbury", "Greater Sudbury"),
+    ("City of Guelph", "Guelph"),
+    ("City of Haldimand", "Haldimand County"),
+    ("City of Kawartha Lakes", "Kawartha Lakes"),
+    ("City of Kingston", "Kingston"),
+    ("City of Norfolk", "Norfolk County"),
+    ("County of Prince Edward", "Prince Edward County"),
+    ("City of Orillia", "Orillia"),
+    ("City of Pembroke", "Pembroke"),
+    ("City of Peterborough", "Peterborough"),
+    ("City of Prescott", "Prescott"),
+    ("City of Quinte West", "Quinte West"),
+    ("City of Sarnia", "Sarnia"),
+    ("City of Sault Ste. Marie", "Sault Ste. Marie"),
+    ("City of St. Thomas", "St. Thomas"),
+    ("City of Stratford", "Stratford"),
+    ("City of Temiskaming Shores", "Temiskaming Shores"),
+    ("City of Thunder Bay", "Thunder Bay"),
+    ("City of Timmins", "Timmins"),
+    ("City of North Bay", "North Bay"),
+    ("City of Oshawa", "Oshawa"),
+]
+
+
+_ON_REMAINDER_LOWER = [
+    # Towns / townships / villages located inside an upper-tier county/region.
+    ("Town of Ajax", "Ajax"),
+    ("Town of Amherstburg", "Amherstburg"),
+    ("Town of Aurora", "Aurora"),
+    ("Town of Aylmer", "Aylmer"),
+    ("Township of Adelaide Metcalfe", "Adelaide Metcalfe"),
+    ("Township of Adjala-Tosorontio", "Adjala-Tosorontio"),
+    ("Township of Alberton", "Alberton"),
+    ("Township of Alfred and Plantagenet", "Alfred and Plantagenet"),
+    ("Township of Algonquin Highlands", "Algonquin Highlands"),
+    ("Township of Amaranth", "Amaranth"),
+    ("Township of Armour", "Armour"),
+    ("Township of Armstrong", "Armstrong"),
+    ("Township of Asphodel-Norwood", "Asphodel-Norwood"),
+    ("Township of Assiginack", "Assiginack"),
+    ("Township of Athens", "Athens"),
+    ("Township of Augusta", "Augusta"),
+    ("Township of Baldwin", "Baldwin"),
+    ("Town of Bancroft", "Bancroft"),
+    ("Township of Beckwith", "Beckwith"),
+    ("Township of Billings", "Billings"),
+    ("Town of Blind River", "Blind River"),
+    ("Municipality of Bluewater", "Bluewater"),
+    ("Township of Bonfield", "Bonfield"),
+    ("Town of Bracebridge", "Bracebridge"),
+    ("Town of Bradford West Gwillimbury", "Bradford West Gwillimbury"),
+    ("Municipality of Brighton", "Brighton"),
+    ("Township of Brock", "Brock"),
+    ("Municipality of Brockton", "Brockton"),
+    ("Town of Burlington", "Burlington"),
+    ("Town of Caledon", "Caledon"),
+    ("Municipality of Callander", "Callander"),
+    ("Township of Calvin", "Calvin"),
+    ("City of Cambridge", "Cambridge"),
+    ("Township of Carling", "Carling"),
+    ("Township of Casey", "Casey"),
+    ("Village of Casselman", "Casselman"),
+    ("Township of Centre Hastings", "Centre Hastings"),
+    ("Township of Centre Wellington", "Centre Wellington"),
+    ("Township of Chamberlain", "Chamberlain"),
+    ("Township of Champlain", "Champlain"),
+    ("Township of Chapleau", "Chapleau"),
+    ("Township of Chapple", "Chapple"),
+    ("Township of Chatham-Kent", "Chatham-Kent"),
+    ("Township of Chatsworth", "Chatsworth"),
+    ("Township of Chisholm", "Chisholm"),
+    ("Township of Clarence-Rockland", "Clarence-Rockland"),
+    ("Municipality of Clarington", "Clarington"),
+    ("Township of Clearview", "Clearview"),
+    ("Town of Cobalt", "Cobalt"),
+    ("Town of Cobourg", "Cobourg"),
+    ("Town of Cochrane", "Cochrane"),
+    ("Township of Coleman", "Coleman"),
+    ("Town of Collingwood", "Collingwood"),
+    ("Township of Conmee", "Conmee"),
+    ("Township of Cramahe", "Cramahe"),
+    ("Township of Dawson", "Dawson"),
+    ("Town of Deep River", "Deep River"),
+    ("Town of Deseronto", "Deseronto"),
+    ("Township of Dorion", "Dorion"),
+    ("Town of Dryden", "Dryden"),
+    ("Township of Drummond/North Elmsley", "Drummond/North Elmsley"),
+    ("Town of East Gwillimbury", "East Gwillimbury"),
+    ("Township of East Hawkesbury", "East Hawkesbury"),
+    ("Township of East Zorra-Tavistock", "East Zorra-Tavistock"),
+    ("Township of Edwardsburgh/Cardinal", "Edwardsburgh/Cardinal"),
+    ("Town of Elliot Lake", "Elliot Lake"),
+    ("Township of Emo", "Emo"),
+    ("Township of Enniskillen", "Enniskillen"),
+    ("Town of Erin", "Erin"),
+    ("Town of Espanola", "Espanola"),
+    ("Township of Essa", "Essa"),
+    ("Town of Essex", "Essex"),
+    ("Township of Faraday", "Faraday"),
+    ("Town of Fort Erie", "Fort Erie"),
+    ("Town of Fort Frances", "Fort Frances"),
+    ("Municipality of French River", "French River"),
+    ("Town of Gananoque", "Gananoque"),
+    ("Township of Gauthier", "Gauthier"),
+    ("Town of Georgina", "Georgina"),
+    ("Township of Georgian Bay", "Georgian Bay"),
+    ("Township of Georgian Bluffs", "Georgian Bluffs"),
+    ("Township of Gillies", "Gillies"),
+    ("Town of Goderich", "Goderich"),
+    ("Town of Gore Bay", "Gore Bay"),
+    ("Town of Grand Valley", "Grand Valley"),
+    ("Town of Gravenhurst", "Gravenhurst"),
+    ("Municipality of Greenstone", "Greenstone"),
+    ("Town of Greater Napanee", "Greater Napanee"),
+    ("Town of Grimsby", "Grimsby"),
+    ("Township of Hamilton", "Hamilton Township"),
+    ("Town of Halton Hills", "Halton Hills"),
+    ("Town of Hanover", "Hanover"),
+    ("Township of Harley", "Harley"),
+    ("Township of Harris", "Harris"),
+    ("Town of Hawkesbury", "Hawkesbury"),
+    ("Town of Hearst", "Hearst"),
+    ("Municipality of Highlands East", "Highlands East"),
+    ("Township of Hilliard", "Hilliard"),
+    ("Township of Hilton", "Hilton"),
+    ("Township of Horton", "Horton"),
+    ("Township of Howick", "Howick"),
+    ("Township of Hudson", "Hudson"),
+    ("Town of Huntsville", "Huntsville"),
+    ("Township of Huron East", "Huron East"),
+    ("Township of Ignace", "Ignace"),
+    ("Town of Ingersoll", "Ingersoll"),
+    ("Township of Innisfil", "Innisfil"),
+    ("Township of James", "James"),
+    ("Town of Jocelyn", "Jocelyn"),
+    ("Township of Johnson", "Johnson"),
+    ("Township of Joly", "Joly"),
+    ("Town of Kearney", "Kearney"),
+    ("Township of Kerns", "Kerns"),
+    ("Municipality of Killarney", "Killarney"),
+    ("Town of Kincardine", "Kincardine"),
+    ("Township of King", "King"),
+    ("Town of Kingsville", "Kingsville"),
+    ("Township of LaSalle", "LaSalle"),
+    ("Township of Laird", "Laird"),
+    ("Township of Lake of the Woods", "Lake of the Woods"),
+    ("Township of Lakeshore", "Lakeshore"),
+    ("Town of Larder Lake", "Larder Lake"),
+    ("Town of Latchford", "Latchford"),
+    ("Town of Leamington", "Leamington"),
+    ("Township of Limerick", "Limerick"),
+    ("Town of Lincoln", "Lincoln"),
+    ("Township of Loyalist", "Loyalist"),
+    ("Township of Machar", "Machar"),
+    ("Township of Machin", "Machin"),
+    ("Township of Madawaska Valley", "Madawaska Valley"),
+    ("Township of Malahide", "Malahide"),
+    ("Township of Mapleton", "Mapleton"),
+    ("Town of Marathon", "Marathon"),
+    ("Town of Mattawa", "Mattawa"),
+    ("Township of Mattawan", "Mattawan"),
+    ("Township of McDougall", "McDougall"),
+    ("Township of McGarry", "McGarry"),
+    ("Township of McKellar", "McKellar"),
+    ("Town of Meaford", "Meaford"),
+    ("Township of Melancthon", "Melancthon"),
+    ("Town of Midland", "Midland"),
+    ("Town of Milton", "Milton"),
+    ("Town of Minto", "Minto"),
+    ("Township of Mississippi Mills", "Mississippi Mills"),
+    ("Township of Mono", "Mono"),
+    ("Township of Montague", "Montague"),
+    ("Town of Moonbeam", "Moonbeam"),
+    ("Township of Morley", "Morley"),
+    ("Town of Mulmur", "Mulmur"),
+    ("Town of Newmarket", "Newmarket"),
+    ("Town of Niagara Falls", "Niagara Falls"),
+    ("Town of Niagara-on-the-Lake", "Niagara-on-the-Lake"),
+    ("Township of Nipissing", "Nipissing"),
+    ("Township of North Dundas", "North Dundas"),
+    ("Township of North Glengarry", "North Glengarry"),
+    ("Township of North Huron", "North Huron"),
+    ("Township of North Middlesex", "North Middlesex"),
+    ("Township of North Perth", "North Perth"),
+    ("Township of Norwich", "Norwich"),
+    ("Township of O'Connor", "O'Connor"),
+    ("Town of Oakville", "Oakville"),
+    ("Town of Oil Springs", "Oil Springs"),
+    ("Town of Orangeville", "Orangeville"),
+    ("Township of Otonabee-South Monaghan", "Otonabee-South Monaghan"),
+    ("Town of Parry Sound", "Parry Sound"),
+    ("Municipality of Pelee", "Pelee"),
+    ("Town of Pelham", "Pelham"),
+    ("Township of Perry", "Perry"),
+    ("Town of Perth", "Perth"),
+    ("Township of Perth East", "Perth East"),
+    ("Township of Perth South", "Perth South"),
+    ("Town of Petawawa", "Petawawa"),
+    ("Town of Petrolia", "Petrolia"),
+    ("City of Pickering", "Pickering"),
+    ("Village of Point Edward", "Point Edward"),
+    ("Town of Port Hope", "Port Hope"),
+    ("Town of Powassan", "Powassan"),
+    ("Township of Puslinch", "Puslinch"),
+    ("Township of Rainy River", "Rainy River"),
+    ("Town of Red Lake", "Red Lake"),
+    ("Town of Red Rock", "Red Rock"),
+    ("Town of Renfrew", "Renfrew"),
+    ("Town of Richmond Hill", "Richmond Hill"),
+    ("Township of Russell", "Russell"),
+    ("Township of Ryerson", "Ryerson"),
+    ("Township of Sables-Spanish Rivers", "Sables-Spanish Rivers"),
+    ("Town of Saugeen Shores", "Saugeen Shores"),
+    ("Town of Schreiber", "Schreiber"),
+    ("Township of Seguin", "Seguin"),
+    ("Township of Selwyn", "Selwyn"),
+    ("Township of Severn", "Severn"),
+    ("Town of Shelburne", "Shelburne"),
+    ("Township of Sioux Lookout", "Sioux Lookout"),
+    ("Town of Smiths Falls", "Smiths Falls"),
+    ("Town of South Bruce", "South Bruce"),
+    ("Township of South Dundas", "South Dundas"),
+    ("Township of South Glengarry", "South Glengarry"),
+    ("Town of South River", "South River"),
+    ("Township of South Stormont", "South Stormont"),
+    ("Township of South-West Oxford", "South-West Oxford"),
+    ("Township of Southgate", "Southgate"),
+    ("Township of Southwest Middlesex", "Southwest Middlesex"),
+    ("Township of Southwold", "Southwold"),
+    ("Town of Spanish", "Spanish"),
+    ("Township of Springwater", "Springwater"),
+    ("Township of St. Charles", "St. Charles"),
+    ("Township of St. Clair", "St. Clair"),
+    ("Township of St. Joseph", "St. Joseph"),
+    ("Town of St. Marys", "St. Marys"),
+    ("Township of Strathroy-Caradoc", "Strathroy-Caradoc"),
+    ("Township of Strong", "Strong"),
+    ("Village of Sundridge", "Sundridge"),
+    ("Township of Tarbutt", "Tarbutt"),
+    ("Township of Tay", "Tay"),
+    ("Township of Tay Valley", "Tay Valley"),
+    ("Town of Tecumseh", "Tecumseh"),
+    ("Town of The Blue Mountains", "The Blue Mountains"),
+    ("Municipality of The Nation", "The Nation"),
+    ("Township of The North Shore", "The North Shore"),
+    ("Town of Thessalon", "Thessalon"),
+    ("Township of Tiny", "Tiny"),
+    ("Town of Trent Hills", "Trent Hills"),
+    ("Township of Trent Lakes", "Trent Lakes"),
+    ("Municipality of Tweed", "Tweed"),
+    ("Township of Tyendinaga", "Tyendinaga"),
+    ("Town of Uxbridge", "Uxbridge"),
+    ("Township of Wainfleet", "Wainfleet"),
+    ("Town of Wasaga Beach", "Wasaga Beach"),
+    ("Township of Warwick", "Warwick"),
+    ("City of Waterloo", "Waterloo"),
+    ("Town of Wawa", "Wawa"),
+    ("Township of Wellesley", "Wellesley"),
+    ("Township of Wellington North", "Wellington North"),
+    ("Township of West Elgin", "West Elgin"),
+    ("Township of West Lincoln", "West Lincoln"),
+    ("Township of West Nipissing", "West Nipissing"),
+    ("Township of West Perth", "West Perth"),
+    ("Town of Whitby", "Whitby"),
+    ("Town of Whitchurch-Stouffville", "Whitchurch-Stouffville"),
+    ("Town of White River", "White River"),
+    ("Township of Whitestone", "Whitestone"),
+    ("Township of Whitewater Region", "Whitewater Region"),
+    ("Township of Wilmot", "Wilmot"),
+    ("Township of Wollaston", "Wollaston"),
+    ("Township of Woodstock", "Woodstock"),
+    ("Township of Woolwich", "Woolwich"),
+    ("Town of Welland", "Welland"),
+    ("Town of Newbury", "Newbury"),
+    ("Town of Hudson", "Hudson"),
+    ("Town of Westport", "Westport"),
+    ("Township of Tudor and Cashel", "Tudor and Cashel"),
+    ("Township of Frontenac Islands", "Frontenac Islands"),
+    ("Township of Stone Mills", "Stone Mills"),
+    ("Township of Greater Madawaska", "Greater Madawaska"),
+    ("Township of Admaston/Bromley", "Admaston/Bromley"),
+    ("Township of McNab/Braeside", "McNab/Braeside"),
+    ("Township of North Frontenac", "North Frontenac"),
+    ("Township of Central Frontenac", "Central Frontenac"),
+    ("Township of South Frontenac", "South Frontenac"),
+    ("Township of Brudenell, Lyndoch and Raglan", "Brudenell, Lyndoch and Raglan"),
+    ("Township of Lanark Highlands", "Lanark Highlands"),
+    ("Township of Carlow/Mayo", "Carlow/Mayo"),
+    ("Township of Highlands of Cardiff", "Highlands of Cardiff"),
+    ("Township of Bonnechere Valley", "Bonnechere Valley"),
+    ("Township of Madoc", "Madoc"),
+    ("Township of Stirling-Rawdon", "Stirling-Rawdon"),
+    ("Township of Tweed (legacy)", "Tweed (legacy)"),
+    ("Town of Mattice-Val Côté", "Mattice-Val Côté"),
+    ("Town of Manitouwadge", "Manitouwadge"),
+    ("Town of Atikokan", "Atikokan"),
+    ("Town of Kapuskasing", "Kapuskasing"),
+    ("Town of Iroquois Falls", "Iroquois Falls"),
+    ("Town of Smooth Rock Falls", "Smooth Rock Falls"),
+    ("Town of Black River-Matheson", "Black River-Matheson"),
+    ("Town of Cochrane (legacy)", "Cochrane (legacy)"),
+    ("Town of Opasatika", "Opasatika"),
+    ("Town of Charlton and Dack", "Charlton and Dack"),
+    ("Town of Englehart", "Englehart"),
+    ("Town of Kirkland Lake", "Kirkland Lake"),
+    ("Township of Larder Lake (legacy)", "Larder Lake (legacy)"),
+    ("Township of Schreiber (legacy)", "Schreiber (legacy)"),
+    ("Township of Manitouwadge (legacy)", "Manitouwadge (legacy)"),
+]
+
+
+def _build_ontario_remainder() -> list[dict]:
+    """Materialize the placeholder Ontario entries from the typed source lists.
+
+    The output skips short_names already in Phase 1 to avoid duplicate seeds.
+    """
+    out: list[dict] = []
+
+    for name, short in _ON_UPPER_TIER:
+        if short in _ON_PHASE_1_SHORT_NAMES:
+            continue
+        out.append(_on_pending(
+            name=name, short_name=short,
+            gov_type=GovType.REGIONAL_DISTRICT, tier=TIER_UPPER,
+        ))
+
+    for name, short in _ON_REMAINDER_SINGLE:
+        if short in _ON_PHASE_1_SHORT_NAMES:
+            continue
+        # Most ON single-tier munis are cities; gov_type=CITY is closest fit.
+        out.append(_on_pending(
+            name=name, short_name=short,
+            gov_type=GovType.CITY, tier=TIER_SINGLE,
+        ))
+
+    for name, short in _ON_REMAINDER_LOWER:
+        if short in _ON_PHASE_1_SHORT_NAMES:
+            continue
+        out.append(_on_pending(
+            name=name, short_name=short,
+            gov_type=GovType.TOWN, tier=TIER_LOWER,
+        ))
+
+    # Dedupe by short_name (the lower-tier list may collide with single-tier).
+    seen: set[str] = set()
+    deduped: list[dict] = []
+    for muni in out:
+        if muni["short_name"] in seen:
+            continue
+        seen.add(muni["short_name"])
+        deduped.append(muni)
+    return deduped
+
+
+def _apply_ontario_remainder_patches(entries: list[dict]) -> list[dict]:
+    """Merge the auto-generated probe patches onto the ON placeholder roster.
+
+    Mirrors ``_apply_remainder_patches`` (Alberta) — see its docstring for
+    the full design discussion.
+    """
+    try:
+        from app.services._on_remainder_patches import REMAINDER_PATCHES
+    except ImportError:
+        return entries
+
+    enum_lookup = {
+        "Platform.CIVICWEB": Platform.CIVICWEB,
+        "Platform.GRANICUS": Platform.GRANICUS,
+        "Platform.ESCRIBE": Platform.ESCRIBE,
+        "Platform.YOUTUBE": Platform.YOUTUBE,
+        "Platform.CIVICPLUS": Platform.CIVICPLUS,
+        "Platform.CUSTOM": Platform.CUSTOM,
+        "Platform.UNKNOWN": Platform.UNKNOWN,
+        "SourceType.AGENDA": SourceType.AGENDA,
+        "SourceType.MINUTES": SourceType.MINUTES,
+        "SourceType.VIDEO": SourceType.VIDEO,
+        "SourceType.NOTICE": SourceType.NOTICE,
+        "SourceType.BYLAW": SourceType.BYLAW,
+        "ScrapeStatus.ACTIVE": ScrapeStatus.ACTIVE,
+        "ScrapeStatus.PENDING": ScrapeStatus.PENDING,
+        "ScrapeStatus.BROKEN": ScrapeStatus.BROKEN,
+        "ScrapeStatus.DISABLED": ScrapeStatus.DISABLED,
+    }
+
+    def _resolve(source: dict) -> dict:
+        return {
+            "platform": enum_lookup[source["platform"]],
+            "source_type": enum_lookup[source["source_type"]],
+            "url": source["url"],
+            "label": source["label"],
+            "scrape_status": enum_lookup[source["scrape_status"]],
+        }
+
+    for entry in entries:
+        patch = REMAINDER_PATCHES.get(entry["short_name"])
+        if not patch:
+            continue
+        if patch.get("website_url"):
+            entry["website_url"] = patch["website_url"]
+        sources = [_resolve(s) for s in patch.get("sources", [])]
+        if sources:
+            entry["sources"] = sources
+
+    return entries
+
+
+ONTARIO_MUNICIPALITIES_REMAINDER: list[dict] = _apply_ontario_remainder_patches(
+    _build_ontario_remainder()
+)
+
+
 # All BC and AB batches concatenated — public for tests that want to
 # walk the entire registry without poking private internals.
 BC_BATCHES = [
@@ -4133,6 +4926,11 @@ AB_BATCHES = [
     ALBERTA_MUNICIPALITIES_REMAINDER,
 ]
 
+ON_BATCHES = [
+    ONTARIO_MUNICIPALITIES_PHASE_1,
+    ONTARIO_MUNICIPALITIES_REMAINDER,
+]
+
 
 def _normalize_province(muni: dict) -> dict:
     """Return a copy of muni with a ``province`` key.
@@ -4157,7 +4955,7 @@ async def seed_registry(db: AsyncSession) -> dict:
     stats = {"municipalities_created": 0, "municipalities_existed": 0, "sources_created": 0}
 
     all_municipalities: list[dict] = []
-    for batch in BC_BATCHES + AB_BATCHES:
+    for batch in BC_BATCHES + AB_BATCHES + ON_BATCHES:
         all_municipalities.extend(batch)
 
     for muni_data in all_municipalities:
