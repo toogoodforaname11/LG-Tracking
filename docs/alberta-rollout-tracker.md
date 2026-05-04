@@ -219,3 +219,153 @@ sparse-data entities) stay PLACEHOLDER and explicitly note the rationale.
 | Fox Creek | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
 | Gibbons | 1 | youtube | VALIDATED | 13 | 13 items |
 | Gift Lake | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+
+### Phase 11 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| Girouxville | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Glendon | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Grand Centre | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Granum | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Grimshaw | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Halkirk | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Hanna | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Hardisty | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Hay Lakes | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Heisler | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+
+### Phase 12 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| High Level | 1 | youtube | VALIDATED | 13 | 13 items |
+| High Prairie | 1 | youtube | VALIDATED | 15 | 15 items |
+| High River | 2 | civicweb + youtube | VALIDATED | 14 | 14 items |
+| Hill Spring | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Hines Creek | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Hinton | 2 | civicweb + youtube | VALIDATED | 9 | 9 items |
+| Hughenden | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Hussar | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Hythe | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Improvement District No. 9 | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+
+### Phase 13 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| Innisfail | 1 | civicweb | VALIDATED | 3 | 3 items |
+| Irricana | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Jasper | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Kikino | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Killam | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Kitscoty | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Kneehill County | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Lac La Biche | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Lac La Biche County | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Lac Ste. Anne County | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+
+### Phase 14 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| Lacombe | 1 | youtube | VALIDATED | 12 | 12 items |
+| Lacombe (former town) | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Lamont | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Lamont County | 2 | civicweb + youtube | VALIDATED | 13 | 13 items |
+| Leduc | 2 | escribe + youtube | READY | 0 | URLs resolve, no items today |
+| Leduc County | 2 | escribe + youtube | READY | 0 | URLs resolve, no items today |
+| Legal | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Linden | 1 | civicweb | READY | 0 | URLs resolve, no items today |
+| Lloydminster | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Lomond | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+
+### Phase 15 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| Longview | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Lougheed | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Mackenzie County | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Magrath | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Manning | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Mannville | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Marwayne | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Mayerthorpe | 1 | youtube | READY | 0 | URLs resolve, no items today |
+| Milk River | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Millet | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+
+### Phase 16 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| Milo | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Minburn | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Morinville | 2 | escribe + youtube | READY | 0 | URLs resolve, no items today |
+| Morrin | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Mountain View County | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Mundare | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Myrnam | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Nampa | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Nanton | 1 | youtube | VALIDATED | 11 | 11 items |
+| Nobleford | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+
+### Phase 17 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| Northern Sunrise County | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Olds | 1 | youtube | VALIDATED | 12 | 12 items |
+| Onoway | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Oyen | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Paddle Prairie | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Paradise Valley | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Parkland County | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Peace River | 2 | civicweb + youtube | VALIDATED | 8 | 8 items |
+| Peavine | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Penhold | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+
+### Phase 18 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| Picture Butte | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Pincher Creek | 1 | escribe | VALIDATED | 2 | 2 items |
+| Ponoka | 1 | youtube | READY | 0 | URLs resolve, no items today |
+| Ponoka County | 1 | youtube | READY | 0 | URLs resolve, no items today |
+| Provost | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Rainbow Lake | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Raymond | 1 | youtube | VALIDATED | 13 | 13 items |
+| Red Deer County | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Redcliff | 1 | civicweb | READY | 0 | URLs resolve, no items today |
+| Rimbey | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+
+### Phase 19 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| Rocky Mountain House | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Rocky View County | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Rockyford | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Rosalind | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Rycroft | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Ryley | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Argentia Beach | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Betula Beach | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Birch Cove | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Birchcliff | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+
+### Phase 20 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| SV Bondiss | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Bonnyville Beach | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Brentwood | 1 | youtube | READY | 0 | URLs resolve, no items today |
+| SV Burnstick Lake | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Castle Island | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Crystal Springs | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Ghost Lake | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Golden Days | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Grandview | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Gull Lake | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
