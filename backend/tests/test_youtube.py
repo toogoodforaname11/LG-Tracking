@@ -66,3 +66,77 @@ def test_format_timestamps_for_embedding():
 
 def test_format_timestamps_empty():
     assert format_timestamps_for_embedding([], "https://youtube.com/watch?v=x") == ""
+
+
+# --- Channel-id resolver ---
+
+import pytest
+from unittest.mock import AsyncMock, MagicMock, patch
+
+from app.discovery.youtube import resolve_channel_id
+
+
+@pytest.mark.asyncio
+async def test_resolve_channel_id_passes_through_real_id():
+    """A real UCxxx id should be returned without any HTTP call."""
+    real = "UC" + "X" * 22
+    with patch("app.discovery.youtube.httpx.AsyncClient") as MockClient:
+        result = await resolve_channel_id(real)
+        assert result == real
+        MockClient.assert_not_called()
+
+
+def _stub_async_client(html: str | None, *, raise_on_get: bool = False):
+    """Return a context-manager mock for ``httpx.AsyncClient`` that yields a
+    fake response with ``html`` (or raises when ``raise_on_get`` is True).
+    """
+    fake_client = AsyncMock()
+    if raise_on_get:
+        fake_client.get = AsyncMock(side_effect=RuntimeError("boom"))
+    else:
+        resp = MagicMock(text=html or "")
+        resp.raise_for_status = MagicMock()
+        fake_client.get = AsyncMock(return_value=resp)
+    fake_client.__aenter__.return_value = fake_client
+    fake_client.__aexit__.return_value = None
+    return fake_client
+
+
+@pytest.mark.asyncio
+async def test_resolve_channel_id_handles_handle_url():
+    """A /@handle URL should be fetched and parsed for channelId."""
+    fake_id = "UC" + "A" * 22
+    html = f'<html>... "channelId":"{fake_id}" ... </html>'
+    client = _stub_async_client(html)
+    with patch("app.discovery.youtube.httpx.AsyncClient", return_value=client):
+        result = await resolve_channel_id("https://www.youtube.com/@CityofCalgary")
+    assert result == fake_id
+
+
+@pytest.mark.asyncio
+async def test_resolve_channel_id_returns_none_on_network_failure():
+    """Network errors should produce None, not raise."""
+    client = _stub_async_client(None, raise_on_get=True)
+    with patch("app.discovery.youtube.httpx.AsyncClient", return_value=client):
+        result = await resolve_channel_id("https://www.youtube.com/@DoesNotExist")
+    assert result is None
+
+
+@pytest.mark.asyncio
+async def test_resolve_channel_id_returns_none_when_no_id_on_page():
+    """If the resolver page has no UCxxx token, return None."""
+    client = _stub_async_client("<html>nothing useful</html>")
+    with patch("app.discovery.youtube.httpx.AsyncClient", return_value=client):
+        result = await resolve_channel_id("@NoChannelHere")
+    assert result is None
+
+
+@pytest.mark.asyncio
+async def test_resolve_channel_id_handles_meta_itemprop_form():
+    """meta itemprop=channelId is the most reliable signal — must be parsed."""
+    fake_id = "UC" + "M" * 22
+    html = f'<meta itemprop="channelId" content="{fake_id}">'
+    client = _stub_async_client(html)
+    with patch("app.discovery.youtube.httpx.AsyncClient", return_value=client):
+        result = await resolve_channel_id("https://www.youtube.com/@WithMeta")
+    assert result == fake_id

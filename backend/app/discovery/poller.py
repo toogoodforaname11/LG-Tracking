@@ -15,7 +15,7 @@ from app.discovery.base import BaseScraper, DiscoveredItem
 from app.discovery.civicweb import CivicWebScraper
 from app.discovery.granicus import GranicusScraper
 from app.discovery.escribe import EScribeScraper
-from app.discovery.youtube import YouTubeScraper
+from app.discovery.youtube import YouTubeScraper, resolve_channel_id, _CHANNEL_ID_RE
 from app.discovery.custom_bc_municipal import make_generic_scraper, GENERIC_SCRAPER_KEYWORDS
 # Substantive custom scrapers with real parsing logic (not just keyword configs)
 from app.discovery.custom_saanich import SaanichScraper
@@ -92,6 +92,7 @@ async def poll_source(source: Source, municipality: Municipality) -> list[Discov
             return await scraper.discover()
         elif source.platform == Platform.YOUTUBE:
             channel_id = None
+            config: dict = {}
             if source.scrape_config:
                 try:
                     config = json.loads(source.scrape_config)
@@ -103,9 +104,23 @@ async def poll_source(source: Source, municipality: Municipality) -> list[Discov
                     )
                     return []
 
-            if not channel_id:
-                # Fall back to extracting from URL like youtube.com/@CityofColwood
-                channel_id = source.url.rstrip("/").split("/")[-1]
+            # If the cached id isn't a real UCxxx channel id (or is missing),
+            # resolve it from the URL. The historical fallback of splitting
+            # the URL on "/" produced a literal "@handle" which YouTube's RSS
+            # endpoint rejects — that path is gone.
+            if not channel_id or not _CHANNEL_ID_RE.match(channel_id):
+                resolved = await resolve_channel_id(source.url)
+                if not resolved:
+                    logger.warning(
+                        "YouTube source %d (%s/%s): could not resolve channel id from %s; skipping",
+                        source.id, municipality.short_name, source.label, source.url,
+                    )
+                    return []
+                channel_id = resolved
+                # Cache the resolved id back into scrape_config so we only pay
+                # the resolution cost once per source.
+                config["channel_id"] = channel_id
+                source.scrape_config = json.dumps(config)
 
             scraper = YouTubeScraper(municipality.short_name, channel_id)
             return await scraper.discover()

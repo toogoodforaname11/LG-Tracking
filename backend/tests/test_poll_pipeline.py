@@ -137,21 +137,85 @@ async def test_poll_source_dispatches_escribe():
 
 @pytest.mark.asyncio
 async def test_poll_source_dispatches_youtube():
-    """poll_source should create a YouTubeScraper for YOUTUBE sources."""
+    """poll_source should resolve handle URLs to a UCxxx channel id and pass
+    that to YouTubeScraper. The resolved id should also be cached back into
+    ``scrape_config`` so the second poll skips the resolution round-trip.
+    """
     source = _make_source(
         platform=Platform.YOUTUBE,
         url="https://www.youtube.com/@CityofColwood",
     )
     muni = _make_municipality()
+    fake_channel_id = "UC" + "0" * 22
 
-    with patch("app.discovery.poller.YouTubeScraper") as MockScraper:
+    with (
+        patch("app.discovery.poller.YouTubeScraper") as MockScraper,
+        patch(
+            "app.discovery.poller.resolve_channel_id",
+            new=AsyncMock(return_value=fake_channel_id),
+        ) as MockResolve,
+    ):
         mock_instance = AsyncMock()
         mock_instance.discover = AsyncMock(return_value=[])
         mock_instance.close = AsyncMock()
         MockScraper.return_value = mock_instance
 
+        await poll_source(source, muni)
+
+        MockResolve.assert_awaited_once_with("https://www.youtube.com/@CityofColwood")
+        MockScraper.assert_called_once_with("Colwood", fake_channel_id)
+        # Resolved id cached back onto the source.
+        assert source.scrape_config and fake_channel_id in source.scrape_config
+
+
+@pytest.mark.asyncio
+async def test_poll_source_youtube_uses_cached_channel_id():
+    """If scrape_config already holds a real UCxxx, no resolution call happens."""
+    cached_id = "UC" + "1" * 22
+    source = _make_source(
+        platform=Platform.YOUTUBE,
+        url="https://www.youtube.com/@CityofColwood",
+    )
+    source.scrape_config = '{"channel_id": "%s"}' % cached_id
+    muni = _make_municipality()
+
+    with (
+        patch("app.discovery.poller.YouTubeScraper") as MockScraper,
+        patch(
+            "app.discovery.poller.resolve_channel_id",
+            new=AsyncMock(),
+        ) as MockResolve,
+    ):
+        mock_instance = AsyncMock()
+        mock_instance.discover = AsyncMock(return_value=[])
+        mock_instance.close = AsyncMock()
+        MockScraper.return_value = mock_instance
+
+        await poll_source(source, muni)
+
+        MockResolve.assert_not_called()
+        MockScraper.assert_called_once_with("Colwood", cached_id)
+
+
+@pytest.mark.asyncio
+async def test_poll_source_youtube_returns_empty_when_resolution_fails():
+    """A handle URL we can't resolve should produce zero items, not crash."""
+    source = _make_source(
+        platform=Platform.YOUTUBE,
+        url="https://www.youtube.com/@TotallyNotARealChannelXYZ",
+    )
+    muni = _make_municipality()
+
+    with (
+        patch("app.discovery.poller.YouTubeScraper") as MockScraper,
+        patch(
+            "app.discovery.poller.resolve_channel_id",
+            new=AsyncMock(return_value=None),
+        ),
+    ):
         items = await poll_source(source, muni)
-        MockScraper.assert_called_once_with("Colwood", "@CityofColwood")
+        assert items == []
+        MockScraper.assert_not_called()
 
 
 @pytest.mark.asyncio

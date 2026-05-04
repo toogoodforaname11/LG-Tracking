@@ -22,6 +22,86 @@ YT_FEED_URL = "https://www.youtube.com/feeds/videos.xml?channel_id={channel_id}"
 # oEmbed endpoint for getting video metadata
 YT_OEMBED_URL = "https://www.youtube.com/oembed?url={video_url}&format=json"
 
+
+# Real YouTube channel IDs are the form ``UC[A-Za-z0-9_-]{22}``. The /@handle
+# style URL is *not* a channel id — feeding it to the RSS endpoint returns
+# 404. We detect a real id with this regex.
+_CHANNEL_ID_RE = re.compile(r"^UC[A-Za-z0-9_-]{22}$")
+
+
+async def resolve_channel_id(channel_url_or_handle: str) -> str | None:
+    """Resolve a YouTube channel URL or @handle to a UCxxx channel ID.
+
+    Handles three input shapes:
+    - Already a real channel id (``UCxxx...``): returned unchanged.
+    - A handle URL (``https://www.youtube.com/@CityofCalgary``): fetched and
+      parsed for the ``"channelId":"UC..."`` field in ytInitialData.
+    - A bare handle (``@CityofCalgary``): treated as the URL above.
+
+    Returns ``None`` on any failure (network, parse, missing channelId) so
+    callers can degrade gracefully instead of polling a guaranteed-404 URL.
+
+    This function is idempotent and side-effect free — caching the result
+    onto ``Source.scrape_config`` is the caller's responsibility.
+    """
+    candidate = (channel_url_or_handle or "").strip()
+    if not candidate:
+        return None
+
+    if _CHANNEL_ID_RE.match(candidate):
+        return candidate
+
+    if candidate.startswith("@"):
+        url = f"https://www.youtube.com/{candidate}"
+    elif candidate.startswith("http"):
+        url = candidate
+    else:
+        # Bare token like "CityofCalgary" — assume it's a handle.
+        url = f"https://www.youtube.com/@{candidate}"
+
+    try:
+        async with httpx.AsyncClient(
+            timeout=15,
+            headers={
+                "User-Agent": (
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                    "AppleWebKit/537.36 (KHTML, like Gecko) "
+                    "Chrome/125.0.0.0 Safari/537.36"
+                ),
+                "Accept-Language": "en-US,en;q=0.9",
+            },
+            follow_redirects=True,
+        ) as client:
+            resp = await client.get(url)
+            resp.raise_for_status()
+            html = resp.text
+    except Exception as e:  # network errors, 404s, etc.
+        logger.warning("YouTube channel-id resolution failed for %s: %s", candidate, e)
+        return None
+
+    # Strategy 1: meta itemprop=channelId is the most stable signal.
+    m = re.search(
+        r'<meta\s+itemprop="(?:identifier|channelId)"\s+content="(UC[A-Za-z0-9_-]{22})"',
+        html,
+    )
+    if m:
+        return m.group(1)
+
+    # Strategy 2: ytInitialData / ytInitialPlayerResponse embeds the id as a JSON field.
+    m = re.search(r'"channelId":"(UC[A-Za-z0-9_-]{22})"', html)
+    if m:
+        return m.group(1)
+
+    # Strategy 3: canonical link to /channel/UCxxx.
+    m = re.search(r'href="https://www\.youtube\.com/channel/(UC[A-Za-z0-9_-]{22})"', html)
+    if m:
+        return m.group(1)
+
+    logger.warning(
+        "YouTube channel-id resolver: no UCxxx found on page for %s", candidate
+    )
+    return None
+
 # Keywords that indicate a council meeting video
 MEETING_KEYWORDS = [
     "council meeting",
