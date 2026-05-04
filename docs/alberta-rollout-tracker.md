@@ -84,3 +84,18 @@ sparse-data entities) stay PLACEHOLDER and explicitly note the rationale.
 
 - **Phase 1** — 10 / 291 munis done (3.4%). Validated 2026-05-04.
 - **Phase 2..N** — pending.
+
+### Phase 2 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| Acme | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Alberta Beach | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Alix | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Alliance | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Andrew | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Arrowwood | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Athabasca County | 1 | civicweb | VALIDATED | 3 | 3 items |
+| Banff | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Barnwell | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Barons | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |

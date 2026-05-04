@@ -4197,5 +4197,24 @@ async def seed_registry(db: AsyncSession) -> dict:
                 db.add(source)
                 stats["sources_created"] += 1
 
+        # Demote any stale AB-directory PENDING placeholders to DISABLED once
+        # this muni has at least one *real* (non-placeholder) source. Without
+        # this, the poller wastes a request on the placeholder URL on every
+        # cron tick. We don't delete the row to preserve scrape_run history.
+        placeholder_substr = "alberta.ca/find-a-municipal-official"
+        non_placeholder_seed_urls = {
+            s["url"] for s in sources_data if placeholder_substr not in s["url"]
+        }
+        if non_placeholder_seed_urls:
+            stale = await db.execute(
+                select(Source).where(
+                    Source.municipality_id == muni.id,
+                    Source.url.like(f"%{placeholder_substr}%"),
+                    Source.scrape_status != ScrapeStatus.DISABLED,
+                )
+            )
+            for placeholder_source in stale.scalars().all():
+                placeholder_source.scrape_status = ScrapeStatus.DISABLED
+
     await db.commit()
     return stats
