@@ -99,3 +99,123 @@ sparse-data entities) stay PLACEHOLDER and explicitly note the rationale.
 | Banff | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
 | Barnwell | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
 | Barons | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+
+### Phase 3 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| Barrhead | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Bassano | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Bawlf | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Beaumont | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Beaver County | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Bentley | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Berwyn | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Big Lakes County | 1 | escribe | READY | 0 | URLs resolve, no items today |
+| Big Valley | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Birch Hills County | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+
+### Phase 4 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| Bittern Lake | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Black Diamond | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Blackfalds | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Bon Accord | 1 | youtube | VALIDATED | 4 | 4 items |
+| Bonnyville | 1 | youtube | VALIDATED | 13 | 13 items |
+| Bow Island | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Bowden | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Boyle | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Brazeau County | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Brooks | 1 | youtube | VALIDATED | 15 | 15 items |
+
+### Phase 5 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| Bruderheim | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Buffalo Lake | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Camrose | 2 | civicweb + youtube | VALIDATED | 1 | 1 items |
+| Camrose County | 2 | civicweb + youtube | VALIDATED | 1 | 1 items |
+| Canmore | 1 | youtube | VALIDATED | 7 | 7 items |
+| Carbon | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Cardston | 1 | youtube | VALIDATED | 14 | 14 items |
+| Cardston County | 1 | youtube | VALIDATED | 14 | 14 items |
+| Carmangay | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Caroline | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+
+### Phase 6 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| Carstairs | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Castor | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Chauvin | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Chestermere | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Chipman | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Claresholm | 2 | escribe + youtube | VALIDATED | 7 | 7 items |
+| Clear Hills County | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Clearwater County | 2 | civicweb + youtube | VALIDATED | 12 | 12 items |
+| Clive | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Clyde | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+
+### Phase 7 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| Coaldale | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Coalhurst | 1 | youtube | VALIDATED | 13 | 13 items |
+| Cold Lake | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Coronation | 1 | civicweb | VALIDATED | 3 | 3 items |
+| County of Barrhead | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| County of Grande Prairie | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| County of Minburn | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| County of Newell | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| County of Northern Lights | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| County of Stettler | 2 | escribe + youtube | VALIDATED | 8 | 8 items |
+
+### Phase 8 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| Crossfield | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Crowsnest Pass | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Cypress County | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Czar | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Daysland | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Delburne | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Delia | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Devon | 1 | youtube | READY | 0 | URLs resolve, no items today |
+| Dewberry | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Didsbury | 2 | escribe + youtube | VALIDATED | 14 | 14 items |
+
+### Phase 9 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| Donalda | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Duchess | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| East Prairie | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Eckville | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Edgerton | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Edson | 2 | civicweb + youtube | VALIDATED | 12 | 12 items |
+| Elizabeth | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Elk Point | 1 | youtube | VALIDATED | 12 | 12 items |
+| Elnora | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Fairview | 2 | civicweb + youtube | VALIDATED | 11 | 11 items |
+
+### Phase 10 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| Falher | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Ferintosh | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Fishing Lake | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Flagstaff County | 2 | escribe + youtube | VALIDATED | 2 | 2 items |
+| Foothills County | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Foremost | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Fort Macleod | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Fox Creek | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Gibbons | 1 | youtube | VALIDATED | 13 | 13 items |
+| Gift Lake | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
