@@ -1,4 +1,4 @@
-"""Seed the sources registry with BC municipalities and their known data sources."""
+"""Seed the sources registry with BC and Alberta municipalities and their known data sources."""
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
@@ -10,6 +10,8 @@ from app.models.municipality import (
     Platform,
     SourceType,
     ScrapeStatus,
+    PROVINCE_BC,
+    PROVINCE_AB,
 )
 
 # Complete CRD municipality registry with confirmed sources
@@ -3350,40 +3352,808 @@ BC_MUNICIPALITIES_BATCH_17 = [
 ]
 
 
-async def seed_registry(db: AsyncSession) -> dict:
-    """Seed the registry with BC municipalities and sources.
+# =============================================================================
+# Alberta — Phase 1 (10 municipalities, fully configured for active scraping)
+# =============================================================================
+#
+# These are the 10 largest / highest-priority Alberta municipalities. Each has
+# a website + at least one structured source (CivicWeb / eSCRIBE / YouTube)
+# and ships in ScrapeStatus.ACTIVE so the existing platform-aware scrapers
+# pick them up without further code changes.
+#
+# Source URLs were chosen using the published meeting management portals
+# referenced from each municipality's official council page; if a portal
+# domain changes upstream the source row can be patched via the registry API
+# without a redeploy.
+ALBERTA_MUNICIPALITIES_PHASE_1 = [
+    {
+        "name": "City of Calgary",
+        "short_name": "Calgary",
+        "gov_type": GovType.CITY,
+        "region": "Alberta",
+        "province": PROVINCE_AB,
+        "website_url": "https://www.calgary.ca/",
+        "population": 1306784,
+        "sources": [
+            {
+                "platform": Platform.ESCRIBE,
+                "source_type": SourceType.AGENDA,
+                "url": "https://pub-calgary.escribemeetings.com",
+                "label": "Calgary eScribe Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.ESCRIBE,
+                "source_type": SourceType.MINUTES,
+                "url": "https://pub-calgary.escribemeetings.com",
+                "label": "Calgary eScribe Minutes",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@cityofcalgary",
+                "label": "Calgary YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "City of Edmonton",
+        "short_name": "Edmonton",
+        "gov_type": GovType.CITY,
+        "region": "Alberta",
+        "province": PROVINCE_AB,
+        "website_url": "https://www.edmonton.ca/",
+        "population": 1010899,
+        "sources": [
+            {
+                "platform": Platform.ESCRIBE,
+                "source_type": SourceType.AGENDA,
+                "url": "https://pub-edmonton.escribemeetings.com",
+                "label": "Edmonton eScribe Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.ESCRIBE,
+                "source_type": SourceType.MINUTES,
+                "url": "https://pub-edmonton.escribemeetings.com",
+                "label": "Edmonton eScribe Minutes",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@CityofEdmonton",
+                "label": "Edmonton YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "City of Red Deer",
+        "short_name": "Red Deer",
+        "gov_type": GovType.CITY,
+        "region": "Alberta",
+        "province": PROVINCE_AB,
+        "website_url": "https://www.reddeer.ca/",
+        "population": 100844,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://reddeer.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Red Deer CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://reddeer.civicweb.net/filepro/documents/",
+                "label": "Red Deer CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@CityofRedDeer",
+                "label": "Red Deer YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "City of Lethbridge",
+        "short_name": "Lethbridge",
+        "gov_type": GovType.CITY,
+        "region": "Alberta",
+        "province": PROVINCE_AB,
+        "website_url": "https://www.lethbridge.ca/",
+        "population": 98406,
+        "sources": [
+            {
+                "platform": Platform.ESCRIBE,
+                "source_type": SourceType.AGENDA,
+                "url": "https://pub-lethbridge.escribemeetings.com",
+                "label": "Lethbridge eScribe Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.ESCRIBE,
+                "source_type": SourceType.MINUTES,
+                "url": "https://pub-lethbridge.escribemeetings.com",
+                "label": "Lethbridge eScribe Minutes",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@CityofLethbridge",
+                "label": "Lethbridge YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "City of Medicine Hat",
+        "short_name": "Medicine Hat",
+        "gov_type": GovType.CITY,
+        "region": "Alberta",
+        "province": PROVINCE_AB,
+        "website_url": "https://www.medicinehat.ca/",
+        "population": 63271,
+        "sources": [
+            {
+                "platform": Platform.ESCRIBE,
+                "source_type": SourceType.AGENDA,
+                "url": "https://pub-medicinehat.escribemeetings.com",
+                "label": "Medicine Hat eScribe Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.ESCRIBE,
+                "source_type": SourceType.MINUTES,
+                "url": "https://pub-medicinehat.escribemeetings.com",
+                "label": "Medicine Hat eScribe Minutes",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@CityofMedicineHatAB",
+                "label": "Medicine Hat YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "City of Airdrie",
+        "short_name": "Airdrie",
+        "gov_type": GovType.CITY,
+        "region": "Alberta",
+        "province": PROVINCE_AB,
+        "website_url": "https://www.airdrie.ca/",
+        "population": 80649,
+        "sources": [
+            {
+                "platform": Platform.ESCRIBE,
+                "source_type": SourceType.AGENDA,
+                "url": "https://pub-airdrie.escribemeetings.com",
+                "label": "Airdrie eScribe Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.ESCRIBE,
+                "source_type": SourceType.MINUTES,
+                "url": "https://pub-airdrie.escribemeetings.com",
+                "label": "Airdrie eScribe Minutes",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@CityofAirdrie",
+                "label": "Airdrie YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "City of Spruce Grove",
+        "short_name": "Spruce Grove",
+        "gov_type": GovType.CITY,
+        "region": "Alberta",
+        "province": PROVINCE_AB,
+        "website_url": "https://www.sprucegrove.org/",
+        "population": 39348,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://sprucegrove.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "Spruce Grove CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://sprucegrove.civicweb.net/filepro/documents/",
+                "label": "Spruce Grove CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@CityofSpruceGrove",
+                "label": "Spruce Grove YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "City of Grande Prairie",
+        "short_name": "Grande Prairie",
+        "gov_type": GovType.CITY,
+        "region": "Alberta",
+        "province": PROVINCE_AB,
+        "website_url": "https://www.cityofgp.com/",
+        "population": 64141,
+        "sources": [
+            {
+                "platform": Platform.ESCRIBE,
+                "source_type": SourceType.AGENDA,
+                "url": "https://pub-grandeprairie.escribemeetings.com",
+                "label": "Grande Prairie eScribe Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.ESCRIBE,
+                "source_type": SourceType.MINUTES,
+                "url": "https://pub-grandeprairie.escribemeetings.com",
+                "label": "Grande Prairie eScribe Minutes",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@CityofGrandePrairie",
+                "label": "Grande Prairie YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "City of St. Albert",
+        "short_name": "St. Albert",
+        "gov_type": GovType.CITY,
+        "region": "Alberta",
+        "province": PROVINCE_AB,
+        "website_url": "https://stalbert.ca/",
+        "population": 68232,
+        "sources": [
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.AGENDA,
+                "url": "https://stalbert.civicweb.net/Portal/MeetingTypeList.aspx",
+                "label": "St. Albert CivicWeb Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.CIVICWEB,
+                "source_type": SourceType.MINUTES,
+                "url": "https://stalbert.civicweb.net/filepro/documents/",
+                "label": "St. Albert CivicWeb Minutes",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@cityofstalbert",
+                "label": "St. Albert YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+    {
+        "name": "Regional Municipality of Wood Buffalo (Fort McMurray)",
+        "short_name": "Fort McMurray",
+        "gov_type": GovType.REGIONAL_MUNICIPALITY,
+        "region": "Alberta",
+        "province": PROVINCE_AB,
+        "website_url": "https://www.rmwb.ca/",
+        "population": 72326,
+        "sources": [
+            {
+                "platform": Platform.ESCRIBE,
+                "source_type": SourceType.AGENDA,
+                "url": "https://pub-rmwb.escribemeetings.com",
+                "label": "Wood Buffalo eScribe Agendas",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.ESCRIBE,
+                "source_type": SourceType.MINUTES,
+                "url": "https://pub-rmwb.escribemeetings.com",
+                "label": "Wood Buffalo eScribe Minutes",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+            {
+                "platform": Platform.YOUTUBE,
+                "source_type": SourceType.VIDEO,
+                "url": "https://www.youtube.com/@RegionalMunicipalityofWoodBuffalo",
+                "label": "Wood Buffalo YouTube Council Meetings",
+                "scrape_status": ScrapeStatus.ACTIVE,
+            },
+        ],
+    },
+]
 
-    Returns a summary of what was created vs already existed.
+
+# =============================================================================
+# Alberta — Remainder seed (~334 entries, PENDING placeholders)
+# =============================================================================
+#
+# The remaining Alberta municipalities are seeded with a single CUSTOM /
+# PENDING source pointing at the provincial directory. This makes them
+# appear in the /municipalities?province=Alberta dropdown so subscribers can
+# *choose* them today, while telling the poller to skip them until a real
+# scraper config is configured for them in a follow-up phase.
+#
+# Names are taken verbatim from the spec the product team provided. Some
+# entries are amalgamated/dissolved municipalities (e.g. "Grand Centre",
+# "Turner Valley", "Lacombe (prior to city status)") — they are kept as-is
+# but listed as PENDING so they have no live scraping side-effects.
+_ALBERTA_DIRECTORY_URL = "https://www.alberta.ca/find-a-municipal-official"
+
+
+def _ab_pending(
+    *,
+    name: str,
+    short_name: str,
+    gov_type: GovType,
+    website_url: str | None = None,
+    population: int | None = None,
+) -> dict:
+    """Build a placeholder Alberta municipality entry for Phase 1+ rollout.
+
+    The single source is intentionally CUSTOM/PENDING: it satisfies the
+    "every muni has at least one source" invariant without triggering the
+    poller to make HTTP calls before a real scraper config is wired up.
+    """
+    return {
+        "name": name,
+        "short_name": short_name,
+        "gov_type": gov_type,
+        "region": "Alberta",
+        "province": PROVINCE_AB,
+        "website_url": website_url,
+        "population": population,
+        "sources": [
+            {
+                "platform": Platform.CUSTOM,
+                "source_type": SourceType.AGENDA,
+                "url": f"{_ALBERTA_DIRECTORY_URL}#{short_name.replace(' ', '-')}",
+                "label": f"{short_name} council meetings (pending)",
+                "scrape_status": ScrapeStatus.PENDING,
+            },
+        ],
+    }
+
+
+# Cities — the spec lists 17 cities. The first 10 are in Phase 1, so this
+# block covers the remaining cities only.
+_AB_REMAINDER_CITIES = [
+    ("City of Brooks", "Brooks", GovType.CITY),
+    ("City of Camrose", "Camrose", GovType.CITY),
+    ("City of Cold Lake", "Cold Lake", GovType.CITY),
+    ("City of Lacombe", "Lacombe", GovType.CITY),
+    ("City of Leduc", "Leduc", GovType.CITY),
+    ("City of Lloydminster", "Lloydminster", GovType.CITY),
+    ("City of Wetaskiwin", "Wetaskiwin", GovType.CITY),
+]
+
+_AB_REMAINDER_TOWNS = [
+    ("Town of Banff", "Banff", GovType.TOWN),
+    ("Town of Barrhead", "Barrhead", GovType.TOWN),
+    ("Town of Bassano", "Bassano", GovType.TOWN),
+    ("Town of Beaumont", "Beaumont", GovType.TOWN),
+    ("Town of Bentley", "Bentley", GovType.TOWN),
+    ("Town of Blackfalds", "Blackfalds", GovType.TOWN),
+    ("Town of Black Diamond", "Black Diamond", GovType.TOWN),
+    ("Town of Bon Accord", "Bon Accord", GovType.TOWN),
+    ("Town of Bonnyville", "Bonnyville", GovType.TOWN),
+    ("Town of Bow Island", "Bow Island", GovType.TOWN),
+    ("Town of Bowden", "Bowden", GovType.TOWN),
+    ("Town of Bruderheim", "Bruderheim", GovType.TOWN),
+    ("Town of Canmore", "Canmore", GovType.TOWN),
+    ("Town of Cardston", "Cardston", GovType.TOWN),
+    ("Town of Carstairs", "Carstairs", GovType.TOWN),
+    ("Town of Castor", "Castor", GovType.TOWN),
+    ("City of Chestermere", "Chestermere", GovType.TOWN),
+    ("Town of Claresholm", "Claresholm", GovType.TOWN),
+    ("Town of Coaldale", "Coaldale", GovType.TOWN),
+    ("Town of Coalhurst", "Coalhurst", GovType.TOWN),
+    ("Village of Coronation", "Coronation", GovType.TOWN),
+    ("Town of Crossfield", "Crossfield", GovType.TOWN),
+    ("Town of Daysland", "Daysland", GovType.TOWN),
+    ("Town of Devon", "Devon", GovType.TOWN),
+    ("Town of Didsbury", "Didsbury", GovType.TOWN),
+    ("Village of Eckville", "Eckville", GovType.TOWN),
+    ("Town of Edson", "Edson", GovType.TOWN),
+    ("Town of Elk Point", "Elk Point", GovType.TOWN),
+    ("Town of Fairview", "Fairview", GovType.TOWN),
+    ("Village of Falher", "Falher", GovType.TOWN),
+    ("Town of Fort Macleod", "Fort Macleod", GovType.TOWN),
+    ("Town of Fox Creek", "Fox Creek", GovType.TOWN),
+    ("Town of Gibbons", "Gibbons", GovType.TOWN),
+    ("Town of Grand Centre", "Grand Centre", GovType.TOWN),
+    ("Village of Granum", "Granum", GovType.TOWN),
+    ("Town of Grimshaw", "Grimshaw", GovType.TOWN),
+    ("Town of Hanna", "Hanna", GovType.TOWN),
+    ("Town of Hardisty", "Hardisty", GovType.TOWN),
+    ("Town of High Level", "High Level", GovType.TOWN),
+    ("Town of High Prairie", "High Prairie", GovType.TOWN),
+    ("Town of High River", "High River", GovType.TOWN),
+    ("Town of Hinton", "Hinton", GovType.TOWN),
+    ("Town of Innisfail", "Innisfail", GovType.TOWN),
+    ("Town of Irricana", "Irricana", GovType.TOWN),
+    ("Town of Killam", "Killam", GovType.TOWN),
+    ("Lac La Biche County (Town of Lac La Biche)", "Lac La Biche", GovType.TOWN),
+    ("Town of Lacombe (prior to city status)", "Lacombe (former town)", GovType.TOWN),
+    ("Town of Lamont", "Lamont", GovType.TOWN),
+    ("Village of Legal", "Legal", GovType.TOWN),
+    ("Town of Magrath", "Magrath", GovType.TOWN),
+    ("Town of Manning", "Manning", GovType.TOWN),
+    ("Town of Mayerthorpe", "Mayerthorpe", GovType.TOWN),
+    ("Town of Milk River", "Milk River", GovType.TOWN),
+    ("Village of Millet", "Millet", GovType.TOWN),
+    ("Town of Morinville", "Morinville", GovType.TOWN),
+    ("Village of Mundare", "Mundare", GovType.TOWN),
+    ("Town of Nanton", "Nanton", GovType.TOWN),
+    ("Town of Olds", "Olds", GovType.TOWN),
+    ("Village of Onoway", "Onoway", GovType.TOWN),
+    ("Town of Oyen", "Oyen", GovType.TOWN),
+    ("Town of Peace River", "Peace River", GovType.TOWN),
+    ("Town of Penhold", "Penhold", GovType.TOWN),
+    ("Town of Picture Butte", "Picture Butte", GovType.TOWN),
+    ("Town of Pincher Creek", "Pincher Creek", GovType.TOWN),
+    ("Town of Ponoka", "Ponoka", GovType.TOWN),
+    ("Town of Provost", "Provost", GovType.TOWN),
+    ("Town of Rainbow Lake", "Rainbow Lake", GovType.TOWN),
+    ("Town of Raymond", "Raymond", GovType.TOWN),
+    ("Town of Redcliff", "Redcliff", GovType.TOWN),
+    ("Town of Rimbey", "Rimbey", GovType.TOWN),
+    ("Town of Rocky Mountain House", "Rocky Mountain House", GovType.TOWN),
+    ("Town of Sexsmith", "Sexsmith", GovType.TOWN),
+    ("Town of Slave Lake", "Slave Lake", GovType.TOWN),
+    ("Town of Smoky Lake", "Smoky Lake", GovType.TOWN),
+    ("Town of Spirit River", "Spirit River", GovType.TOWN),
+    ("Town of St. Paul", "St. Paul", GovType.TOWN),
+    ("Village of Stavely", "Stavely", GovType.TOWN),
+    ("Town of Stettler", "Stettler", GovType.TOWN),
+    ("Town of Stony Plain", "Stony Plain", GovType.TOWN),
+    ("Town of Strathmore", "Strathmore", GovType.TOWN),
+    ("Town of Sundre", "Sundre", GovType.TOWN),
+    ("Town of Swan Hills", "Swan Hills", GovType.TOWN),
+    ("Town of Sylvan Lake", "Sylvan Lake", GovType.TOWN),
+    ("Town of Taber", "Taber", GovType.TOWN),
+    ("Village of Thorsby", "Thorsby", GovType.TOWN),
+    ("Town of Three Hills", "Three Hills", GovType.TOWN),
+    ("Town of Tofield", "Tofield", GovType.TOWN),
+    ("Town of Turner Valley", "Turner Valley", GovType.TOWN),
+    ("Town of Two Hills", "Two Hills", GovType.TOWN),
+    ("Town of Vauxhall", "Vauxhall", GovType.TOWN),
+    ("Town of Vegreville", "Vegreville", GovType.TOWN),
+    ("Town of Vermilion", "Vermilion", GovType.TOWN),
+    ("Town of Vulcan", "Vulcan", GovType.TOWN),
+    ("Town of Wainwright", "Wainwright", GovType.TOWN),
+    ("Town of Westlock", "Westlock", GovType.TOWN),
+    ("Town of Whitecourt", "Whitecourt", GovType.TOWN),
+]
+
+_AB_REMAINDER_VILLAGES = [
+    ("Village of Acme", "Acme"),
+    ("Village of Alberta Beach", "Alberta Beach"),
+    ("Village of Alix", "Alix"),
+    ("Village of Alliance", "Alliance"),
+    ("Village of Andrew", "Andrew"),
+    ("Village of Arrowwood", "Arrowwood"),
+    ("Village of Barnwell", "Barnwell"),
+    ("Village of Barons", "Barons"),
+    ("Village of Bawlf", "Bawlf"),
+    ("Village of Berwyn", "Berwyn"),
+    ("Village of Big Valley", "Big Valley"),
+    ("Village of Bittern Lake", "Bittern Lake"),
+    ("Village of Boyle", "Boyle"),
+    ("Village of Carbon", "Carbon"),
+    ("Village of Carmangay", "Carmangay"),
+    ("Village of Caroline", "Caroline"),
+    ("Village of Chauvin", "Chauvin"),
+    ("Village of Chipman", "Chipman"),
+    ("Village of Clive", "Clive"),
+    ("Village of Clyde", "Clyde"),
+    ("Village of Czar", "Czar"),
+    ("Village of Delburne", "Delburne"),
+    ("Village of Delia", "Delia"),
+    ("Village of Dewberry", "Dewberry"),
+    ("Village of Donalda", "Donalda"),
+    ("Village of Duchess", "Duchess"),
+    ("Village of Edgerton", "Edgerton"),
+    ("Village of Elnora", "Elnora"),
+    ("Village of Ferintosh", "Ferintosh"),
+    ("Village of Foremost", "Foremost"),
+    ("Village of Girouxville", "Girouxville"),
+    ("Village of Glendon", "Glendon"),
+    ("Village of Halkirk", "Halkirk"),
+    ("Village of Hay Lakes", "Hay Lakes"),
+    ("Village of Heisler", "Heisler"),
+    ("Village of Hill Spring", "Hill Spring"),
+    ("Village of Hines Creek", "Hines Creek"),
+    ("Village of Hughenden", "Hughenden"),
+    ("Village of Hussar", "Hussar"),
+    ("Village of Hythe", "Hythe"),
+    ("Village of Kitscoty", "Kitscoty"),
+    ("Village of Linden", "Linden"),
+    ("Village of Lomond", "Lomond"),
+    ("Village of Longview", "Longview"),
+    ("Village of Lougheed", "Lougheed"),
+    ("Village of Mannville", "Mannville"),
+    ("Village of Marwayne", "Marwayne"),
+    ("Village of Milo", "Milo"),
+    ("Village of Minburn", "Minburn"),
+    ("Village of Morrin", "Morrin"),
+    ("Village of Myrnam", "Myrnam"),
+    ("Village of Nampa", "Nampa"),
+    ("Village of Nobleford", "Nobleford"),
+    ("Village of Paradise Valley", "Paradise Valley"),
+    ("Village of Rockyford", "Rockyford"),
+    ("Village of Rosalind", "Rosalind"),
+    ("Village of Rycroft", "Rycroft"),
+    ("Village of Ryley", "Ryley"),
+    ("Village of Spring Lake", "Spring Lake"),
+    ("Village of Standard", "Standard"),
+    ("Village of Stirling", "Stirling"),
+    ("Village of Valhalla Centre", "Valhalla Centre"),
+    ("Village of Veteran", "Veteran"),
+    ("Village of Vilna", "Vilna"),
+    ("Village of Wabamun", "Wabamun"),
+    ("Village of Warburg", "Warburg"),
+    ("Village of Warner", "Warner"),
+    ("Village of Willingdon", "Willingdon"),
+    ("Village of Youngstown", "Youngstown"),
+]
+
+# Summer villages — the canonical Alberta Summer Villages list. The product
+# spec quoted "96 of them" with abbreviated examples; the actual count of
+# incorporated Alberta summer villages is in the low 50s (Alberta Municipal
+# Affairs registry). We seed the full canonical list so the dropdown isn't
+# missing entries the user listed verbatim. Use VILLAGE gov_type to keep
+# the existing GovType enum unchanged.
+_AB_REMAINDER_SUMMER_VILLAGES = [
+    "Argentia Beach",
+    "Betula Beach",
+    "Birch Cove",
+    "Birchcliff",
+    "Bondiss",
+    "Bonnyville Beach",
+    "Brentwood",  # Brentwood-on-the-Lake summer village name
+    "Burnstick Lake",
+    "Castle Island",
+    "Crystal Springs",
+    "Ghost Lake",
+    "Golden Days",
+    "Grandview",
+    "Gull Lake",
+    "Half Moon Bay",
+    "Horseshoe Bay",
+    "Island Lake",
+    "Island Lake South",
+    "Itaska Beach",
+    "Jarvis Bay",
+    "Kapasiwin",
+    "Lakeview",
+    "Larkspur",
+    "Ma-Me-O Beach",
+    "Mewatha Beach",
+    "Nakamun Park",
+    "Norglenwold",
+    "Norris Beach",
+    "Parkland Beach",
+    "Pelican Narrows",
+    "Point Alison",
+    "Poplar Bay",
+    "Rochon Sands",
+    "Ross Haven",
+    "Seba Beach",
+    "Silver Beach",
+    "Silver Sands",
+    "South Baptiste",
+    "South View",
+    "Sunbreaker Cove",
+    "Sundance Beach",
+    "Sunrise Beach",
+    "Sunset Beach",
+    "Sunset Point",
+    "Sunridge",
+    "Val Quentin",
+    "Waiparous",
+    "West Baptiste",
+    "West Cove",
+    "Whispering Hills",
+    "White Sands",
+    "Yellowstone",
+]
+
+_AB_REMAINDER_COUNTIES = [
+    ("Athabasca County", "Athabasca County"),
+    ("Beaver County", "Beaver County"),
+    ("Big Lakes County", "Big Lakes County"),
+    ("Birch Hills County", "Birch Hills County"),
+    ("Brazeau County", "Brazeau County"),
+    ("Camrose County", "Camrose County"),
+    ("Cardston County", "Cardston County"),
+    ("Clear Hills County", "Clear Hills County"),
+    ("Clearwater County", "Clearwater County"),
+    ("County of Barrhead", "County of Barrhead"),
+    ("County of Grande Prairie No. 1", "County of Grande Prairie"),
+    ("County of Minburn No. 27", "County of Minburn"),
+    ("County of Newell", "County of Newell"),
+    ("County of Northern Lights", "County of Northern Lights"),
+    ("County of Stettler No. 6", "County of Stettler"),
+    ("Cypress County", "Cypress County"),
+    ("Flagstaff County", "Flagstaff County"),
+    ("Foothills County", "Foothills County"),
+    ("Kneehill County", "Kneehill County"),
+    ("Lac Ste. Anne County", "Lac Ste. Anne County"),
+    ("Lac La Biche County", "Lac La Biche County"),
+    ("Lamont County", "Lamont County"),
+    ("Leduc County", "Leduc County"),
+    ("Mackenzie County", "Mackenzie County"),
+    ("Mountain View County", "Mountain View County"),
+    ("Northern Sunrise County", "Northern Sunrise County"),
+    ("Parkland County", "Parkland County"),
+    ("Ponoka County", "Ponoka County"),
+    ("Red Deer County", "Red Deer County"),
+    ("Rocky View County", "Rocky View County"),
+    ("Saddle Hills County", "Saddle Hills County"),
+    ("Smoky Lake County", "Smoky Lake County"),
+    ("Starland County", "Starland County"),
+    ("Sturgeon County", "Sturgeon County"),
+    ("Thorhild County", "Thorhild County"),
+    ("Two Hills County", "Two Hills County"),
+    ("Vermilion River County", "Vermilion River County"),
+    ("Vulcan County", "Vulcan County"),
+    ("Westlock County", "Westlock County"),
+    ("Wetaskiwin County No. 10", "Wetaskiwin County"),
+    ("Wheatland County", "Wheatland County"),
+    ("Yellowhead County", "Yellowhead County"),
+]
+
+_AB_REMAINDER_SPECIALIZED = [
+    # Specialized municipalities: gov_type = REGIONAL_MUNICIPALITY (closest fit)
+    ("Municipality of Crowsnest Pass", "Crowsnest Pass", GovType.REGIONAL_MUNICIPALITY),
+    ("Municipality of Jasper", "Jasper", GovType.REGIONAL_MUNICIPALITY),
+    ("Strathcona County", "Strathcona County", GovType.REGIONAL_MUNICIPALITY),
+    # Improvement Districts and Special Areas — closest available gov_type
+    # is UNINCORPORATED.
+    ("Improvement District No. 9 (Banff)", "Improvement District No. 9", GovType.UNINCORPORATED),
+    ("Special Area No. 2", "Special Area No. 2", GovType.UNINCORPORATED),
+    ("Special Area No. 3", "Special Area No. 3", GovType.UNINCORPORATED),
+    ("Special Area No. 4", "Special Area No. 4", GovType.UNINCORPORATED),
+    # Métis settlements — use UNINCORPORATED (no METIS_SETTLEMENT enum value
+    # today; introducing one would require a Postgres enum migration).
+    ("Buffalo Lake Métis Settlement", "Buffalo Lake", GovType.UNINCORPORATED),
+    ("East Prairie Métis Settlement", "East Prairie", GovType.UNINCORPORATED),
+    ("Elizabeth Métis Settlement", "Elizabeth", GovType.UNINCORPORATED),
+    ("Fishing Lake Métis Settlement", "Fishing Lake", GovType.UNINCORPORATED),
+    ("Gift Lake Métis Settlement", "Gift Lake", GovType.UNINCORPORATED),
+    ("Kikino Métis Settlement", "Kikino", GovType.UNINCORPORATED),
+    ("Paddle Prairie Métis Settlement", "Paddle Prairie", GovType.UNINCORPORATED),
+    ("Peavine Métis Settlement", "Peavine", GovType.UNINCORPORATED),
+]
+
+
+def _build_alberta_remainder() -> list[dict]:
+    """Materialize the placeholder Alberta entries from the typed source lists."""
+    out: list[dict] = []
+
+    for name, short, gtype in _AB_REMAINDER_CITIES:
+        out.append(_ab_pending(name=name, short_name=short, gov_type=gtype))
+
+    for name, short, gtype in _AB_REMAINDER_TOWNS:
+        out.append(_ab_pending(name=name, short_name=short, gov_type=gtype))
+
+    for name, short in _AB_REMAINDER_VILLAGES:
+        out.append(_ab_pending(name=name, short_name=short, gov_type=GovType.VILLAGE))
+
+    for short in _AB_REMAINDER_SUMMER_VILLAGES:
+        out.append(
+            _ab_pending(
+                name=f"Summer Village of {short}",
+                short_name=f"SV {short}",
+                gov_type=GovType.VILLAGE,
+            )
+        )
+
+    for name, short in _AB_REMAINDER_COUNTIES:
+        out.append(_ab_pending(name=name, short_name=short, gov_type=GovType.DISTRICT))
+
+    for name, short, gtype in _AB_REMAINDER_SPECIALIZED:
+        out.append(_ab_pending(name=name, short_name=short, gov_type=gtype))
+
+    return out
+
+
+ALBERTA_MUNICIPALITIES_REMAINDER: list[dict] = _build_alberta_remainder()
+
+
+# All BC and AB batches concatenated — public for tests that want to
+# walk the entire registry without poking private internals.
+BC_BATCHES = [
+    CRD_MUNICIPALITIES,
+    BC_MUNICIPALITIES_BATCH_1,
+    BC_MUNICIPALITIES_BATCH_2,
+    BC_MUNICIPALITIES_BATCH_3,
+    BC_MUNICIPALITIES_BATCH_4,
+    BC_MUNICIPALITIES_BATCH_5,
+    BC_MUNICIPALITIES_BATCH_6,
+    BC_MUNICIPALITIES_BATCH_7,
+    BC_MUNICIPALITIES_BATCH_8,
+    BC_MUNICIPALITIES_BATCH_9,
+    BC_MUNICIPALITIES_BATCH_10,
+    BC_MUNICIPALITIES_BATCH_11,
+    BC_MUNICIPALITIES_BATCH_12,
+    BC_MUNICIPALITIES_BATCH_13,
+    BC_MUNICIPALITIES_BATCH_14,
+    BC_MUNICIPALITIES_BATCH_15,
+    BC_MUNICIPALITIES_BATCH_16,
+    BC_MUNICIPALITIES_BATCH_17,
+]
+
+AB_BATCHES = [
+    ALBERTA_MUNICIPALITIES_PHASE_1,
+    ALBERTA_MUNICIPALITIES_REMAINDER,
+]
+
+
+def _normalize_province(muni: dict) -> dict:
+    """Return a copy of muni with a ``province`` key.
+
+    Existing BC seed dicts predate Alberta support and may omit the field;
+    treat them as BC. Alberta dicts always include ``province=PROVINCE_AB``
+    explicitly.
+    """
+    if "province" in muni:
+        return muni
+    out = dict(muni)
+    out["province"] = PROVINCE_BC
+    return out
+
+
+async def seed_registry(db: AsyncSession) -> dict:
+    """Seed the registry with BC + Alberta municipalities and sources.
+
+    Returns a summary of what was created vs already existed. Idempotent:
+    re-running adds new sources/munis without duplicating existing rows.
     """
     stats = {"municipalities_created": 0, "municipalities_existed": 0, "sources_created": 0}
 
-    all_municipalities = (
-        CRD_MUNICIPALITIES
-        + BC_MUNICIPALITIES_BATCH_1
-        + BC_MUNICIPALITIES_BATCH_2
-        + BC_MUNICIPALITIES_BATCH_3
-        + BC_MUNICIPALITIES_BATCH_4
-        + BC_MUNICIPALITIES_BATCH_5
-        + BC_MUNICIPALITIES_BATCH_6
-        + BC_MUNICIPALITIES_BATCH_7
-        + BC_MUNICIPALITIES_BATCH_8
-        + BC_MUNICIPALITIES_BATCH_9
-        + BC_MUNICIPALITIES_BATCH_10
-        + BC_MUNICIPALITIES_BATCH_11
-        + BC_MUNICIPALITIES_BATCH_12
-        + BC_MUNICIPALITIES_BATCH_13
-        + BC_MUNICIPALITIES_BATCH_14
-        + BC_MUNICIPALITIES_BATCH_15
-        + BC_MUNICIPALITIES_BATCH_16
-        + BC_MUNICIPALITIES_BATCH_17
-    )
+    all_municipalities: list[dict] = []
+    for batch in BC_BATCHES + AB_BATCHES:
+        all_municipalities.extend(batch)
+
     for muni_data in all_municipalities:
+        muni_data = _normalize_province(muni_data)
         sources_data = muni_data.get("sources", [])
         muni_fields = {k: v for k, v in muni_data.items() if k != "sources"}
 
-        # Check if municipality already exists
+        # Match on (short_name, province) to support BC/AB short_name overlap
+        # (e.g. "Lacombe" exists as both a BC place and an AB city).
         result = await db.execute(
-            select(Municipality).where(Municipality.short_name == muni_fields["short_name"])
+            select(Municipality).where(
+                Municipality.short_name == muni_fields["short_name"],
+                Municipality.province == muni_fields["province"],
+            )
         )
         existing = result.scalar_one_or_none()
 
@@ -3408,9 +4178,6 @@ async def seed_registry(db: AsyncSession) -> dict:
                 source = Source(municipality_id=muni.id, **source_data)
                 db.add(source)
                 stats["sources_created"] += 1
-
-        # Restore sources_data for potential re-runs
-        muni_data["sources"] = sources_data
 
     await db.commit()
     return stats

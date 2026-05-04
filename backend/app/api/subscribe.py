@@ -5,13 +5,14 @@ from datetime import datetime, timedelta, timezone
 from urllib.parse import quote
 
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, field_validator
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from app.db.database import get_db
 from app.models.subscriber import Subscriber
 from app.models.magic_link import MagicLinkToken
+from app.models.municipality import Municipality, PROVINCE_BC, VALID_PROVINCES
 from app.config import settings
 
 logger = logging.getLogger(__name__)
@@ -30,6 +31,18 @@ class SubscribeRequest(BaseModel):
     topics: list[str]
     keywords: str = ""
     immediate_alerts: bool = False
+    # Province scope for the selected municipalities. Defaults to BC for
+    # backward compatibility with the legacy frontend.
+    province: str = PROVINCE_BC
+
+    @field_validator("province")
+    @classmethod
+    def _validate_province(cls, v: str) -> str:
+        if v not in VALID_PROVINCES:
+            raise ValueError(
+                f"Invalid province '{v}'. Must be one of: {sorted(VALID_PROVINCES)}"
+            )
+        return v
 
 
 class SubscribeResponse(BaseModel):
@@ -164,6 +177,28 @@ async def subscribe(
     This prevents anyone from subscribing or modifying preferences for an
     email address they don't control.
     """
+    # Validate that every selected municipality short_name actually exists in
+    # the requested province. This prevents a malicious / mistyped client from
+    # registering subscriptions for nonexistent or wrong-province munis.
+    if req.municipalities:
+        muni_result = await db.execute(
+            select(Municipality.short_name).where(
+                Municipality.province == req.province,
+                Municipality.short_name.in_(req.municipalities),
+                Municipality.is_active.is_(True),
+            )
+        )
+        known = {row for row in muni_result.scalars().all()}
+        unknown = [name for name in req.municipalities if name not in known]
+        if unknown:
+            raise HTTPException(
+                status_code=422,
+                detail=(
+                    f"Unknown municipalities for province '{req.province}': "
+                    f"{unknown}"
+                ),
+            )
+
     result = await db.execute(
         select(Subscriber).where(Subscriber.email == req.email)
     )
@@ -178,6 +213,7 @@ async def subscribe(
         "topics": req.topics,
         "keywords": req.keywords,
         "immediate_alerts": req.immediate_alerts,
+        "province": req.province,
     }
 
     # An "unverified" subscriber is one that exists but has never confirmed
@@ -196,6 +232,7 @@ async def subscribe(
             topics=req.topics,
             keywords=req.keywords,
             immediate_alerts=req.immediate_alerts,
+            province=req.province,
             active=False,  # Stays inactive until email is verified
         )
         db.add(subscriber)
@@ -207,6 +244,7 @@ async def subscribe(
         existing.topics = req.topics
         existing.keywords = req.keywords
         existing.immediate_alerts = req.immediate_alerts
+        existing.province = req.province
 
     expires_at = datetime.now(timezone.utc) + timedelta(hours=MAGIC_LINK_TTL_HOURS)
     token = MagicLinkToken(

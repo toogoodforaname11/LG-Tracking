@@ -61,6 +61,9 @@ async def confirm_magic_link(token: str, db: AsyncSession = Depends(get_db)):
     subscriber.topics = prefs.get("topics", subscriber.topics)
     subscriber.keywords = prefs.get("keywords", subscriber.keywords)
     subscriber.immediate_alerts = prefs.get("immediate_alerts", subscriber.immediate_alerts)
+    # Province may be missing from old magic-link tokens created before
+    # Alberta support shipped — fall back to the subscriber's existing value.
+    subscriber.province = prefs.get("province", subscriber.province)
     subscriber.active = True
     subscriber.updated_at = datetime.now(timezone.utc)
 

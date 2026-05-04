@@ -5,9 +5,20 @@ from sqlalchemy.orm import selectinload
 from pydantic import BaseModel
 
 from app.db.database import get_db
-from app.models.municipality import Municipality, Source, ScrapeStatus
+from app.models.municipality import (
+    Municipality,
+    Source,
+    ScrapeStatus,
+    PROVINCE_BC,
+    VALID_PROVINCES,
+)
 from app.services.seed_registry import seed_registry
 from app.api.dependencies import verify_cron_secret
+
+
+# Sentinel query value to opt-out of the default-BC filter and request all
+# provinces in a single call. Useful for admin tools and tests.
+PROVINCE_QUERY_ALL = "all"
 
 router = APIRouter()
 
@@ -33,6 +44,7 @@ class MunicipalityOut(BaseModel):
     short_name: str
     gov_type: str
     region: str
+    province: str
     website_url: str | None = None
     population: int | None = None
     is_active: bool
@@ -66,13 +78,45 @@ class SeedResult(BaseModel):
 @router.get("/municipalities", response_model=MunicipalityListOut)
 async def list_municipalities(
     region: str | None = None,
+    province: str | None = None,
     active_only: bool = True,
     db: AsyncSession = Depends(get_db),
 ):
-    """List all municipalities, optionally filtered by region."""
+    """List municipalities, optionally filtered by region and/or province.
+
+    ``province`` semantics:
+    - omitted → defaults to ``"BC"`` for backward compatibility with clients
+      that were written before Alberta support.
+    - one of ``VALID_PROVINCES`` (``"BC"``, ``"Alberta"``) → strict filter.
+    - ``"all"`` → no province filter; returns every province.
+    - any other value → ``HTTP 422``.
+    """
+    # Validate the province query parameter before running the query.
+    if province is not None and province != PROVINCE_QUERY_ALL and province not in VALID_PROVINCES:
+        raise HTTPException(
+            status_code=422,
+            detail=(
+                f"Invalid province '{province}'. "
+                f"Must be one of: {sorted(VALID_PROVINCES) + [PROVINCE_QUERY_ALL]}"
+            ),
+        )
+
     query = select(Municipality).options(selectinload(Municipality.sources))
     if region:
         query = query.where(Municipality.region == region)
+
+    # Default to BC so existing /municipalities callers (legacy frontends,
+    # internal scripts) keep getting the BC list they expect.
+    effective_province: str | None
+    if province is None:
+        effective_province = PROVINCE_BC
+    elif province == PROVINCE_QUERY_ALL:
+        effective_province = None
+    else:
+        effective_province = province
+    if effective_province is not None:
+        query = query.where(Municipality.province == effective_province)
+
     if active_only:
         query = query.where(Municipality.is_active.is_(True))
     query = query.order_by(Municipality.name)

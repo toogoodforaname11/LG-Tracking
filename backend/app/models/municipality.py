@@ -1,10 +1,21 @@
 import enum
 from datetime import datetime, timezone
 
-from sqlalchemy import String, Text, Enum, DateTime, Integer, Boolean, ForeignKey, Index
+from sqlalchemy import (
+    String, Text, Enum, DateTime, Integer, Boolean, ForeignKey, Index, UniqueConstraint,
+)
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.database import Base
+
+
+# Province constants — referenced from API, seed registry, and migrations.
+# Stored as plain strings in Postgres (no enum type) so adding more provinces
+# in the future doesn't require an enum-type ALTER. Keep these as the only
+# source of truth for valid province values.
+PROVINCE_BC = "BC"
+PROVINCE_AB = "Alberta"
+VALID_PROVINCES: frozenset[str] = frozenset({PROVINCE_BC, PROVINCE_AB})
 
 
 class GovType(str, enum.Enum):
@@ -49,9 +60,21 @@ class Municipality(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     name: Mapped[str] = mapped_column(String(200), nullable=False)
-    short_name: Mapped[str] = mapped_column(String(100), nullable=False, unique=True)
+    # short_name is unique within a province (see UniqueConstraint below) so that
+    # BC and Alberta can independently use names like "Lacombe" without collision.
+    short_name: Mapped[str] = mapped_column(String(100), nullable=False)
     gov_type: Mapped[GovType] = mapped_column(Enum(GovType), nullable=False)
+    # region is a *sub*-province grouping ("CRD", "BC", "Alberta", ...).
+    # province is the authoritative top-level grouping for filtering on the
+    # subscription form. Both are kept for backward compatibility.
     region: Mapped[str] = mapped_column(String(100), nullable=False, default="CRD")
+    province: Mapped[str] = mapped_column(
+        String(40),
+        nullable=False,
+        default=PROVINCE_BC,
+        server_default=PROVINCE_BC,
+        index=True,
+    )
     website_url: Mapped[str | None] = mapped_column(Text)
     population: Mapped[int | None] = mapped_column(Integer)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
@@ -67,8 +90,12 @@ class Municipality(Base):
 
     sources: Mapped[list["Source"]] = relationship(back_populates="municipality", cascade="all")
 
+    __table_args__ = (
+        UniqueConstraint("short_name", "province", name="uq_muni_short_province"),
+    )
+
     def __repr__(self) -> str:
-        return f"<Municipality {self.short_name}>"
+        return f"<Municipality {self.short_name} ({self.province})>"
 
 
 class Source(Base):
