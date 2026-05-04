@@ -31,14 +31,26 @@ The matrix is rebuilt after each phase. Phase 1 entries below; remaining
 339 entries start as `Phase: -` / `Status: PLACEHOLDER` and migrate into
 phase sub-tables as their batches run.
 
-### Phase 1 (10 munis — completed YYYY-MM-DD)
+### Phase 1 (10 munis — completed 2026-05-04)
 
-This sub-table is filled in after the Phase 1 live validation runs
-against `scripts/poll.py`. See the per-phase tables below for batch results.
+| # | Municipality | Tier   | Sources | Platform           | Status     | Items | Last validated | Notes |
+|---|--------------|--------|--------:|--------------------|------------|------:|----------------|-------|
+| 1 | Toronto      | single | 2       | Custom* + YouTube  | DEMOTED    | 0     | 2026-05-04 | Bespoke portal — see ON-001. |
+| 2 | Ottawa       | single | 2       | eSCRIBE + YouTube  | READY      | 0     | 2026-05-04 | eSCRIBE portal returns 200 but no items today (AJAX-only calendar similar to AB-007). |
+| 3 | Mississauga  | lower  | 2       | eSCRIBE + YouTube  | VALIDATED  | 13    | 2026-05-04 | eSCRIBE 13 agendas live. |
+| 4 | Brampton     | lower  | 2       | eSCRIBE + YouTube  | VALIDATED  | 10    | 2026-05-04 | eSCRIBE 10 agendas live. |
+| 5 | Hamilton     | single | 2       | eSCRIBE + YouTube  | VALIDATED  | 13    | 2026-05-04 | eSCRIBE 13 agendas live. |
+| 6 | London       | single | 2       | eSCRIBE + YouTube  | VALIDATED  |  6    | 2026-05-04 | eSCRIBE 6 agendas live. |
+| 7 | Markham      | lower  | 2       | eSCRIBE + YouTube  | VALIDATED  |  5    | 2026-05-04 | eSCRIBE 5 agendas live. |
+| 8 | Vaughan      | lower  | 2       | eSCRIBE + YouTube  | VALIDATED  | 10    | 2026-05-04 | eSCRIBE 10 agendas live. |
+| 9 | Kitchener    | lower  | 2       | eSCRIBE + YouTube  | VALIDATED  | 12    | 2026-05-04 | eSCRIBE 12 agendas live. |
+| 10| Windsor      | single | 2       | eSCRIBE + YouTube  | READY      | 0     | 2026-05-04 | eSCRIBE portal returns 200 but no items today (AJAX-only calendar similar to AB-007). |
+
+**Phase 1 summary**: 7/10 VALIDATED, 2 READY (AJAX-only — same pattern as AB-007), 1 DEMOTED (Toronto's custom portal — ON-001).
 
 ## Phases completed
 
-- **Phase 1** — 10 / 349 munis seeded with full configs. Validation pending.
+- **Phase 1** — 10 / 349 munis done. 7 producing items live as of 2026-05-04.
 - **Phases 2..N** — pending.
 
 ## How to advance the tracker
