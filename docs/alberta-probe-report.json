@@ -1,0 +1,6690 @@
+[
+  {
+    "short_name": "Acme",
+    "website_url": "https://www.acme.ca/",
+    "candidates_tried": [
+      "www.acme.ca",
+      "acme.ca",
+      "www.townofacme.ca",
+      "townofacme.ca",
+      "www.cityofacme.ca",
+      "cityofacme.ca",
+      "www.villageofacme.ca",
+      "villageofacme.ca",
+      "www.acmecounty.ca",
+      "acmecounty.ca",
+      "www.acme.com",
+      "acme.com",
+      "www.acme-ab.ca",
+      "acme-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Alberta Beach",
+    "website_url": "https://www.albertabeach.com/",
+    "candidates_tried": [
+      "www.albertabeach.ca",
+      "albertabeach.ca",
+      "www.townofalbertabeach.ca",
+      "townofalbertabeach.ca",
+      "www.cityofalbertabeach.ca",
+      "cityofalbertabeach.ca",
+      "www.villageofalbertabeach.ca",
+      "villageofalbertabeach.ca",
+      "www.albertabeachcounty.ca",
+      "albertabeachcounty.ca",
+      "www.alberta-beach.ca",
+      "alberta-beach.ca",
+      "www.albertabeach.com",
+      "albertabeach.com",
+      "www.albertabeach-ab.ca",
+      "albertabeach-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Alix",
+    "website_url": "https://www.villageofalix.ca/",
+    "candidates_tried": [
+      "www.alix.ca",
+      "alix.ca",
+      "www.townofalix.ca",
+      "townofalix.ca",
+      "www.cityofalix.ca",
+      "cityofalix.ca",
+      "www.villageofalix.ca",
+      "villageofalix.ca",
+      "www.alixcounty.ca",
+      "alixcounty.ca",
+      "www.alix.com",
+      "alix.com",
+      "www.alix-ab.ca",
+      "alix-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Alliance",
+    "website_url": "https://www.villageofalliance.ca/",
+    "candidates_tried": [
+      "www.alliance.ca",
+      "alliance.ca",
+      "www.townofalliance.ca",
+      "townofalliance.ca",
+      "www.cityofalliance.ca",
+      "cityofalliance.ca",
+      "www.villageofalliance.ca",
+      "villageofalliance.ca",
+      "www.alliancecounty.ca",
+      "alliancecounty.ca",
+      "www.alliance.com",
+      "alliance.com",
+      "www.alliance-ab.ca",
+      "alliance-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Andrew",
+    "website_url": "https://www.andrew.com/",
+    "candidates_tried": [
+      "www.andrew.ca",
+      "andrew.ca",
+      "www.townofandrew.ca",
+      "townofandrew.ca",
+      "www.cityofandrew.ca",
+      "cityofandrew.ca",
+      "www.villageofandrew.ca",
+      "villageofandrew.ca",
+      "www.andrewcounty.ca",
+      "andrewcounty.ca",
+      "www.andrew.com",
+      "andrew.com",
+      "www.andrew-ab.ca",
+      "andrew-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/@AndrewConnectivity"
+      ]
+    }
+  },
+  {
+    "short_name": "Arrowwood",
+    "website_url": "https://www.villageofarrowwood.ca/",
+    "candidates_tried": [
+      "www.arrowwood.ca",
+      "arrowwood.ca",
+      "www.townofarrowwood.ca",
+      "townofarrowwood.ca",
+      "www.cityofarrowwood.ca",
+      "cityofarrowwood.ca",
+      "www.villageofarrowwood.ca",
+      "villageofarrowwood.ca",
+      "www.arrowwoodcounty.ca",
+      "arrowwoodcounty.ca",
+      "www.arrowwood.com",
+      "arrowwood.com",
+      "www.arrowwood-ab.ca",
+      "arrowwood-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Athabasca County",
+    "website_url": "https://www.athabasca.ca/",
+    "candidates_tried": [
+      "www.athabascacounty.ca",
+      "athabascacounty.ca",
+      "www.townofathabasca.ca",
+      "townofathabasca.ca",
+      "www.cityofathabasca.ca",
+      "cityofathabasca.ca",
+      "www.villageofathabasca.ca",
+      "villageofathabasca.ca",
+      "www.athabasca.ca",
+      "athabasca.ca",
+      "www.athabascacounty.com",
+      "athabascacounty.com",
+      "www.athabasca-ab.ca",
+      "athabasca-ab.ca"
+    ],
+    "platform_links": {
+      "civicweb": [
+        "https://athabasca.civicweb.net/filepro/documents",
+        "https://athabasca.civicweb.net/filepro/documents/4464"
+      ]
+    }
+  },
+  {
+    "short_name": "Banff",
+    "website_url": "https://www.banff.ca/",
+    "candidates_tried": [
+      "www.banff.ca",
+      "banff.ca",
+      "www.townofbanff.ca",
+      "townofbanff.ca",
+      "www.cityofbanff.ca",
+      "cityofbanff.ca",
+      "www.villageofbanff.ca",
+      "villageofbanff.ca",
+      "www.banffcounty.ca",
+      "banffcounty.ca",
+      "www.banff.com",
+      "banff.com",
+      "www.banff-ab.ca",
+      "banff-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Barnwell",
+    "website_url": "https://www.barnwell.ca/",
+    "candidates_tried": [
+      "www.barnwell.ca",
+      "barnwell.ca",
+      "www.townofbarnwell.ca",
+      "townofbarnwell.ca",
+      "www.cityofbarnwell.ca",
+      "cityofbarnwell.ca",
+      "www.villageofbarnwell.ca",
+      "villageofbarnwell.ca",
+      "www.barnwellcounty.ca",
+      "barnwellcounty.ca",
+      "www.barnwell.com",
+      "barnwell.com",
+      "www.barnwell-ab.ca",
+      "barnwell-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Barons",
+    "website_url": "https://www.barons.ca/",
+    "candidates_tried": [
+      "www.barons.ca",
+      "barons.ca",
+      "www.townofbarons.ca",
+      "townofbarons.ca",
+      "www.cityofbarons.ca",
+      "cityofbarons.ca",
+      "www.villageofbarons.ca",
+      "villageofbarons.ca",
+      "www.baronscounty.ca",
+      "baronscounty.ca",
+      "www.barons.com",
+      "barons.com",
+      "www.barons-ab.ca",
+      "barons-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Barrhead",
+    "website_url": "https://www.barrhead.ca/",
+    "candidates_tried": [
+      "www.barrhead.ca",
+      "barrhead.ca",
+      "www.townofbarrhead.ca",
+      "townofbarrhead.ca",
+      "www.cityofbarrhead.ca",
+      "cityofbarrhead.ca",
+      "www.villageofbarrhead.ca",
+      "villageofbarrhead.ca",
+      "www.barrheadcounty.ca",
+      "barrheadcounty.ca",
+      "www.barrhead.com",
+      "barrhead.com",
+      "www.barrhead-ab.ca",
+      "barrhead-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Bassano",
+    "website_url": "https://bassano.ca/",
+    "candidates_tried": [
+      "www.bassano.ca",
+      "bassano.ca",
+      "www.townofbassano.ca",
+      "townofbassano.ca",
+      "www.cityofbassano.ca",
+      "cityofbassano.ca",
+      "www.villageofbassano.ca",
+      "villageofbassano.ca",
+      "www.bassanocounty.ca",
+      "bassanocounty.ca",
+      "www.bassano.com",
+      "bassano.com",
+      "www.bassano-ab.ca",
+      "bassano-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Bawlf",
+    "website_url": null,
+    "candidates_tried": [
+      "www.bawlf.ca",
+      "bawlf.ca",
+      "www.townofbawlf.ca",
+      "townofbawlf.ca",
+      "www.cityofbawlf.ca",
+      "cityofbawlf.ca",
+      "www.villageofbawlf.ca",
+      "villageofbawlf.ca",
+      "www.bawlfcounty.ca",
+      "bawlfcounty.ca",
+      "www.bawlf.com",
+      "bawlf.com",
+      "www.bawlf-ab.ca",
+      "bawlf-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Beaumont",
+    "website_url": "https://www.beaumont.ca/",
+    "candidates_tried": [
+      "www.beaumont.ca",
+      "beaumont.ca",
+      "www.townofbeaumont.ca",
+      "townofbeaumont.ca",
+      "www.cityofbeaumont.ca",
+      "cityofbeaumont.ca",
+      "www.villageofbeaumont.ca",
+      "villageofbeaumont.ca",
+      "www.beaumontcounty.ca",
+      "beaumontcounty.ca",
+      "www.beaumont.com",
+      "beaumont.com",
+      "www.beaumont-ab.ca",
+      "beaumont-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Beaver County",
+    "website_url": "https://www.beavercounty.ca/",
+    "candidates_tried": [
+      "www.beavercounty.ca",
+      "beavercounty.ca",
+      "www.townofbeaver.ca",
+      "townofbeaver.ca",
+      "www.cityofbeaver.ca",
+      "cityofbeaver.ca",
+      "www.villageofbeaver.ca",
+      "villageofbeaver.ca",
+      "www.beaver.ca",
+      "beaver.ca",
+      "www.beavercounty.com",
+      "beavercounty.com",
+      "www.beaver-ab.ca",
+      "beaver-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Bentley",
+    "website_url": "https://www.townofbentley.ca/",
+    "candidates_tried": [
+      "www.bentley.ca",
+      "bentley.ca",
+      "www.townofbentley.ca",
+      "townofbentley.ca",
+      "www.cityofbentley.ca",
+      "cityofbentley.ca",
+      "www.villageofbentley.ca",
+      "villageofbentley.ca",
+      "www.bentleycounty.ca",
+      "bentleycounty.ca",
+      "www.bentley.com",
+      "bentley.com",
+      "www.bentley-ab.ca",
+      "bentley-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Berwyn",
+    "website_url": "https://www.berwyn.ca/",
+    "candidates_tried": [
+      "www.berwyn.ca",
+      "berwyn.ca",
+      "www.townofberwyn.ca",
+      "townofberwyn.ca",
+      "www.cityofberwyn.ca",
+      "cityofberwyn.ca",
+      "www.villageofberwyn.ca",
+      "villageofberwyn.ca",
+      "www.berwyncounty.ca",
+      "berwyncounty.ca",
+      "www.berwyn.com",
+      "berwyn.com",
+      "www.berwyn-ab.ca",
+      "berwyn-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Big Lakes County",
+    "website_url": "https://www.biglakescounty.ca/",
+    "candidates_tried": [
+      "www.biglakescounty.ca",
+      "biglakescounty.ca",
+      "www.townofbiglakes.ca",
+      "townofbiglakes.ca",
+      "www.cityofbiglakes.ca",
+      "cityofbiglakes.ca",
+      "www.villageofbiglakes.ca",
+      "villageofbiglakes.ca",
+      "www.big-lakes.ca",
+      "big-lakes.ca",
+      "www.biglakescounty.com",
+      "biglakescounty.com",
+      "www.biglakes-ab.ca",
+      "biglakes-ab.ca"
+    ],
+    "platform_links": {
+      "escribe": [
+        "https://pub-biglakescounty.escribemeetings.com/?FillWidth=1"
+      ]
+    }
+  },
+  {
+    "short_name": "Big Valley",
+    "website_url": "https://www.villageofbigvalley.ca/",
+    "candidates_tried": [
+      "www.bigvalley.ca",
+      "bigvalley.ca",
+      "www.townofbigvalley.ca",
+      "townofbigvalley.ca",
+      "www.cityofbigvalley.ca",
+      "cityofbigvalley.ca",
+      "www.villageofbigvalley.ca",
+      "villageofbigvalley.ca",
+      "www.bigvalleycounty.ca",
+      "bigvalleycounty.ca",
+      "www.big-valley.ca",
+      "big-valley.ca",
+      "www.bigvalley.com",
+      "bigvalley.com",
+      "www.bigvalley-ab.ca",
+      "bigvalley-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Birch Hills County",
+    "website_url": "https://www.birchhillscounty.com/",
+    "candidates_tried": [
+      "www.birchhillscounty.ca",
+      "birchhillscounty.ca",
+      "www.townofbirchhills.ca",
+      "townofbirchhills.ca",
+      "www.cityofbirchhills.ca",
+      "cityofbirchhills.ca",
+      "www.villageofbirchhills.ca",
+      "villageofbirchhills.ca",
+      "www.birch-hills.ca",
+      "birch-hills.ca",
+      "www.birchhillscounty.com",
+      "birchhillscounty.com",
+      "www.birchhills-ab.ca",
+      "birchhills-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Bittern Lake",
+    "website_url": "https://www.villageofbitternlake.ca/",
+    "candidates_tried": [
+      "www.bitternlake.ca",
+      "bitternlake.ca",
+      "www.townofbitternlake.ca",
+      "townofbitternlake.ca",
+      "www.cityofbitternlake.ca",
+      "cityofbitternlake.ca",
+      "www.villageofbitternlake.ca",
+      "villageofbitternlake.ca",
+      "www.bitternlakecounty.ca",
+      "bitternlakecounty.ca",
+      "www.bittern-lake.ca",
+      "bittern-lake.ca",
+      "www.bitternlake.com",
+      "bitternlake.com",
+      "www.bitternlake-ab.ca",
+      "bitternlake-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Black Diamond",
+    "website_url": "https://www.blackdiamond.ca/",
+    "candidates_tried": [
+      "www.blackdiamond.ca",
+      "blackdiamond.ca",
+      "www.townofblackdiamond.ca",
+      "townofblackdiamond.ca",
+      "www.cityofblackdiamond.ca",
+      "cityofblackdiamond.ca",
+      "www.villageofblackdiamond.ca",
+      "villageofblackdiamond.ca",
+      "www.blackdiamondcounty.ca",
+      "blackdiamondcounty.ca",
+      "www.black-diamond.ca",
+      "black-diamond.ca",
+      "www.blackdiamond.com",
+      "blackdiamond.com",
+      "www.blackdiamond-ab.ca",
+      "blackdiamond-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Blackfalds",
+    "website_url": "https://www.blackfalds.ca/",
+    "candidates_tried": [
+      "www.blackfalds.ca",
+      "blackfalds.ca",
+      "www.townofblackfalds.ca",
+      "townofblackfalds.ca",
+      "www.cityofblackfalds.ca",
+      "cityofblackfalds.ca",
+      "www.villageofblackfalds.ca",
+      "villageofblackfalds.ca",
+      "www.blackfaldscounty.ca",
+      "blackfaldscounty.ca",
+      "www.blackfalds.com",
+      "blackfalds.com",
+      "www.blackfalds-ab.ca",
+      "blackfalds-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Bon Accord",
+    "website_url": "https://www.bonaccord.ca/",
+    "candidates_tried": [
+      "www.bonaccord.ca",
+      "bonaccord.ca",
+      "www.townofbonaccord.ca",
+      "townofbonaccord.ca",
+      "www.cityofbonaccord.ca",
+      "cityofbonaccord.ca",
+      "www.villageofbonaccord.ca",
+      "villageofbonaccord.ca",
+      "www.bonaccordcounty.ca",
+      "bonaccordcounty.ca",
+      "www.bon-accord.ca",
+      "bon-accord.ca",
+      "www.bonaccord.com",
+      "bonaccord.com",
+      "www.bonaccord-ab.ca",
+      "bonaccord-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/@bonaccordab"
+      ]
+    }
+  },
+  {
+    "short_name": "Bonnyville",
+    "website_url": "https://www.bonnyville.ca/",
+    "candidates_tried": [
+      "www.bonnyville.ca",
+      "bonnyville.ca",
+      "www.townofbonnyville.ca",
+      "townofbonnyville.ca",
+      "www.cityofbonnyville.ca",
+      "cityofbonnyville.ca",
+      "www.villageofbonnyville.ca",
+      "villageofbonnyville.ca",
+      "www.bonnyvillecounty.ca",
+      "bonnyvillecounty.ca",
+      "www.bonnyville.com",
+      "bonnyville.com",
+      "www.bonnyville-ab.ca",
+      "bonnyville-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/channel/UCzzqOo841-77fv6ifGuV2FQ"
+      ]
+    }
+  },
+  {
+    "short_name": "Bow Island",
+    "website_url": "https://www.bowisland.com/",
+    "candidates_tried": [
+      "www.bowisland.ca",
+      "bowisland.ca",
+      "www.townofbowisland.ca",
+      "townofbowisland.ca",
+      "www.cityofbowisland.ca",
+      "cityofbowisland.ca",
+      "www.villageofbowisland.ca",
+      "villageofbowisland.ca",
+      "www.bowislandcounty.ca",
+      "bowislandcounty.ca",
+      "www.bow-island.ca",
+      "bow-island.ca",
+      "www.bowisland.com",
+      "bowisland.com",
+      "www.bowisland-ab.ca",
+      "bowisland-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Bowden",
+    "website_url": "https://www.bowden.ca/",
+    "candidates_tried": [
+      "www.bowden.ca",
+      "bowden.ca",
+      "www.townofbowden.ca",
+      "townofbowden.ca",
+      "www.cityofbowden.ca",
+      "cityofbowden.ca",
+      "www.villageofbowden.ca",
+      "villageofbowden.ca",
+      "www.bowdencounty.ca",
+      "bowdencounty.ca",
+      "www.bowden.com",
+      "bowden.com",
+      "www.bowden-ab.ca",
+      "bowden-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Boyle",
+    "website_url": "https://www.boyle.com/",
+    "candidates_tried": [
+      "www.boyle.ca",
+      "boyle.ca",
+      "www.townofboyle.ca",
+      "townofboyle.ca",
+      "www.cityofboyle.ca",
+      "cityofboyle.ca",
+      "www.villageofboyle.ca",
+      "villageofboyle.ca",
+      "www.boylecounty.ca",
+      "boylecounty.ca",
+      "www.boyle.com",
+      "boyle.com",
+      "www.boyle-ab.ca",
+      "boyle-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Brazeau County",
+    "website_url": null,
+    "candidates_tried": [
+      "www.brazeaucounty.ca",
+      "brazeaucounty.ca",
+      "www.townofbrazeau.ca",
+      "townofbrazeau.ca",
+      "www.cityofbrazeau.ca",
+      "cityofbrazeau.ca",
+      "www.villageofbrazeau.ca",
+      "villageofbrazeau.ca",
+      "www.brazeau.ca",
+      "brazeau.ca",
+      "www.brazeaucounty.com",
+      "brazeaucounty.com",
+      "www.brazeau-ab.ca",
+      "brazeau-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Brooks",
+    "website_url": "https://www.brooks.ca/",
+    "candidates_tried": [
+      "www.brooks.ca",
+      "brooks.ca",
+      "www.townofbrooks.ca",
+      "townofbrooks.ca",
+      "www.cityofbrooks.ca",
+      "cityofbrooks.ca",
+      "www.villageofbrooks.ca",
+      "villageofbrooks.ca",
+      "www.brookscounty.ca",
+      "brookscounty.ca",
+      "www.brooks.com",
+      "brooks.com",
+      "www.brooks-ab.ca",
+      "brooks-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/@CityOfBrooksAB"
+      ]
+    }
+  },
+  {
+    "short_name": "Bruderheim",
+    "website_url": "https://www.bruderheim.ca/",
+    "candidates_tried": [
+      "www.bruderheim.ca",
+      "bruderheim.ca",
+      "www.townofbruderheim.ca",
+      "townofbruderheim.ca",
+      "www.cityofbruderheim.ca",
+      "cityofbruderheim.ca",
+      "www.villageofbruderheim.ca",
+      "villageofbruderheim.ca",
+      "www.bruderheimcounty.ca",
+      "bruderheimcounty.ca",
+      "www.bruderheim.com",
+      "bruderheim.com",
+      "www.bruderheim-ab.ca",
+      "bruderheim-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Buffalo Lake",
+    "website_url": null,
+    "candidates_tried": [
+      "www.buffalolake.ca",
+      "buffalolake.ca",
+      "www.townofbuffalolake.ca",
+      "townofbuffalolake.ca",
+      "www.cityofbuffalolake.ca",
+      "cityofbuffalolake.ca",
+      "www.villageofbuffalolake.ca",
+      "villageofbuffalolake.ca",
+      "www.buffalolakecounty.ca",
+      "buffalolakecounty.ca",
+      "www.buffalo-lake.ca",
+      "buffalo-lake.ca",
+      "www.buffalolake.com",
+      "buffalolake.com",
+      "www.buffalolake-ab.ca",
+      "buffalolake-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Camrose",
+    "website_url": "https://www.camrose.ca/",
+    "candidates_tried": [
+      "www.camrose.ca",
+      "camrose.ca",
+      "www.townofcamrose.ca",
+      "townofcamrose.ca",
+      "www.cityofcamrose.ca",
+      "cityofcamrose.ca",
+      "www.villageofcamrose.ca",
+      "villageofcamrose.ca",
+      "www.camrosecounty.ca",
+      "camrosecounty.ca",
+      "www.camrose.com",
+      "camrose.com",
+      "www.camrose-ab.ca",
+      "camrose-ab.ca"
+    ],
+    "platform_links": {
+      "civicweb": [
+        "https://camrose.civicweb.net/Portal/",
+        "https://camrose.civicweb.net/filepro/document/100611/Water%20Restrictions%20Bylaw%203378-25.pdf",
+        "https://camrose.civicweb.net/filepro/document/101418/Community%20Standards%20Bylaw%203377-25.pdf",
+        "https://camrose.civicweb.net/filepro/document/104960/Recreation%20Facility%20User%20Advertising%20Council%20Policy.pdf",
+        "https://camrose.civicweb.net/filepro/document/104962/Subdivision%20and%20Development%20Security%20Council%20Policy.pdf"
+      ],
+      "youtube": [
+        "https://www.youtube.com/@city-of-camrose"
+      ]
+    }
+  },
+  {
+    "short_name": "Camrose County",
+    "website_url": "https://www.camrose.ca/",
+    "candidates_tried": [
+      "www.camrosecounty.ca",
+      "camrosecounty.ca",
+      "www.townofcamrose.ca",
+      "townofcamrose.ca",
+      "www.cityofcamrose.ca",
+      "cityofcamrose.ca",
+      "www.villageofcamrose.ca",
+      "villageofcamrose.ca",
+      "www.camrose.ca",
+      "camrose.ca",
+      "www.camrosecounty.com",
+      "camrosecounty.com",
+      "www.camrose-ab.ca",
+      "camrose-ab.ca"
+    ],
+    "platform_links": {
+      "civicweb": [
+        "https://camrose.civicweb.net/Portal/",
+        "https://camrose.civicweb.net/filepro/document/100611/Water%20Restrictions%20Bylaw%203378-25.pdf",
+        "https://camrose.civicweb.net/filepro/document/101418/Community%20Standards%20Bylaw%203377-25.pdf",
+        "https://camrose.civicweb.net/filepro/document/104960/Recreation%20Facility%20User%20Advertising%20Council%20Policy.pdf",
+        "https://camrose.civicweb.net/filepro/document/104962/Subdivision%20and%20Development%20Security%20Council%20Policy.pdf"
+      ],
+      "youtube": [
+        "https://www.youtube.com/@city-of-camrose"
+      ]
+    }
+  },
+  {
+    "short_name": "Canmore",
+    "website_url": "https://www.canmore.ca/",
+    "candidates_tried": [
+      "www.canmore.ca",
+      "canmore.ca",
+      "www.townofcanmore.ca",
+      "townofcanmore.ca",
+      "www.cityofcanmore.ca",
+      "cityofcanmore.ca",
+      "www.villageofcanmore.ca",
+      "villageofcanmore.ca",
+      "www.canmorecounty.ca",
+      "canmorecounty.ca",
+      "www.canmore.com",
+      "canmore.com",
+      "www.canmore-ab.ca",
+      "canmore-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/@thetownofcanmore",
+        "https://www.youtube.com/channel/UC3tmsrSkEDheQLgB0Ii_vBg"
+      ]
+    }
+  },
+  {
+    "short_name": "Carbon",
+    "website_url": "https://www.carbon.ca/",
+    "candidates_tried": [
+      "www.carbon.ca",
+      "carbon.ca",
+      "www.townofcarbon.ca",
+      "townofcarbon.ca",
+      "www.cityofcarbon.ca",
+      "cityofcarbon.ca",
+      "www.villageofcarbon.ca",
+      "villageofcarbon.ca",
+      "www.carboncounty.ca",
+      "carboncounty.ca",
+      "www.carbon.com",
+      "carbon.com",
+      "www.carbon-ab.ca",
+      "carbon-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Cardston",
+    "website_url": "https://www.cardston.ca/",
+    "candidates_tried": [
+      "www.cardston.ca",
+      "cardston.ca",
+      "www.townofcardston.ca",
+      "townofcardston.ca",
+      "www.cityofcardston.ca",
+      "cityofcardston.ca",
+      "www.villageofcardston.ca",
+      "villageofcardston.ca",
+      "www.cardstoncounty.ca",
+      "cardstoncounty.ca",
+      "www.cardston.com",
+      "cardston.com",
+      "www.cardston-ab.ca",
+      "cardston-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/channel/UCaCwvtT_3RDAa4pxw89e1zg"
+      ]
+    }
+  },
+  {
+    "short_name": "Cardston County",
+    "website_url": "https://www.cardston.ca/",
+    "candidates_tried": [
+      "www.cardstoncounty.ca",
+      "cardstoncounty.ca",
+      "www.townofcardston.ca",
+      "townofcardston.ca",
+      "www.cityofcardston.ca",
+      "cityofcardston.ca",
+      "www.villageofcardston.ca",
+      "villageofcardston.ca",
+      "www.cardston.ca",
+      "cardston.ca",
+      "www.cardstoncounty.com",
+      "cardstoncounty.com",
+      "www.cardston-ab.ca",
+      "cardston-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/channel/UCaCwvtT_3RDAa4pxw89e1zg"
+      ]
+    }
+  },
+  {
+    "short_name": "Carmangay",
+    "website_url": "https://www.carmangay.ca/",
+    "candidates_tried": [
+      "www.carmangay.ca",
+      "carmangay.ca",
+      "www.townofcarmangay.ca",
+      "townofcarmangay.ca",
+      "www.cityofcarmangay.ca",
+      "cityofcarmangay.ca",
+      "www.villageofcarmangay.ca",
+      "villageofcarmangay.ca",
+      "www.carmangaycounty.ca",
+      "carmangaycounty.ca",
+      "www.carmangay.com",
+      "carmangay.com",
+      "www.carmangay-ab.ca",
+      "carmangay-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Caroline",
+    "website_url": null,
+    "candidates_tried": [
+      "www.caroline.ca",
+      "caroline.ca",
+      "www.townofcaroline.ca",
+      "townofcaroline.ca",
+      "www.cityofcaroline.ca",
+      "cityofcaroline.ca",
+      "www.villageofcaroline.ca",
+      "villageofcaroline.ca",
+      "www.carolinecounty.ca",
+      "carolinecounty.ca",
+      "www.caroline.com",
+      "caroline.com",
+      "www.caroline-ab.ca",
+      "caroline-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Carstairs",
+    "website_url": "https://www.carstairs.ca/",
+    "candidates_tried": [
+      "www.carstairs.ca",
+      "carstairs.ca",
+      "www.townofcarstairs.ca",
+      "townofcarstairs.ca",
+      "www.cityofcarstairs.ca",
+      "cityofcarstairs.ca",
+      "www.villageofcarstairs.ca",
+      "villageofcarstairs.ca",
+      "www.carstairscounty.ca",
+      "carstairscounty.ca",
+      "www.carstairs.com",
+      "carstairs.com",
+      "www.carstairs-ab.ca",
+      "carstairs-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Castor",
+    "website_url": null,
+    "candidates_tried": [
+      "www.castor.ca",
+      "castor.ca",
+      "www.townofcastor.ca",
+      "townofcastor.ca",
+      "www.cityofcastor.ca",
+      "cityofcastor.ca",
+      "www.villageofcastor.ca",
+      "villageofcastor.ca",
+      "www.castorcounty.ca",
+      "castorcounty.ca",
+      "www.castor.com",
+      "castor.com",
+      "www.castor-ab.ca",
+      "castor-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Chauvin",
+    "website_url": null,
+    "candidates_tried": [
+      "www.chauvin.ca",
+      "chauvin.ca",
+      "www.townofchauvin.ca",
+      "townofchauvin.ca",
+      "www.cityofchauvin.ca",
+      "cityofchauvin.ca",
+      "www.villageofchauvin.ca",
+      "villageofchauvin.ca",
+      "www.chauvincounty.ca",
+      "chauvincounty.ca",
+      "www.chauvin.com",
+      "chauvin.com",
+      "www.chauvin-ab.ca",
+      "chauvin-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Chestermere",
+    "website_url": "https://www.chestermere.ca/",
+    "candidates_tried": [
+      "www.chestermere.ca",
+      "chestermere.ca",
+      "www.townofchestermere.ca",
+      "townofchestermere.ca",
+      "www.cityofchestermere.ca",
+      "cityofchestermere.ca",
+      "www.villageofchestermere.ca",
+      "villageofchestermere.ca",
+      "www.chestermerecounty.ca",
+      "chestermerecounty.ca",
+      "www.chestermere.com",
+      "chestermere.com",
+      "www.chestermere-ab.ca",
+      "chestermere-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Chipman",
+    "website_url": null,
+    "candidates_tried": [
+      "www.chipman.ca",
+      "chipman.ca",
+      "www.townofchipman.ca",
+      "townofchipman.ca",
+      "www.cityofchipman.ca",
+      "cityofchipman.ca",
+      "www.villageofchipman.ca",
+      "villageofchipman.ca",
+      "www.chipmancounty.ca",
+      "chipmancounty.ca",
+      "www.chipman.com",
+      "chipman.com",
+      "www.chipman-ab.ca",
+      "chipman-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Claresholm",
+    "website_url": "https://www.claresholm.ca/",
+    "candidates_tried": [
+      "www.claresholm.ca",
+      "claresholm.ca",
+      "www.townofclaresholm.ca",
+      "townofclaresholm.ca",
+      "www.cityofclaresholm.ca",
+      "cityofclaresholm.ca",
+      "www.villageofclaresholm.ca",
+      "villageofclaresholm.ca",
+      "www.claresholmcounty.ca",
+      "claresholmcounty.ca",
+      "www.claresholm.com",
+      "claresholm.com",
+      "www.claresholm-ab.ca",
+      "claresholm-ab.ca"
+    ],
+    "platform_links": {
+      "escribe": [
+        "https://pub-claresholm.escribemeetings.com/?FillWidth=1",
+        "https://pub-claresholm.escribemeetings.com/Meeting.aspx?Id=182cdcab-6d3e-401c-9000-726db41db68a&amp;Agenda=Agenda&amp;lang=English",
+        "https://pub-claresholm.escribemeetings.com/Meeting.aspx?Id=190c3eae-f343-4bb5-9741-aa5c974f3cea&amp;Agenda=Agenda&amp;lang=English",
+        "https://pub-claresholm.escribemeetings.com/Meeting.aspx?Id=24ac05e9-6103-4123-acf6-1693fc3b6810&amp;Agenda=Agenda&amp;lang=English",
+        "https://pub-claresholm.escribemeetings.com/Meeting.aspx?Id=37251292-0293-4778-8a0b-07e05c41c212&amp;Agenda=Agenda&amp;lang=English"
+      ],
+      "youtube": [
+        "https://www.youtube.com/channel/UCe3OPyLhTzPajvPVAtNL1KA"
+      ]
+    }
+  },
+  {
+    "short_name": "Clear Hills County",
+    "website_url": null,
+    "candidates_tried": [
+      "www.clearhillscounty.ca",
+      "clearhillscounty.ca",
+      "www.townofclearhills.ca",
+      "townofclearhills.ca",
+      "www.cityofclearhills.ca",
+      "cityofclearhills.ca",
+      "www.villageofclearhills.ca",
+      "villageofclearhills.ca",
+      "www.clear-hills.ca",
+      "clear-hills.ca",
+      "www.clearhillscounty.com",
+      "clearhillscounty.com",
+      "www.clearhills-ab.ca",
+      "clearhills-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Clearwater County",
+    "website_url": "https://www.clearwatercounty.ca/",
+    "candidates_tried": [
+      "www.clearwatercounty.ca",
+      "clearwatercounty.ca",
+      "www.townofclearwater.ca",
+      "townofclearwater.ca",
+      "www.cityofclearwater.ca",
+      "cityofclearwater.ca",
+      "www.villageofclearwater.ca",
+      "villageofclearwater.ca",
+      "www.clearwater.ca",
+      "clearwater.ca",
+      "www.clearwatercounty.com",
+      "clearwatercounty.com",
+      "www.clearwater-ab.ca",
+      "clearwater-ab.ca"
+    ],
+    "platform_links": {
+      "civicweb": [
+        "https://clearwatercounty.civicweb.net/Portal/Default.aspx",
+        "https://clearwatercounty.civicweb.net/Portal/MeetingSchedule.aspx",
+        "https://clearwatercounty.civicweb.net/filepro/documents/?preview=37044"
+      ],
+      "youtube": [
+        "https://www.youtube.com/user/ClearwaterCounty"
+      ]
+    }
+  },
+  {
+    "short_name": "Clive",
+    "website_url": "https://www.clive.ca/",
+    "candidates_tried": [
+      "www.clive.ca",
+      "clive.ca",
+      "www.townofclive.ca",
+      "townofclive.ca",
+      "www.cityofclive.ca",
+      "cityofclive.ca",
+      "www.villageofclive.ca",
+      "villageofclive.ca",
+      "www.clivecounty.ca",
+      "clivecounty.ca",
+      "www.clive.com",
+      "clive.com",
+      "www.clive-ab.ca",
+      "clive-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Clyde",
+    "website_url": "https://www.villageofclyde.ca/",
+    "candidates_tried": [
+      "www.clyde.ca",
+      "clyde.ca",
+      "www.townofclyde.ca",
+      "townofclyde.ca",
+      "www.cityofclyde.ca",
+      "cityofclyde.ca",
+      "www.villageofclyde.ca",
+      "villageofclyde.ca",
+      "www.clydecounty.ca",
+      "clydecounty.ca",
+      "www.clyde.com",
+      "clyde.com",
+      "www.clyde-ab.ca",
+      "clyde-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Coaldale",
+    "website_url": "https://www.coaldale.ca/",
+    "candidates_tried": [
+      "www.coaldale.ca",
+      "coaldale.ca",
+      "www.townofcoaldale.ca",
+      "townofcoaldale.ca",
+      "www.cityofcoaldale.ca",
+      "cityofcoaldale.ca",
+      "www.villageofcoaldale.ca",
+      "villageofcoaldale.ca",
+      "www.coaldalecounty.ca",
+      "coaldalecounty.ca",
+      "www.coaldale.com",
+      "coaldale.com",
+      "www.coaldale-ab.ca",
+      "coaldale-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Coalhurst",
+    "website_url": "https://www.coalhurst.ca/",
+    "candidates_tried": [
+      "www.coalhurst.ca",
+      "coalhurst.ca",
+      "www.townofcoalhurst.ca",
+      "townofcoalhurst.ca",
+      "www.cityofcoalhurst.ca",
+      "cityofcoalhurst.ca",
+      "www.villageofcoalhurst.ca",
+      "villageofcoalhurst.ca",
+      "www.coalhurstcounty.ca",
+      "coalhurstcounty.ca",
+      "www.coalhurst.com",
+      "coalhurst.com",
+      "www.coalhurst-ab.ca",
+      "coalhurst-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/@TownofCoalhurstAB"
+      ]
+    }
+  },
+  {
+    "short_name": "Cold Lake",
+    "website_url": "https://www.coldlake.com/",
+    "candidates_tried": [
+      "www.coldlake.ca",
+      "coldlake.ca",
+      "www.townofcoldlake.ca",
+      "townofcoldlake.ca",
+      "www.cityofcoldlake.ca",
+      "cityofcoldlake.ca",
+      "www.villageofcoldlake.ca",
+      "villageofcoldlake.ca",
+      "www.coldlakecounty.ca",
+      "coldlakecounty.ca",
+      "www.cold-lake.ca",
+      "cold-lake.ca",
+      "www.coldlake.com",
+      "coldlake.com",
+      "www.coldlake-ab.ca",
+      "coldlake-ab.ca"
+    ],
+    "platform_links": {
+      "escribe": [
+        "https://pub-coldlake.escribemeetings.com/"
+      ],
+      "youtube": [
+        "https://www.youtube.com/channel/UC8ak4UNJqfSvFEnhNc60BJg",
+        "https://www.youtube.com/channel/UCo5gGiSUgbZBxQhOn1xI5ow",
+        "https://www.youtube.com/user/CityOfColdLake"
+      ]
+    }
+  },
+  {
+    "short_name": "Coronation",
+    "website_url": "https://www.coronation.ca/",
+    "candidates_tried": [
+      "www.coronation.ca",
+      "coronation.ca",
+      "www.townofcoronation.ca",
+      "townofcoronation.ca",
+      "www.cityofcoronation.ca",
+      "cityofcoronation.ca",
+      "www.villageofcoronation.ca",
+      "villageofcoronation.ca",
+      "www.coronationcounty.ca",
+      "coronationcounty.ca",
+      "www.coronation.com",
+      "coronation.com",
+      "www.coronation-ab.ca",
+      "coronation-ab.ca"
+    ],
+    "platform_links": {
+      "civicweb": [
+        "https://coronation.civicweb.net/filepro/documents/",
+        "https://coronation.civicweb.net/filepro/documents/0"
+      ]
+    }
+  },
+  {
+    "short_name": "County of Barrhead",
+    "website_url": "https://www.barrhead.ca/",
+    "candidates_tried": [
+      "countyofbarrhead.ca",
+      "www.countyofbarrhead.ca",
+      "www.townofbarrhead.ca",
+      "townofbarrhead.ca",
+      "www.cityofbarrhead.ca",
+      "cityofbarrhead.ca",
+      "www.villageofbarrhead.ca",
+      "villageofbarrhead.ca",
+      "www.barrheadcounty.ca",
+      "barrheadcounty.ca",
+      "www.barrhead.ca",
+      "barrhead.ca",
+      "www.countyofbarrhead.com",
+      "countyofbarrhead.com",
+      "www.barrhead-ab.ca",
+      "barrhead-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "County of Grande Prairie",
+    "website_url": null,
+    "candidates_tried": [
+      "countyofgrandeprairie.ca",
+      "www.countyofgrandeprairie.ca",
+      "www.townofgrandeprairie.ca",
+      "townofgrandeprairie.ca",
+      "www.cityofgrandeprairie.ca",
+      "cityofgrandeprairie.ca",
+      "www.villageofgrandeprairie.ca",
+      "villageofgrandeprairie.ca",
+      "www.grandeprairiecounty.ca",
+      "grandeprairiecounty.ca",
+      "www.grande-prairie.ca",
+      "grande-prairie.ca",
+      "www.countyofgrandeprairie.com",
+      "countyofgrandeprairie.com",
+      "www.grandeprairie-ab.ca",
+      "grandeprairie-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "County of Minburn",
+    "website_url": null,
+    "candidates_tried": [
+      "countyofminburn.ca",
+      "www.countyofminburn.ca",
+      "www.townofminburn.ca",
+      "townofminburn.ca",
+      "www.cityofminburn.ca",
+      "cityofminburn.ca",
+      "www.villageofminburn.ca",
+      "villageofminburn.ca",
+      "www.minburncounty.ca",
+      "minburncounty.ca",
+      "www.minburn.ca",
+      "minburn.ca",
+      "www.countyofminburn.com",
+      "countyofminburn.com",
+      "www.minburn-ab.ca",
+      "minburn-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "County of Newell",
+    "website_url": "https://www.countyofnewell.com/",
+    "candidates_tried": [
+      "countyofnewell.ca",
+      "www.countyofnewell.ca",
+      "www.townofnewell.ca",
+      "townofnewell.ca",
+      "www.cityofnewell.ca",
+      "cityofnewell.ca",
+      "www.villageofnewell.ca",
+      "villageofnewell.ca",
+      "www.newellcounty.ca",
+      "newellcounty.ca",
+      "www.newell.ca",
+      "newell.ca",
+      "www.countyofnewell.com",
+      "countyofnewell.com",
+      "www.newell-ab.ca",
+      "newell-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "County of Northern Lights",
+    "website_url": "https://www.countyofnorthernlights.com/",
+    "candidates_tried": [
+      "countyofnorthernlights.ca",
+      "www.countyofnorthernlights.ca",
+      "www.townofnorthernlights.ca",
+      "townofnorthernlights.ca",
+      "www.cityofnorthernlights.ca",
+      "cityofnorthernlights.ca",
+      "www.villageofnorthernlights.ca",
+      "villageofnorthernlights.ca",
+      "www.northernlightscounty.ca",
+      "northernlightscounty.ca",
+      "www.northern-lights.ca",
+      "northern-lights.ca",
+      "www.countyofnorthernlights.com",
+      "countyofnorthernlights.com",
+      "www.northernlights-ab.ca",
+      "northernlights-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "County of Stettler",
+    "website_url": "https://www.stettlercounty.ca/",
+    "candidates_tried": [
+      "countyofstettler.ca",
+      "www.countyofstettler.ca",
+      "www.townofstettler.ca",
+      "townofstettler.ca",
+      "www.cityofstettler.ca",
+      "cityofstettler.ca",
+      "www.villageofstettler.ca",
+      "villageofstettler.ca",
+      "www.stettlercounty.ca",
+      "stettlercounty.ca",
+      "www.stettler.ca",
+      "stettler.ca",
+      "www.countyofstettler.com",
+      "countyofstettler.com",
+      "www.stettler-ab.ca",
+      "stettler-ab.ca"
+    ],
+    "platform_links": {
+      "escribe": [
+        "https://pub-stettlercounty.escribemeetings.com/?FillWidth=1"
+      ],
+      "youtube": [
+        "https://www.youtube.com/user/StettlerCounty"
+      ]
+    }
+  },
+  {
+    "short_name": "Crossfield",
+    "website_url": null,
+    "candidates_tried": [
+      "www.crossfield.ca",
+      "crossfield.ca",
+      "www.townofcrossfield.ca",
+      "townofcrossfield.ca",
+      "www.cityofcrossfield.ca",
+      "cityofcrossfield.ca",
+      "www.villageofcrossfield.ca",
+      "villageofcrossfield.ca",
+      "www.crossfieldcounty.ca",
+      "crossfieldcounty.ca",
+      "www.crossfield.com",
+      "crossfield.com",
+      "www.crossfield-ab.ca",
+      "crossfield-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Crowsnest Pass",
+    "website_url": "https://www.crowsnestpass.ca/",
+    "candidates_tried": [
+      "www.crowsnestpass.ca",
+      "crowsnestpass.ca",
+      "www.townofcrowsnestpass.ca",
+      "townofcrowsnestpass.ca",
+      "www.cityofcrowsnestpass.ca",
+      "cityofcrowsnestpass.ca",
+      "www.villageofcrowsnestpass.ca",
+      "villageofcrowsnestpass.ca",
+      "www.crowsnestpasscounty.ca",
+      "crowsnestpasscounty.ca",
+      "www.crowsnest-pass.ca",
+      "crowsnest-pass.ca",
+      "www.crowsnestpass.com",
+      "crowsnestpass.com",
+      "www.crowsnestpass-ab.ca",
+      "crowsnestpass-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Cypress County",
+    "website_url": "https://www.cypresscounty.com/",
+    "candidates_tried": [
+      "www.cypresscounty.ca",
+      "cypresscounty.ca",
+      "www.townofcypress.ca",
+      "townofcypress.ca",
+      "www.cityofcypress.ca",
+      "cityofcypress.ca",
+      "www.villageofcypress.ca",
+      "villageofcypress.ca",
+      "www.cypress.ca",
+      "cypress.ca",
+      "www.cypresscounty.com",
+      "cypresscounty.com",
+      "www.cypress-ab.ca",
+      "cypress-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Czar",
+    "website_url": "https://www.villageofczar.ca/",
+    "candidates_tried": [
+      "www.czar.ca",
+      "czar.ca",
+      "www.townofczar.ca",
+      "townofczar.ca",
+      "www.cityofczar.ca",
+      "cityofczar.ca",
+      "www.villageofczar.ca",
+      "villageofczar.ca",
+      "www.czarcounty.ca",
+      "czarcounty.ca",
+      "www.czar.com",
+      "czar.com",
+      "www.czar-ab.ca",
+      "czar-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Daysland",
+    "website_url": "https://www.daysland.ca/",
+    "candidates_tried": [
+      "www.daysland.ca",
+      "daysland.ca",
+      "www.townofdaysland.ca",
+      "townofdaysland.ca",
+      "www.cityofdaysland.ca",
+      "cityofdaysland.ca",
+      "www.villageofdaysland.ca",
+      "villageofdaysland.ca",
+      "www.dayslandcounty.ca",
+      "dayslandcounty.ca",
+      "www.daysland.com",
+      "daysland.com",
+      "www.daysland-ab.ca",
+      "daysland-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Delburne",
+    "website_url": "https://www.delburne.ca/",
+    "candidates_tried": [
+      "www.delburne.ca",
+      "delburne.ca",
+      "www.townofdelburne.ca",
+      "townofdelburne.ca",
+      "www.cityofdelburne.ca",
+      "cityofdelburne.ca",
+      "www.villageofdelburne.ca",
+      "villageofdelburne.ca",
+      "www.delburnecounty.ca",
+      "delburnecounty.ca",
+      "www.delburne.com",
+      "delburne.com",
+      "www.delburne-ab.ca",
+      "delburne-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Delia",
+    "website_url": "https://www.delia.ca/",
+    "candidates_tried": [
+      "www.delia.ca",
+      "delia.ca",
+      "www.townofdelia.ca",
+      "townofdelia.ca",
+      "www.cityofdelia.ca",
+      "cityofdelia.ca",
+      "www.villageofdelia.ca",
+      "villageofdelia.ca",
+      "www.deliacounty.ca",
+      "deliacounty.ca",
+      "www.delia.com",
+      "delia.com",
+      "www.delia-ab.ca",
+      "delia-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Devon",
+    "website_url": "https://www.devon.ca/",
+    "candidates_tried": [
+      "www.devon.ca",
+      "devon.ca",
+      "www.townofdevon.ca",
+      "townofdevon.ca",
+      "www.cityofdevon.ca",
+      "cityofdevon.ca",
+      "www.villageofdevon.ca",
+      "villageofdevon.ca",
+      "www.devoncounty.ca",
+      "devoncounty.ca",
+      "www.devon.com",
+      "devon.com",
+      "www.devon-ab.ca",
+      "devon-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/user/DevonAlberta"
+      ]
+    }
+  },
+  {
+    "short_name": "Dewberry",
+    "website_url": "https://www.villageofdewberry.ca/",
+    "candidates_tried": [
+      "www.dewberry.ca",
+      "dewberry.ca",
+      "www.townofdewberry.ca",
+      "townofdewberry.ca",
+      "www.cityofdewberry.ca",
+      "cityofdewberry.ca",
+      "www.villageofdewberry.ca",
+      "villageofdewberry.ca",
+      "www.dewberrycounty.ca",
+      "dewberrycounty.ca",
+      "www.dewberry.com",
+      "dewberry.com",
+      "www.dewberry-ab.ca",
+      "dewberry-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Didsbury",
+    "website_url": "https://www.didsbury.ca/",
+    "candidates_tried": [
+      "www.didsbury.ca",
+      "didsbury.ca",
+      "www.townofdidsbury.ca",
+      "townofdidsbury.ca",
+      "www.cityofdidsbury.ca",
+      "cityofdidsbury.ca",
+      "www.villageofdidsbury.ca",
+      "villageofdidsbury.ca",
+      "www.didsburycounty.ca",
+      "didsburycounty.ca",
+      "www.didsbury.com",
+      "didsbury.com",
+      "www.didsbury-ab.ca",
+      "didsbury-ab.ca"
+    ],
+    "platform_links": {
+      "escribe": [
+        "http://pub-didsbury.escribemeetings.com/",
+        "https://pub-didsbury.escribemeetings.com/"
+      ],
+      "youtube": [
+        "http://www.youtube.com/channel/UC-J11Gmd6oTHRcAWNdzy9fg",
+        "https://www.youtube.com/channel/UC-J11Gmd6oTHRcAWNdzy9fg"
+      ]
+    }
+  },
+  {
+    "short_name": "Donalda",
+    "website_url": null,
+    "candidates_tried": [
+      "www.donalda.ca",
+      "donalda.ca",
+      "www.townofdonalda.ca",
+      "townofdonalda.ca",
+      "www.cityofdonalda.ca",
+      "cityofdonalda.ca",
+      "www.villageofdonalda.ca",
+      "villageofdonalda.ca",
+      "www.donaldacounty.ca",
+      "donaldacounty.ca",
+      "www.donalda.com",
+      "donalda.com",
+      "www.donalda-ab.ca",
+      "donalda-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Duchess",
+    "website_url": "https://www.duchess.com/",
+    "candidates_tried": [
+      "www.duchess.ca",
+      "duchess.ca",
+      "www.townofduchess.ca",
+      "townofduchess.ca",
+      "www.cityofduchess.ca",
+      "cityofduchess.ca",
+      "www.villageofduchess.ca",
+      "villageofduchess.ca",
+      "www.duchesscounty.ca",
+      "duchesscounty.ca",
+      "www.duchess.com",
+      "duchess.com",
+      "www.duchess-ab.ca",
+      "duchess-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "East Prairie",
+    "website_url": "https://www.eastprairie.ca/",
+    "candidates_tried": [
+      "www.eastprairie.ca",
+      "eastprairie.ca",
+      "www.townofeastprairie.ca",
+      "townofeastprairie.ca",
+      "www.cityofeastprairie.ca",
+      "cityofeastprairie.ca",
+      "www.villageofeastprairie.ca",
+      "villageofeastprairie.ca",
+      "www.eastprairiecounty.ca",
+      "eastprairiecounty.ca",
+      "www.east-prairie.ca",
+      "east-prairie.ca",
+      "www.eastprairie.com",
+      "eastprairie.com",
+      "www.eastprairie-ab.ca",
+      "eastprairie-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Eckville",
+    "website_url": "https://www.eckville.com/",
+    "candidates_tried": [
+      "www.eckville.ca",
+      "eckville.ca",
+      "www.townofeckville.ca",
+      "townofeckville.ca",
+      "www.cityofeckville.ca",
+      "cityofeckville.ca",
+      "www.villageofeckville.ca",
+      "villageofeckville.ca",
+      "www.eckvillecounty.ca",
+      "eckvillecounty.ca",
+      "www.eckville.com",
+      "eckville.com",
+      "www.eckville-ab.ca",
+      "eckville-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Edgerton",
+    "website_url": "https://www.edgerton.ca/",
+    "candidates_tried": [
+      "www.edgerton.ca",
+      "edgerton.ca",
+      "www.townofedgerton.ca",
+      "townofedgerton.ca",
+      "www.cityofedgerton.ca",
+      "cityofedgerton.ca",
+      "www.villageofedgerton.ca",
+      "villageofedgerton.ca",
+      "www.edgertoncounty.ca",
+      "edgertoncounty.ca",
+      "www.edgerton.com",
+      "edgerton.com",
+      "www.edgerton-ab.ca",
+      "edgerton-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Edson",
+    "website_url": "https://www.edson.ca/",
+    "candidates_tried": [
+      "www.edson.ca",
+      "edson.ca",
+      "www.townofedson.ca",
+      "townofedson.ca",
+      "www.cityofedson.ca",
+      "cityofedson.ca",
+      "www.villageofedson.ca",
+      "villageofedson.ca",
+      "www.edsoncounty.ca",
+      "edsoncounty.ca",
+      "www.edson.com",
+      "edson.com",
+      "www.edson-ab.ca",
+      "edson-ab.ca"
+    ],
+    "platform_links": {
+      "civicweb": [
+        "http://edson.civicweb.net/Portal/default.aspx",
+        "https://edson.civicweb.net/Portal/",
+        "https://edson.civicweb.net/Portal/</a",
+        "https://edson.civicweb.net/filepro/documents/108",
+        "https://edson.civicweb.net/filepro/documents/24175?preview=31871"
+      ],
+      "youtube": [
+        "https://www.youtube.com/channel/UC0xPmAO5OEP78QFzznJtt5g",
+        "https://youtube.com/channel/UC0xPmAO5OEP78QFzznJtt5g"
+      ]
+    }
+  },
+  {
+    "short_name": "Elizabeth",
+    "website_url": "https://www.elizabeth.ca/",
+    "candidates_tried": [
+      "www.elizabeth.ca",
+      "elizabeth.ca",
+      "www.townofelizabeth.ca",
+      "townofelizabeth.ca",
+      "www.cityofelizabeth.ca",
+      "cityofelizabeth.ca",
+      "www.villageofelizabeth.ca",
+      "villageofelizabeth.ca",
+      "www.elizabethcounty.ca",
+      "elizabethcounty.ca",
+      "www.elizabeth.com",
+      "elizabeth.com",
+      "www.elizabeth-ab.ca",
+      "elizabeth-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Elk Point",
+    "website_url": "https://www.elkpoint.ca/",
+    "candidates_tried": [
+      "www.elkpoint.ca",
+      "elkpoint.ca",
+      "www.townofelkpoint.ca",
+      "townofelkpoint.ca",
+      "www.cityofelkpoint.ca",
+      "cityofelkpoint.ca",
+      "www.villageofelkpoint.ca",
+      "villageofelkpoint.ca",
+      "www.elkpointcounty.ca",
+      "elkpointcounty.ca",
+      "www.elk-point.ca",
+      "elk-point.ca",
+      "www.elkpoint.com",
+      "elkpoint.com",
+      "www.elkpoint-ab.ca",
+      "elkpoint-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/@townofelkpoint3953"
+      ]
+    }
+  },
+  {
+    "short_name": "Elnora",
+    "website_url": "https://www.elnora.com/",
+    "candidates_tried": [
+      "www.elnora.ca",
+      "elnora.ca",
+      "www.townofelnora.ca",
+      "townofelnora.ca",
+      "www.cityofelnora.ca",
+      "cityofelnora.ca",
+      "www.villageofelnora.ca",
+      "villageofelnora.ca",
+      "www.elnoracounty.ca",
+      "elnoracounty.ca",
+      "www.elnora.com",
+      "elnora.com",
+      "www.elnora-ab.ca",
+      "elnora-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Fairview",
+    "website_url": "https://www.fairview.ca/",
+    "candidates_tried": [
+      "www.fairview.ca",
+      "fairview.ca",
+      "www.townoffairview.ca",
+      "townoffairview.ca",
+      "www.cityoffairview.ca",
+      "cityoffairview.ca",
+      "www.villageoffairview.ca",
+      "villageoffairview.ca",
+      "www.fairviewcounty.ca",
+      "fairviewcounty.ca",
+      "www.fairview.com",
+      "fairview.com",
+      "www.fairview-ab.ca",
+      "fairview-ab.ca"
+    ],
+    "platform_links": {
+      "civicweb": [
+        "https://fairview.civicweb.net/Portal"
+      ],
+      "youtube": [
+        "https://www.youtube.com/channel/UCbjwk3a_3T2149jWJuH-NeA"
+      ]
+    }
+  },
+  {
+    "short_name": "Falher",
+    "website_url": "https://www.falher.ca/",
+    "candidates_tried": [
+      "www.falher.ca",
+      "falher.ca",
+      "www.townoffalher.ca",
+      "townoffalher.ca",
+      "www.cityoffalher.ca",
+      "cityoffalher.ca",
+      "www.villageoffalher.ca",
+      "villageoffalher.ca",
+      "www.falhercounty.ca",
+      "falhercounty.ca",
+      "www.falher.com",
+      "falher.com",
+      "www.falher-ab.ca",
+      "falher-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Ferintosh",
+    "website_url": "https://www.ferintosh.com/",
+    "candidates_tried": [
+      "www.ferintosh.ca",
+      "ferintosh.ca",
+      "www.townofferintosh.ca",
+      "townofferintosh.ca",
+      "www.cityofferintosh.ca",
+      "cityofferintosh.ca",
+      "www.villageofferintosh.ca",
+      "villageofferintosh.ca",
+      "www.ferintoshcounty.ca",
+      "ferintoshcounty.ca",
+      "www.ferintosh.com",
+      "ferintosh.com",
+      "www.ferintosh-ab.ca",
+      "ferintosh-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Fishing Lake",
+    "website_url": "https://www.fishinglake.ca/",
+    "candidates_tried": [
+      "www.fishinglake.ca",
+      "fishinglake.ca",
+      "www.townoffishinglake.ca",
+      "townoffishinglake.ca",
+      "www.cityoffishinglake.ca",
+      "cityoffishinglake.ca",
+      "www.villageoffishinglake.ca",
+      "villageoffishinglake.ca",
+      "www.fishinglakecounty.ca",
+      "fishinglakecounty.ca",
+      "www.fishing-lake.ca",
+      "fishing-lake.ca",
+      "www.fishinglake.com",
+      "fishinglake.com",
+      "www.fishinglake-ab.ca",
+      "fishinglake-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Flagstaff County",
+    "website_url": "https://www.flagstaff.ca/",
+    "candidates_tried": [
+      "www.flagstaffcounty.ca",
+      "flagstaffcounty.ca",
+      "www.townofflagstaff.ca",
+      "townofflagstaff.ca",
+      "www.cityofflagstaff.ca",
+      "cityofflagstaff.ca",
+      "www.villageofflagstaff.ca",
+      "villageofflagstaff.ca",
+      "www.flagstaff.ca",
+      "flagstaff.ca",
+      "www.flagstaffcounty.com",
+      "flagstaffcounty.com",
+      "www.flagstaff-ab.ca",
+      "flagstaff-ab.ca"
+    ],
+    "platform_links": {
+      "escribe": [
+        "https://pub-flagstaffcounty.escribemeetings.com?FillWidth=1"
+      ],
+      "youtube": [
+        "https://www.youtube.com/channel/UCQQgpaW6Wl7mlEWvHqvXESQ"
+      ]
+    }
+  },
+  {
+    "short_name": "Foothills County",
+    "website_url": null,
+    "candidates_tried": [
+      "www.foothillscounty.ca",
+      "foothillscounty.ca",
+      "www.townoffoothills.ca",
+      "townoffoothills.ca",
+      "www.cityoffoothills.ca",
+      "cityoffoothills.ca",
+      "www.villageoffoothills.ca",
+      "villageoffoothills.ca",
+      "www.foothills.ca",
+      "foothills.ca",
+      "www.foothillscounty.com",
+      "foothillscounty.com",
+      "www.foothills-ab.ca",
+      "foothills-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Foremost",
+    "website_url": "https://www.foremost.ca/",
+    "candidates_tried": [
+      "www.foremost.ca",
+      "foremost.ca",
+      "www.townofforemost.ca",
+      "townofforemost.ca",
+      "www.cityofforemost.ca",
+      "cityofforemost.ca",
+      "www.villageofforemost.ca",
+      "villageofforemost.ca",
+      "www.foremostcounty.ca",
+      "foremostcounty.ca",
+      "www.foremost.com",
+      "foremost.com",
+      "www.foremost-ab.ca",
+      "foremost-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Fort Macleod",
+    "website_url": "https://www.fortmacleod.com/",
+    "candidates_tried": [
+      "www.fortmacleod.ca",
+      "fortmacleod.ca",
+      "www.townoffortmacleod.ca",
+      "townoffortmacleod.ca",
+      "www.cityoffortmacleod.ca",
+      "cityoffortmacleod.ca",
+      "www.villageoffortmacleod.ca",
+      "villageoffortmacleod.ca",
+      "www.fortmacleodcounty.ca",
+      "fortmacleodcounty.ca",
+      "www.fort-macleod.ca",
+      "fort-macleod.ca",
+      "www.fortmacleod.com",
+      "fortmacleod.com",
+      "www.fortmacleod-ab.ca",
+      "fortmacleod-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/channel/UCxuyHfJ_aHylnKj07UbJctw"
+      ]
+    }
+  },
+  {
+    "short_name": "Fox Creek",
+    "website_url": "https://www.foxcreek.ca/",
+    "candidates_tried": [
+      "www.foxcreek.ca",
+      "foxcreek.ca",
+      "www.townoffoxcreek.ca",
+      "townoffoxcreek.ca",
+      "www.cityoffoxcreek.ca",
+      "cityoffoxcreek.ca",
+      "www.villageoffoxcreek.ca",
+      "villageoffoxcreek.ca",
+      "www.foxcreekcounty.ca",
+      "foxcreekcounty.ca",
+      "www.fox-creek.ca",
+      "fox-creek.ca",
+      "www.foxcreek.com",
+      "foxcreek.com",
+      "www.foxcreek-ab.ca",
+      "foxcreek-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Gibbons",
+    "website_url": "https://www.gibbons.ca/",
+    "candidates_tried": [
+      "www.gibbons.ca",
+      "gibbons.ca",
+      "www.townofgibbons.ca",
+      "townofgibbons.ca",
+      "www.cityofgibbons.ca",
+      "cityofgibbons.ca",
+      "www.villageofgibbons.ca",
+      "villageofgibbons.ca",
+      "www.gibbonscounty.ca",
+      "gibbonscounty.ca",
+      "www.gibbons.com",
+      "gibbons.com",
+      "www.gibbons-ab.ca",
+      "gibbons-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/@townofgibbons9669"
+      ]
+    }
+  },
+  {
+    "short_name": "Gift Lake",
+    "website_url": null,
+    "candidates_tried": [
+      "www.giftlake.ca",
+      "giftlake.ca",
+      "www.townofgiftlake.ca",
+      "townofgiftlake.ca",
+      "www.cityofgiftlake.ca",
+      "cityofgiftlake.ca",
+      "www.villageofgiftlake.ca",
+      "villageofgiftlake.ca",
+      "www.giftlakecounty.ca",
+      "giftlakecounty.ca",
+      "www.gift-lake.ca",
+      "gift-lake.ca",
+      "www.giftlake.com",
+      "giftlake.com",
+      "www.giftlake-ab.ca",
+      "giftlake-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Girouxville",
+    "website_url": "https://www.girouxville.ca/",
+    "candidates_tried": [
+      "www.girouxville.ca",
+      "girouxville.ca",
+      "www.townofgirouxville.ca",
+      "townofgirouxville.ca",
+      "www.cityofgirouxville.ca",
+      "cityofgirouxville.ca",
+      "www.villageofgirouxville.ca",
+      "villageofgirouxville.ca",
+      "www.girouxvillecounty.ca",
+      "girouxvillecounty.ca",
+      "www.girouxville.com",
+      "girouxville.com",
+      "www.girouxville-ab.ca",
+      "girouxville-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Glendon",
+    "website_url": "https://www.villageofglendon.ca/",
+    "candidates_tried": [
+      "www.glendon.ca",
+      "glendon.ca",
+      "www.townofglendon.ca",
+      "townofglendon.ca",
+      "www.cityofglendon.ca",
+      "cityofglendon.ca",
+      "www.villageofglendon.ca",
+      "villageofglendon.ca",
+      "www.glendoncounty.ca",
+      "glendoncounty.ca",
+      "www.glendon.com",
+      "glendon.com",
+      "www.glendon-ab.ca",
+      "glendon-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Grand Centre",
+    "website_url": null,
+    "candidates_tried": [
+      "www.grandcentre.ca",
+      "grandcentre.ca",
+      "www.townofgrandcentre.ca",
+      "townofgrandcentre.ca",
+      "www.cityofgrandcentre.ca",
+      "cityofgrandcentre.ca",
+      "www.villageofgrandcentre.ca",
+      "villageofgrandcentre.ca",
+      "www.grandcentrecounty.ca",
+      "grandcentrecounty.ca",
+      "www.grand-centre.ca",
+      "grand-centre.ca",
+      "www.grandcentre.com",
+      "grandcentre.com",
+      "www.grandcentre-ab.ca",
+      "grandcentre-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Granum",
+    "website_url": "https://www.granum.com/",
+    "candidates_tried": [
+      "www.granum.ca",
+      "granum.ca",
+      "www.townofgranum.ca",
+      "townofgranum.ca",
+      "www.cityofgranum.ca",
+      "cityofgranum.ca",
+      "www.villageofgranum.ca",
+      "villageofgranum.ca",
+      "www.granumcounty.ca",
+      "granumcounty.ca",
+      "www.granum.com",
+      "granum.com",
+      "www.granum-ab.ca",
+      "granum-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/user/LMNVideo"
+      ]
+    }
+  },
+  {
+    "short_name": "Grimshaw",
+    "website_url": "https://www.grimshaw.ca/",
+    "candidates_tried": [
+      "www.grimshaw.ca",
+      "grimshaw.ca",
+      "www.townofgrimshaw.ca",
+      "townofgrimshaw.ca",
+      "www.cityofgrimshaw.ca",
+      "cityofgrimshaw.ca",
+      "www.villageofgrimshaw.ca",
+      "villageofgrimshaw.ca",
+      "www.grimshawcounty.ca",
+      "grimshawcounty.ca",
+      "www.grimshaw.com",
+      "grimshaw.com",
+      "www.grimshaw-ab.ca",
+      "grimshaw-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Halkirk",
+    "website_url": null,
+    "candidates_tried": [
+      "www.halkirk.ca",
+      "halkirk.ca",
+      "www.townofhalkirk.ca",
+      "townofhalkirk.ca",
+      "www.cityofhalkirk.ca",
+      "cityofhalkirk.ca",
+      "www.villageofhalkirk.ca",
+      "villageofhalkirk.ca",
+      "www.halkirkcounty.ca",
+      "halkirkcounty.ca",
+      "www.halkirk.com",
+      "halkirk.com",
+      "www.halkirk-ab.ca",
+      "halkirk-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Hanna",
+    "website_url": "https://www.hanna.ca/",
+    "candidates_tried": [
+      "www.hanna.ca",
+      "hanna.ca",
+      "www.townofhanna.ca",
+      "townofhanna.ca",
+      "www.cityofhanna.ca",
+      "cityofhanna.ca",
+      "www.villageofhanna.ca",
+      "villageofhanna.ca",
+      "www.hannacounty.ca",
+      "hannacounty.ca",
+      "www.hanna.com",
+      "hanna.com",
+      "www.hanna-ab.ca",
+      "hanna-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Hardisty",
+    "website_url": "https://www.hardisty.ca/",
+    "candidates_tried": [
+      "www.hardisty.ca",
+      "hardisty.ca",
+      "www.townofhardisty.ca",
+      "townofhardisty.ca",
+      "www.cityofhardisty.ca",
+      "cityofhardisty.ca",
+      "www.villageofhardisty.ca",
+      "villageofhardisty.ca",
+      "www.hardistycounty.ca",
+      "hardistycounty.ca",
+      "www.hardisty.com",
+      "hardisty.com",
+      "www.hardisty-ab.ca",
+      "hardisty-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Hay Lakes",
+    "website_url": null,
+    "candidates_tried": [
+      "www.haylakes.ca",
+      "haylakes.ca",
+      "www.townofhaylakes.ca",
+      "townofhaylakes.ca",
+      "www.cityofhaylakes.ca",
+      "cityofhaylakes.ca",
+      "www.villageofhaylakes.ca",
+      "villageofhaylakes.ca",
+      "www.haylakescounty.ca",
+      "haylakescounty.ca",
+      "www.hay-lakes.ca",
+      "hay-lakes.ca",
+      "www.haylakes.com",
+      "haylakes.com",
+      "www.haylakes-ab.ca",
+      "haylakes-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Heisler",
+    "website_url": "https://www.villageofheisler.ca/",
+    "candidates_tried": [
+      "www.heisler.ca",
+      "heisler.ca",
+      "www.townofheisler.ca",
+      "townofheisler.ca",
+      "www.cityofheisler.ca",
+      "cityofheisler.ca",
+      "www.villageofheisler.ca",
+      "villageofheisler.ca",
+      "www.heislercounty.ca",
+      "heislercounty.ca",
+      "www.heisler.com",
+      "heisler.com",
+      "www.heisler-ab.ca",
+      "heisler-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "High Level",
+    "website_url": "https://www.highlevel.ca/",
+    "candidates_tried": [
+      "www.highlevel.ca",
+      "highlevel.ca",
+      "www.townofhighlevel.ca",
+      "townofhighlevel.ca",
+      "www.cityofhighlevel.ca",
+      "cityofhighlevel.ca",
+      "www.villageofhighlevel.ca",
+      "villageofhighlevel.ca",
+      "www.highlevelcounty.ca",
+      "highlevelcounty.ca",
+      "www.high-level.ca",
+      "high-level.ca",
+      "www.highlevel.com",
+      "highlevel.com",
+      "www.highlevel-ab.ca",
+      "highlevel-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/@townhighlevel"
+      ]
+    }
+  },
+  {
+    "short_name": "High Prairie",
+    "website_url": "https://www.highprairie.ca/",
+    "candidates_tried": [
+      "www.highprairie.ca",
+      "highprairie.ca",
+      "www.townofhighprairie.ca",
+      "townofhighprairie.ca",
+      "www.cityofhighprairie.ca",
+      "cityofhighprairie.ca",
+      "www.villageofhighprairie.ca",
+      "villageofhighprairie.ca",
+      "www.highprairiecounty.ca",
+      "highprairiecounty.ca",
+      "www.high-prairie.ca",
+      "high-prairie.ca",
+      "www.highprairie.com",
+      "highprairie.com",
+      "www.highprairie-ab.ca",
+      "highprairie-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/channel/UCCVAh6oIAOQlKspVSJRKrsg"
+      ]
+    }
+  },
+  {
+    "short_name": "High River",
+    "website_url": "https://www.highriver.ca/",
+    "candidates_tried": [
+      "www.highriver.ca",
+      "highriver.ca",
+      "www.townofhighriver.ca",
+      "townofhighriver.ca",
+      "www.cityofhighriver.ca",
+      "cityofhighriver.ca",
+      "www.villageofhighriver.ca",
+      "villageofhighriver.ca",
+      "www.highrivercounty.ca",
+      "highrivercounty.ca",
+      "www.high-river.ca",
+      "high-river.ca",
+      "www.highriver.com",
+      "highriver.com",
+      "www.highriver-ab.ca",
+      "highriver-ab.ca"
+    ],
+    "platform_links": {
+      "civicweb": [
+        "https://highriver.civicweb.net/Portal/MeetingSchedule.aspx",
+        "https://highriver.civicweb.net/Portal/MeetingTypeList.aspx",
+        "https://highriver.civicweb.net/Portal/VotingRecords.aspx",
+        "https://highriver.civicweb.net/portal/members.aspx?id=10"
+      ],
+      "youtube": [
+        "https://www.youtube.com/@townofhighriver",
+        "https://www.youtube.com/user/townofhighriver"
+      ]
+    }
+  },
+  {
+    "short_name": "Hill Spring",
+    "website_url": "https://www.hillspring.ca/",
+    "candidates_tried": [
+      "www.hillspring.ca",
+      "hillspring.ca",
+      "www.townofhillspring.ca",
+      "townofhillspring.ca",
+      "www.cityofhillspring.ca",
+      "cityofhillspring.ca",
+      "www.villageofhillspring.ca",
+      "villageofhillspring.ca",
+      "www.hillspringcounty.ca",
+      "hillspringcounty.ca",
+      "www.hill-spring.ca",
+      "hill-spring.ca",
+      "www.hillspring.com",
+      "hillspring.com",
+      "www.hillspring-ab.ca",
+      "hillspring-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Hines Creek",
+    "website_url": "https://www.hinescreek.com/",
+    "candidates_tried": [
+      "www.hinescreek.ca",
+      "hinescreek.ca",
+      "www.townofhinescreek.ca",
+      "townofhinescreek.ca",
+      "www.cityofhinescreek.ca",
+      "cityofhinescreek.ca",
+      "www.villageofhinescreek.ca",
+      "villageofhinescreek.ca",
+      "www.hinescreekcounty.ca",
+      "hinescreekcounty.ca",
+      "www.hines-creek.ca",
+      "hines-creek.ca",
+      "www.hinescreek.com",
+      "hinescreek.com",
+      "www.hinescreek-ab.ca",
+      "hinescreek-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Hinton",
+    "website_url": "https://www.hinton.ca/",
+    "candidates_tried": [
+      "www.hinton.ca",
+      "hinton.ca",
+      "www.townofhinton.ca",
+      "townofhinton.ca",
+      "www.cityofhinton.ca",
+      "cityofhinton.ca",
+      "www.villageofhinton.ca",
+      "villageofhinton.ca",
+      "www.hintoncounty.ca",
+      "hintoncounty.ca",
+      "www.hinton.com",
+      "hinton.com",
+      "www.hinton-ab.ca",
+      "hinton-ab.ca"
+    ],
+    "platform_links": {
+      "civicweb": [
+        "http://hinton.civicweb.net/Portal/default.aspx",
+        "https://hinton.civicweb.net/filepro/documents/140472/",
+        "https://hinton.civicweb.net/filepro/documents/140473/",
+        "https://hinton.civicweb.net/filepro/documents/176694/",
+        "https://i.civicweb.net/Global/Images/MobileIcons/ic-icon-114.png"
+      ],
+      "youtube": [
+        "https://www.youtube.com/@HintonAB",
+        "https://www.youtube.com/user/tohinton"
+      ]
+    }
+  },
+  {
+    "short_name": "Hughenden",
+    "website_url": "https://www.hughenden.com/",
+    "candidates_tried": [
+      "www.hughenden.ca",
+      "hughenden.ca",
+      "www.townofhughenden.ca",
+      "townofhughenden.ca",
+      "www.cityofhughenden.ca",
+      "cityofhughenden.ca",
+      "www.villageofhughenden.ca",
+      "villageofhughenden.ca",
+      "www.hughendencounty.ca",
+      "hughendencounty.ca",
+      "www.hughenden.com",
+      "hughenden.com",
+      "www.hughenden-ab.ca",
+      "hughenden-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Hussar",
+    "website_url": "https://www.villageofhussar.ca/",
+    "candidates_tried": [
+      "www.hussar.ca",
+      "hussar.ca",
+      "www.townofhussar.ca",
+      "townofhussar.ca",
+      "www.cityofhussar.ca",
+      "cityofhussar.ca",
+      "www.villageofhussar.ca",
+      "villageofhussar.ca",
+      "www.hussarcounty.ca",
+      "hussarcounty.ca",
+      "www.hussar.com",
+      "hussar.com",
+      "www.hussar-ab.ca",
+      "hussar-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Hythe",
+    "website_url": null,
+    "candidates_tried": [
+      "www.hythe.ca",
+      "hythe.ca",
+      "www.townofhythe.ca",
+      "townofhythe.ca",
+      "www.cityofhythe.ca",
+      "cityofhythe.ca",
+      "www.villageofhythe.ca",
+      "villageofhythe.ca",
+      "www.hythecounty.ca",
+      "hythecounty.ca",
+      "www.hythe.com",
+      "hythe.com",
+      "www.hythe-ab.ca",
+      "hythe-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Improvement District No. 9",
+    "website_url": null,
+    "candidates_tried": [
+      "www.improvementdistrictno9.ca",
+      "improvementdistrictno9.ca",
+      "www.townofimprovementdistrictno9.ca",
+      "townofimprovementdistrictno9.ca",
+      "www.cityofimprovementdistrictno9.ca",
+      "cityofimprovementdistrictno9.ca",
+      "www.villageofimprovementdistrictno9.ca",
+      "villageofimprovementdistrictno9.ca",
+      "www.improvementdistrictno9county.ca",
+      "improvementdistrictno9county.ca",
+      "www.improvement-district-no-9.ca",
+      "improvement-district-no-9.ca",
+      "www.improvementdistrictno9.com",
+      "improvementdistrictno9.com",
+      "www.improvementdistrictno9-ab.ca",
+      "improvementdistrictno9-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Innisfail",
+    "website_url": "https://www.innisfail.ca/",
+    "candidates_tried": [
+      "www.innisfail.ca",
+      "innisfail.ca",
+      "www.townofinnisfail.ca",
+      "townofinnisfail.ca",
+      "www.cityofinnisfail.ca",
+      "cityofinnisfail.ca",
+      "www.villageofinnisfail.ca",
+      "villageofinnisfail.ca",
+      "www.innisfailcounty.ca",
+      "innisfailcounty.ca",
+      "www.innisfail.com",
+      "innisfail.com",
+      "www.innisfail-ab.ca",
+      "innisfail-ab.ca"
+    ],
+    "platform_links": {
+      "civicweb": [
+        "https://innisfail.civicweb.net/filepro/documents/158313/",
+        "https://innisfail.civicweb.net/filepro/documents/17630",
+        "https://innisfail.civicweb.net/filepro/documents/46864",
+        "https://innisfail.civicweb.net/filepro/documents/46864/?preview=160128",
+        "https://innisfail.civicweb.net/filepro/documents/997"
+      ]
+    }
+  },
+  {
+    "short_name": "Irricana",
+    "website_url": "https://townofirricana.ca/",
+    "candidates_tried": [
+      "www.irricana.ca",
+      "irricana.ca",
+      "www.townofirricana.ca",
+      "townofirricana.ca",
+      "www.cityofirricana.ca",
+      "cityofirricana.ca",
+      "www.villageofirricana.ca",
+      "villageofirricana.ca",
+      "www.irricanacounty.ca",
+      "irricanacounty.ca",
+      "www.irricana.com",
+      "irricana.com",
+      "www.irricana-ab.ca",
+      "irricana-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Jasper",
+    "website_url": "https://www.jasper.ca/",
+    "candidates_tried": [
+      "www.jasper.ca",
+      "jasper.ca",
+      "www.townofjasper.ca",
+      "townofjasper.ca",
+      "www.cityofjasper.ca",
+      "cityofjasper.ca",
+      "www.villageofjasper.ca",
+      "villageofjasper.ca",
+      "www.jaspercounty.ca",
+      "jaspercounty.ca",
+      "www.jasper.com",
+      "jasper.com",
+      "www.jasper-ab.ca",
+      "jasper-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Kikino",
+    "website_url": "https://www.kikino.com/",
+    "candidates_tried": [
+      "www.kikino.ca",
+      "kikino.ca",
+      "www.townofkikino.ca",
+      "townofkikino.ca",
+      "www.cityofkikino.ca",
+      "cityofkikino.ca",
+      "www.villageofkikino.ca",
+      "villageofkikino.ca",
+      "www.kikinocounty.ca",
+      "kikinocounty.ca",
+      "www.kikino.com",
+      "kikino.com",
+      "www.kikino-ab.ca",
+      "kikino-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Killam",
+    "website_url": "https://www.killam.com/",
+    "candidates_tried": [
+      "www.killam.ca",
+      "killam.ca",
+      "www.townofkillam.ca",
+      "townofkillam.ca",
+      "www.cityofkillam.ca",
+      "cityofkillam.ca",
+      "www.villageofkillam.ca",
+      "villageofkillam.ca",
+      "www.killamcounty.ca",
+      "killamcounty.ca",
+      "www.killam.com",
+      "killam.com",
+      "www.killam-ab.ca",
+      "killam-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Kitscoty",
+    "website_url": null,
+    "candidates_tried": [
+      "www.kitscoty.ca",
+      "kitscoty.ca",
+      "www.townofkitscoty.ca",
+      "townofkitscoty.ca",
+      "www.cityofkitscoty.ca",
+      "cityofkitscoty.ca",
+      "www.villageofkitscoty.ca",
+      "villageofkitscoty.ca",
+      "www.kitscotycounty.ca",
+      "kitscotycounty.ca",
+      "www.kitscoty.com",
+      "kitscoty.com",
+      "www.kitscoty-ab.ca",
+      "kitscoty-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Kneehill County",
+    "website_url": "https://www.kneehillcounty.com/",
+    "candidates_tried": [
+      "www.kneehillcounty.ca",
+      "kneehillcounty.ca",
+      "www.townofkneehill.ca",
+      "townofkneehill.ca",
+      "www.cityofkneehill.ca",
+      "cityofkneehill.ca",
+      "www.villageofkneehill.ca",
+      "villageofkneehill.ca",
+      "www.kneehill.ca",
+      "kneehill.ca",
+      "www.kneehillcounty.com",
+      "kneehillcounty.com",
+      "www.kneehill-ab.ca",
+      "kneehill-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Lac La Biche",
+    "website_url": null,
+    "candidates_tried": [
+      "www.laclabiche.ca",
+      "laclabiche.ca",
+      "www.townoflaclabiche.ca",
+      "townoflaclabiche.ca",
+      "www.cityoflaclabiche.ca",
+      "cityoflaclabiche.ca",
+      "www.villageoflaclabiche.ca",
+      "villageoflaclabiche.ca",
+      "www.laclabichecounty.ca",
+      "laclabichecounty.ca",
+      "www.lac-la-biche.ca",
+      "lac-la-biche.ca",
+      "www.laclabiche.com",
+      "laclabiche.com",
+      "www.laclabiche-ab.ca",
+      "laclabiche-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Lac La Biche County",
+    "website_url": "https://www.laclabichecounty.com/",
+    "candidates_tried": [
+      "www.laclabichecounty.ca",
+      "laclabichecounty.ca",
+      "www.townoflaclabiche.ca",
+      "townoflaclabiche.ca",
+      "www.cityoflaclabiche.ca",
+      "cityoflaclabiche.ca",
+      "www.villageoflaclabiche.ca",
+      "villageoflaclabiche.ca",
+      "www.lac-la-biche.ca",
+      "lac-la-biche.ca",
+      "www.laclabichecounty.com",
+      "laclabichecounty.com",
+      "www.laclabiche-ab.ca",
+      "laclabiche-ab.ca"
+    ],
+    "platform_links": {
+      "escribe": [
+        "https://pub-llbc.escribemeetings.com/?Year=2022&Expanded=Regular%20Council%20Meeting",
+        "https://pub-llbc.escribemeetings.com/?fillWidth=1"
+      ],
+      "youtube": [
+        "https://www.youtube.com/channel/UCdGn7hrBEfmv8b5bWR36paw"
+      ]
+    }
+  },
+  {
+    "short_name": "Lac Ste. Anne County",
+    "website_url": null,
+    "candidates_tried": [
+      "www.lacsteannecounty.ca",
+      "lacsteannecounty.ca",
+      "www.townoflacsteanne.ca",
+      "townoflacsteanne.ca",
+      "www.cityoflacsteanne.ca",
+      "cityoflacsteanne.ca",
+      "www.villageoflacsteanne.ca",
+      "villageoflacsteanne.ca",
+      "www.lac-ste-anne.ca",
+      "lac-ste-anne.ca",
+      "www.lacsteannecounty.com",
+      "lacsteannecounty.com",
+      "www.lacsteanne-ab.ca",
+      "lacsteanne-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Lacombe",
+    "website_url": "https://www.lacombe.ca/",
+    "candidates_tried": [
+      "www.lacombe.ca",
+      "lacombe.ca",
+      "www.townoflacombe.ca",
+      "townoflacombe.ca",
+      "www.cityoflacombe.ca",
+      "cityoflacombe.ca",
+      "www.villageoflacombe.ca",
+      "villageoflacombe.ca",
+      "www.lacombecounty.ca",
+      "lacombecounty.ca",
+      "www.lacombe.com",
+      "lacombe.com",
+      "www.lacombe-ab.ca",
+      "lacombe-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/channel/UCMS2L0Hbvg5vcNHRRU34gwg",
+        "https://www.youtube.com/user/Lacombenews"
+      ]
+    }
+  },
+  {
+    "short_name": "Lacombe (former town)",
+    "website_url": null,
+    "candidates_tried": [
+      "www.lacombeformertown.ca",
+      "lacombeformertown.ca",
+      "www.townoflacombeformertown.ca",
+      "townoflacombeformertown.ca",
+      "www.cityoflacombeformertown.ca",
+      "cityoflacombeformertown.ca",
+      "www.villageoflacombeformertown.ca",
+      "villageoflacombeformertown.ca",
+      "www.lacombeformertowncounty.ca",
+      "lacombeformertowncounty.ca",
+      "www.lacombe-former-town.ca",
+      "lacombe-former-town.ca",
+      "www.lacombeformertown.com",
+      "lacombeformertown.com",
+      "www.lacombeformertown-ab.ca",
+      "lacombeformertown-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Lamont",
+    "website_url": "https://www.lamont.ca/",
+    "candidates_tried": [
+      "www.lamont.ca",
+      "lamont.ca",
+      "www.townoflamont.ca",
+      "townoflamont.ca",
+      "www.cityoflamont.ca",
+      "cityoflamont.ca",
+      "www.villageoflamont.ca",
+      "villageoflamont.ca",
+      "www.lamontcounty.ca",
+      "lamontcounty.ca",
+      "www.lamont.com",
+      "lamont.com",
+      "www.lamont-ab.ca",
+      "lamont-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Lamont County",
+    "website_url": "https://www.lamontcounty.ca/",
+    "candidates_tried": [
+      "www.lamontcounty.ca",
+      "lamontcounty.ca",
+      "www.townoflamont.ca",
+      "townoflamont.ca",
+      "www.cityoflamont.ca",
+      "cityoflamont.ca",
+      "www.villageoflamont.ca",
+      "villageoflamont.ca",
+      "www.lamont.ca",
+      "lamont.ca",
+      "www.lamontcounty.com",
+      "lamontcounty.com",
+      "www.lamont-ab.ca",
+      "lamont-ab.ca"
+    ],
+    "platform_links": {
+      "civicweb": [
+        "https://lamontcounty.civicweb.net/document/59621",
+        "https://lamontcounty.civicweb.net/filepro/documents/15236",
+        "https://lamontcounty.civicweb.net/filepro/documents/25129",
+        "https://lamontcounty.civicweb.net/filepro/documents/27233",
+        "https://lamontcounty.civicweb.net/filepro/documents/9510"
+      ],
+      "youtube": [
+        "https://www.youtube.com/@LamontCounty",
+        "https://www.youtube.com/channel/UCPdY7QgyGh1NwHaNX-BjytA"
+      ]
+    }
+  },
+  {
+    "short_name": "Leduc",
+    "website_url": "https://www.leduc.ca/",
+    "candidates_tried": [
+      "www.leduc.ca",
+      "leduc.ca",
+      "www.townofleduc.ca",
+      "townofleduc.ca",
+      "www.cityofleduc.ca",
+      "cityofleduc.ca",
+      "www.villageofleduc.ca",
+      "villageofleduc.ca",
+      "www.leduccounty.ca",
+      "leduccounty.ca",
+      "www.leduc.com",
+      "leduc.com",
+      "www.leduc-ab.ca",
+      "leduc-ab.ca"
+    ],
+    "platform_links": {
+      "escribe": [
+        "https://bm-public-leduc.escribemeetings.com",
+        "https://pub-leduc.escribemeetings.com"
+      ],
+      "youtube": [
+        "https://www.youtube.com/user/CityofLeduc"
+      ]
+    }
+  },
+  {
+    "short_name": "Leduc County",
+    "website_url": "https://www.leduc.ca/",
+    "candidates_tried": [
+      "www.leduccounty.ca",
+      "leduccounty.ca",
+      "www.townofleduc.ca",
+      "townofleduc.ca",
+      "www.cityofleduc.ca",
+      "cityofleduc.ca",
+      "www.villageofleduc.ca",
+      "villageofleduc.ca",
+      "www.leduc.ca",
+      "leduc.ca",
+      "www.leduccounty.com",
+      "leduccounty.com",
+      "www.leduc-ab.ca",
+      "leduc-ab.ca"
+    ],
+    "platform_links": {
+      "escribe": [
+        "https://bm-public-leduc.escribemeetings.com",
+        "https://pub-leduc.escribemeetings.com"
+      ],
+      "youtube": [
+        "https://www.youtube.com/user/CityofLeduc"
+      ]
+    }
+  },
+  {
+    "short_name": "Legal",
+    "website_url": "https://www.legal.ca/",
+    "candidates_tried": [
+      "www.legal.ca",
+      "legal.ca",
+      "www.townoflegal.ca",
+      "townoflegal.ca",
+      "www.cityoflegal.ca",
+      "cityoflegal.ca",
+      "www.villageoflegal.ca",
+      "villageoflegal.ca",
+      "www.legalcounty.ca",
+      "legalcounty.ca",
+      "www.legal.com",
+      "legal.com",
+      "www.legal-ab.ca",
+      "legal-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Linden",
+    "website_url": "https://www.linden.ca/",
+    "candidates_tried": [
+      "www.linden.ca",
+      "linden.ca",
+      "www.townoflinden.ca",
+      "townoflinden.ca",
+      "www.cityoflinden.ca",
+      "cityoflinden.ca",
+      "www.villageoflinden.ca",
+      "villageoflinden.ca",
+      "www.lindencounty.ca",
+      "lindencounty.ca",
+      "www.linden.com",
+      "linden.com",
+      "www.linden-ab.ca",
+      "linden-ab.ca"
+    ],
+    "platform_links": {
+      "civicweb": [
+        "https://linden.civicweb.net/Portal/",
+        "https://linden.civicweb.net/filepro/documents/108",
+        "https://linden.civicweb.net/filepro/documents/109/",
+        "https://linden.civicweb.net/filepro/documents/149",
+        "https://linden.civicweb.net/filepro/documents/24814/"
+      ]
+    }
+  },
+  {
+    "short_name": "Lloydminster",
+    "website_url": "https://www.lloydminster.ca/",
+    "candidates_tried": [
+      "www.lloydminster.ca",
+      "lloydminster.ca",
+      "www.townoflloydminster.ca",
+      "townoflloydminster.ca",
+      "www.cityoflloydminster.ca",
+      "cityoflloydminster.ca",
+      "www.villageoflloydminster.ca",
+      "villageoflloydminster.ca",
+      "www.lloydminstercounty.ca",
+      "lloydminstercounty.ca",
+      "www.lloydminster.com",
+      "lloydminster.com",
+      "www.lloydminster-ab.ca",
+      "lloydminster-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Lomond",
+    "website_url": "https://www.villageoflomond.ca/",
+    "candidates_tried": [
+      "www.lomond.ca",
+      "lomond.ca",
+      "www.townoflomond.ca",
+      "townoflomond.ca",
+      "www.cityoflomond.ca",
+      "cityoflomond.ca",
+      "www.villageoflomond.ca",
+      "villageoflomond.ca",
+      "www.lomondcounty.ca",
+      "lomondcounty.ca",
+      "www.lomond.com",
+      "lomond.com",
+      "www.lomond-ab.ca",
+      "lomond-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Longview",
+    "website_url": null,
+    "candidates_tried": [
+      "www.longview.ca",
+      "longview.ca",
+      "www.townoflongview.ca",
+      "townoflongview.ca",
+      "www.cityoflongview.ca",
+      "cityoflongview.ca",
+      "www.villageoflongview.ca",
+      "villageoflongview.ca",
+      "www.longviewcounty.ca",
+      "longviewcounty.ca",
+      "www.longview.com",
+      "longview.com",
+      "www.longview-ab.ca",
+      "longview-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Lougheed",
+    "website_url": "https://www.lougheed.ca/",
+    "candidates_tried": [
+      "www.lougheed.ca",
+      "lougheed.ca",
+      "www.townoflougheed.ca",
+      "townoflougheed.ca",
+      "www.cityoflougheed.ca",
+      "cityoflougheed.ca",
+      "www.villageoflougheed.ca",
+      "villageoflougheed.ca",
+      "www.lougheedcounty.ca",
+      "lougheedcounty.ca",
+      "www.lougheed.com",
+      "lougheed.com",
+      "www.lougheed-ab.ca",
+      "lougheed-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Mackenzie County",
+    "website_url": "https://www.mackenzie.ca/",
+    "candidates_tried": [
+      "www.mackenziecounty.ca",
+      "mackenziecounty.ca",
+      "www.townofmackenzie.ca",
+      "townofmackenzie.ca",
+      "www.cityofmackenzie.ca",
+      "cityofmackenzie.ca",
+      "www.villageofmackenzie.ca",
+      "villageofmackenzie.ca",
+      "www.mackenzie.ca",
+      "mackenzie.ca",
+      "www.mackenziecounty.com",
+      "mackenziecounty.com",
+      "www.mackenzie-ab.ca",
+      "mackenzie-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Magrath",
+    "website_url": "https://www.magrath.ca/",
+    "candidates_tried": [
+      "www.magrath.ca",
+      "magrath.ca",
+      "www.townofmagrath.ca",
+      "townofmagrath.ca",
+      "www.cityofmagrath.ca",
+      "cityofmagrath.ca",
+      "www.villageofmagrath.ca",
+      "villageofmagrath.ca",
+      "www.magrathcounty.ca",
+      "magrathcounty.ca",
+      "www.magrath.com",
+      "magrath.com",
+      "www.magrath-ab.ca",
+      "magrath-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Manning",
+    "website_url": "https://manning.ca/",
+    "candidates_tried": [
+      "www.manning.ca",
+      "manning.ca",
+      "www.townofmanning.ca",
+      "townofmanning.ca",
+      "www.cityofmanning.ca",
+      "cityofmanning.ca",
+      "www.villageofmanning.ca",
+      "villageofmanning.ca",
+      "www.manningcounty.ca",
+      "manningcounty.ca",
+      "www.manning.com",
+      "manning.com",
+      "www.manning-ab.ca",
+      "manning-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Mannville",
+    "website_url": "https://www.mannville.ca/",
+    "candidates_tried": [
+      "www.mannville.ca",
+      "mannville.ca",
+      "www.townofmannville.ca",
+      "townofmannville.ca",
+      "www.cityofmannville.ca",
+      "cityofmannville.ca",
+      "www.villageofmannville.ca",
+      "villageofmannville.ca",
+      "www.mannvillecounty.ca",
+      "mannvillecounty.ca",
+      "www.mannville.com",
+      "mannville.com",
+      "www.mannville-ab.ca",
+      "mannville-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Marwayne",
+    "website_url": "https://www.marwayne.ca/",
+    "candidates_tried": [
+      "www.marwayne.ca",
+      "marwayne.ca",
+      "www.townofmarwayne.ca",
+      "townofmarwayne.ca",
+      "www.cityofmarwayne.ca",
+      "cityofmarwayne.ca",
+      "www.villageofmarwayne.ca",
+      "villageofmarwayne.ca",
+      "www.marwaynecounty.ca",
+      "marwaynecounty.ca",
+      "www.marwayne.com",
+      "marwayne.com",
+      "www.marwayne-ab.ca",
+      "marwayne-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Mayerthorpe",
+    "website_url": "https://www.mayerthorpe.ca/",
+    "candidates_tried": [
+      "www.mayerthorpe.ca",
+      "mayerthorpe.ca",
+      "www.townofmayerthorpe.ca",
+      "townofmayerthorpe.ca",
+      "www.cityofmayerthorpe.ca",
+      "cityofmayerthorpe.ca",
+      "www.villageofmayerthorpe.ca",
+      "villageofmayerthorpe.ca",
+      "www.mayerthorpecounty.ca",
+      "mayerthorpecounty.ca",
+      "www.mayerthorpe.com",
+      "mayerthorpe.com",
+      "www.mayerthorpe-ab.ca",
+      "mayerthorpe-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/channel/UC_KdMZEn_zeXbOIQwthRqrg"
+      ]
+    }
+  },
+  {
+    "short_name": "Milk River",
+    "website_url": "https://www.milkriver.ca/",
+    "candidates_tried": [
+      "www.milkriver.ca",
+      "milkriver.ca",
+      "www.townofmilkriver.ca",
+      "townofmilkriver.ca",
+      "www.cityofmilkriver.ca",
+      "cityofmilkriver.ca",
+      "www.villageofmilkriver.ca",
+      "villageofmilkriver.ca",
+      "www.milkrivercounty.ca",
+      "milkrivercounty.ca",
+      "www.milk-river.ca",
+      "milk-river.ca",
+      "www.milkriver.com",
+      "milkriver.com",
+      "www.milkriver-ab.ca",
+      "milkriver-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Millet",
+    "website_url": "https://www.millet.ca/",
+    "candidates_tried": [
+      "www.millet.ca",
+      "millet.ca",
+      "www.townofmillet.ca",
+      "townofmillet.ca",
+      "www.cityofmillet.ca",
+      "cityofmillet.ca",
+      "www.villageofmillet.ca",
+      "villageofmillet.ca",
+      "www.milletcounty.ca",
+      "milletcounty.ca",
+      "www.millet.com",
+      "millet.com",
+      "www.millet-ab.ca",
+      "millet-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Milo",
+    "website_url": "https://www.villageofmilo.ca/",
+    "candidates_tried": [
+      "www.milo.ca",
+      "milo.ca",
+      "www.townofmilo.ca",
+      "townofmilo.ca",
+      "www.cityofmilo.ca",
+      "cityofmilo.ca",
+      "www.villageofmilo.ca",
+      "villageofmilo.ca",
+      "www.milocounty.ca",
+      "milocounty.ca",
+      "www.milo.com",
+      "milo.com",
+      "www.milo-ab.ca",
+      "milo-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Minburn",
+    "website_url": null,
+    "candidates_tried": [
+      "www.minburn.ca",
+      "minburn.ca",
+      "www.townofminburn.ca",
+      "townofminburn.ca",
+      "www.cityofminburn.ca",
+      "cityofminburn.ca",
+      "www.villageofminburn.ca",
+      "villageofminburn.ca",
+      "www.minburncounty.ca",
+      "minburncounty.ca",
+      "www.minburn.com",
+      "minburn.com",
+      "www.minburn-ab.ca",
+      "minburn-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Morinville",
+    "website_url": "https://www.morinville.ca/",
+    "candidates_tried": [
+      "www.morinville.ca",
+      "morinville.ca",
+      "www.townofmorinville.ca",
+      "townofmorinville.ca",
+      "www.cityofmorinville.ca",
+      "cityofmorinville.ca",
+      "www.villageofmorinville.ca",
+      "villageofmorinville.ca",
+      "www.morinvillecounty.ca",
+      "morinvillecounty.ca",
+      "www.morinville.com",
+      "morinville.com",
+      "www.morinville-ab.ca",
+      "morinville-ab.ca"
+    ],
+    "platform_links": {
+      "escribe": [
+        "https://pub-morinville.escribemeetings.com/?FillWidth=1&amp;wmode=transparent"
+      ],
+      "youtube": [
+        "https://www.youtube.com/channel/UCd7C8Wp83ghqRWjGM7FmC-w"
+      ]
+    }
+  },
+  {
+    "short_name": "Morrin",
+    "website_url": "https://www.morrin.com/",
+    "candidates_tried": [
+      "www.morrin.ca",
+      "morrin.ca",
+      "www.townofmorrin.ca",
+      "townofmorrin.ca",
+      "www.cityofmorrin.ca",
+      "cityofmorrin.ca",
+      "www.villageofmorrin.ca",
+      "villageofmorrin.ca",
+      "www.morrincounty.ca",
+      "morrincounty.ca",
+      "www.morrin.com",
+      "morrin.com",
+      "www.morrin-ab.ca",
+      "morrin-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Mountain View County",
+    "website_url": "https://www.mountainviewcounty.com/",
+    "candidates_tried": [
+      "www.mountainviewcounty.ca",
+      "mountainviewcounty.ca",
+      "www.townofmountainview.ca",
+      "townofmountainview.ca",
+      "www.cityofmountainview.ca",
+      "cityofmountainview.ca",
+      "www.villageofmountainview.ca",
+      "villageofmountainview.ca",
+      "www.mountain-view.ca",
+      "mountain-view.ca",
+      "www.mountainviewcounty.com",
+      "mountainviewcounty.com",
+      "www.mountainview-ab.ca",
+      "mountainview-ab.ca"
+    ],
+    "platform_links": {
+      "civicweb": [
+        "https://mountainviewcounty.civicweb.net/Portal/MeetingInformation.aspx?Org=Cal&amp;Id=186",
+        "https://mountainviewcounty.civicweb.net/Portal/MeetingTypeList.aspx",
+        "https://mountainviewcounty.civicweb.net/document/26956/",
+        "https://mountainviewcounty.civicweb.net/portal/members.aspx?id=17",
+        "https://mountainviewcounty.civicweb.net/portal/members.aspx?id=19"
+      ],
+      "youtube": [
+        "https://www.youtube.com/@mountainviewcountyAB",
+        "https://www.youtube.com/channel/UCQ7Y2orfyHU1Ez-jl2a3Hig"
+      ]
+    }
+  },
+  {
+    "short_name": "Mundare",
+    "website_url": "https://www.mundare.ca/",
+    "candidates_tried": [
+      "www.mundare.ca",
+      "mundare.ca",
+      "www.townofmundare.ca",
+      "townofmundare.ca",
+      "www.cityofmundare.ca",
+      "cityofmundare.ca",
+      "www.villageofmundare.ca",
+      "villageofmundare.ca",
+      "www.mundarecounty.ca",
+      "mundarecounty.ca",
+      "www.mundare.com",
+      "mundare.com",
+      "www.mundare-ab.ca",
+      "mundare-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Myrnam",
+    "website_url": "https://www.myrnam.ca/",
+    "candidates_tried": [
+      "www.myrnam.ca",
+      "myrnam.ca",
+      "www.townofmyrnam.ca",
+      "townofmyrnam.ca",
+      "www.cityofmyrnam.ca",
+      "cityofmyrnam.ca",
+      "www.villageofmyrnam.ca",
+      "villageofmyrnam.ca",
+      "www.myrnamcounty.ca",
+      "myrnamcounty.ca",
+      "www.myrnam.com",
+      "myrnam.com",
+      "www.myrnam-ab.ca",
+      "myrnam-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Nampa",
+    "website_url": "https://www.nampa.com/",
+    "candidates_tried": [
+      "www.nampa.ca",
+      "nampa.ca",
+      "www.townofnampa.ca",
+      "townofnampa.ca",
+      "www.cityofnampa.ca",
+      "cityofnampa.ca",
+      "www.villageofnampa.ca",
+      "villageofnampa.ca",
+      "www.nampacounty.ca",
+      "nampacounty.ca",
+      "www.nampa.com",
+      "nampa.com",
+      "www.nampa-ab.ca",
+      "nampa-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Nanton",
+    "website_url": "https://www.nanton.ca/",
+    "candidates_tried": [
+      "www.nanton.ca",
+      "nanton.ca",
+      "www.townofnanton.ca",
+      "townofnanton.ca",
+      "www.cityofnanton.ca",
+      "cityofnanton.ca",
+      "www.villageofnanton.ca",
+      "villageofnanton.ca",
+      "www.nantoncounty.ca",
+      "nantoncounty.ca",
+      "www.nanton.com",
+      "nanton.com",
+      "www.nanton-ab.ca",
+      "nanton-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/@townofnanton5280"
+      ]
+    }
+  },
+  {
+    "short_name": "Nobleford",
+    "website_url": "https://www.nobleford.ca/",
+    "candidates_tried": [
+      "www.nobleford.ca",
+      "nobleford.ca",
+      "www.townofnobleford.ca",
+      "townofnobleford.ca",
+      "www.cityofnobleford.ca",
+      "cityofnobleford.ca",
+      "www.villageofnobleford.ca",
+      "villageofnobleford.ca",
+      "www.noblefordcounty.ca",
+      "noblefordcounty.ca",
+      "www.nobleford.com",
+      "nobleford.com",
+      "www.nobleford-ab.ca",
+      "nobleford-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Northern Sunrise County",
+    "website_url": null,
+    "candidates_tried": [
+      "www.northernsunrisecounty.ca",
+      "northernsunrisecounty.ca",
+      "www.townofnorthernsunrise.ca",
+      "townofnorthernsunrise.ca",
+      "www.cityofnorthernsunrise.ca",
+      "cityofnorthernsunrise.ca",
+      "www.villageofnorthernsunrise.ca",
+      "villageofnorthernsunrise.ca",
+      "www.northern-sunrise.ca",
+      "northern-sunrise.ca",
+      "www.northernsunrisecounty.com",
+      "northernsunrisecounty.com",
+      "www.northernsunrise-ab.ca",
+      "northernsunrise-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Olds",
+    "website_url": "https://www.olds.ca/",
+    "candidates_tried": [
+      "www.olds.ca",
+      "olds.ca",
+      "www.townofolds.ca",
+      "townofolds.ca",
+      "www.cityofolds.ca",
+      "cityofolds.ca",
+      "www.villageofolds.ca",
+      "villageofolds.ca",
+      "www.oldscounty.ca",
+      "oldscounty.ca",
+      "www.olds.com",
+      "olds.com",
+      "www.olds-ab.ca",
+      "olds-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/channel/UC_NH_Sz_lONHVES9ltADIHw"
+      ]
+    }
+  },
+  {
+    "short_name": "Onoway",
+    "website_url": "https://www.onoway.ca/",
+    "candidates_tried": [
+      "www.onoway.ca",
+      "onoway.ca",
+      "www.townofonoway.ca",
+      "townofonoway.ca",
+      "www.cityofonoway.ca",
+      "cityofonoway.ca",
+      "www.villageofonoway.ca",
+      "villageofonoway.ca",
+      "www.onowaycounty.ca",
+      "onowaycounty.ca",
+      "www.onoway.com",
+      "onoway.com",
+      "www.onoway-ab.ca",
+      "onoway-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Oyen",
+    "website_url": "https://oyen.ca/",
+    "candidates_tried": [
+      "www.oyen.ca",
+      "oyen.ca",
+      "www.townofoyen.ca",
+      "townofoyen.ca",
+      "www.cityofoyen.ca",
+      "cityofoyen.ca",
+      "www.villageofoyen.ca",
+      "villageofoyen.ca",
+      "www.oyencounty.ca",
+      "oyencounty.ca",
+      "www.oyen.com",
+      "oyen.com",
+      "www.oyen-ab.ca",
+      "oyen-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Paddle Prairie",
+    "website_url": null,
+    "candidates_tried": [
+      "www.paddleprairie.ca",
+      "paddleprairie.ca",
+      "www.townofpaddleprairie.ca",
+      "townofpaddleprairie.ca",
+      "www.cityofpaddleprairie.ca",
+      "cityofpaddleprairie.ca",
+      "www.villageofpaddleprairie.ca",
+      "villageofpaddleprairie.ca",
+      "www.paddleprairiecounty.ca",
+      "paddleprairiecounty.ca",
+      "www.paddle-prairie.ca",
+      "paddle-prairie.ca",
+      "www.paddleprairie.com",
+      "paddleprairie.com",
+      "www.paddleprairie-ab.ca",
+      "paddleprairie-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Paradise Valley",
+    "website_url": "https://www.paradise-valley.ca/",
+    "candidates_tried": [
+      "www.paradisevalley.ca",
+      "paradisevalley.ca",
+      "www.townofparadisevalley.ca",
+      "townofparadisevalley.ca",
+      "www.cityofparadisevalley.ca",
+      "cityofparadisevalley.ca",
+      "www.villageofparadisevalley.ca",
+      "villageofparadisevalley.ca",
+      "www.paradisevalleycounty.ca",
+      "paradisevalleycounty.ca",
+      "www.paradise-valley.ca",
+      "paradise-valley.ca",
+      "www.paradisevalley.com",
+      "paradisevalley.com",
+      "www.paradisevalley-ab.ca",
+      "paradisevalley-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Parkland County",
+    "website_url": "https://www.parkland.ca/",
+    "candidates_tried": [
+      "www.parklandcounty.ca",
+      "parklandcounty.ca",
+      "www.townofparkland.ca",
+      "townofparkland.ca",
+      "www.cityofparkland.ca",
+      "cityofparkland.ca",
+      "www.villageofparkland.ca",
+      "villageofparkland.ca",
+      "www.parkland.ca",
+      "parkland.ca",
+      "www.parklandcounty.com",
+      "parklandcounty.com",
+      "www.parkland-ab.ca",
+      "parkland-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Peace River",
+    "website_url": "https://www.peaceriver.ca/",
+    "candidates_tried": [
+      "www.peaceriver.ca",
+      "peaceriver.ca",
+      "www.townofpeaceriver.ca",
+      "townofpeaceriver.ca",
+      "www.cityofpeaceriver.ca",
+      "cityofpeaceriver.ca",
+      "www.villageofpeaceriver.ca",
+      "villageofpeaceriver.ca",
+      "www.peacerivercounty.ca",
+      "peacerivercounty.ca",
+      "www.peace-river.ca",
+      "peace-river.ca",
+      "www.peaceriver.com",
+      "peaceriver.com",
+      "www.peaceriver-ab.ca",
+      "peaceriver-ab.ca"
+    ],
+    "platform_links": {
+      "civicweb": [
+        "https://peaceriver.civicweb.net/Portal/",
+        "https://peaceriver.civicweb.net/Portal/MeetingTypeList.aspx",
+        "https://peaceriver.civicweb.net/filepro/documents/111180/",
+        "https://peaceriver.civicweb.net/filepro/documents/116161/",
+        "https://peaceriver.civicweb.net/filepro/documents/140077/"
+      ],
+      "youtube": [
+        "https://www.youtube.com/@townofpeaceriver8959"
+      ]
+    }
+  },
+  {
+    "short_name": "Peavine",
+    "website_url": null,
+    "candidates_tried": [
+      "www.peavine.ca",
+      "peavine.ca",
+      "www.townofpeavine.ca",
+      "townofpeavine.ca",
+      "www.cityofpeavine.ca",
+      "cityofpeavine.ca",
+      "www.villageofpeavine.ca",
+      "villageofpeavine.ca",
+      "www.peavinecounty.ca",
+      "peavinecounty.ca",
+      "www.peavine.com",
+      "peavine.com",
+      "www.peavine-ab.ca",
+      "peavine-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Penhold",
+    "website_url": "https://www.townofpenhold.ca/",
+    "candidates_tried": [
+      "www.penhold.ca",
+      "penhold.ca",
+      "www.townofpenhold.ca",
+      "townofpenhold.ca",
+      "www.cityofpenhold.ca",
+      "cityofpenhold.ca",
+      "www.villageofpenhold.ca",
+      "villageofpenhold.ca",
+      "www.penholdcounty.ca",
+      "penholdcounty.ca",
+      "www.penhold.com",
+      "penhold.com",
+      "www.penhold-ab.ca",
+      "penhold-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Picture Butte",
+    "website_url": "https://www.picturebutte.ca/",
+    "candidates_tried": [
+      "www.picturebutte.ca",
+      "picturebutte.ca",
+      "www.townofpicturebutte.ca",
+      "townofpicturebutte.ca",
+      "www.cityofpicturebutte.ca",
+      "cityofpicturebutte.ca",
+      "www.villageofpicturebutte.ca",
+      "villageofpicturebutte.ca",
+      "www.picturebuttecounty.ca",
+      "picturebuttecounty.ca",
+      "www.picture-butte.ca",
+      "picture-butte.ca",
+      "www.picturebutte.com",
+      "picturebutte.com",
+      "www.picturebutte-ab.ca",
+      "picturebutte-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Pincher Creek",
+    "website_url": "https://pinchercreek.ca/",
+    "candidates_tried": [
+      "www.pinchercreek.ca",
+      "pinchercreek.ca",
+      "www.townofpinchercreek.ca",
+      "townofpinchercreek.ca",
+      "www.cityofpinchercreek.ca",
+      "cityofpinchercreek.ca",
+      "www.villageofpinchercreek.ca",
+      "villageofpinchercreek.ca",
+      "www.pinchercreekcounty.ca",
+      "pinchercreekcounty.ca",
+      "www.pincher-creek.ca",
+      "pincher-creek.ca",
+      "www.pinchercreek.com",
+      "pinchercreek.com",
+      "www.pinchercreek-ab.ca",
+      "pinchercreek-ab.ca"
+    ],
+    "platform_links": {
+      "escribe": [
+        "http://pub-pinchercreek.escribemeetings.com/",
+        "https://pub-pinchercreek.escribemeetings.com/"
+      ]
+    }
+  },
+  {
+    "short_name": "Ponoka",
+    "website_url": "https://www.ponoka.ca/",
+    "candidates_tried": [
+      "www.ponoka.ca",
+      "ponoka.ca",
+      "www.townofponoka.ca",
+      "townofponoka.ca",
+      "www.cityofponoka.ca",
+      "cityofponoka.ca",
+      "www.villageofponoka.ca",
+      "villageofponoka.ca",
+      "www.ponokacounty.ca",
+      "ponokacounty.ca",
+      "www.ponoka.com",
+      "ponoka.com",
+      "www.ponoka-ab.ca",
+      "ponoka-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/channel/UCcXFy3eUh6RPZOY1kOKS0lw"
+      ]
+    }
+  },
+  {
+    "short_name": "Ponoka County",
+    "website_url": "https://www.ponoka.ca/",
+    "candidates_tried": [
+      "www.ponokacounty.ca",
+      "ponokacounty.ca",
+      "www.townofponoka.ca",
+      "townofponoka.ca",
+      "www.cityofponoka.ca",
+      "cityofponoka.ca",
+      "www.villageofponoka.ca",
+      "villageofponoka.ca",
+      "www.ponoka.ca",
+      "ponoka.ca",
+      "www.ponokacounty.com",
+      "ponokacounty.com",
+      "www.ponoka-ab.ca",
+      "ponoka-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/channel/UCcXFy3eUh6RPZOY1kOKS0lw"
+      ]
+    }
+  },
+  {
+    "short_name": "Provost",
+    "website_url": "https://www.provost.ca/",
+    "candidates_tried": [
+      "www.provost.ca",
+      "provost.ca",
+      "www.townofprovost.ca",
+      "townofprovost.ca",
+      "www.cityofprovost.ca",
+      "cityofprovost.ca",
+      "www.villageofprovost.ca",
+      "villageofprovost.ca",
+      "www.provostcounty.ca",
+      "provostcounty.ca",
+      "www.provost.com",
+      "provost.com",
+      "www.provost-ab.ca",
+      "provost-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Rainbow Lake",
+    "website_url": "https://www.rainbowlake.ca/",
+    "candidates_tried": [
+      "www.rainbowlake.ca",
+      "rainbowlake.ca",
+      "www.townofrainbowlake.ca",
+      "townofrainbowlake.ca",
+      "www.cityofrainbowlake.ca",
+      "cityofrainbowlake.ca",
+      "www.villageofrainbowlake.ca",
+      "villageofrainbowlake.ca",
+      "www.rainbowlakecounty.ca",
+      "rainbowlakecounty.ca",
+      "www.rainbow-lake.ca",
+      "rainbow-lake.ca",
+      "www.rainbowlake.com",
+      "rainbowlake.com",
+      "www.rainbowlake-ab.ca",
+      "rainbowlake-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Raymond",
+    "website_url": "https://www.raymond.ca/",
+    "candidates_tried": [
+      "www.raymond.ca",
+      "raymond.ca",
+      "www.townofraymond.ca",
+      "townofraymond.ca",
+      "www.cityofraymond.ca",
+      "cityofraymond.ca",
+      "www.villageofraymond.ca",
+      "villageofraymond.ca",
+      "www.raymondcounty.ca",
+      "raymondcounty.ca",
+      "www.raymond.com",
+      "raymond.com",
+      "www.raymond-ab.ca",
+      "raymond-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "http://www.youtube.com/user/TownofRaymondVideos",
+        "https://www.youtube.com/channel/UCiHirW3MvrAV0-WdyLGfo_g"
+      ]
+    }
+  },
+  {
+    "short_name": "Red Deer County",
+    "website_url": null,
+    "candidates_tried": [
+      "www.reddeercounty.ca",
+      "reddeercounty.ca",
+      "www.townofreddeer.ca",
+      "townofreddeer.ca",
+      "www.cityofreddeer.ca",
+      "cityofreddeer.ca",
+      "www.villageofreddeer.ca",
+      "villageofreddeer.ca",
+      "www.red-deer.ca",
+      "red-deer.ca",
+      "www.reddeercounty.com",
+      "reddeercounty.com",
+      "www.reddeer-ab.ca",
+      "reddeer-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Redcliff",
+    "website_url": "https://www.redcliff.ca/",
+    "candidates_tried": [
+      "www.redcliff.ca",
+      "redcliff.ca",
+      "www.townofredcliff.ca",
+      "townofredcliff.ca",
+      "www.cityofredcliff.ca",
+      "cityofredcliff.ca",
+      "www.villageofredcliff.ca",
+      "villageofredcliff.ca",
+      "www.redcliffcounty.ca",
+      "redcliffcounty.ca",
+      "www.redcliff.com",
+      "redcliff.com",
+      "www.redcliff-ab.ca",
+      "redcliff-ab.ca"
+    ],
+    "platform_links": {
+      "civicweb": [
+        "https://redcliff.civicweb.net/Portal/",
+        "https://redcliff.civicweb.net/Portal/MeetingTypeList.aspx",
+        "https://redcliff.civicweb.net/filepro/documents",
+        "https://redcliff.civicweb.net/filepro/documents/10555",
+        "https://redcliff.civicweb.net/filepro/documents/10556"
+      ]
+    }
+  },
+  {
+    "short_name": "Rimbey",
+    "website_url": "https://www.rimbey.com/",
+    "candidates_tried": [
+      "www.rimbey.ca",
+      "rimbey.ca",
+      "www.townofrimbey.ca",
+      "townofrimbey.ca",
+      "www.cityofrimbey.ca",
+      "cityofrimbey.ca",
+      "www.villageofrimbey.ca",
+      "villageofrimbey.ca",
+      "www.rimbeycounty.ca",
+      "rimbeycounty.ca",
+      "www.rimbey.com",
+      "rimbey.com",
+      "www.rimbey-ab.ca",
+      "rimbey-ab.ca"
+    ],
+    "platform_links": {
+      "civicweb": [
+        "https://rimbey.civicweb.net/Portal/MeetingTypeList.aspx"
+      ]
+    }
+  },
+  {
+    "short_name": "Rocky Mountain House",
+    "website_url": null,
+    "candidates_tried": [
+      "www.rockymountainhouse.ca",
+      "rockymountainhouse.ca",
+      "www.townofrockymountainhouse.ca",
+      "townofrockymountainhouse.ca",
+      "www.cityofrockymountainhouse.ca",
+      "cityofrockymountainhouse.ca",
+      "www.villageofrockymountainhouse.ca",
+      "villageofrockymountainhouse.ca",
+      "www.rockymountainhousecounty.ca",
+      "rockymountainhousecounty.ca",
+      "www.rocky-mountain-house.ca",
+      "rocky-mountain-house.ca",
+      "www.rockymountainhouse.com",
+      "rockymountainhouse.com",
+      "www.rockymountainhouse-ab.ca",
+      "rockymountainhouse-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Rocky View County",
+    "website_url": "https://www.rockyviewcounty.ca/",
+    "candidates_tried": [
+      "www.rockyviewcounty.ca",
+      "rockyviewcounty.ca",
+      "www.townofrockyview.ca",
+      "townofrockyview.ca",
+      "www.cityofrockyview.ca",
+      "cityofrockyview.ca",
+      "www.villageofrockyview.ca",
+      "villageofrockyview.ca",
+      "www.rocky-view.ca",
+      "rocky-view.ca",
+      "www.rockyviewcounty.com",
+      "rockyviewcounty.com",
+      "www.rockyview-ab.ca",
+      "rockyview-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Rockyford",
+    "website_url": "https://www.rockyford.ca/",
+    "candidates_tried": [
+      "www.rockyford.ca",
+      "rockyford.ca",
+      "www.townofrockyford.ca",
+      "townofrockyford.ca",
+      "www.cityofrockyford.ca",
+      "cityofrockyford.ca",
+      "www.villageofrockyford.ca",
+      "villageofrockyford.ca",
+      "www.rockyfordcounty.ca",
+      "rockyfordcounty.ca",
+      "www.rockyford.com",
+      "rockyford.com",
+      "www.rockyford-ab.ca",
+      "rockyford-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Rosalind",
+    "website_url": "https://www.villageofrosalind.ca/",
+    "candidates_tried": [
+      "www.rosalind.ca",
+      "rosalind.ca",
+      "www.townofrosalind.ca",
+      "townofrosalind.ca",
+      "www.cityofrosalind.ca",
+      "cityofrosalind.ca",
+      "www.villageofrosalind.ca",
+      "villageofrosalind.ca",
+      "www.rosalindcounty.ca",
+      "rosalindcounty.ca",
+      "www.rosalind.com",
+      "rosalind.com",
+      "www.rosalind-ab.ca",
+      "rosalind-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Rycroft",
+    "website_url": "https://www.rycroft.ca/",
+    "candidates_tried": [
+      "www.rycroft.ca",
+      "rycroft.ca",
+      "www.townofrycroft.ca",
+      "townofrycroft.ca",
+      "www.cityofrycroft.ca",
+      "cityofrycroft.ca",
+      "www.villageofrycroft.ca",
+      "villageofrycroft.ca",
+      "www.rycroftcounty.ca",
+      "rycroftcounty.ca",
+      "www.rycroft.com",
+      "rycroft.com",
+      "www.rycroft-ab.ca",
+      "rycroft-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Ryley",
+    "website_url": "https://www.ryley.ca/",
+    "candidates_tried": [
+      "www.ryley.ca",
+      "ryley.ca",
+      "www.townofryley.ca",
+      "townofryley.ca",
+      "www.cityofryley.ca",
+      "cityofryley.ca",
+      "www.villageofryley.ca",
+      "villageofryley.ca",
+      "www.ryleycounty.ca",
+      "ryleycounty.ca",
+      "www.ryley.com",
+      "ryley.com",
+      "www.ryley-ab.ca",
+      "ryley-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Argentia Beach",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofargentiabeach.ca",
+      "www.summervillageofargentiabeach.ca",
+      "www.svargentiabeach.ca",
+      "svargentiabeach.ca",
+      "www.townofargentiabeach.ca",
+      "townofargentiabeach.ca",
+      "www.cityofargentiabeach.ca",
+      "cityofargentiabeach.ca",
+      "www.villageofargentiabeach.ca",
+      "villageofargentiabeach.ca",
+      "www.argentiabeachcounty.ca",
+      "argentiabeachcounty.ca",
+      "www.argentia-beach.ca",
+      "argentia-beach.ca",
+      "www.svargentiabeach.com",
+      "svargentiabeach.com",
+      "www.argentiabeach-ab.ca",
+      "argentiabeach-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Betula Beach",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofbetulabeach.ca",
+      "www.summervillageofbetulabeach.ca",
+      "www.svbetulabeach.ca",
+      "svbetulabeach.ca",
+      "www.townofbetulabeach.ca",
+      "townofbetulabeach.ca",
+      "www.cityofbetulabeach.ca",
+      "cityofbetulabeach.ca",
+      "www.villageofbetulabeach.ca",
+      "villageofbetulabeach.ca",
+      "www.betulabeachcounty.ca",
+      "betulabeachcounty.ca",
+      "www.betula-beach.ca",
+      "betula-beach.ca",
+      "www.svbetulabeach.com",
+      "svbetulabeach.com",
+      "www.betulabeach-ab.ca",
+      "betulabeach-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Birch Cove",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofbirchcove.ca",
+      "www.summervillageofbirchcove.ca",
+      "www.svbirchcove.ca",
+      "svbirchcove.ca",
+      "www.townofbirchcove.ca",
+      "townofbirchcove.ca",
+      "www.cityofbirchcove.ca",
+      "cityofbirchcove.ca",
+      "www.villageofbirchcove.ca",
+      "villageofbirchcove.ca",
+      "www.birchcovecounty.ca",
+      "birchcovecounty.ca",
+      "www.birch-cove.ca",
+      "birch-cove.ca",
+      "www.svbirchcove.com",
+      "svbirchcove.com",
+      "www.birchcove-ab.ca",
+      "birchcove-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Birchcliff",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofbirchcliff.ca",
+      "www.summervillageofbirchcliff.ca",
+      "www.svbirchcliff.ca",
+      "svbirchcliff.ca",
+      "www.townofbirchcliff.ca",
+      "townofbirchcliff.ca",
+      "www.cityofbirchcliff.ca",
+      "cityofbirchcliff.ca",
+      "www.villageofbirchcliff.ca",
+      "villageofbirchcliff.ca",
+      "www.birchcliffcounty.ca",
+      "birchcliffcounty.ca",
+      "www.birchcliff.ca",
+      "birchcliff.ca",
+      "www.svbirchcliff.com",
+      "svbirchcliff.com",
+      "www.birchcliff-ab.ca",
+      "birchcliff-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Bondiss",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofbondiss.ca",
+      "www.summervillageofbondiss.ca",
+      "www.svbondiss.ca",
+      "svbondiss.ca",
+      "www.townofbondiss.ca",
+      "townofbondiss.ca",
+      "www.cityofbondiss.ca",
+      "cityofbondiss.ca",
+      "www.villageofbondiss.ca",
+      "villageofbondiss.ca",
+      "www.bondisscounty.ca",
+      "bondisscounty.ca",
+      "www.bondiss.ca",
+      "bondiss.ca",
+      "www.svbondiss.com",
+      "svbondiss.com",
+      "www.bondiss-ab.ca",
+      "bondiss-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Bonnyville Beach",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofbonnyvillebeach.ca",
+      "www.summervillageofbonnyvillebeach.ca",
+      "www.svbonnyvillebeach.ca",
+      "svbonnyvillebeach.ca",
+      "www.townofbonnyvillebeach.ca",
+      "townofbonnyvillebeach.ca",
+      "www.cityofbonnyvillebeach.ca",
+      "cityofbonnyvillebeach.ca",
+      "www.villageofbonnyvillebeach.ca",
+      "villageofbonnyvillebeach.ca",
+      "www.bonnyvillebeachcounty.ca",
+      "bonnyvillebeachcounty.ca",
+      "www.bonnyville-beach.ca",
+      "bonnyville-beach.ca",
+      "www.svbonnyvillebeach.com",
+      "svbonnyvillebeach.com",
+      "www.bonnyvillebeach-ab.ca",
+      "bonnyvillebeach-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Brentwood",
+    "website_url": "https://www.brentwood.ca/",
+    "candidates_tried": [
+      "summervillageofbrentwood.ca",
+      "www.summervillageofbrentwood.ca",
+      "www.svbrentwood.ca",
+      "svbrentwood.ca",
+      "www.townofbrentwood.ca",
+      "townofbrentwood.ca",
+      "www.cityofbrentwood.ca",
+      "cityofbrentwood.ca",
+      "www.villageofbrentwood.ca",
+      "villageofbrentwood.ca",
+      "www.brentwoodcounty.ca",
+      "brentwoodcounty.ca",
+      "www.brentwood.ca",
+      "brentwood.ca",
+      "www.svbrentwood.com",
+      "svbrentwood.com",
+      "www.brentwood-ab.ca",
+      "brentwood-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/user/brentwoodcollege"
+      ]
+    }
+  },
+  {
+    "short_name": "SV Burnstick Lake",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofburnsticklake.ca",
+      "www.summervillageofburnsticklake.ca",
+      "www.svburnsticklake.ca",
+      "svburnsticklake.ca",
+      "www.townofburnsticklake.ca",
+      "townofburnsticklake.ca",
+      "www.cityofburnsticklake.ca",
+      "cityofburnsticklake.ca",
+      "www.villageofburnsticklake.ca",
+      "villageofburnsticklake.ca",
+      "www.burnsticklakecounty.ca",
+      "burnsticklakecounty.ca",
+      "www.burnstick-lake.ca",
+      "burnstick-lake.ca",
+      "www.svburnsticklake.com",
+      "svburnsticklake.com",
+      "www.burnsticklake-ab.ca",
+      "burnsticklake-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Castle Island",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofcastleisland.ca",
+      "www.summervillageofcastleisland.ca",
+      "www.svcastleisland.ca",
+      "svcastleisland.ca",
+      "www.townofcastleisland.ca",
+      "townofcastleisland.ca",
+      "www.cityofcastleisland.ca",
+      "cityofcastleisland.ca",
+      "www.villageofcastleisland.ca",
+      "villageofcastleisland.ca",
+      "www.castleislandcounty.ca",
+      "castleislandcounty.ca",
+      "www.castle-island.ca",
+      "castle-island.ca",
+      "www.svcastleisland.com",
+      "svcastleisland.com",
+      "www.castleisland-ab.ca",
+      "castleisland-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Crystal Springs",
+    "website_url": "https://svcrystalsprings.ca/",
+    "candidates_tried": [
+      "summervillageofcrystalsprings.ca",
+      "www.summervillageofcrystalsprings.ca",
+      "www.svcrystalsprings.ca",
+      "svcrystalsprings.ca",
+      "www.townofcrystalsprings.ca",
+      "townofcrystalsprings.ca",
+      "www.cityofcrystalsprings.ca",
+      "cityofcrystalsprings.ca",
+      "www.villageofcrystalsprings.ca",
+      "villageofcrystalsprings.ca",
+      "www.crystalspringscounty.ca",
+      "crystalspringscounty.ca",
+      "www.crystal-springs.ca",
+      "crystal-springs.ca",
+      "www.svcrystalsprings.com",
+      "svcrystalsprings.com",
+      "www.crystalsprings-ab.ca",
+      "crystalsprings-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Ghost Lake",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofghostlake.ca",
+      "www.summervillageofghostlake.ca",
+      "www.svghostlake.ca",
+      "svghostlake.ca",
+      "www.townofghostlake.ca",
+      "townofghostlake.ca",
+      "www.cityofghostlake.ca",
+      "cityofghostlake.ca",
+      "www.villageofghostlake.ca",
+      "villageofghostlake.ca",
+      "www.ghostlakecounty.ca",
+      "ghostlakecounty.ca",
+      "www.ghost-lake.ca",
+      "ghost-lake.ca",
+      "www.svghostlake.com",
+      "svghostlake.com",
+      "www.ghostlake-ab.ca",
+      "ghostlake-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Golden Days",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofgoldendays.ca",
+      "www.summervillageofgoldendays.ca",
+      "www.svgoldendays.ca",
+      "svgoldendays.ca",
+      "www.townofgoldendays.ca",
+      "townofgoldendays.ca",
+      "www.cityofgoldendays.ca",
+      "cityofgoldendays.ca",
+      "www.villageofgoldendays.ca",
+      "villageofgoldendays.ca",
+      "www.goldendayscounty.ca",
+      "goldendayscounty.ca",
+      "www.golden-days.ca",
+      "golden-days.ca",
+      "www.svgoldendays.com",
+      "svgoldendays.com",
+      "www.goldendays-ab.ca",
+      "goldendays-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Grandview",
+    "website_url": "https://www.grandview.ca/",
+    "candidates_tried": [
+      "summervillageofgrandview.ca",
+      "www.summervillageofgrandview.ca",
+      "www.svgrandview.ca",
+      "svgrandview.ca",
+      "www.townofgrandview.ca",
+      "townofgrandview.ca",
+      "www.cityofgrandview.ca",
+      "cityofgrandview.ca",
+      "www.villageofgrandview.ca",
+      "villageofgrandview.ca",
+      "www.grandviewcounty.ca",
+      "grandviewcounty.ca",
+      "www.grandview.ca",
+      "grandview.ca",
+      "www.svgrandview.com",
+      "svgrandview.com",
+      "www.grandview-ab.ca",
+      "grandview-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Gull Lake",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofgulllake.ca",
+      "www.summervillageofgulllake.ca",
+      "www.svgulllake.ca",
+      "svgulllake.ca",
+      "www.townofgulllake.ca",
+      "townofgulllake.ca",
+      "www.cityofgulllake.ca",
+      "cityofgulllake.ca",
+      "www.villageofgulllake.ca",
+      "villageofgulllake.ca",
+      "www.gulllakecounty.ca",
+      "gulllakecounty.ca",
+      "www.gull-lake.ca",
+      "gull-lake.ca",
+      "www.svgulllake.com",
+      "svgulllake.com",
+      "www.gulllake-ab.ca",
+      "gulllake-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Half Moon Bay",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofhalfmoonbay.ca",
+      "www.summervillageofhalfmoonbay.ca",
+      "www.svhalfmoonbay.ca",
+      "svhalfmoonbay.ca",
+      "www.townofhalfmoonbay.ca",
+      "townofhalfmoonbay.ca",
+      "www.cityofhalfmoonbay.ca",
+      "cityofhalfmoonbay.ca",
+      "www.villageofhalfmoonbay.ca",
+      "villageofhalfmoonbay.ca",
+      "www.halfmoonbaycounty.ca",
+      "halfmoonbaycounty.ca",
+      "www.half-moon-bay.ca",
+      "half-moon-bay.ca",
+      "www.svhalfmoonbay.com",
+      "svhalfmoonbay.com",
+      "www.halfmoonbay-ab.ca",
+      "halfmoonbay-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Horseshoe Bay",
+    "website_url": "https://www.svhorseshoebay.com/",
+    "candidates_tried": [
+      "summervillageofhorseshoebay.ca",
+      "www.summervillageofhorseshoebay.ca",
+      "www.svhorseshoebay.ca",
+      "svhorseshoebay.ca",
+      "www.townofhorseshoebay.ca",
+      "townofhorseshoebay.ca",
+      "www.cityofhorseshoebay.ca",
+      "cityofhorseshoebay.ca",
+      "www.villageofhorseshoebay.ca",
+      "villageofhorseshoebay.ca",
+      "www.horseshoebaycounty.ca",
+      "horseshoebaycounty.ca",
+      "www.horseshoe-bay.ca",
+      "horseshoe-bay.ca",
+      "www.svhorseshoebay.com",
+      "svhorseshoebay.com",
+      "www.horseshoebay-ab.ca",
+      "horseshoebay-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Island Lake",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofislandlake.ca",
+      "www.summervillageofislandlake.ca",
+      "www.svislandlake.ca",
+      "svislandlake.ca",
+      "www.townofislandlake.ca",
+      "townofislandlake.ca",
+      "www.cityofislandlake.ca",
+      "cityofislandlake.ca",
+      "www.villageofislandlake.ca",
+      "villageofislandlake.ca",
+      "www.islandlakecounty.ca",
+      "islandlakecounty.ca",
+      "www.island-lake.ca",
+      "island-lake.ca",
+      "www.svislandlake.com",
+      "svislandlake.com",
+      "www.islandlake-ab.ca",
+      "islandlake-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Island Lake South",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofislandlakesouth.ca",
+      "www.summervillageofislandlakesouth.ca",
+      "www.svislandlakesouth.ca",
+      "svislandlakesouth.ca",
+      "www.townofislandlakesouth.ca",
+      "townofislandlakesouth.ca",
+      "www.cityofislandlakesouth.ca",
+      "cityofislandlakesouth.ca",
+      "www.villageofislandlakesouth.ca",
+      "villageofislandlakesouth.ca",
+      "www.islandlakesouthcounty.ca",
+      "islandlakesouthcounty.ca",
+      "www.island-lake-south.ca",
+      "island-lake-south.ca",
+      "www.svislandlakesouth.com",
+      "svislandlakesouth.com",
+      "www.islandlakesouth-ab.ca",
+      "islandlakesouth-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Itaska Beach",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofitaskabeach.ca",
+      "www.summervillageofitaskabeach.ca",
+      "www.svitaskabeach.ca",
+      "svitaskabeach.ca",
+      "www.townofitaskabeach.ca",
+      "townofitaskabeach.ca",
+      "www.cityofitaskabeach.ca",
+      "cityofitaskabeach.ca",
+      "www.villageofitaskabeach.ca",
+      "villageofitaskabeach.ca",
+      "www.itaskabeachcounty.ca",
+      "itaskabeachcounty.ca",
+      "www.itaska-beach.ca",
+      "itaska-beach.ca",
+      "www.svitaskabeach.com",
+      "svitaskabeach.com",
+      "www.itaskabeach-ab.ca",
+      "itaskabeach-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Jarvis Bay",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofjarvisbay.ca",
+      "www.summervillageofjarvisbay.ca",
+      "www.svjarvisbay.ca",
+      "svjarvisbay.ca",
+      "www.townofjarvisbay.ca",
+      "townofjarvisbay.ca",
+      "www.cityofjarvisbay.ca",
+      "cityofjarvisbay.ca",
+      "www.villageofjarvisbay.ca",
+      "villageofjarvisbay.ca",
+      "www.jarvisbaycounty.ca",
+      "jarvisbaycounty.ca",
+      "www.jarvis-bay.ca",
+      "jarvis-bay.ca",
+      "www.svjarvisbay.com",
+      "svjarvisbay.com",
+      "www.jarvisbay-ab.ca",
+      "jarvisbay-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Kapasiwin",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofkapasiwin.ca",
+      "www.summervillageofkapasiwin.ca",
+      "www.svkapasiwin.ca",
+      "svkapasiwin.ca",
+      "www.townofkapasiwin.ca",
+      "townofkapasiwin.ca",
+      "www.cityofkapasiwin.ca",
+      "cityofkapasiwin.ca",
+      "www.villageofkapasiwin.ca",
+      "villageofkapasiwin.ca",
+      "www.kapasiwincounty.ca",
+      "kapasiwincounty.ca",
+      "www.kapasiwin.ca",
+      "kapasiwin.ca",
+      "www.svkapasiwin.com",
+      "svkapasiwin.com",
+      "www.kapasiwin-ab.ca",
+      "kapasiwin-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Lakeview",
+    "website_url": "https://www.lakeview.ca/",
+    "candidates_tried": [
+      "summervillageoflakeview.ca",
+      "www.summervillageoflakeview.ca",
+      "www.svlakeview.ca",
+      "svlakeview.ca",
+      "www.townoflakeview.ca",
+      "townoflakeview.ca",
+      "www.cityoflakeview.ca",
+      "cityoflakeview.ca",
+      "www.villageoflakeview.ca",
+      "villageoflakeview.ca",
+      "www.lakeviewcounty.ca",
+      "lakeviewcounty.ca",
+      "www.lakeview.ca",
+      "lakeview.ca",
+      "www.svlakeview.com",
+      "svlakeview.com",
+      "www.lakeview-ab.ca",
+      "lakeview-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Larkspur",
+    "website_url": "https://www.svlarkspur.ca/",
+    "candidates_tried": [
+      "summervillageoflarkspur.ca",
+      "www.summervillageoflarkspur.ca",
+      "www.svlarkspur.ca",
+      "svlarkspur.ca",
+      "www.townoflarkspur.ca",
+      "townoflarkspur.ca",
+      "www.cityoflarkspur.ca",
+      "cityoflarkspur.ca",
+      "www.villageoflarkspur.ca",
+      "villageoflarkspur.ca",
+      "www.larkspurcounty.ca",
+      "larkspurcounty.ca",
+      "www.larkspur.ca",
+      "larkspur.ca",
+      "www.svlarkspur.com",
+      "svlarkspur.com",
+      "www.larkspur-ab.ca",
+      "larkspur-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Ma-Me-O Beach",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofmameobeach.ca",
+      "www.summervillageofmameobeach.ca",
+      "www.svmameobeach.ca",
+      "svmameobeach.ca",
+      "www.townofmameobeach.ca",
+      "townofmameobeach.ca",
+      "www.cityofmameobeach.ca",
+      "cityofmameobeach.ca",
+      "www.villageofmameobeach.ca",
+      "villageofmameobeach.ca",
+      "www.mameobeachcounty.ca",
+      "mameobeachcounty.ca",
+      "www.ma-me-o-beach.ca",
+      "ma-me-o-beach.ca",
+      "www.svmameobeach.com",
+      "svmameobeach.com",
+      "www.mameobeach-ab.ca",
+      "mameobeach-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Mewatha Beach",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofmewathabeach.ca",
+      "www.summervillageofmewathabeach.ca",
+      "www.svmewathabeach.ca",
+      "svmewathabeach.ca",
+      "www.townofmewathabeach.ca",
+      "townofmewathabeach.ca",
+      "www.cityofmewathabeach.ca",
+      "cityofmewathabeach.ca",
+      "www.villageofmewathabeach.ca",
+      "villageofmewathabeach.ca",
+      "www.mewathabeachcounty.ca",
+      "mewathabeachcounty.ca",
+      "www.mewatha-beach.ca",
+      "mewatha-beach.ca",
+      "www.svmewathabeach.com",
+      "svmewathabeach.com",
+      "www.mewathabeach-ab.ca",
+      "mewathabeach-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Nakamun Park",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofnakamunpark.ca",
+      "www.summervillageofnakamunpark.ca",
+      "www.svnakamunpark.ca",
+      "svnakamunpark.ca",
+      "www.townofnakamunpark.ca",
+      "townofnakamunpark.ca",
+      "www.cityofnakamunpark.ca",
+      "cityofnakamunpark.ca",
+      "www.villageofnakamunpark.ca",
+      "villageofnakamunpark.ca",
+      "www.nakamunparkcounty.ca",
+      "nakamunparkcounty.ca",
+      "www.nakamun-park.ca",
+      "nakamun-park.ca",
+      "www.svnakamunpark.com",
+      "svnakamunpark.com",
+      "www.nakamunpark-ab.ca",
+      "nakamunpark-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Norglenwold",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofnorglenwold.ca",
+      "www.summervillageofnorglenwold.ca",
+      "www.svnorglenwold.ca",
+      "svnorglenwold.ca",
+      "www.townofnorglenwold.ca",
+      "townofnorglenwold.ca",
+      "www.cityofnorglenwold.ca",
+      "cityofnorglenwold.ca",
+      "www.villageofnorglenwold.ca",
+      "villageofnorglenwold.ca",
+      "www.norglenwoldcounty.ca",
+      "norglenwoldcounty.ca",
+      "www.norglenwold.ca",
+      "norglenwold.ca",
+      "www.svnorglenwold.com",
+      "svnorglenwold.com",
+      "www.norglenwold-ab.ca",
+      "norglenwold-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Norris Beach",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofnorrisbeach.ca",
+      "www.summervillageofnorrisbeach.ca",
+      "www.svnorrisbeach.ca",
+      "svnorrisbeach.ca",
+      "www.townofnorrisbeach.ca",
+      "townofnorrisbeach.ca",
+      "www.cityofnorrisbeach.ca",
+      "cityofnorrisbeach.ca",
+      "www.villageofnorrisbeach.ca",
+      "villageofnorrisbeach.ca",
+      "www.norrisbeachcounty.ca",
+      "norrisbeachcounty.ca",
+      "www.norris-beach.ca",
+      "norris-beach.ca",
+      "www.svnorrisbeach.com",
+      "svnorrisbeach.com",
+      "www.norrisbeach-ab.ca",
+      "norrisbeach-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Parkland Beach",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofparklandbeach.ca",
+      "www.summervillageofparklandbeach.ca",
+      "www.svparklandbeach.ca",
+      "svparklandbeach.ca",
+      "www.townofparklandbeach.ca",
+      "townofparklandbeach.ca",
+      "www.cityofparklandbeach.ca",
+      "cityofparklandbeach.ca",
+      "www.villageofparklandbeach.ca",
+      "villageofparklandbeach.ca",
+      "www.parklandbeachcounty.ca",
+      "parklandbeachcounty.ca",
+      "www.parkland-beach.ca",
+      "parkland-beach.ca",
+      "www.svparklandbeach.com",
+      "svparklandbeach.com",
+      "www.parklandbeach-ab.ca",
+      "parklandbeach-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Pelican Narrows",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofpelicannarrows.ca",
+      "www.summervillageofpelicannarrows.ca",
+      "www.svpelicannarrows.ca",
+      "svpelicannarrows.ca",
+      "www.townofpelicannarrows.ca",
+      "townofpelicannarrows.ca",
+      "www.cityofpelicannarrows.ca",
+      "cityofpelicannarrows.ca",
+      "www.villageofpelicannarrows.ca",
+      "villageofpelicannarrows.ca",
+      "www.pelicannarrowscounty.ca",
+      "pelicannarrowscounty.ca",
+      "www.pelican-narrows.ca",
+      "pelican-narrows.ca",
+      "www.svpelicannarrows.com",
+      "svpelicannarrows.com",
+      "www.pelicannarrows-ab.ca",
+      "pelicannarrows-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Point Alison",
+    "website_url": "https://www.svpointalison.com/",
+    "candidates_tried": [
+      "summervillageofpointalison.ca",
+      "www.summervillageofpointalison.ca",
+      "www.svpointalison.ca",
+      "svpointalison.ca",
+      "www.townofpointalison.ca",
+      "townofpointalison.ca",
+      "www.cityofpointalison.ca",
+      "cityofpointalison.ca",
+      "www.villageofpointalison.ca",
+      "villageofpointalison.ca",
+      "www.pointalisoncounty.ca",
+      "pointalisoncounty.ca",
+      "www.point-alison.ca",
+      "point-alison.ca",
+      "www.svpointalison.com",
+      "svpointalison.com",
+      "www.pointalison-ab.ca",
+      "pointalison-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Poplar Bay",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofpoplarbay.ca",
+      "www.summervillageofpoplarbay.ca",
+      "www.svpoplarbay.ca",
+      "svpoplarbay.ca",
+      "www.townofpoplarbay.ca",
+      "townofpoplarbay.ca",
+      "www.cityofpoplarbay.ca",
+      "cityofpoplarbay.ca",
+      "www.villageofpoplarbay.ca",
+      "villageofpoplarbay.ca",
+      "www.poplarbaycounty.ca",
+      "poplarbaycounty.ca",
+      "www.poplar-bay.ca",
+      "poplar-bay.ca",
+      "www.svpoplarbay.com",
+      "svpoplarbay.com",
+      "www.poplarbay-ab.ca",
+      "poplarbay-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Rochon Sands",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofrochonsands.ca",
+      "www.summervillageofrochonsands.ca",
+      "www.svrochonsands.ca",
+      "svrochonsands.ca",
+      "www.townofrochonsands.ca",
+      "townofrochonsands.ca",
+      "www.cityofrochonsands.ca",
+      "cityofrochonsands.ca",
+      "www.villageofrochonsands.ca",
+      "villageofrochonsands.ca",
+      "www.rochonsandscounty.ca",
+      "rochonsandscounty.ca",
+      "www.rochon-sands.ca",
+      "rochon-sands.ca",
+      "www.svrochonsands.com",
+      "svrochonsands.com",
+      "www.rochonsands-ab.ca",
+      "rochonsands-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Ross Haven",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofrosshaven.ca",
+      "www.summervillageofrosshaven.ca",
+      "www.svrosshaven.ca",
+      "svrosshaven.ca",
+      "www.townofrosshaven.ca",
+      "townofrosshaven.ca",
+      "www.cityofrosshaven.ca",
+      "cityofrosshaven.ca",
+      "www.villageofrosshaven.ca",
+      "villageofrosshaven.ca",
+      "www.rosshavencounty.ca",
+      "rosshavencounty.ca",
+      "www.ross-haven.ca",
+      "ross-haven.ca",
+      "www.svrosshaven.com",
+      "svrosshaven.com",
+      "www.rosshaven-ab.ca",
+      "rosshaven-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Seba Beach",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofsebabeach.ca",
+      "www.summervillageofsebabeach.ca",
+      "www.svsebabeach.ca",
+      "svsebabeach.ca",
+      "www.townofsebabeach.ca",
+      "townofsebabeach.ca",
+      "www.cityofsebabeach.ca",
+      "cityofsebabeach.ca",
+      "www.villageofsebabeach.ca",
+      "villageofsebabeach.ca",
+      "www.sebabeachcounty.ca",
+      "sebabeachcounty.ca",
+      "www.seba-beach.ca",
+      "seba-beach.ca",
+      "www.svsebabeach.com",
+      "svsebabeach.com",
+      "www.sebabeach-ab.ca",
+      "sebabeach-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Silver Beach",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofsilverbeach.ca",
+      "www.summervillageofsilverbeach.ca",
+      "www.svsilverbeach.ca",
+      "svsilverbeach.ca",
+      "www.townofsilverbeach.ca",
+      "townofsilverbeach.ca",
+      "www.cityofsilverbeach.ca",
+      "cityofsilverbeach.ca",
+      "www.villageofsilverbeach.ca",
+      "villageofsilverbeach.ca",
+      "www.silverbeachcounty.ca",
+      "silverbeachcounty.ca",
+      "www.silver-beach.ca",
+      "silver-beach.ca",
+      "www.svsilverbeach.com",
+      "svsilverbeach.com",
+      "www.silverbeach-ab.ca",
+      "silverbeach-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Silver Sands",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofsilversands.ca",
+      "www.summervillageofsilversands.ca",
+      "www.svsilversands.ca",
+      "svsilversands.ca",
+      "www.townofsilversands.ca",
+      "townofsilversands.ca",
+      "www.cityofsilversands.ca",
+      "cityofsilversands.ca",
+      "www.villageofsilversands.ca",
+      "villageofsilversands.ca",
+      "www.silversandscounty.ca",
+      "silversandscounty.ca",
+      "www.silver-sands.ca",
+      "silver-sands.ca",
+      "www.svsilversands.com",
+      "svsilversands.com",
+      "www.silversands-ab.ca",
+      "silversands-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV South Baptiste",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofsouthbaptiste.ca",
+      "www.summervillageofsouthbaptiste.ca",
+      "www.svsouthbaptiste.ca",
+      "svsouthbaptiste.ca",
+      "www.townofsouthbaptiste.ca",
+      "townofsouthbaptiste.ca",
+      "www.cityofsouthbaptiste.ca",
+      "cityofsouthbaptiste.ca",
+      "www.villageofsouthbaptiste.ca",
+      "villageofsouthbaptiste.ca",
+      "www.southbaptistecounty.ca",
+      "southbaptistecounty.ca",
+      "www.south-baptiste.ca",
+      "south-baptiste.ca",
+      "www.svsouthbaptiste.com",
+      "svsouthbaptiste.com",
+      "www.southbaptiste-ab.ca",
+      "southbaptiste-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV South View",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofsouthview.ca",
+      "www.summervillageofsouthview.ca",
+      "www.svsouthview.ca",
+      "svsouthview.ca",
+      "www.townofsouthview.ca",
+      "townofsouthview.ca",
+      "www.cityofsouthview.ca",
+      "cityofsouthview.ca",
+      "www.villageofsouthview.ca",
+      "villageofsouthview.ca",
+      "www.southviewcounty.ca",
+      "southviewcounty.ca",
+      "www.south-view.ca",
+      "south-view.ca",
+      "www.svsouthview.com",
+      "svsouthview.com",
+      "www.southview-ab.ca",
+      "southview-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Sunbreaker Cove",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofsunbreakercove.ca",
+      "www.summervillageofsunbreakercove.ca",
+      "www.svsunbreakercove.ca",
+      "svsunbreakercove.ca",
+      "www.townofsunbreakercove.ca",
+      "townofsunbreakercove.ca",
+      "www.cityofsunbreakercove.ca",
+      "cityofsunbreakercove.ca",
+      "www.villageofsunbreakercove.ca",
+      "villageofsunbreakercove.ca",
+      "www.sunbreakercovecounty.ca",
+      "sunbreakercovecounty.ca",
+      "www.sunbreaker-cove.ca",
+      "sunbreaker-cove.ca",
+      "www.svsunbreakercove.com",
+      "svsunbreakercove.com",
+      "www.sunbreakercove-ab.ca",
+      "sunbreakercove-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Sundance Beach",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofsundancebeach.ca",
+      "www.summervillageofsundancebeach.ca",
+      "www.svsundancebeach.ca",
+      "svsundancebeach.ca",
+      "www.townofsundancebeach.ca",
+      "townofsundancebeach.ca",
+      "www.cityofsundancebeach.ca",
+      "cityofsundancebeach.ca",
+      "www.villageofsundancebeach.ca",
+      "villageofsundancebeach.ca",
+      "www.sundancebeachcounty.ca",
+      "sundancebeachcounty.ca",
+      "www.sundance-beach.ca",
+      "sundance-beach.ca",
+      "www.svsundancebeach.com",
+      "svsundancebeach.com",
+      "www.sundancebeach-ab.ca",
+      "sundancebeach-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Sunridge",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofsunridge.ca",
+      "www.summervillageofsunridge.ca",
+      "www.svsunridge.ca",
+      "svsunridge.ca",
+      "www.townofsunridge.ca",
+      "townofsunridge.ca",
+      "www.cityofsunridge.ca",
+      "cityofsunridge.ca",
+      "www.villageofsunridge.ca",
+      "villageofsunridge.ca",
+      "www.sunridgecounty.ca",
+      "sunridgecounty.ca",
+      "www.sunridge.ca",
+      "sunridge.ca",
+      "www.svsunridge.com",
+      "svsunridge.com",
+      "www.sunridge-ab.ca",
+      "sunridge-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Sunrise Beach",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofsunrisebeach.ca",
+      "www.summervillageofsunrisebeach.ca",
+      "www.svsunrisebeach.ca",
+      "svsunrisebeach.ca",
+      "www.townofsunrisebeach.ca",
+      "townofsunrisebeach.ca",
+      "www.cityofsunrisebeach.ca",
+      "cityofsunrisebeach.ca",
+      "www.villageofsunrisebeach.ca",
+      "villageofsunrisebeach.ca",
+      "www.sunrisebeachcounty.ca",
+      "sunrisebeachcounty.ca",
+      "www.sunrise-beach.ca",
+      "sunrise-beach.ca",
+      "www.svsunrisebeach.com",
+      "svsunrisebeach.com",
+      "www.sunrisebeach-ab.ca",
+      "sunrisebeach-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Sunset Beach",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofsunsetbeach.ca",
+      "www.summervillageofsunsetbeach.ca",
+      "www.svsunsetbeach.ca",
+      "svsunsetbeach.ca",
+      "www.townofsunsetbeach.ca",
+      "townofsunsetbeach.ca",
+      "www.cityofsunsetbeach.ca",
+      "cityofsunsetbeach.ca",
+      "www.villageofsunsetbeach.ca",
+      "villageofsunsetbeach.ca",
+      "www.sunsetbeachcounty.ca",
+      "sunsetbeachcounty.ca",
+      "www.sunset-beach.ca",
+      "sunset-beach.ca",
+      "www.svsunsetbeach.com",
+      "svsunsetbeach.com",
+      "www.sunsetbeach-ab.ca",
+      "sunsetbeach-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Sunset Point",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofsunsetpoint.ca",
+      "www.summervillageofsunsetpoint.ca",
+      "www.svsunsetpoint.ca",
+      "svsunsetpoint.ca",
+      "www.townofsunsetpoint.ca",
+      "townofsunsetpoint.ca",
+      "www.cityofsunsetpoint.ca",
+      "cityofsunsetpoint.ca",
+      "www.villageofsunsetpoint.ca",
+      "villageofsunsetpoint.ca",
+      "www.sunsetpointcounty.ca",
+      "sunsetpointcounty.ca",
+      "www.sunset-point.ca",
+      "sunset-point.ca",
+      "www.svsunsetpoint.com",
+      "svsunsetpoint.com",
+      "www.sunsetpoint-ab.ca",
+      "sunsetpoint-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Val Quentin",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofvalquentin.ca",
+      "www.summervillageofvalquentin.ca",
+      "www.svvalquentin.ca",
+      "svvalquentin.ca",
+      "www.townofvalquentin.ca",
+      "townofvalquentin.ca",
+      "www.cityofvalquentin.ca",
+      "cityofvalquentin.ca",
+      "www.villageofvalquentin.ca",
+      "villageofvalquentin.ca",
+      "www.valquentincounty.ca",
+      "valquentincounty.ca",
+      "www.val-quentin.ca",
+      "val-quentin.ca",
+      "www.svvalquentin.com",
+      "svvalquentin.com",
+      "www.valquentin-ab.ca",
+      "valquentin-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Waiparous",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofwaiparous.ca",
+      "www.summervillageofwaiparous.ca",
+      "www.svwaiparous.ca",
+      "svwaiparous.ca",
+      "www.townofwaiparous.ca",
+      "townofwaiparous.ca",
+      "www.cityofwaiparous.ca",
+      "cityofwaiparous.ca",
+      "www.villageofwaiparous.ca",
+      "villageofwaiparous.ca",
+      "www.waiparouscounty.ca",
+      "waiparouscounty.ca",
+      "www.waiparous.ca",
+      "waiparous.ca",
+      "www.svwaiparous.com",
+      "svwaiparous.com",
+      "www.waiparous-ab.ca",
+      "waiparous-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV West Baptiste",
+    "website_url": "https://www.svwestbaptiste.ca/",
+    "candidates_tried": [
+      "summervillageofwestbaptiste.ca",
+      "www.summervillageofwestbaptiste.ca",
+      "www.svwestbaptiste.ca",
+      "svwestbaptiste.ca",
+      "www.townofwestbaptiste.ca",
+      "townofwestbaptiste.ca",
+      "www.cityofwestbaptiste.ca",
+      "cityofwestbaptiste.ca",
+      "www.villageofwestbaptiste.ca",
+      "villageofwestbaptiste.ca",
+      "www.westbaptistecounty.ca",
+      "westbaptistecounty.ca",
+      "www.west-baptiste.ca",
+      "west-baptiste.ca",
+      "www.svwestbaptiste.com",
+      "svwestbaptiste.com",
+      "www.westbaptiste-ab.ca",
+      "westbaptiste-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV West Cove",
+    "website_url": "https://www.svwestcove.ca/",
+    "candidates_tried": [
+      "summervillageofwestcove.ca",
+      "www.summervillageofwestcove.ca",
+      "www.svwestcove.ca",
+      "svwestcove.ca",
+      "www.townofwestcove.ca",
+      "townofwestcove.ca",
+      "www.cityofwestcove.ca",
+      "cityofwestcove.ca",
+      "www.villageofwestcove.ca",
+      "villageofwestcove.ca",
+      "www.westcovecounty.ca",
+      "westcovecounty.ca",
+      "www.west-cove.ca",
+      "west-cove.ca",
+      "www.svwestcove.com",
+      "svwestcove.com",
+      "www.westcove-ab.ca",
+      "westcove-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Whispering Hills",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofwhisperinghills.ca",
+      "www.summervillageofwhisperinghills.ca",
+      "www.svwhisperinghills.ca",
+      "svwhisperinghills.ca",
+      "www.townofwhisperinghills.ca",
+      "townofwhisperinghills.ca",
+      "www.cityofwhisperinghills.ca",
+      "cityofwhisperinghills.ca",
+      "www.villageofwhisperinghills.ca",
+      "villageofwhisperinghills.ca",
+      "www.whisperinghillscounty.ca",
+      "whisperinghillscounty.ca",
+      "www.whispering-hills.ca",
+      "whispering-hills.ca",
+      "www.svwhisperinghills.com",
+      "svwhisperinghills.com",
+      "www.whisperinghills-ab.ca",
+      "whisperinghills-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV White Sands",
+    "website_url": null,
+    "candidates_tried": [
+      "summervillageofwhitesands.ca",
+      "www.summervillageofwhitesands.ca",
+      "www.svwhitesands.ca",
+      "svwhitesands.ca",
+      "www.townofwhitesands.ca",
+      "townofwhitesands.ca",
+      "www.cityofwhitesands.ca",
+      "cityofwhitesands.ca",
+      "www.villageofwhitesands.ca",
+      "villageofwhitesands.ca",
+      "www.whitesandscounty.ca",
+      "whitesandscounty.ca",
+      "www.white-sands.ca",
+      "white-sands.ca",
+      "www.svwhitesands.com",
+      "svwhitesands.com",
+      "www.whitesands-ab.ca",
+      "whitesands-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "SV Yellowstone",
+    "website_url": "https://www.svyellowstone.ca/",
+    "candidates_tried": [
+      "summervillageofyellowstone.ca",
+      "www.summervillageofyellowstone.ca",
+      "www.svyellowstone.ca",
+      "svyellowstone.ca",
+      "www.townofyellowstone.ca",
+      "townofyellowstone.ca",
+      "www.cityofyellowstone.ca",
+      "cityofyellowstone.ca",
+      "www.villageofyellowstone.ca",
+      "villageofyellowstone.ca",
+      "www.yellowstonecounty.ca",
+      "yellowstonecounty.ca",
+      "www.yellowstone.ca",
+      "yellowstone.ca",
+      "www.svyellowstone.com",
+      "svyellowstone.com",
+      "www.yellowstone-ab.ca",
+      "yellowstone-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Saddle Hills County",
+    "website_url": null,
+    "candidates_tried": [
+      "www.saddlehillscounty.ca",
+      "saddlehillscounty.ca",
+      "www.townofsaddlehills.ca",
+      "townofsaddlehills.ca",
+      "www.cityofsaddlehills.ca",
+      "cityofsaddlehills.ca",
+      "www.villageofsaddlehills.ca",
+      "villageofsaddlehills.ca",
+      "www.saddle-hills.ca",
+      "saddle-hills.ca",
+      "www.saddlehillscounty.com",
+      "saddlehillscounty.com",
+      "www.saddlehills-ab.ca",
+      "saddlehills-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Sexsmith",
+    "website_url": "https://www.sexsmith.ca/",
+    "candidates_tried": [
+      "www.sexsmith.ca",
+      "sexsmith.ca",
+      "www.townofsexsmith.ca",
+      "townofsexsmith.ca",
+      "www.cityofsexsmith.ca",
+      "cityofsexsmith.ca",
+      "www.villageofsexsmith.ca",
+      "villageofsexsmith.ca",
+      "www.sexsmithcounty.ca",
+      "sexsmithcounty.ca",
+      "www.sexsmith.com",
+      "sexsmith.com",
+      "www.sexsmith-ab.ca",
+      "sexsmith-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Slave Lake",
+    "website_url": "https://www.slavelake.ca/",
+    "candidates_tried": [
+      "www.slavelake.ca",
+      "slavelake.ca",
+      "www.townofslavelake.ca",
+      "townofslavelake.ca",
+      "www.cityofslavelake.ca",
+      "cityofslavelake.ca",
+      "www.villageofslavelake.ca",
+      "villageofslavelake.ca",
+      "www.slavelakecounty.ca",
+      "slavelakecounty.ca",
+      "www.slave-lake.ca",
+      "slave-lake.ca",
+      "www.slavelake.com",
+      "slavelake.com",
+      "www.slavelake-ab.ca",
+      "slavelake-ab.ca"
+    ],
+    "platform_links": {
+      "civicweb": [
+        "https://slavelake.civicweb.net/Portal/"
+      ],
+      "youtube": [
+        "https://www.youtube.com/channel/UCWF4_0QmulIhjBTlyRRb-gw"
+      ]
+    }
+  },
+  {
+    "short_name": "Smoky Lake",
+    "website_url": "https://www.smokylake.ca/",
+    "candidates_tried": [
+      "www.smokylake.ca",
+      "smokylake.ca",
+      "www.townofsmokylake.ca",
+      "townofsmokylake.ca",
+      "www.cityofsmokylake.ca",
+      "cityofsmokylake.ca",
+      "www.villageofsmokylake.ca",
+      "villageofsmokylake.ca",
+      "www.smokylakecounty.ca",
+      "smokylakecounty.ca",
+      "www.smoky-lake.ca",
+      "smoky-lake.ca",
+      "www.smokylake.com",
+      "smokylake.com",
+      "www.smokylake-ab.ca",
+      "smokylake-ab.ca"
+    ],
+    "platform_links": {
+      "civicweb": [
+        "http://smokylake.civicweb.net/Portal/Default.aspx",
+        "https://smokylake.civicweb.net/Portal/Default.aspx"
+      ]
+    }
+  },
+  {
+    "short_name": "Smoky Lake County",
+    "website_url": null,
+    "candidates_tried": [
+      "www.smokylakecounty.ca",
+      "smokylakecounty.ca",
+      "www.townofsmokylake.ca",
+      "townofsmokylake.ca",
+      "www.cityofsmokylake.ca",
+      "cityofsmokylake.ca",
+      "www.villageofsmokylake.ca",
+      "villageofsmokylake.ca",
+      "www.smoky-lake.ca",
+      "smoky-lake.ca",
+      "www.smokylakecounty.com",
+      "smokylakecounty.com",
+      "www.smokylake-ab.ca",
+      "smokylake-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Special Area No. 2",
+    "website_url": null,
+    "candidates_tried": [
+      "www.specialareano2.ca",
+      "specialareano2.ca",
+      "www.townofspecialareano2.ca",
+      "townofspecialareano2.ca",
+      "www.cityofspecialareano2.ca",
+      "cityofspecialareano2.ca",
+      "www.villageofspecialareano2.ca",
+      "villageofspecialareano2.ca",
+      "www.specialareano2county.ca",
+      "specialareano2county.ca",
+      "www.special-area-no-2.ca",
+      "special-area-no-2.ca",
+      "www.specialareano2.com",
+      "specialareano2.com",
+      "www.specialareano2-ab.ca",
+      "specialareano2-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Special Area No. 3",
+    "website_url": null,
+    "candidates_tried": [
+      "www.specialareano3.ca",
+      "specialareano3.ca",
+      "www.townofspecialareano3.ca",
+      "townofspecialareano3.ca",
+      "www.cityofspecialareano3.ca",
+      "cityofspecialareano3.ca",
+      "www.villageofspecialareano3.ca",
+      "villageofspecialareano3.ca",
+      "www.specialareano3county.ca",
+      "specialareano3county.ca",
+      "www.special-area-no-3.ca",
+      "special-area-no-3.ca",
+      "www.specialareano3.com",
+      "specialareano3.com",
+      "www.specialareano3-ab.ca",
+      "specialareano3-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Special Area No. 4",
+    "website_url": null,
+    "candidates_tried": [
+      "www.specialareano4.ca",
+      "specialareano4.ca",
+      "www.townofspecialareano4.ca",
+      "townofspecialareano4.ca",
+      "www.cityofspecialareano4.ca",
+      "cityofspecialareano4.ca",
+      "www.villageofspecialareano4.ca",
+      "villageofspecialareano4.ca",
+      "www.specialareano4county.ca",
+      "specialareano4county.ca",
+      "www.special-area-no-4.ca",
+      "special-area-no-4.ca",
+      "www.specialareano4.com",
+      "specialareano4.com",
+      "www.specialareano4-ab.ca",
+      "specialareano4-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Spirit River",
+    "website_url": "https://www.townofspiritriver.ca/",
+    "candidates_tried": [
+      "www.spiritriver.ca",
+      "spiritriver.ca",
+      "www.townofspiritriver.ca",
+      "townofspiritriver.ca",
+      "www.cityofspiritriver.ca",
+      "cityofspiritriver.ca",
+      "www.villageofspiritriver.ca",
+      "villageofspiritriver.ca",
+      "www.spiritrivercounty.ca",
+      "spiritrivercounty.ca",
+      "www.spirit-river.ca",
+      "spirit-river.ca",
+      "www.spiritriver.com",
+      "spiritriver.com",
+      "www.spiritriver-ab.ca",
+      "spiritriver-ab.ca"
+    ],
+    "platform_links": {
+      "civicweb": [
+        "https://townofspiritriver.civicweb.net/filepro/documents/1009/",
+        "https://townofspiritriver.civicweb.net/filepro/documents/3939/",
+        "https://townofspiritriver.civicweb.net/filepro/documents/3967/"
+      ]
+    }
+  },
+  {
+    "short_name": "Spring Lake",
+    "website_url": null,
+    "candidates_tried": [
+      "www.springlake.ca",
+      "springlake.ca",
+      "www.townofspringlake.ca",
+      "townofspringlake.ca",
+      "www.cityofspringlake.ca",
+      "cityofspringlake.ca",
+      "www.villageofspringlake.ca",
+      "villageofspringlake.ca",
+      "www.springlakecounty.ca",
+      "springlakecounty.ca",
+      "www.spring-lake.ca",
+      "spring-lake.ca",
+      "www.springlake.com",
+      "springlake.com",
+      "www.springlake-ab.ca",
+      "springlake-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "St. Paul",
+    "website_url": "https://www.stpaul.ca/",
+    "candidates_tried": [
+      "www.stpaul.ca",
+      "stpaul.ca",
+      "www.townofstpaul.ca",
+      "townofstpaul.ca",
+      "www.cityofstpaul.ca",
+      "cityofstpaul.ca",
+      "www.villageofstpaul.ca",
+      "villageofstpaul.ca",
+      "www.stpaulcounty.ca",
+      "stpaulcounty.ca",
+      "www.st-paul.ca",
+      "st-paul.ca",
+      "www.stpaul.com",
+      "stpaul.com",
+      "www.stpaul-ab.ca",
+      "stpaul-ab.ca"
+    ],
+    "platform_links": {
+      "civicweb": [
+        "https://townstpaul.civicweb.net/",
+        "https://townstpaul.civicweb.net/Portal/Subscribe.aspx",
+        "https://townstpaul.civicweb.net/document/86251/?printPdf=true",
+        "https://townstpaul.civicweb.net/filepro/documents/3699",
+        "https://townstpaul.civicweb.net/filepro/documents/3702"
+      ],
+      "youtube": [
+        "https://www.youtube.com/channel/UC2vFbG8WDfXeDvJNXRi2VyQ"
+      ]
+    }
+  },
+  {
+    "short_name": "Standard",
+    "website_url": "https://www.villageofstandard.ca/",
+    "candidates_tried": [
+      "www.standard.ca",
+      "standard.ca",
+      "www.townofstandard.ca",
+      "townofstandard.ca",
+      "www.cityofstandard.ca",
+      "cityofstandard.ca",
+      "www.villageofstandard.ca",
+      "villageofstandard.ca",
+      "www.standardcounty.ca",
+      "standardcounty.ca",
+      "www.standard.com",
+      "standard.com",
+      "www.standard-ab.ca",
+      "standard-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/@VillageofStandard",
+        "https://www.youtube.com/@Villageofstandard"
+      ]
+    }
+  },
+  {
+    "short_name": "Starland County",
+    "website_url": "https://www.starlandcounty.com/",
+    "candidates_tried": [
+      "www.starlandcounty.ca",
+      "starlandcounty.ca",
+      "www.townofstarland.ca",
+      "townofstarland.ca",
+      "www.cityofstarland.ca",
+      "cityofstarland.ca",
+      "www.villageofstarland.ca",
+      "villageofstarland.ca",
+      "www.starland.ca",
+      "starland.ca",
+      "www.starlandcounty.com",
+      "starlandcounty.com",
+      "www.starland-ab.ca",
+      "starland-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/@StarlandCountyAlberta"
+      ]
+    }
+  },
+  {
+    "short_name": "Stavely",
+    "website_url": "https://www.stavely.ca/",
+    "candidates_tried": [
+      "www.stavely.ca",
+      "stavely.ca",
+      "www.townofstavely.ca",
+      "townofstavely.ca",
+      "www.cityofstavely.ca",
+      "cityofstavely.ca",
+      "www.villageofstavely.ca",
+      "villageofstavely.ca",
+      "www.stavelycounty.ca",
+      "stavelycounty.ca",
+      "www.stavely.com",
+      "stavely.com",
+      "www.stavely-ab.ca",
+      "stavely-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Stettler",
+    "website_url": "https://www.stettlercounty.ca/",
+    "candidates_tried": [
+      "www.stettler.ca",
+      "stettler.ca",
+      "www.townofstettler.ca",
+      "townofstettler.ca",
+      "www.cityofstettler.ca",
+      "cityofstettler.ca",
+      "www.villageofstettler.ca",
+      "villageofstettler.ca",
+      "www.stettlercounty.ca",
+      "stettlercounty.ca",
+      "www.stettler.com",
+      "stettler.com",
+      "www.stettler-ab.ca",
+      "stettler-ab.ca"
+    ],
+    "platform_links": {
+      "escribe": [
+        "https://pub-stettlercounty.escribemeetings.com/?FillWidth=1"
+      ],
+      "youtube": [
+        "https://www.youtube.com/user/StettlerCounty"
+      ]
+    }
+  },
+  {
+    "short_name": "Stirling",
+    "website_url": "https://www.stirling.ca/",
+    "candidates_tried": [
+      "www.stirling.ca",
+      "stirling.ca",
+      "www.townofstirling.ca",
+      "townofstirling.ca",
+      "www.cityofstirling.ca",
+      "cityofstirling.ca",
+      "www.villageofstirling.ca",
+      "villageofstirling.ca",
+      "www.stirlingcounty.ca",
+      "stirlingcounty.ca",
+      "www.stirling.com",
+      "stirling.com",
+      "www.stirling-ab.ca",
+      "stirling-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/channel/UCVtOpeAgjnv16vALUFAeg1A"
+      ]
+    }
+  },
+  {
+    "short_name": "Stony Plain",
+    "website_url": "https://www.stonyplain.com/",
+    "candidates_tried": [
+      "www.stonyplain.ca",
+      "stonyplain.ca",
+      "www.townofstonyplain.ca",
+      "townofstonyplain.ca",
+      "www.cityofstonyplain.ca",
+      "cityofstonyplain.ca",
+      "www.villageofstonyplain.ca",
+      "villageofstonyplain.ca",
+      "www.stonyplaincounty.ca",
+      "stonyplaincounty.ca",
+      "www.stony-plain.ca",
+      "stony-plain.ca",
+      "www.stonyplain.com",
+      "stonyplain.com",
+      "www.stonyplain-ab.ca",
+      "stonyplain-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/@TownofStonyPlain",
+        "https://www.youtube.com/user/TownofStonyPlain"
+      ]
+    }
+  },
+  {
+    "short_name": "Strathcona County",
+    "website_url": "https://www.strathcona.ca/",
+    "candidates_tried": [
+      "www.strathconacounty.ca",
+      "strathconacounty.ca",
+      "www.townofstrathcona.ca",
+      "townofstrathcona.ca",
+      "www.cityofstrathcona.ca",
+      "cityofstrathcona.ca",
+      "www.villageofstrathcona.ca",
+      "villageofstrathcona.ca",
+      "www.strathcona.ca",
+      "strathcona.ca",
+      "www.strathconacounty.com",
+      "strathconacounty.com",
+      "www.strathcona-ab.ca",
+      "strathcona-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/user/StrathconaCounty"
+      ]
+    }
+  },
+  {
+    "short_name": "Strathmore",
+    "website_url": "https://www.strathmore.ca/",
+    "candidates_tried": [
+      "www.strathmore.ca",
+      "strathmore.ca",
+      "www.townofstrathmore.ca",
+      "townofstrathmore.ca",
+      "www.cityofstrathmore.ca",
+      "cityofstrathmore.ca",
+      "www.villageofstrathmore.ca",
+      "villageofstrathmore.ca",
+      "www.strathmorecounty.ca",
+      "strathmorecounty.ca",
+      "www.strathmore.com",
+      "strathmore.com",
+      "www.strathmore-ab.ca",
+      "strathmore-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/@TOStrathmore",
+        "https://www.youtube.com/user/TOStrathmore"
+      ]
+    }
+  },
+  {
+    "short_name": "Sturgeon County",
+    "website_url": null,
+    "candidates_tried": [
+      "www.sturgeoncounty.ca",
+      "sturgeoncounty.ca",
+      "www.townofsturgeon.ca",
+      "townofsturgeon.ca",
+      "www.cityofsturgeon.ca",
+      "cityofsturgeon.ca",
+      "www.villageofsturgeon.ca",
+      "villageofsturgeon.ca",
+      "www.sturgeon.ca",
+      "sturgeon.ca",
+      "www.sturgeoncounty.com",
+      "sturgeoncounty.com",
+      "www.sturgeon-ab.ca",
+      "sturgeon-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Sundre",
+    "website_url": "https://www.sundre.com/",
+    "candidates_tried": [
+      "www.sundre.ca",
+      "sundre.ca",
+      "www.townofsundre.ca",
+      "townofsundre.ca",
+      "www.cityofsundre.ca",
+      "cityofsundre.ca",
+      "www.villageofsundre.ca",
+      "villageofsundre.ca",
+      "www.sundrecounty.ca",
+      "sundrecounty.ca",
+      "www.sundre.com",
+      "sundre.com",
+      "www.sundre-ab.ca",
+      "sundre-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Swan Hills",
+    "website_url": null,
+    "candidates_tried": [
+      "www.swanhills.ca",
+      "swanhills.ca",
+      "www.townofswanhills.ca",
+      "townofswanhills.ca",
+      "www.cityofswanhills.ca",
+      "cityofswanhills.ca",
+      "www.villageofswanhills.ca",
+      "villageofswanhills.ca",
+      "www.swanhillscounty.ca",
+      "swanhillscounty.ca",
+      "www.swan-hills.ca",
+      "swan-hills.ca",
+      "www.swanhills.com",
+      "swanhills.com",
+      "www.swanhills-ab.ca",
+      "swanhills-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Sylvan Lake",
+    "website_url": "https://www.sylvanlake.ca/",
+    "candidates_tried": [
+      "www.sylvanlake.ca",
+      "sylvanlake.ca",
+      "www.townofsylvanlake.ca",
+      "townofsylvanlake.ca",
+      "www.cityofsylvanlake.ca",
+      "cityofsylvanlake.ca",
+      "www.villageofsylvanlake.ca",
+      "villageofsylvanlake.ca",
+      "www.sylvanlakecounty.ca",
+      "sylvanlakecounty.ca",
+      "www.sylvan-lake.ca",
+      "sylvan-lake.ca",
+      "www.sylvanlake.com",
+      "sylvanlake.com",
+      "www.sylvanlake-ab.ca",
+      "sylvanlake-ab.ca"
+    ],
+    "platform_links": {
+      "civicweb": [
+        "https://sylvanlake.civicweb.net/",
+        "https://sylvanlake.civicweb.net/filepro/documents/18338",
+        "https://sylvanlake.civicweb.net/filepro/documents/609",
+        "https://sylvanlake.civicweb.net/filepro/documents/63808/?preview=69805",
+        "https://sylvanlake.civicweb.net/filepro/documents/69893/?preview=72195"
+      ],
+      "youtube": [
+        "https://www.youtube.com/channel/UCayZh8L9SE7cw4KRY2qKqqg"
+      ]
+    }
+  },
+  {
+    "short_name": "Taber",
+    "website_url": "https://www.taber.com/",
+    "candidates_tried": [
+      "www.taber.ca",
+      "taber.ca",
+      "www.townoftaber.ca",
+      "townoftaber.ca",
+      "www.cityoftaber.ca",
+      "cityoftaber.ca",
+      "www.villageoftaber.ca",
+      "villageoftaber.ca",
+      "www.tabercounty.ca",
+      "tabercounty.ca",
+      "www.taber.com",
+      "taber.com",
+      "www.taber-ab.ca",
+      "taber-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Thorhild County",
+    "website_url": "https://www.thorhildcounty.com/",
+    "candidates_tried": [
+      "www.thorhildcounty.ca",
+      "thorhildcounty.ca",
+      "www.townofthorhild.ca",
+      "townofthorhild.ca",
+      "www.cityofthorhild.ca",
+      "cityofthorhild.ca",
+      "www.villageofthorhild.ca",
+      "villageofthorhild.ca",
+      "www.thorhild.ca",
+      "thorhild.ca",
+      "www.thorhildcounty.com",
+      "thorhildcounty.com",
+      "www.thorhild-ab.ca",
+      "thorhild-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Thorsby",
+    "website_url": "https://www.thorsby.ca/",
+    "candidates_tried": [
+      "www.thorsby.ca",
+      "thorsby.ca",
+      "www.townofthorsby.ca",
+      "townofthorsby.ca",
+      "www.cityofthorsby.ca",
+      "cityofthorsby.ca",
+      "www.villageofthorsby.ca",
+      "villageofthorsby.ca",
+      "www.thorsbycounty.ca",
+      "thorsbycounty.ca",
+      "www.thorsby.com",
+      "thorsby.com",
+      "www.thorsby-ab.ca",
+      "thorsby-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/channel/UCl8MsMmaRxJcU3tDInER2zA"
+      ]
+    }
+  },
+  {
+    "short_name": "Three Hills",
+    "website_url": "https://www.threehills.ca/",
+    "candidates_tried": [
+      "www.threehills.ca",
+      "threehills.ca",
+      "www.townofthreehills.ca",
+      "townofthreehills.ca",
+      "www.cityofthreehills.ca",
+      "cityofthreehills.ca",
+      "www.villageofthreehills.ca",
+      "villageofthreehills.ca",
+      "www.threehillscounty.ca",
+      "threehillscounty.ca",
+      "www.three-hills.ca",
+      "three-hills.ca",
+      "www.threehills.com",
+      "threehills.com",
+      "www.threehills-ab.ca",
+      "threehills-ab.ca"
+    ],
+    "platform_links": {
+      "civicweb": [
+        "http://threehills.civicweb.net/portal/"
+      ]
+    }
+  },
+  {
+    "short_name": "Tofield",
+    "website_url": "https://www.tofield.com/",
+    "candidates_tried": [
+      "www.tofield.ca",
+      "tofield.ca",
+      "www.townoftofield.ca",
+      "townoftofield.ca",
+      "www.cityoftofield.ca",
+      "cityoftofield.ca",
+      "www.villageoftofield.ca",
+      "villageoftofield.ca",
+      "www.tofieldcounty.ca",
+      "tofieldcounty.ca",
+      "www.tofield.com",
+      "tofield.com",
+      "www.tofield-ab.ca",
+      "tofield-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Turner Valley",
+    "website_url": "https://www.turnervalley.com/",
+    "candidates_tried": [
+      "www.turnervalley.ca",
+      "turnervalley.ca",
+      "www.townofturnervalley.ca",
+      "townofturnervalley.ca",
+      "www.cityofturnervalley.ca",
+      "cityofturnervalley.ca",
+      "www.villageofturnervalley.ca",
+      "villageofturnervalley.ca",
+      "www.turnervalleycounty.ca",
+      "turnervalleycounty.ca",
+      "www.turner-valley.ca",
+      "turner-valley.ca",
+      "www.turnervalley.com",
+      "turnervalley.com",
+      "www.turnervalley-ab.ca",
+      "turnervalley-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Two Hills",
+    "website_url": "https://www.twohills.com/",
+    "candidates_tried": [
+      "www.twohills.ca",
+      "twohills.ca",
+      "www.townoftwohills.ca",
+      "townoftwohills.ca",
+      "www.cityoftwohills.ca",
+      "cityoftwohills.ca",
+      "www.villageoftwohills.ca",
+      "villageoftwohills.ca",
+      "www.twohillscounty.ca",
+      "twohillscounty.ca",
+      "www.two-hills.ca",
+      "two-hills.ca",
+      "www.twohills.com",
+      "twohills.com",
+      "www.twohills-ab.ca",
+      "twohills-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Two Hills County",
+    "website_url": null,
+    "candidates_tried": [
+      "www.twohillscounty.ca",
+      "twohillscounty.ca",
+      "www.townoftwohills.ca",
+      "townoftwohills.ca",
+      "www.cityoftwohills.ca",
+      "cityoftwohills.ca",
+      "www.villageoftwohills.ca",
+      "villageoftwohills.ca",
+      "www.two-hills.ca",
+      "two-hills.ca",
+      "www.twohillscounty.com",
+      "twohillscounty.com",
+      "www.twohills-ab.ca",
+      "twohills-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Valhalla Centre",
+    "website_url": null,
+    "candidates_tried": [
+      "www.valhallacentre.ca",
+      "valhallacentre.ca",
+      "www.townofvalhallacentre.ca",
+      "townofvalhallacentre.ca",
+      "www.cityofvalhallacentre.ca",
+      "cityofvalhallacentre.ca",
+      "www.villageofvalhallacentre.ca",
+      "villageofvalhallacentre.ca",
+      "www.valhallacentrecounty.ca",
+      "valhallacentrecounty.ca",
+      "www.valhalla-centre.ca",
+      "valhalla-centre.ca",
+      "www.valhallacentre.com",
+      "valhallacentre.com",
+      "www.valhallacentre-ab.ca",
+      "valhallacentre-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Vauxhall",
+    "website_url": null,
+    "candidates_tried": [
+      "www.vauxhall.ca",
+      "vauxhall.ca",
+      "www.townofvauxhall.ca",
+      "townofvauxhall.ca",
+      "www.cityofvauxhall.ca",
+      "cityofvauxhall.ca",
+      "www.villageofvauxhall.ca",
+      "villageofvauxhall.ca",
+      "www.vauxhallcounty.ca",
+      "vauxhallcounty.ca",
+      "www.vauxhall.com",
+      "vauxhall.com",
+      "www.vauxhall-ab.ca",
+      "vauxhall-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Vegreville",
+    "website_url": "https://www.vegreville.com/",
+    "candidates_tried": [
+      "www.vegreville.ca",
+      "vegreville.ca",
+      "www.townofvegreville.ca",
+      "townofvegreville.ca",
+      "www.cityofvegreville.ca",
+      "cityofvegreville.ca",
+      "www.villageofvegreville.ca",
+      "villageofvegreville.ca",
+      "www.vegrevillecounty.ca",
+      "vegrevillecounty.ca",
+      "www.vegreville.com",
+      "vegreville.com",
+      "www.vegreville-ab.ca",
+      "vegreville-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/@VegrevilleAB"
+      ]
+    }
+  },
+  {
+    "short_name": "Vermilion",
+    "website_url": "https://www.vermilion.ca/",
+    "candidates_tried": [
+      "www.vermilion.ca",
+      "vermilion.ca",
+      "www.townofvermilion.ca",
+      "townofvermilion.ca",
+      "www.cityofvermilion.ca",
+      "cityofvermilion.ca",
+      "www.villageofvermilion.ca",
+      "villageofvermilion.ca",
+      "www.vermilioncounty.ca",
+      "vermilioncounty.ca",
+      "www.vermilion.com",
+      "vermilion.com",
+      "www.vermilion-ab.ca",
+      "vermilion-ab.ca"
+    ],
+    "platform_links": {
+      "civicweb": [
+        "https://vermilion.civicweb.net/user/signin?url="
+      ],
+      "youtube": [
+        "https://www.youtube.com/channel/UCZIsdY7YnEiKcO_aNpqIkPw"
+      ]
+    }
+  },
+  {
+    "short_name": "Vermilion River County",
+    "website_url": null,
+    "candidates_tried": [
+      "www.vermilionrivercounty.ca",
+      "vermilionrivercounty.ca",
+      "www.townofvermilionriver.ca",
+      "townofvermilionriver.ca",
+      "www.cityofvermilionriver.ca",
+      "cityofvermilionriver.ca",
+      "www.villageofvermilionriver.ca",
+      "villageofvermilionriver.ca",
+      "www.vermilion-river.ca",
+      "vermilion-river.ca",
+      "www.vermilionrivercounty.com",
+      "vermilionrivercounty.com",
+      "www.vermilionriver-ab.ca",
+      "vermilionriver-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Veteran",
+    "website_url": "https://www.veteran.com/",
+    "candidates_tried": [
+      "www.veteran.ca",
+      "veteran.ca",
+      "www.townofveteran.ca",
+      "townofveteran.ca",
+      "www.cityofveteran.ca",
+      "cityofveteran.ca",
+      "www.villageofveteran.ca",
+      "villageofveteran.ca",
+      "www.veterancounty.ca",
+      "veterancounty.ca",
+      "www.veteran.com",
+      "veteran.com",
+      "www.veteran-ab.ca",
+      "veteran-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/c/MilitarybenefitsInfo"
+      ]
+    }
+  },
+  {
+    "short_name": "Vilna",
+    "website_url": "https://www.vilna.ca/",
+    "candidates_tried": [
+      "www.vilna.ca",
+      "vilna.ca",
+      "www.townofvilna.ca",
+      "townofvilna.ca",
+      "www.cityofvilna.ca",
+      "cityofvilna.ca",
+      "www.villageofvilna.ca",
+      "villageofvilna.ca",
+      "www.vilnacounty.ca",
+      "vilnacounty.ca",
+      "www.vilna.com",
+      "vilna.com",
+      "www.vilna-ab.ca",
+      "vilna-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Vulcan",
+    "website_url": "https://www.townofvulcan.ca/",
+    "candidates_tried": [
+      "www.vulcan.ca",
+      "vulcan.ca",
+      "www.townofvulcan.ca",
+      "townofvulcan.ca",
+      "www.cityofvulcan.ca",
+      "cityofvulcan.ca",
+      "www.villageofvulcan.ca",
+      "villageofvulcan.ca",
+      "www.vulcancounty.ca",
+      "vulcancounty.ca",
+      "www.vulcan.com",
+      "vulcan.com",
+      "www.vulcan-ab.ca",
+      "vulcan-ab.ca"
+    ],
+    "platform_links": {
+      "civicweb": [
+        "https://townofvulcan.civicweb.net/portal/"
+      ]
+    }
+  },
+  {
+    "short_name": "Vulcan County",
+    "website_url": "https://www.townofvulcan.ca/",
+    "candidates_tried": [
+      "www.vulcancounty.ca",
+      "vulcancounty.ca",
+      "www.townofvulcan.ca",
+      "townofvulcan.ca",
+      "www.cityofvulcan.ca",
+      "cityofvulcan.ca",
+      "www.villageofvulcan.ca",
+      "villageofvulcan.ca",
+      "www.vulcan.ca",
+      "vulcan.ca",
+      "www.vulcancounty.com",
+      "vulcancounty.com",
+      "www.vulcan-ab.ca",
+      "vulcan-ab.ca"
+    ],
+    "platform_links": {
+      "civicweb": [
+        "https://townofvulcan.civicweb.net/portal/"
+      ]
+    }
+  },
+  {
+    "short_name": "Wabamun",
+    "website_url": "https://www.wabamun.ca/",
+    "candidates_tried": [
+      "www.wabamun.ca",
+      "wabamun.ca",
+      "www.townofwabamun.ca",
+      "townofwabamun.ca",
+      "www.cityofwabamun.ca",
+      "cityofwabamun.ca",
+      "www.villageofwabamun.ca",
+      "villageofwabamun.ca",
+      "www.wabamuncounty.ca",
+      "wabamuncounty.ca",
+      "www.wabamun.com",
+      "wabamun.com",
+      "www.wabamun-ab.ca",
+      "wabamun-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Wainwright",
+    "website_url": "https://www.wainwright.ca/",
+    "candidates_tried": [
+      "www.wainwright.ca",
+      "wainwright.ca",
+      "www.townofwainwright.ca",
+      "townofwainwright.ca",
+      "www.cityofwainwright.ca",
+      "cityofwainwright.ca",
+      "www.villageofwainwright.ca",
+      "villageofwainwright.ca",
+      "www.wainwrightcounty.ca",
+      "wainwrightcounty.ca",
+      "www.wainwright.com",
+      "wainwright.com",
+      "www.wainwright-ab.ca",
+      "wainwright-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/@townwainwright"
+      ]
+    }
+  },
+  {
+    "short_name": "Warburg",
+    "website_url": "https://www.warburg.ca/",
+    "candidates_tried": [
+      "www.warburg.ca",
+      "warburg.ca",
+      "www.townofwarburg.ca",
+      "townofwarburg.ca",
+      "www.cityofwarburg.ca",
+      "cityofwarburg.ca",
+      "www.villageofwarburg.ca",
+      "villageofwarburg.ca",
+      "www.warburgcounty.ca",
+      "warburgcounty.ca",
+      "www.warburg.com",
+      "warburg.com",
+      "www.warburg-ab.ca",
+      "warburg-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Warner",
+    "website_url": "https://www.warner.ca/",
+    "candidates_tried": [
+      "www.warner.ca",
+      "warner.ca",
+      "www.townofwarner.ca",
+      "townofwarner.ca",
+      "www.cityofwarner.ca",
+      "cityofwarner.ca",
+      "www.villageofwarner.ca",
+      "villageofwarner.ca",
+      "www.warnercounty.ca",
+      "warnercounty.ca",
+      "www.warner.com",
+      "warner.com",
+      "www.warner-ab.ca",
+      "warner-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Westlock",
+    "website_url": "https://www.westlock.ca/",
+    "candidates_tried": [
+      "www.westlock.ca",
+      "westlock.ca",
+      "www.townofwestlock.ca",
+      "townofwestlock.ca",
+      "www.cityofwestlock.ca",
+      "cityofwestlock.ca",
+      "www.villageofwestlock.ca",
+      "villageofwestlock.ca",
+      "www.westlockcounty.ca",
+      "westlockcounty.ca",
+      "www.westlock.com",
+      "westlock.com",
+      "www.westlock-ab.ca",
+      "westlock-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "http://www.youtube.com/user/TownofWestlock"
+      ]
+    }
+  },
+  {
+    "short_name": "Westlock County",
+    "website_url": "https://www.westlock.ca/",
+    "candidates_tried": [
+      "www.westlockcounty.ca",
+      "westlockcounty.ca",
+      "www.townofwestlock.ca",
+      "townofwestlock.ca",
+      "www.cityofwestlock.ca",
+      "cityofwestlock.ca",
+      "www.villageofwestlock.ca",
+      "villageofwestlock.ca",
+      "www.westlock.ca",
+      "westlock.ca",
+      "www.westlockcounty.com",
+      "westlockcounty.com",
+      "www.westlock-ab.ca",
+      "westlock-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "http://www.youtube.com/user/TownofWestlock"
+      ]
+    }
+  },
+  {
+    "short_name": "Wetaskiwin",
+    "website_url": "https://www.wetaskiwin.ca/",
+    "candidates_tried": [
+      "www.wetaskiwin.ca",
+      "wetaskiwin.ca",
+      "www.townofwetaskiwin.ca",
+      "townofwetaskiwin.ca",
+      "www.cityofwetaskiwin.ca",
+      "cityofwetaskiwin.ca",
+      "www.villageofwetaskiwin.ca",
+      "villageofwetaskiwin.ca",
+      "www.wetaskiwincounty.ca",
+      "wetaskiwincounty.ca",
+      "www.wetaskiwin.com",
+      "wetaskiwin.com",
+      "www.wetaskiwin-ab.ca",
+      "wetaskiwin-ab.ca"
+    ],
+    "platform_links": {
+      "civicweb": [
+        "https://wetaskiwin.civicweb.net/Portal/MeetingInformation.aspx?Org=Cal&amp;Id=622",
+        "https://wetaskiwin.civicweb.net/portal/"
+      ],
+      "youtube": [
+        "https://www.youtube.com/channel/UCosEDSy_HiuWMUPY-uSYNhQ"
+      ]
+    }
+  },
+  {
+    "short_name": "Wetaskiwin County",
+    "website_url": "https://www.wetaskiwin.ca/",
+    "candidates_tried": [
+      "www.wetaskiwincounty.ca",
+      "wetaskiwincounty.ca",
+      "www.townofwetaskiwin.ca",
+      "townofwetaskiwin.ca",
+      "www.cityofwetaskiwin.ca",
+      "cityofwetaskiwin.ca",
+      "www.villageofwetaskiwin.ca",
+      "villageofwetaskiwin.ca",
+      "www.wetaskiwin.ca",
+      "wetaskiwin.ca",
+      "www.wetaskiwincounty.com",
+      "wetaskiwincounty.com",
+      "www.wetaskiwin-ab.ca",
+      "wetaskiwin-ab.ca"
+    ],
+    "platform_links": {
+      "civicweb": [
+        "https://wetaskiwin.civicweb.net/Portal/MeetingInformation.aspx?Org=Cal&amp;Id=622",
+        "https://wetaskiwin.civicweb.net/portal/"
+      ],
+      "youtube": [
+        "https://www.youtube.com/channel/UCosEDSy_HiuWMUPY-uSYNhQ"
+      ]
+    }
+  },
+  {
+    "short_name": "Wheatland County",
+    "website_url": "https://wheatlandcounty.ca/",
+    "candidates_tried": [
+      "www.wheatlandcounty.ca",
+      "wheatlandcounty.ca",
+      "www.townofwheatland.ca",
+      "townofwheatland.ca",
+      "www.cityofwheatland.ca",
+      "cityofwheatland.ca",
+      "www.villageofwheatland.ca",
+      "villageofwheatland.ca",
+      "www.wheatland.ca",
+      "wheatland.ca",
+      "www.wheatlandcounty.com",
+      "wheatlandcounty.com",
+      "www.wheatland-ab.ca",
+      "wheatland-ab.ca"
+    ],
+    "platform_links": {
+      "escribe": [
+        "https://pub-wheatland.escribemeetings.com",
+        "https://pub-wheatland.escribemeetings.com/"
+      ],
+      "youtube": [
+        "https://www.youtube.com/@wheatlandcounty703",
+        "https://www.youtube.com/channel/UCRJrvIs0eygNM7zERLnviOg"
+      ]
+    }
+  },
+  {
+    "short_name": "Whitecourt",
+    "website_url": "https://www.whitecourt.ca/",
+    "candidates_tried": [
+      "www.whitecourt.ca",
+      "whitecourt.ca",
+      "www.townofwhitecourt.ca",
+      "townofwhitecourt.ca",
+      "www.cityofwhitecourt.ca",
+      "cityofwhitecourt.ca",
+      "www.villageofwhitecourt.ca",
+      "villageofwhitecourt.ca",
+      "www.whitecourtcounty.ca",
+      "whitecourtcounty.ca",
+      "www.whitecourt.com",
+      "whitecourt.com",
+      "www.whitecourt-ab.ca",
+      "whitecourt-ab.ca"
+    ],
+    "platform_links": {
+      "youtube": [
+        "https://www.youtube.com/@WhitecourtAB",
+        "https://www.youtube.com/user/whitecourtadmin"
+      ]
+    }
+  },
+  {
+    "short_name": "Willingdon",
+    "website_url": null,
+    "candidates_tried": [
+      "www.willingdon.ca",
+      "willingdon.ca",
+      "www.townofwillingdon.ca",
+      "townofwillingdon.ca",
+      "www.cityofwillingdon.ca",
+      "cityofwillingdon.ca",
+      "www.villageofwillingdon.ca",
+      "villageofwillingdon.ca",
+      "www.willingdoncounty.ca",
+      "willingdoncounty.ca",
+      "www.willingdon.com",
+      "willingdon.com",
+      "www.willingdon-ab.ca",
+      "willingdon-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Yellowhead County",
+    "website_url": null,
+    "candidates_tried": [
+      "www.yellowheadcounty.ca",
+      "yellowheadcounty.ca",
+      "www.townofyellowhead.ca",
+      "townofyellowhead.ca",
+      "www.cityofyellowhead.ca",
+      "cityofyellowhead.ca",
+      "www.villageofyellowhead.ca",
+      "villageofyellowhead.ca",
+      "www.yellowhead.ca",
+      "yellowhead.ca",
+      "www.yellowheadcounty.com",
+      "yellowheadcounty.com",
+      "www.yellowhead-ab.ca",
+      "yellowhead-ab.ca"
+    ],
+    "platform_links": {}
+  },
+  {
+    "short_name": "Youngstown",
+    "website_url": "https://www.youngstown.ca/",
+    "candidates_tried": [
+      "www.youngstown.ca",
+      "youngstown.ca",
+      "www.townofyoungstown.ca",
+      "townofyoungstown.ca",
+      "www.cityofyoungstown.ca",
+      "cityofyoungstown.ca",
+      "www.villageofyoungstown.ca",
+      "villageofyoungstown.ca",
+      "www.youngstowncounty.ca",
+      "youngstowncounty.ca",
+      "www.youngstown.com",
+      "youngstown.com",
+      "www.youngstown-ab.ca",
+      "youngstown-ab.ca"
+    ],
+    "platform_links": {}
+  }
+]
