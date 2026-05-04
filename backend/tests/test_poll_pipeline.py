@@ -508,8 +508,12 @@ async def test_run_discovery_marks_broken_after_threshold():
 
 @pytest.mark.asyncio
 async def test_run_discovery_resets_failures_on_success():
-    """Successful poll should reset consecutive_failures and set status to ACTIVE."""
-    source = _make_source(status=ScrapeStatus.PENDING)
+    """Successful poll should reset consecutive_failures and clear last_error.
+
+    Status auto-flip is intentionally limited to BROKEN -> ACTIVE so that
+    operator-set PENDING / DISABLED status is preserved.
+    """
+    source = _make_source(status=ScrapeStatus.BROKEN)
     source.consecutive_failures = 3
     muni = _make_municipality()
 
@@ -529,11 +533,43 @@ async def test_run_discovery_resets_failures_on_success():
 
             with patch("app.discovery.poller.send_immediate_alerts_for_documents", new_callable=AsyncMock) as mock_alerts:
                 mock_alerts.return_value = {"alerts_sent": 0}
-                result = await run_discovery(db)
+                await run_discovery(db)
 
     assert source.scrape_status == ScrapeStatus.ACTIVE
     assert source.consecutive_failures == 0
     assert source.last_error is None
+
+
+@pytest.mark.asyncio
+async def test_run_discovery_preserves_pending_status_on_success():
+    """A PENDING source that polls cleanly should *stay* PENDING.
+
+    PENDING is set by operators (e.g. AB Phase 1 placeholders that don't
+    yet have a working scraper). The poller must not silently flip it to
+    ACTIVE just because the HTTP fetch returned 200.
+    """
+    source = _make_source(status=ScrapeStatus.PENDING)
+    source.consecutive_failures = 0
+    muni = _make_municipality()
+
+    db = AsyncMock()
+    source_result = MagicMock()
+    source_result.all.return_value = [(source, muni)]
+    db.execute = AsyncMock(return_value=source_result)
+    db.flush = AsyncMock()
+    db.commit = AsyncMock()
+
+    with patch("app.discovery.poller.poll_source", new_callable=AsyncMock) as mock_poll:
+        mock_poll.return_value = []  # no items, no error
+        with patch("app.discovery.poller.store_discovered_items", new_callable=AsyncMock) as mock_store:
+            mock_store.return_value = ({"total": 0, "new": 0}, [])
+            with patch("app.discovery.poller.send_immediate_alerts_for_documents", new_callable=AsyncMock) as mock_alerts:
+                mock_alerts.return_value = {"alerts_sent": 0}
+                await run_discovery(db)
+
+    assert source.scrape_status == ScrapeStatus.PENDING, (
+        "PENDING must not auto-flip to ACTIVE on a clean poll"
+    )
 
 
 @pytest.mark.asyncio

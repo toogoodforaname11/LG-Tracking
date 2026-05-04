@@ -195,7 +195,12 @@ def test_alberta_phase_1_seed_inventory():
         f"extra={actual - expected_short_names}"
     )
 
+    # Each Phase 1 muni has exactly two source rows: one platform/portal
+    # entry (eSCRIBE or Legistar/CUSTOM) plus one YouTube entry. The
+    # eSCRIBE scraper crawls both agendas and minutes from the same portal,
+    # so registering separate AGENDA and MINUTES rows for the same URL
+    # would just duplicate-poll.
     for muni in ALBERTA_MUNICIPALITIES_PHASE_1:
-        assert len(muni["sources"]) == 3, (
-            f"{muni['short_name']!r} should have 3 sources, got {len(muni['sources'])}"
+        assert len(muni["sources"]) == 2, (
+            f"{muni['short_name']!r} should have 2 sources, got {len(muni['sources'])}"
         )

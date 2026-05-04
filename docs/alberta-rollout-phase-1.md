@@ -52,9 +52,11 @@ The other 4 (Edmonton, Red Deer, Spruce Grove, Fort McMurray) have valid YouTube
 |----------|-------:|--------:|-------|
 | eSCRIBE  | 9      | 0       | All 9 ACTIVE eSCRIBE URLs respond 200 |
 | YouTube  | 9      | 1       | Airdrie demoted; channel handle not discoverable |
-| Custom (Legistar) | 0 | 2  | St. Albert agendas + minutes — needs new scraper |
+| Custom (Legistar) | 0 | 1  | St. Albert — needs new scraper |
 
-(Each muni has 3 source slots; eSCRIBE agendas + minutes share one URL per muni so they show up as 1 ACTIVE eSCRIBE row in the validator. Source row count is preserved at 30 in the seed for inventory purposes.)
+Each Phase 1 muni has exactly **2 source rows** in the seed: one platform/portal entry (eSCRIBE for 9 munis, Legistar/CUSTOM for St. Albert) plus one YouTube entry. Earlier iterations registered separate AGENDA + MINUTES rows for the same eSCRIBE URL; we collapsed those because the eSCRIBE scraper crawls both document types from a single portal listing — having two rows just duplicate-polled the same URL. Total: **20 source rows for 10 munis**.
+
+Operator-set status (PENDING / DISABLED) is now preserved across polls — the poller only auto-promotes BROKEN → ACTIVE when recovering from a failure, not on every clean fetch. This stops Airdrie YT and St. Albert Legistar from silently flipping to ACTIVE the first time they 200 OK without producing items.
 
 ## Known issues blocking 100% Phase 1 coverage
 

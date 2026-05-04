@@ -3376,17 +3376,14 @@ ALBERTA_MUNICIPALITIES_PHASE_1 = [
         "population": 1306784,
         "sources": [
             {
+                # One eSCRIBE source per portal — the scraper finds both
+                # agendas and minutes from the same portal listing, so
+                # registering separate rows per source_type would just
+                # duplicate-poll the same URL.
                 "platform": Platform.ESCRIBE,
                 "source_type": SourceType.AGENDA,
                 "url": "https://pub-calgary.escribemeetings.com",
-                "label": "Calgary eScribe Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-            {
-                "platform": Platform.ESCRIBE,
-                "source_type": SourceType.MINUTES,
-                "url": "https://pub-calgary.escribemeetings.com",
-                "label": "Calgary eScribe Minutes",
+                "label": "Calgary eScribe Portal",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
             {
@@ -3414,14 +3411,7 @@ ALBERTA_MUNICIPALITIES_PHASE_1 = [
                 "platform": Platform.ESCRIBE,
                 "source_type": SourceType.AGENDA,
                 "url": "https://pub-edmonton.escribemeetings.com",
-                "label": "Edmonton eScribe Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-            {
-                "platform": Platform.ESCRIBE,
-                "source_type": SourceType.MINUTES,
-                "url": "https://pub-edmonton.escribemeetings.com",
-                "label": "Edmonton eScribe Minutes",
+                "label": "Edmonton eScribe Portal",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
             {
@@ -3449,14 +3439,7 @@ ALBERTA_MUNICIPALITIES_PHASE_1 = [
                 "platform": Platform.ESCRIBE,
                 "source_type": SourceType.AGENDA,
                 "url": "https://pub-reddeer.escribemeetings.com",
-                "label": "Red Deer eScribe Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-            {
-                "platform": Platform.ESCRIBE,
-                "source_type": SourceType.MINUTES,
-                "url": "https://pub-reddeer.escribemeetings.com",
-                "label": "Red Deer eScribe Minutes",
+                "label": "Red Deer eScribe Portal",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
             {
@@ -3481,14 +3464,7 @@ ALBERTA_MUNICIPALITIES_PHASE_1 = [
                 "platform": Platform.ESCRIBE,
                 "source_type": SourceType.AGENDA,
                 "url": "https://pub-lethbridge.escribemeetings.com",
-                "label": "Lethbridge eScribe Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-            {
-                "platform": Platform.ESCRIBE,
-                "source_type": SourceType.MINUTES,
-                "url": "https://pub-lethbridge.escribemeetings.com",
-                "label": "Lethbridge eScribe Minutes",
+                "label": "Lethbridge eScribe Portal",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
             {
@@ -3513,14 +3489,7 @@ ALBERTA_MUNICIPALITIES_PHASE_1 = [
                 "platform": Platform.ESCRIBE,
                 "source_type": SourceType.AGENDA,
                 "url": "https://pub-medicinehat.escribemeetings.com",
-                "label": "Medicine Hat eScribe Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-            {
-                "platform": Platform.ESCRIBE,
-                "source_type": SourceType.MINUTES,
-                "url": "https://pub-medicinehat.escribemeetings.com",
-                "label": "Medicine Hat eScribe Minutes",
+                "label": "Medicine Hat eScribe Portal",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
             {
@@ -3547,14 +3516,7 @@ ALBERTA_MUNICIPALITIES_PHASE_1 = [
                 "platform": Platform.ESCRIBE,
                 "source_type": SourceType.AGENDA,
                 "url": "https://pub-airdrie.escribemeetings.com",
-                "label": "Airdrie eScribe Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-            {
-                "platform": Platform.ESCRIBE,
-                "source_type": SourceType.MINUTES,
-                "url": "https://pub-airdrie.escribemeetings.com",
-                "label": "Airdrie eScribe Minutes",
+                "label": "Airdrie eScribe Portal",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
             {
@@ -3584,14 +3546,7 @@ ALBERTA_MUNICIPALITIES_PHASE_1 = [
                 "platform": Platform.ESCRIBE,
                 "source_type": SourceType.AGENDA,
                 "url": "https://pub-sprucegrove.escribemeetings.com",
-                "label": "Spruce Grove eScribe Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-            {
-                "platform": Platform.ESCRIBE,
-                "source_type": SourceType.MINUTES,
-                "url": "https://pub-sprucegrove.escribemeetings.com",
-                "label": "Spruce Grove eScribe Minutes",
+                "label": "Spruce Grove eScribe Portal",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
             {
@@ -3618,14 +3573,7 @@ ALBERTA_MUNICIPALITIES_PHASE_1 = [
                 "platform": Platform.ESCRIBE,
                 "source_type": SourceType.AGENDA,
                 "url": "https://pub-cityofgp.escribemeetings.com",
-                "label": "Grande Prairie eScribe Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-            {
-                "platform": Platform.ESCRIBE,
-                "source_type": SourceType.MINUTES,
-                "url": "https://pub-cityofgp.escribemeetings.com",
-                "label": "Grande Prairie eScribe Minutes",
+                "label": "Grande Prairie eScribe Portal",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
             {
@@ -3656,14 +3604,7 @@ ALBERTA_MUNICIPALITIES_PHASE_1 = [
                 "platform": Platform.CUSTOM,
                 "source_type": SourceType.AGENDA,
                 "url": "https://stalbert.ca.legistar.com/Calendar.aspx",
-                "label": "St. Albert Legistar Agendas (pending Legistar scraper)",
-                "scrape_status": ScrapeStatus.PENDING,
-            },
-            {
-                "platform": Platform.CUSTOM,
-                "source_type": SourceType.MINUTES,
-                "url": "https://stalbert.ca.legistar.com/Calendar.aspx",
-                "label": "St. Albert Legistar Minutes (pending Legistar scraper)",
+                "label": "St. Albert Legistar Portal (pending Legistar scraper)",
                 "scrape_status": ScrapeStatus.PENDING,
             },
             {
@@ -3688,14 +3629,7 @@ ALBERTA_MUNICIPALITIES_PHASE_1 = [
                 "platform": Platform.ESCRIBE,
                 "source_type": SourceType.AGENDA,
                 "url": "https://pub-rmwb.escribemeetings.com",
-                "label": "Wood Buffalo eScribe Agendas",
-                "scrape_status": ScrapeStatus.ACTIVE,
-            },
-            {
-                "platform": Platform.ESCRIBE,
-                "source_type": SourceType.MINUTES,
-                "url": "https://pub-rmwb.escribemeetings.com",
-                "label": "Wood Buffalo eScribe Minutes",
+                "label": "Wood Buffalo eScribe Portal",
                 "scrape_status": ScrapeStatus.ACTIVE,
             },
             {

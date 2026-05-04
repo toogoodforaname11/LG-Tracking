@@ -343,7 +343,12 @@ async def run_discovery(db: AsyncSession, municipality_filter: str | None = None
                 scrape_run.documents_found = stats["total"]
                 scrape_run.new_documents = stats["new"]
 
-                source.scrape_status = ScrapeStatus.ACTIVE
+                # Only auto-promote to ACTIVE when recovering from BROKEN.
+                # PENDING and DISABLED are operator-set (e.g. AB Phase 1
+                # placeholders) and must not silently flip to ACTIVE just
+                # because the HTTP fetch returned a 200.
+                if source.scrape_status == ScrapeStatus.BROKEN:
+                    source.scrape_status = ScrapeStatus.ACTIVE
                 source.last_scraped_at = datetime.now(timezone.utc)
                 source.last_error = None
                 source.consecutive_failures = 0
