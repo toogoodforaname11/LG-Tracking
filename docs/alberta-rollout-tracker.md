@@ -369,3 +369,144 @@ sparse-data entities) stay PLACEHOLDER and explicitly note the rationale.
 | SV Golden Days | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
 | SV Grandview | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
 | SV Gull Lake | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+
+### Phase 21 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| SV Half Moon Bay | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Horseshoe Bay | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Island Lake | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Island Lake South | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Itaska Beach | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Jarvis Bay | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Kapasiwin | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Lakeview | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Larkspur | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Ma-Me-O Beach | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+
+### Phase 22 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| SV Mewatha Beach | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Nakamun Park | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Norglenwold | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Norris Beach | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Parkland Beach | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Pelican Narrows | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Point Alison | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Poplar Bay | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Rochon Sands | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Ross Haven | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+
+### Phase 23 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| SV Seba Beach | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Silver Beach | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Silver Sands | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV South Baptiste | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV South View | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Sunbreaker Cove | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Sundance Beach | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Sunridge | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Sunrise Beach | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Sunset Beach | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+
+### Phase 24 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| SV Sunset Point | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Val Quentin | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Waiparous | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV West Baptiste | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV West Cove | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Whispering Hills | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV White Sands | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| SV Yellowstone | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Saddle Hills County | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Sexsmith | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+
+### Phase 25 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| Slave Lake | 2 | civicweb + youtube | VALIDATED | 15 | 15 items |
+| Smoky Lake | 1 | civicweb | READY | 0 | URLs resolve, no items today |
+| Smoky Lake County | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Special Area No. 2 | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Special Area No. 3 | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Special Area No. 4 | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Spirit River | 1 | civicweb | VALIDATED | 1 | 1 items |
+| Spring Lake | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| St. Paul | 2 | civicweb + youtube | VALIDATED | 9 | 9 items |
+| Standard | 1 | youtube | VALIDATED | 11 | 11 items |
+
+### Phase 26 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| Starland County | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Stavely | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Stettler | 2 | escribe + youtube | VALIDATED | 8 | 8 items |
+| Stirling | 1 | youtube | VALIDATED | 3 | 3 items |
+| Stony Plain | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Strathcona County | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Strathmore | 1 | youtube | VALIDATED | 15 | 15 items |
+| Sturgeon County | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Sundre | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Swan Hills | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+
+### Phase 27 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| Sylvan Lake | 2 | civicweb + youtube | VALIDATED | 11 | 11 items |
+| Taber | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Thorhild County | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Thorsby | 1 | youtube | VALIDATED | 7 | 7 items |
+| Three Hills | 1 | civicweb | READY | 0 | URLs resolve, no items today |
+| Tofield | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Turner Valley | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Two Hills | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Two Hills County | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Valhalla Centre | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+
+### Phase 28 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| Vauxhall | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Vegreville | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Vermilion | 2 | civicweb + youtube | VALIDATED | 4 | 4 items |
+| Vermilion River County | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Veteran | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Vilna | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Vulcan | 1 | civicweb | READY | 0 | URLs resolve, no items today |
+| Vulcan County | 1 | civicweb | READY | 0 | URLs resolve, no items today |
+| Wabamun | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Wainwright | 1 | youtube | READY | 0 | URLs resolve, no items today |
+
+### Phase 29 (10 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| Warburg | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Warner | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Westlock | 1 | youtube | READY | 0 | URLs resolve, no items today |
+| Westlock County | 1 | youtube | READY | 0 | URLs resolve, no items today |
+| Wetaskiwin | 2 | civicweb + youtube | VALIDATED | 4 | 4 items |
+| Wetaskiwin County | 2 | civicweb + youtube | VALIDATED | 4 | 4 items |
+| Wheatland County | 2 | escribe + youtube | VALIDATED | 9 | 9 items |
+| Whitecourt | 1 | youtube | READY | 0 | URLs resolve, no items today |
+| Willingdon | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+| Yellowhead County | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
+
+### Phase 30 (1 munis — 2026-05-04)
+
+| Municipality | Sources | Platform | Status | Items | Notes |
+|---|---:|---|---|---:|---|
+| Youngstown | 1 | custom* | PLACEHOLDER | 0 | no portal discovered yet |
