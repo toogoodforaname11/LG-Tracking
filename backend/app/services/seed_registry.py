@@ -4041,7 +4041,68 @@ def _build_alberta_remainder() -> list[dict]:
     return out
 
 
-ALBERTA_MUNICIPALITIES_REMAINDER: list[dict] = _build_alberta_remainder()
+def _apply_remainder_patches(entries: list[dict]) -> list[dict]:
+    """Merge the auto-generated probe patches onto the placeholder roster.
+
+    For every entry whose ``short_name`` appears in ``REMAINDER_PATCHES``:
+    - replace ``website_url`` with the probe-discovered value
+    - replace the placeholder source list with the probe-derived sources
+
+    Entries with no patch keep their PENDING placeholder source.
+    """
+    try:
+        from app.services._ab_remainder_patches import REMAINDER_PATCHES
+    except ImportError:
+        # Patches file not generated yet (e.g. fresh checkout before
+        # ``scripts/apply_alberta_probe.py`` has been run). Stay placeholder-only.
+        return entries
+
+    # Resolve the string-form enum references used in the patches file.
+    enum_lookup = {
+        "Platform.CIVICWEB": Platform.CIVICWEB,
+        "Platform.GRANICUS": Platform.GRANICUS,
+        "Platform.ESCRIBE": Platform.ESCRIBE,
+        "Platform.YOUTUBE": Platform.YOUTUBE,
+        "Platform.CIVICPLUS": Platform.CIVICPLUS,
+        "Platform.CUSTOM": Platform.CUSTOM,
+        "Platform.UNKNOWN": Platform.UNKNOWN,
+        "SourceType.AGENDA": SourceType.AGENDA,
+        "SourceType.MINUTES": SourceType.MINUTES,
+        "SourceType.VIDEO": SourceType.VIDEO,
+        "SourceType.NOTICE": SourceType.NOTICE,
+        "SourceType.BYLAW": SourceType.BYLAW,
+        "ScrapeStatus.ACTIVE": ScrapeStatus.ACTIVE,
+        "ScrapeStatus.PENDING": ScrapeStatus.PENDING,
+        "ScrapeStatus.BROKEN": ScrapeStatus.BROKEN,
+        "ScrapeStatus.DISABLED": ScrapeStatus.DISABLED,
+    }
+
+    def _resolve(source: dict) -> dict:
+        return {
+            "platform": enum_lookup[source["platform"]],
+            "source_type": enum_lookup[source["source_type"]],
+            "url": source["url"],
+            "label": source["label"],
+            "scrape_status": enum_lookup[source["scrape_status"]],
+        }
+
+    for entry in entries:
+        patch = REMAINDER_PATCHES.get(entry["short_name"])
+        if not patch:
+            continue
+        if patch.get("website_url"):
+            entry["website_url"] = patch["website_url"]
+        sources = [_resolve(s) for s in patch.get("sources", [])]
+        if sources:
+            # Drop the placeholder PENDING source — we now have real ones.
+            entry["sources"] = sources
+
+    return entries
+
+
+ALBERTA_MUNICIPALITIES_REMAINDER: list[dict] = _apply_remainder_patches(
+    _build_alberta_remainder()
+)
 
 
 # All BC and AB batches concatenated — public for tests that want to

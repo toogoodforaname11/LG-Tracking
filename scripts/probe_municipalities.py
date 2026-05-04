@@ -94,6 +94,9 @@ def _candidate_hosts(short_name: str) -> list[str]:
         bare = _slug(tail)
         bare_dashed = _slug_dashed(tail)
 
+    # Restrict to .ca to avoid grabbing unrelated .com domains owned by
+    # other people — false-positives like andrew.com landing on a YouTube
+    # channel for "Andrew Connectivity" instead of the Village of Andrew.
     candidates = [
         f"www.{slug}.ca",
         f"{slug}.ca",
@@ -107,8 +110,6 @@ def _candidate_hosts(short_name: str) -> list[str]:
         f"{bare}county.ca",
         f"www.{bare_dashed}.ca",
         f"{bare_dashed}.ca",
-        f"www.{slug}.com",
-        f"{slug}.com",
         f"www.{bare}-ab.ca",
         f"{bare}-ab.ca",
     ]

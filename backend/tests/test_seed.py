@@ -213,13 +213,29 @@ def test_alberta_phase_1_has_active_sources():
         )
 
 
-def test_alberta_remainder_uses_pending_status():
-    """Remainder munis must be PENDING — they're placeholders, not live."""
-    from app.models.municipality import ScrapeStatus
+def test_alberta_remainder_unpatched_munis_are_pending():
+    """Remainder munis without an auto-applied probe patch should remain
+    PENDING placeholders (single CUSTOM source pointing at the AB directory).
+    Patched munis ship at least one ACTIVE source (CivicWeb/eSCRIBE/YouTube).
+    """
+    from app.models.municipality import ScrapeStatus, Platform
+
+    placeholder_url_substr = "alberta.ca/find-a-municipal-official"
 
     for muni in ALBERTA_MUNICIPALITIES_REMAINDER:
-        for source in muni["sources"]:
-            assert source["scrape_status"] == ScrapeStatus.PENDING, (
-                f"AB remainder {muni['short_name']!r} should be PENDING, "
-                f"got {source['scrape_status']}"
+        sources = muni["sources"]
+        assert sources, f"{muni['short_name']!r} has no sources"
+        is_placeholder = (
+            len(sources) == 1
+            and sources[0]["platform"] == Platform.CUSTOM
+            and placeholder_url_substr in sources[0]["url"]
+        )
+        if is_placeholder:
+            assert sources[0]["scrape_status"] == ScrapeStatus.PENDING, (
+                f"{muni['short_name']!r} placeholder source must be PENDING"
             )
+        else:
+            # Patched muni — should have at least one ACTIVE source.
+            assert any(
+                s["scrape_status"] == ScrapeStatus.ACTIVE for s in sources
+            ), f"{muni['short_name']!r} patched muni has no ACTIVE source"

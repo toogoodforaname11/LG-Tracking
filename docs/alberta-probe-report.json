@@ -13,8 +13,6 @@
       "villageofacme.ca",
       "www.acmecounty.ca",
       "acmecounty.ca",
-      "www.acme.com",
-      "acme.com",
       "www.acme-ab.ca",
       "acme-ab.ca"
     ],
@@ -22,7 +20,7 @@
   },
   {
     "short_name": "Alberta Beach",
-    "website_url": "https://www.albertabeach.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.albertabeach.ca",
       "albertabeach.ca",
@@ -36,8 +34,6 @@
       "albertabeachcounty.ca",
       "www.alberta-beach.ca",
       "alberta-beach.ca",
-      "www.albertabeach.com",
-      "albertabeach.com",
       "www.albertabeach-ab.ca",
       "albertabeach-ab.ca"
     ],
@@ -57,8 +53,6 @@
       "villageofalix.ca",
       "www.alixcounty.ca",
       "alixcounty.ca",
-      "www.alix.com",
-      "alix.com",
       "www.alix-ab.ca",
       "alix-ab.ca"
     ],
@@ -78,8 +72,6 @@
       "villageofalliance.ca",
       "www.alliancecounty.ca",
       "alliancecounty.ca",
-      "www.alliance.com",
-      "alliance.com",
       "www.alliance-ab.ca",
       "alliance-ab.ca"
     ],
@@ -87,7 +79,7 @@
   },
   {
     "short_name": "Andrew",
-    "website_url": "https://www.andrew.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.andrew.ca",
       "andrew.ca",
@@ -99,16 +91,10 @@
       "villageofandrew.ca",
       "www.andrewcounty.ca",
       "andrewcounty.ca",
-      "www.andrew.com",
-      "andrew.com",
       "www.andrew-ab.ca",
       "andrew-ab.ca"
     ],
-    "platform_links": {
-      "youtube": [
-        "https://www.youtube.com/@AndrewConnectivity"
-      ]
-    }
+    "platform_links": {}
   },
   {
     "short_name": "Arrowwood",
@@ -124,8 +110,6 @@
       "villageofarrowwood.ca",
       "www.arrowwoodcounty.ca",
       "arrowwoodcounty.ca",
-      "www.arrowwood.com",
-      "arrowwood.com",
       "www.arrowwood-ab.ca",
       "arrowwood-ab.ca"
     ],
@@ -145,8 +129,6 @@
       "villageofathabasca.ca",
       "www.athabasca.ca",
       "athabasca.ca",
-      "www.athabascacounty.com",
-      "athabascacounty.com",
       "www.athabasca-ab.ca",
       "athabasca-ab.ca"
     ],
@@ -171,8 +153,6 @@
       "villageofbanff.ca",
       "www.banffcounty.ca",
       "banffcounty.ca",
-      "www.banff.com",
-      "banff.com",
       "www.banff-ab.ca",
       "banff-ab.ca"
     ],
@@ -192,8 +172,6 @@
       "villageofbarnwell.ca",
       "www.barnwellcounty.ca",
       "barnwellcounty.ca",
-      "www.barnwell.com",
-      "barnwell.com",
       "www.barnwell-ab.ca",
       "barnwell-ab.ca"
     ],
@@ -213,8 +191,6 @@
       "villageofbarons.ca",
       "www.baronscounty.ca",
       "baronscounty.ca",
-      "www.barons.com",
-      "barons.com",
       "www.barons-ab.ca",
       "barons-ab.ca"
     ],
@@ -234,8 +210,6 @@
       "villageofbarrhead.ca",
       "www.barrheadcounty.ca",
       "barrheadcounty.ca",
-      "www.barrhead.com",
-      "barrhead.com",
       "www.barrhead-ab.ca",
       "barrhead-ab.ca"
     ],
@@ -255,8 +229,6 @@
       "villageofbassano.ca",
       "www.bassanocounty.ca",
       "bassanocounty.ca",
-      "www.bassano.com",
-      "bassano.com",
       "www.bassano-ab.ca",
       "bassano-ab.ca"
     ],
@@ -276,8 +248,6 @@
       "villageofbawlf.ca",
       "www.bawlfcounty.ca",
       "bawlfcounty.ca",
-      "www.bawlf.com",
-      "bawlf.com",
       "www.bawlf-ab.ca",
       "bawlf-ab.ca"
     ],
@@ -297,8 +267,6 @@
       "villageofbeaumont.ca",
       "www.beaumontcounty.ca",
       "beaumontcounty.ca",
-      "www.beaumont.com",
-      "beaumont.com",
       "www.beaumont-ab.ca",
       "beaumont-ab.ca"
     ],
@@ -318,8 +286,6 @@
       "villageofbeaver.ca",
       "www.beaver.ca",
       "beaver.ca",
-      "www.beavercounty.com",
-      "beavercounty.com",
       "www.beaver-ab.ca",
       "beaver-ab.ca"
     ],
@@ -327,7 +293,7 @@
   },
   {
     "short_name": "Bentley",
-    "website_url": "https://www.townofbentley.ca/",
+    "website_url": "https://townofbentley.ca/",
     "candidates_tried": [
       "www.bentley.ca",
       "bentley.ca",
@@ -339,8 +305,6 @@
       "villageofbentley.ca",
       "www.bentleycounty.ca",
       "bentleycounty.ca",
-      "www.bentley.com",
-      "bentley.com",
       "www.bentley-ab.ca",
       "bentley-ab.ca"
     ],
@@ -360,8 +324,6 @@
       "villageofberwyn.ca",
       "www.berwyncounty.ca",
       "berwyncounty.ca",
-      "www.berwyn.com",
-      "berwyn.com",
       "www.berwyn-ab.ca",
       "berwyn-ab.ca"
     ],
@@ -381,8 +343,6 @@
       "villageofbiglakes.ca",
       "www.big-lakes.ca",
       "big-lakes.ca",
-      "www.biglakescounty.com",
-      "biglakescounty.com",
       "www.biglakes-ab.ca",
       "biglakes-ab.ca"
     ],
@@ -408,8 +368,6 @@
       "bigvalleycounty.ca",
       "www.big-valley.ca",
       "big-valley.ca",
-      "www.bigvalley.com",
-      "bigvalley.com",
       "www.bigvalley-ab.ca",
       "bigvalley-ab.ca"
     ],
@@ -417,7 +375,7 @@
   },
   {
     "short_name": "Birch Hills County",
-    "website_url": "https://www.birchhillscounty.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.birchhillscounty.ca",
       "birchhillscounty.ca",
@@ -429,8 +387,6 @@
       "villageofbirchhills.ca",
       "www.birch-hills.ca",
       "birch-hills.ca",
-      "www.birchhillscounty.com",
-      "birchhillscounty.com",
       "www.birchhills-ab.ca",
       "birchhills-ab.ca"
     ],
@@ -452,8 +408,6 @@
       "bitternlakecounty.ca",
       "www.bittern-lake.ca",
       "bittern-lake.ca",
-      "www.bitternlake.com",
-      "bitternlake.com",
       "www.bitternlake-ab.ca",
       "bitternlake-ab.ca"
     ],
@@ -475,8 +429,6 @@
       "blackdiamondcounty.ca",
       "www.black-diamond.ca",
       "black-diamond.ca",
-      "www.blackdiamond.com",
-      "blackdiamond.com",
       "www.blackdiamond-ab.ca",
       "blackdiamond-ab.ca"
     ],
@@ -496,8 +448,6 @@
       "villageofblackfalds.ca",
       "www.blackfaldscounty.ca",
       "blackfaldscounty.ca",
-      "www.blackfalds.com",
-      "blackfalds.com",
       "www.blackfalds-ab.ca",
       "blackfalds-ab.ca"
     ],
@@ -519,8 +469,6 @@
       "bonaccordcounty.ca",
       "www.bon-accord.ca",
       "bon-accord.ca",
-      "www.bonaccord.com",
-      "bonaccord.com",
       "www.bonaccord-ab.ca",
       "bonaccord-ab.ca"
     ],
@@ -544,8 +492,6 @@
       "villageofbonnyville.ca",
       "www.bonnyvillecounty.ca",
       "bonnyvillecounty.ca",
-      "www.bonnyville.com",
-      "bonnyville.com",
       "www.bonnyville-ab.ca",
       "bonnyville-ab.ca"
     ],
@@ -557,7 +503,7 @@
   },
   {
     "short_name": "Bow Island",
-    "website_url": "https://www.bowisland.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.bowisland.ca",
       "bowisland.ca",
@@ -571,8 +517,6 @@
       "bowislandcounty.ca",
       "www.bow-island.ca",
       "bow-island.ca",
-      "www.bowisland.com",
-      "bowisland.com",
       "www.bowisland-ab.ca",
       "bowisland-ab.ca"
     ],
@@ -592,8 +536,6 @@
       "villageofbowden.ca",
       "www.bowdencounty.ca",
       "bowdencounty.ca",
-      "www.bowden.com",
-      "bowden.com",
       "www.bowden-ab.ca",
       "bowden-ab.ca"
     ],
@@ -601,7 +543,7 @@
   },
   {
     "short_name": "Boyle",
-    "website_url": "https://www.boyle.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.boyle.ca",
       "boyle.ca",
@@ -613,8 +555,6 @@
       "villageofboyle.ca",
       "www.boylecounty.ca",
       "boylecounty.ca",
-      "www.boyle.com",
-      "boyle.com",
       "www.boyle-ab.ca",
       "boyle-ab.ca"
     ],
@@ -634,8 +574,6 @@
       "villageofbrazeau.ca",
       "www.brazeau.ca",
       "brazeau.ca",
-      "www.brazeaucounty.com",
-      "brazeaucounty.com",
       "www.brazeau-ab.ca",
       "brazeau-ab.ca"
     ],
@@ -655,8 +593,6 @@
       "villageofbrooks.ca",
       "www.brookscounty.ca",
       "brookscounty.ca",
-      "www.brooks.com",
-      "brooks.com",
       "www.brooks-ab.ca",
       "brooks-ab.ca"
     ],
@@ -680,8 +616,6 @@
       "villageofbruderheim.ca",
       "www.bruderheimcounty.ca",
       "bruderheimcounty.ca",
-      "www.bruderheim.com",
-      "bruderheim.com",
       "www.bruderheim-ab.ca",
       "bruderheim-ab.ca"
     ],
@@ -703,8 +637,6 @@
       "buffalolakecounty.ca",
       "www.buffalo-lake.ca",
       "buffalo-lake.ca",
-      "www.buffalolake.com",
-      "buffalolake.com",
       "www.buffalolake-ab.ca",
       "buffalolake-ab.ca"
     ],
@@ -724,8 +656,6 @@
       "villageofcamrose.ca",
       "www.camrosecounty.ca",
       "camrosecounty.ca",
-      "www.camrose.com",
-      "camrose.com",
       "www.camrose-ab.ca",
       "camrose-ab.ca"
     ],
@@ -756,8 +686,6 @@
       "villageofcamrose.ca",
       "www.camrose.ca",
       "camrose.ca",
-      "www.camrosecounty.com",
-      "camrosecounty.com",
       "www.camrose-ab.ca",
       "camrose-ab.ca"
     ],
@@ -788,8 +716,6 @@
       "villageofcanmore.ca",
       "www.canmorecounty.ca",
       "canmorecounty.ca",
-      "www.canmore.com",
-      "canmore.com",
       "www.canmore-ab.ca",
       "canmore-ab.ca"
     ],
@@ -814,8 +740,6 @@
       "villageofcarbon.ca",
       "www.carboncounty.ca",
       "carboncounty.ca",
-      "www.carbon.com",
-      "carbon.com",
       "www.carbon-ab.ca",
       "carbon-ab.ca"
     ],
@@ -835,8 +759,6 @@
       "villageofcardston.ca",
       "www.cardstoncounty.ca",
       "cardstoncounty.ca",
-      "www.cardston.com",
-      "cardston.com",
       "www.cardston-ab.ca",
       "cardston-ab.ca"
     ],
@@ -860,8 +782,6 @@
       "villageofcardston.ca",
       "www.cardston.ca",
       "cardston.ca",
-      "www.cardstoncounty.com",
-      "cardstoncounty.com",
       "www.cardston-ab.ca",
       "cardston-ab.ca"
     ],
@@ -885,8 +805,6 @@
       "villageofcarmangay.ca",
       "www.carmangaycounty.ca",
       "carmangaycounty.ca",
-      "www.carmangay.com",
-      "carmangay.com",
       "www.carmangay-ab.ca",
       "carmangay-ab.ca"
     ],
@@ -906,8 +824,6 @@
       "villageofcaroline.ca",
       "www.carolinecounty.ca",
       "carolinecounty.ca",
-      "www.caroline.com",
-      "caroline.com",
       "www.caroline-ab.ca",
       "caroline-ab.ca"
     ],
@@ -927,8 +843,6 @@
       "villageofcarstairs.ca",
       "www.carstairscounty.ca",
       "carstairscounty.ca",
-      "www.carstairs.com",
-      "carstairs.com",
       "www.carstairs-ab.ca",
       "carstairs-ab.ca"
     ],
@@ -948,8 +862,6 @@
       "villageofcastor.ca",
       "www.castorcounty.ca",
       "castorcounty.ca",
-      "www.castor.com",
-      "castor.com",
       "www.castor-ab.ca",
       "castor-ab.ca"
     ],
@@ -969,8 +881,6 @@
       "villageofchauvin.ca",
       "www.chauvincounty.ca",
       "chauvincounty.ca",
-      "www.chauvin.com",
-      "chauvin.com",
       "www.chauvin-ab.ca",
       "chauvin-ab.ca"
     ],
@@ -990,8 +900,6 @@
       "villageofchestermere.ca",
       "www.chestermerecounty.ca",
       "chestermerecounty.ca",
-      "www.chestermere.com",
-      "chestermere.com",
       "www.chestermere-ab.ca",
       "chestermere-ab.ca"
     ],
@@ -1011,8 +919,6 @@
       "villageofchipman.ca",
       "www.chipmancounty.ca",
       "chipmancounty.ca",
-      "www.chipman.com",
-      "chipman.com",
       "www.chipman-ab.ca",
       "chipman-ab.ca"
     ],
@@ -1032,8 +938,6 @@
       "villageofclaresholm.ca",
       "www.claresholmcounty.ca",
       "claresholmcounty.ca",
-      "www.claresholm.com",
-      "claresholm.com",
       "www.claresholm-ab.ca",
       "claresholm-ab.ca"
     ],
@@ -1064,8 +968,6 @@
       "villageofclearhills.ca",
       "www.clear-hills.ca",
       "clear-hills.ca",
-      "www.clearhillscounty.com",
-      "clearhillscounty.com",
       "www.clearhills-ab.ca",
       "clearhills-ab.ca"
     ],
@@ -1085,8 +987,6 @@
       "villageofclearwater.ca",
       "www.clearwater.ca",
       "clearwater.ca",
-      "www.clearwatercounty.com",
-      "clearwatercounty.com",
       "www.clearwater-ab.ca",
       "clearwater-ab.ca"
     ],
@@ -1115,8 +1015,6 @@
       "villageofclive.ca",
       "www.clivecounty.ca",
       "clivecounty.ca",
-      "www.clive.com",
-      "clive.com",
       "www.clive-ab.ca",
       "clive-ab.ca"
     ],
@@ -1136,8 +1034,6 @@
       "villageofclyde.ca",
       "www.clydecounty.ca",
       "clydecounty.ca",
-      "www.clyde.com",
-      "clyde.com",
       "www.clyde-ab.ca",
       "clyde-ab.ca"
     ],
@@ -1157,8 +1053,6 @@
       "villageofcoaldale.ca",
       "www.coaldalecounty.ca",
       "coaldalecounty.ca",
-      "www.coaldale.com",
-      "coaldale.com",
       "www.coaldale-ab.ca",
       "coaldale-ab.ca"
     ],
@@ -1178,8 +1072,6 @@
       "villageofcoalhurst.ca",
       "www.coalhurstcounty.ca",
       "coalhurstcounty.ca",
-      "www.coalhurst.com",
-      "coalhurst.com",
       "www.coalhurst-ab.ca",
       "coalhurst-ab.ca"
     ],
@@ -1191,7 +1083,7 @@
   },
   {
     "short_name": "Cold Lake",
-    "website_url": "https://www.coldlake.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.coldlake.ca",
       "coldlake.ca",
@@ -1205,21 +1097,10 @@
       "coldlakecounty.ca",
       "www.cold-lake.ca",
       "cold-lake.ca",
-      "www.coldlake.com",
-      "coldlake.com",
       "www.coldlake-ab.ca",
       "coldlake-ab.ca"
     ],
-    "platform_links": {
-      "escribe": [
-        "https://pub-coldlake.escribemeetings.com/"
-      ],
-      "youtube": [
-        "https://www.youtube.com/channel/UC8ak4UNJqfSvFEnhNc60BJg",
-        "https://www.youtube.com/channel/UCo5gGiSUgbZBxQhOn1xI5ow",
-        "https://www.youtube.com/user/CityOfColdLake"
-      ]
-    }
+    "platform_links": {}
   },
   {
     "short_name": "Coronation",
@@ -1235,8 +1116,6 @@
       "villageofcoronation.ca",
       "www.coronationcounty.ca",
       "coronationcounty.ca",
-      "www.coronation.com",
-      "coronation.com",
       "www.coronation-ab.ca",
       "coronation-ab.ca"
     ],
@@ -1263,8 +1142,6 @@
       "barrheadcounty.ca",
       "www.barrhead.ca",
       "barrhead.ca",
-      "www.countyofbarrhead.com",
-      "countyofbarrhead.com",
       "www.barrhead-ab.ca",
       "barrhead-ab.ca"
     ],
@@ -1286,8 +1163,6 @@
       "grandeprairiecounty.ca",
       "www.grande-prairie.ca",
       "grande-prairie.ca",
-      "www.countyofgrandeprairie.com",
-      "countyofgrandeprairie.com",
       "www.grandeprairie-ab.ca",
       "grandeprairie-ab.ca"
     ],
@@ -1309,8 +1184,6 @@
       "minburncounty.ca",
       "www.minburn.ca",
       "minburn.ca",
-      "www.countyofminburn.com",
-      "countyofminburn.com",
       "www.minburn-ab.ca",
       "minburn-ab.ca"
     ],
@@ -1318,7 +1191,7 @@
   },
   {
     "short_name": "County of Newell",
-    "website_url": "https://www.countyofnewell.com/",
+    "website_url": null,
     "candidates_tried": [
       "countyofnewell.ca",
       "www.countyofnewell.ca",
@@ -1332,8 +1205,6 @@
       "newellcounty.ca",
       "www.newell.ca",
       "newell.ca",
-      "www.countyofnewell.com",
-      "countyofnewell.com",
       "www.newell-ab.ca",
       "newell-ab.ca"
     ],
@@ -1341,7 +1212,7 @@
   },
   {
     "short_name": "County of Northern Lights",
-    "website_url": "https://www.countyofnorthernlights.com/",
+    "website_url": null,
     "candidates_tried": [
       "countyofnorthernlights.ca",
       "www.countyofnorthernlights.ca",
@@ -1355,8 +1226,6 @@
       "northernlightscounty.ca",
       "www.northern-lights.ca",
       "northern-lights.ca",
-      "www.countyofnorthernlights.com",
-      "countyofnorthernlights.com",
       "www.northernlights-ab.ca",
       "northernlights-ab.ca"
     ],
@@ -1378,8 +1247,6 @@
       "stettlercounty.ca",
       "www.stettler.ca",
       "stettler.ca",
-      "www.countyofstettler.com",
-      "countyofstettler.com",
       "www.stettler-ab.ca",
       "stettler-ab.ca"
     ],
@@ -1406,8 +1273,6 @@
       "villageofcrossfield.ca",
       "www.crossfieldcounty.ca",
       "crossfieldcounty.ca",
-      "www.crossfield.com",
-      "crossfield.com",
       "www.crossfield-ab.ca",
       "crossfield-ab.ca"
     ],
@@ -1429,8 +1294,6 @@
       "crowsnestpasscounty.ca",
       "www.crowsnest-pass.ca",
       "crowsnest-pass.ca",
-      "www.crowsnestpass.com",
-      "crowsnestpass.com",
       "www.crowsnestpass-ab.ca",
       "crowsnestpass-ab.ca"
     ],
@@ -1438,7 +1301,7 @@
   },
   {
     "short_name": "Cypress County",
-    "website_url": "https://www.cypresscounty.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.cypresscounty.ca",
       "cypresscounty.ca",
@@ -1450,8 +1313,6 @@
       "villageofcypress.ca",
       "www.cypress.ca",
       "cypress.ca",
-      "www.cypresscounty.com",
-      "cypresscounty.com",
       "www.cypress-ab.ca",
       "cypress-ab.ca"
     ],
@@ -1471,8 +1332,6 @@
       "villageofczar.ca",
       "www.czarcounty.ca",
       "czarcounty.ca",
-      "www.czar.com",
-      "czar.com",
       "www.czar-ab.ca",
       "czar-ab.ca"
     ],
@@ -1492,8 +1351,6 @@
       "villageofdaysland.ca",
       "www.dayslandcounty.ca",
       "dayslandcounty.ca",
-      "www.daysland.com",
-      "daysland.com",
       "www.daysland-ab.ca",
       "daysland-ab.ca"
     ],
@@ -1513,8 +1370,6 @@
       "villageofdelburne.ca",
       "www.delburnecounty.ca",
       "delburnecounty.ca",
-      "www.delburne.com",
-      "delburne.com",
       "www.delburne-ab.ca",
       "delburne-ab.ca"
     ],
@@ -1534,8 +1389,6 @@
       "villageofdelia.ca",
       "www.deliacounty.ca",
       "deliacounty.ca",
-      "www.delia.com",
-      "delia.com",
       "www.delia-ab.ca",
       "delia-ab.ca"
     ],
@@ -1555,8 +1408,6 @@
       "villageofdevon.ca",
       "www.devoncounty.ca",
       "devoncounty.ca",
-      "www.devon.com",
-      "devon.com",
       "www.devon-ab.ca",
       "devon-ab.ca"
     ],
@@ -1580,8 +1431,6 @@
       "villageofdewberry.ca",
       "www.dewberrycounty.ca",
       "dewberrycounty.ca",
-      "www.dewberry.com",
-      "dewberry.com",
       "www.dewberry-ab.ca",
       "dewberry-ab.ca"
     ],
@@ -1601,8 +1450,6 @@
       "villageofdidsbury.ca",
       "www.didsburycounty.ca",
       "didsburycounty.ca",
-      "www.didsbury.com",
-      "didsbury.com",
       "www.didsbury-ab.ca",
       "didsbury-ab.ca"
     ],
@@ -1631,8 +1478,6 @@
       "villageofdonalda.ca",
       "www.donaldacounty.ca",
       "donaldacounty.ca",
-      "www.donalda.com",
-      "donalda.com",
       "www.donalda-ab.ca",
       "donalda-ab.ca"
     ],
@@ -1640,7 +1485,7 @@
   },
   {
     "short_name": "Duchess",
-    "website_url": "https://www.duchess.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.duchess.ca",
       "duchess.ca",
@@ -1652,8 +1497,6 @@
       "villageofduchess.ca",
       "www.duchesscounty.ca",
       "duchesscounty.ca",
-      "www.duchess.com",
-      "duchess.com",
       "www.duchess-ab.ca",
       "duchess-ab.ca"
     ],
@@ -1675,8 +1518,6 @@
       "eastprairiecounty.ca",
       "www.east-prairie.ca",
       "east-prairie.ca",
-      "www.eastprairie.com",
-      "eastprairie.com",
       "www.eastprairie-ab.ca",
       "eastprairie-ab.ca"
     ],
@@ -1684,7 +1525,7 @@
   },
   {
     "short_name": "Eckville",
-    "website_url": "https://www.eckville.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.eckville.ca",
       "eckville.ca",
@@ -1696,8 +1537,6 @@
       "villageofeckville.ca",
       "www.eckvillecounty.ca",
       "eckvillecounty.ca",
-      "www.eckville.com",
-      "eckville.com",
       "www.eckville-ab.ca",
       "eckville-ab.ca"
     ],
@@ -1717,8 +1556,6 @@
       "villageofedgerton.ca",
       "www.edgertoncounty.ca",
       "edgertoncounty.ca",
-      "www.edgerton.com",
-      "edgerton.com",
       "www.edgerton-ab.ca",
       "edgerton-ab.ca"
     ],
@@ -1738,8 +1575,6 @@
       "villageofedson.ca",
       "www.edsoncounty.ca",
       "edsoncounty.ca",
-      "www.edson.com",
-      "edson.com",
       "www.edson-ab.ca",
       "edson-ab.ca"
     ],
@@ -1771,8 +1606,6 @@
       "villageofelizabeth.ca",
       "www.elizabethcounty.ca",
       "elizabethcounty.ca",
-      "www.elizabeth.com",
-      "elizabeth.com",
       "www.elizabeth-ab.ca",
       "elizabeth-ab.ca"
     ],
@@ -1794,8 +1627,6 @@
       "elkpointcounty.ca",
       "www.elk-point.ca",
       "elk-point.ca",
-      "www.elkpoint.com",
-      "elkpoint.com",
       "www.elkpoint-ab.ca",
       "elkpoint-ab.ca"
     ],
@@ -1807,7 +1638,7 @@
   },
   {
     "short_name": "Elnora",
-    "website_url": "https://www.elnora.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.elnora.ca",
       "elnora.ca",
@@ -1819,8 +1650,6 @@
       "villageofelnora.ca",
       "www.elnoracounty.ca",
       "elnoracounty.ca",
-      "www.elnora.com",
-      "elnora.com",
       "www.elnora-ab.ca",
       "elnora-ab.ca"
     ],
@@ -1840,8 +1669,6 @@
       "villageoffairview.ca",
       "www.fairviewcounty.ca",
       "fairviewcounty.ca",
-      "www.fairview.com",
-      "fairview.com",
       "www.fairview-ab.ca",
       "fairview-ab.ca"
     ],
@@ -1868,8 +1695,6 @@
       "villageoffalher.ca",
       "www.falhercounty.ca",
       "falhercounty.ca",
-      "www.falher.com",
-      "falher.com",
       "www.falher-ab.ca",
       "falher-ab.ca"
     ],
@@ -1877,7 +1702,7 @@
   },
   {
     "short_name": "Ferintosh",
-    "website_url": "https://www.ferintosh.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.ferintosh.ca",
       "ferintosh.ca",
@@ -1889,8 +1714,6 @@
       "villageofferintosh.ca",
       "www.ferintoshcounty.ca",
       "ferintoshcounty.ca",
-      "www.ferintosh.com",
-      "ferintosh.com",
       "www.ferintosh-ab.ca",
       "ferintosh-ab.ca"
     ],
@@ -1912,8 +1735,6 @@
       "fishinglakecounty.ca",
       "www.fishing-lake.ca",
       "fishing-lake.ca",
-      "www.fishinglake.com",
-      "fishinglake.com",
       "www.fishinglake-ab.ca",
       "fishinglake-ab.ca"
     ],
@@ -1933,8 +1754,6 @@
       "villageofflagstaff.ca",
       "www.flagstaff.ca",
       "flagstaff.ca",
-      "www.flagstaffcounty.com",
-      "flagstaffcounty.com",
       "www.flagstaff-ab.ca",
       "flagstaff-ab.ca"
     ],
@@ -1961,8 +1780,6 @@
       "villageoffoothills.ca",
       "www.foothills.ca",
       "foothills.ca",
-      "www.foothillscounty.com",
-      "foothillscounty.com",
       "www.foothills-ab.ca",
       "foothills-ab.ca"
     ],
@@ -1982,8 +1799,6 @@
       "villageofforemost.ca",
       "www.foremostcounty.ca",
       "foremostcounty.ca",
-      "www.foremost.com",
-      "foremost.com",
       "www.foremost-ab.ca",
       "foremost-ab.ca"
     ],
@@ -1991,7 +1806,7 @@
   },
   {
     "short_name": "Fort Macleod",
-    "website_url": "https://www.fortmacleod.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.fortmacleod.ca",
       "fortmacleod.ca",
@@ -2005,16 +1820,10 @@
       "fortmacleodcounty.ca",
       "www.fort-macleod.ca",
       "fort-macleod.ca",
-      "www.fortmacleod.com",
-      "fortmacleod.com",
       "www.fortmacleod-ab.ca",
       "fortmacleod-ab.ca"
     ],
-    "platform_links": {
-      "youtube": [
-        "https://www.youtube.com/channel/UCxuyHfJ_aHylnKj07UbJctw"
-      ]
-    }
+    "platform_links": {}
   },
   {
     "short_name": "Fox Creek",
@@ -2032,8 +1841,6 @@
       "foxcreekcounty.ca",
       "www.fox-creek.ca",
       "fox-creek.ca",
-      "www.foxcreek.com",
-      "foxcreek.com",
       "www.foxcreek-ab.ca",
       "foxcreek-ab.ca"
     ],
@@ -2053,8 +1860,6 @@
       "villageofgibbons.ca",
       "www.gibbonscounty.ca",
       "gibbonscounty.ca",
-      "www.gibbons.com",
-      "gibbons.com",
       "www.gibbons-ab.ca",
       "gibbons-ab.ca"
     ],
@@ -2080,8 +1885,6 @@
       "giftlakecounty.ca",
       "www.gift-lake.ca",
       "gift-lake.ca",
-      "www.giftlake.com",
-      "giftlake.com",
       "www.giftlake-ab.ca",
       "giftlake-ab.ca"
     ],
@@ -2101,8 +1904,6 @@
       "villageofgirouxville.ca",
       "www.girouxvillecounty.ca",
       "girouxvillecounty.ca",
-      "www.girouxville.com",
-      "girouxville.com",
       "www.girouxville-ab.ca",
       "girouxville-ab.ca"
     ],
@@ -2122,8 +1923,6 @@
       "villageofglendon.ca",
       "www.glendoncounty.ca",
       "glendoncounty.ca",
-      "www.glendon.com",
-      "glendon.com",
       "www.glendon-ab.ca",
       "glendon-ab.ca"
     ],
@@ -2145,8 +1944,6 @@
       "grandcentrecounty.ca",
       "www.grand-centre.ca",
       "grand-centre.ca",
-      "www.grandcentre.com",
-      "grandcentre.com",
       "www.grandcentre-ab.ca",
       "grandcentre-ab.ca"
     ],
@@ -2154,7 +1951,7 @@
   },
   {
     "short_name": "Granum",
-    "website_url": "https://www.granum.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.granum.ca",
       "granum.ca",
@@ -2166,16 +1963,10 @@
       "villageofgranum.ca",
       "www.granumcounty.ca",
       "granumcounty.ca",
-      "www.granum.com",
-      "granum.com",
       "www.granum-ab.ca",
       "granum-ab.ca"
     ],
-    "platform_links": {
-      "youtube": [
-        "https://www.youtube.com/user/LMNVideo"
-      ]
-    }
+    "platform_links": {}
   },
   {
     "short_name": "Grimshaw",
@@ -2191,8 +1982,6 @@
       "villageofgrimshaw.ca",
       "www.grimshawcounty.ca",
       "grimshawcounty.ca",
-      "www.grimshaw.com",
-      "grimshaw.com",
       "www.grimshaw-ab.ca",
       "grimshaw-ab.ca"
     ],
@@ -2212,8 +2001,6 @@
       "villageofhalkirk.ca",
       "www.halkirkcounty.ca",
       "halkirkcounty.ca",
-      "www.halkirk.com",
-      "halkirk.com",
       "www.halkirk-ab.ca",
       "halkirk-ab.ca"
     ],
@@ -2233,8 +2020,6 @@
       "villageofhanna.ca",
       "www.hannacounty.ca",
       "hannacounty.ca",
-      "www.hanna.com",
-      "hanna.com",
       "www.hanna-ab.ca",
       "hanna-ab.ca"
     ],
@@ -2254,8 +2039,6 @@
       "villageofhardisty.ca",
       "www.hardistycounty.ca",
       "hardistycounty.ca",
-      "www.hardisty.com",
-      "hardisty.com",
       "www.hardisty-ab.ca",
       "hardisty-ab.ca"
     ],
@@ -2277,8 +2060,6 @@
       "haylakescounty.ca",
       "www.hay-lakes.ca",
       "hay-lakes.ca",
-      "www.haylakes.com",
-      "haylakes.com",
       "www.haylakes-ab.ca",
       "haylakes-ab.ca"
     ],
@@ -2298,8 +2079,6 @@
       "villageofheisler.ca",
       "www.heislercounty.ca",
       "heislercounty.ca",
-      "www.heisler.com",
-      "heisler.com",
       "www.heisler-ab.ca",
       "heisler-ab.ca"
     ],
@@ -2321,8 +2100,6 @@
       "highlevelcounty.ca",
       "www.high-level.ca",
       "high-level.ca",
-      "www.highlevel.com",
-      "highlevel.com",
       "www.highlevel-ab.ca",
       "highlevel-ab.ca"
     ],
@@ -2348,8 +2125,6 @@
       "highprairiecounty.ca",
       "www.high-prairie.ca",
       "high-prairie.ca",
-      "www.highprairie.com",
-      "highprairie.com",
       "www.highprairie-ab.ca",
       "highprairie-ab.ca"
     ],
@@ -2375,8 +2150,6 @@
       "highrivercounty.ca",
       "www.high-river.ca",
       "high-river.ca",
-      "www.highriver.com",
-      "highriver.com",
       "www.highriver-ab.ca",
       "highriver-ab.ca"
     ],
@@ -2409,8 +2182,6 @@
       "hillspringcounty.ca",
       "www.hill-spring.ca",
       "hill-spring.ca",
-      "www.hillspring.com",
-      "hillspring.com",
       "www.hillspring-ab.ca",
       "hillspring-ab.ca"
     ],
@@ -2418,7 +2189,7 @@
   },
   {
     "short_name": "Hines Creek",
-    "website_url": "https://www.hinescreek.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.hinescreek.ca",
       "hinescreek.ca",
@@ -2432,8 +2203,6 @@
       "hinescreekcounty.ca",
       "www.hines-creek.ca",
       "hines-creek.ca",
-      "www.hinescreek.com",
-      "hinescreek.com",
       "www.hinescreek-ab.ca",
       "hinescreek-ab.ca"
     ],
@@ -2453,8 +2222,6 @@
       "villageofhinton.ca",
       "www.hintoncounty.ca",
       "hintoncounty.ca",
-      "www.hinton.com",
-      "hinton.com",
       "www.hinton-ab.ca",
       "hinton-ab.ca"
     ],
@@ -2474,7 +2241,7 @@
   },
   {
     "short_name": "Hughenden",
-    "website_url": "https://www.hughenden.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.hughenden.ca",
       "hughenden.ca",
@@ -2486,8 +2253,6 @@
       "villageofhughenden.ca",
       "www.hughendencounty.ca",
       "hughendencounty.ca",
-      "www.hughenden.com",
-      "hughenden.com",
       "www.hughenden-ab.ca",
       "hughenden-ab.ca"
     ],
@@ -2507,8 +2272,6 @@
       "villageofhussar.ca",
       "www.hussarcounty.ca",
       "hussarcounty.ca",
-      "www.hussar.com",
-      "hussar.com",
       "www.hussar-ab.ca",
       "hussar-ab.ca"
     ],
@@ -2528,8 +2291,6 @@
       "villageofhythe.ca",
       "www.hythecounty.ca",
       "hythecounty.ca",
-      "www.hythe.com",
-      "hythe.com",
       "www.hythe-ab.ca",
       "hythe-ab.ca"
     ],
@@ -2551,8 +2312,6 @@
       "improvementdistrictno9county.ca",
       "www.improvement-district-no-9.ca",
       "improvement-district-no-9.ca",
-      "www.improvementdistrictno9.com",
-      "improvementdistrictno9.com",
       "www.improvementdistrictno9-ab.ca",
       "improvementdistrictno9-ab.ca"
     ],
@@ -2572,8 +2331,6 @@
       "villageofinnisfail.ca",
       "www.innisfailcounty.ca",
       "innisfailcounty.ca",
-      "www.innisfail.com",
-      "innisfail.com",
       "www.innisfail-ab.ca",
       "innisfail-ab.ca"
     ],
@@ -2601,8 +2358,6 @@
       "villageofirricana.ca",
       "www.irricanacounty.ca",
       "irricanacounty.ca",
-      "www.irricana.com",
-      "irricana.com",
       "www.irricana-ab.ca",
       "irricana-ab.ca"
     ],
@@ -2610,7 +2365,7 @@
   },
   {
     "short_name": "Jasper",
-    "website_url": "https://www.jasper.ca/",
+    "website_url": "https://jasper.ca/",
     "candidates_tried": [
       "www.jasper.ca",
       "jasper.ca",
@@ -2622,8 +2377,6 @@
       "villageofjasper.ca",
       "www.jaspercounty.ca",
       "jaspercounty.ca",
-      "www.jasper.com",
-      "jasper.com",
       "www.jasper-ab.ca",
       "jasper-ab.ca"
     ],
@@ -2631,7 +2384,7 @@
   },
   {
     "short_name": "Kikino",
-    "website_url": "https://www.kikino.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.kikino.ca",
       "kikino.ca",
@@ -2643,8 +2396,6 @@
       "villageofkikino.ca",
       "www.kikinocounty.ca",
       "kikinocounty.ca",
-      "www.kikino.com",
-      "kikino.com",
       "www.kikino-ab.ca",
       "kikino-ab.ca"
     ],
@@ -2652,7 +2403,7 @@
   },
   {
     "short_name": "Killam",
-    "website_url": "https://www.killam.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.killam.ca",
       "killam.ca",
@@ -2664,8 +2415,6 @@
       "villageofkillam.ca",
       "www.killamcounty.ca",
       "killamcounty.ca",
-      "www.killam.com",
-      "killam.com",
       "www.killam-ab.ca",
       "killam-ab.ca"
     ],
@@ -2685,8 +2434,6 @@
       "villageofkitscoty.ca",
       "www.kitscotycounty.ca",
       "kitscotycounty.ca",
-      "www.kitscoty.com",
-      "kitscoty.com",
       "www.kitscoty-ab.ca",
       "kitscoty-ab.ca"
     ],
@@ -2694,7 +2441,7 @@
   },
   {
     "short_name": "Kneehill County",
-    "website_url": "https://www.kneehillcounty.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.kneehillcounty.ca",
       "kneehillcounty.ca",
@@ -2706,8 +2453,6 @@
       "villageofkneehill.ca",
       "www.kneehill.ca",
       "kneehill.ca",
-      "www.kneehillcounty.com",
-      "kneehillcounty.com",
       "www.kneehill-ab.ca",
       "kneehill-ab.ca"
     ],
@@ -2729,8 +2474,6 @@
       "laclabichecounty.ca",
       "www.lac-la-biche.ca",
       "lac-la-biche.ca",
-      "www.laclabiche.com",
-      "laclabiche.com",
       "www.laclabiche-ab.ca",
       "laclabiche-ab.ca"
     ],
@@ -2738,7 +2481,7 @@
   },
   {
     "short_name": "Lac La Biche County",
-    "website_url": "https://www.laclabichecounty.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.laclabichecounty.ca",
       "laclabichecounty.ca",
@@ -2750,20 +2493,10 @@
       "villageoflaclabiche.ca",
       "www.lac-la-biche.ca",
       "lac-la-biche.ca",
-      "www.laclabichecounty.com",
-      "laclabichecounty.com",
       "www.laclabiche-ab.ca",
       "laclabiche-ab.ca"
     ],
-    "platform_links": {
-      "escribe": [
-        "https://pub-llbc.escribemeetings.com/?Year=2022&Expanded=Regular%20Council%20Meeting",
-        "https://pub-llbc.escribemeetings.com/?fillWidth=1"
-      ],
-      "youtube": [
-        "https://www.youtube.com/channel/UCdGn7hrBEfmv8b5bWR36paw"
-      ]
-    }
+    "platform_links": {}
   },
   {
     "short_name": "Lac Ste. Anne County",
@@ -2779,8 +2512,6 @@
       "villageoflacsteanne.ca",
       "www.lac-ste-anne.ca",
       "lac-ste-anne.ca",
-      "www.lacsteannecounty.com",
-      "lacsteannecounty.com",
       "www.lacsteanne-ab.ca",
       "lacsteanne-ab.ca"
     ],
@@ -2800,8 +2531,6 @@
       "villageoflacombe.ca",
       "www.lacombecounty.ca",
       "lacombecounty.ca",
-      "www.lacombe.com",
-      "lacombe.com",
       "www.lacombe-ab.ca",
       "lacombe-ab.ca"
     ],
@@ -2828,8 +2557,6 @@
       "lacombeformertowncounty.ca",
       "www.lacombe-former-town.ca",
       "lacombe-former-town.ca",
-      "www.lacombeformertown.com",
-      "lacombeformertown.com",
       "www.lacombeformertown-ab.ca",
       "lacombeformertown-ab.ca"
     ],
@@ -2849,8 +2576,6 @@
       "villageoflamont.ca",
       "www.lamontcounty.ca",
       "lamontcounty.ca",
-      "www.lamont.com",
-      "lamont.com",
       "www.lamont-ab.ca",
       "lamont-ab.ca"
     ],
@@ -2870,8 +2595,6 @@
       "villageoflamont.ca",
       "www.lamont.ca",
       "lamont.ca",
-      "www.lamontcounty.com",
-      "lamontcounty.com",
       "www.lamont-ab.ca",
       "lamont-ab.ca"
     ],
@@ -2903,8 +2626,6 @@
       "villageofleduc.ca",
       "www.leduccounty.ca",
       "leduccounty.ca",
-      "www.leduc.com",
-      "leduc.com",
       "www.leduc-ab.ca",
       "leduc-ab.ca"
     ],
@@ -2932,8 +2653,6 @@
       "villageofleduc.ca",
       "www.leduc.ca",
       "leduc.ca",
-      "www.leduccounty.com",
-      "leduccounty.com",
       "www.leduc-ab.ca",
       "leduc-ab.ca"
     ],
@@ -2961,8 +2680,6 @@
       "villageoflegal.ca",
       "www.legalcounty.ca",
       "legalcounty.ca",
-      "www.legal.com",
-      "legal.com",
       "www.legal-ab.ca",
       "legal-ab.ca"
     ],
@@ -2982,8 +2699,6 @@
       "villageoflinden.ca",
       "www.lindencounty.ca",
       "lindencounty.ca",
-      "www.linden.com",
-      "linden.com",
       "www.linden-ab.ca",
       "linden-ab.ca"
     ],
@@ -3011,8 +2726,6 @@
       "villageoflloydminster.ca",
       "www.lloydminstercounty.ca",
       "lloydminstercounty.ca",
-      "www.lloydminster.com",
-      "lloydminster.com",
       "www.lloydminster-ab.ca",
       "lloydminster-ab.ca"
     ],
@@ -3032,8 +2745,6 @@
       "villageoflomond.ca",
       "www.lomondcounty.ca",
       "lomondcounty.ca",
-      "www.lomond.com",
-      "lomond.com",
       "www.lomond-ab.ca",
       "lomond-ab.ca"
     ],
@@ -3053,8 +2764,6 @@
       "villageoflongview.ca",
       "www.longviewcounty.ca",
       "longviewcounty.ca",
-      "www.longview.com",
-      "longview.com",
       "www.longview-ab.ca",
       "longview-ab.ca"
     ],
@@ -3074,8 +2783,6 @@
       "villageoflougheed.ca",
       "www.lougheedcounty.ca",
       "lougheedcounty.ca",
-      "www.lougheed.com",
-      "lougheed.com",
       "www.lougheed-ab.ca",
       "lougheed-ab.ca"
     ],
@@ -3095,8 +2802,6 @@
       "villageofmackenzie.ca",
       "www.mackenzie.ca",
       "mackenzie.ca",
-      "www.mackenziecounty.com",
-      "mackenziecounty.com",
       "www.mackenzie-ab.ca",
       "mackenzie-ab.ca"
     ],
@@ -3116,8 +2821,6 @@
       "villageofmagrath.ca",
       "www.magrathcounty.ca",
       "magrathcounty.ca",
-      "www.magrath.com",
-      "magrath.com",
       "www.magrath-ab.ca",
       "magrath-ab.ca"
     ],
@@ -3137,8 +2840,6 @@
       "villageofmanning.ca",
       "www.manningcounty.ca",
       "manningcounty.ca",
-      "www.manning.com",
-      "manning.com",
       "www.manning-ab.ca",
       "manning-ab.ca"
     ],
@@ -3158,8 +2859,6 @@
       "villageofmannville.ca",
       "www.mannvillecounty.ca",
       "mannvillecounty.ca",
-      "www.mannville.com",
-      "mannville.com",
       "www.mannville-ab.ca",
       "mannville-ab.ca"
     ],
@@ -3179,8 +2878,6 @@
       "villageofmarwayne.ca",
       "www.marwaynecounty.ca",
       "marwaynecounty.ca",
-      "www.marwayne.com",
-      "marwayne.com",
       "www.marwayne-ab.ca",
       "marwayne-ab.ca"
     ],
@@ -3200,8 +2897,6 @@
       "villageofmayerthorpe.ca",
       "www.mayerthorpecounty.ca",
       "mayerthorpecounty.ca",
-      "www.mayerthorpe.com",
-      "mayerthorpe.com",
       "www.mayerthorpe-ab.ca",
       "mayerthorpe-ab.ca"
     ],
@@ -3227,8 +2922,6 @@
       "milkrivercounty.ca",
       "www.milk-river.ca",
       "milk-river.ca",
-      "www.milkriver.com",
-      "milkriver.com",
       "www.milkriver-ab.ca",
       "milkriver-ab.ca"
     ],
@@ -3248,8 +2941,6 @@
       "villageofmillet.ca",
       "www.milletcounty.ca",
       "milletcounty.ca",
-      "www.millet.com",
-      "millet.com",
       "www.millet-ab.ca",
       "millet-ab.ca"
     ],
@@ -3269,8 +2960,6 @@
       "villageofmilo.ca",
       "www.milocounty.ca",
       "milocounty.ca",
-      "www.milo.com",
-      "milo.com",
       "www.milo-ab.ca",
       "milo-ab.ca"
     ],
@@ -3290,8 +2979,6 @@
       "villageofminburn.ca",
       "www.minburncounty.ca",
       "minburncounty.ca",
-      "www.minburn.com",
-      "minburn.com",
       "www.minburn-ab.ca",
       "minburn-ab.ca"
     ],
@@ -3311,8 +2998,6 @@
       "villageofmorinville.ca",
       "www.morinvillecounty.ca",
       "morinvillecounty.ca",
-      "www.morinville.com",
-      "morinville.com",
       "www.morinville-ab.ca",
       "morinville-ab.ca"
     ],
@@ -3327,7 +3012,7 @@
   },
   {
     "short_name": "Morrin",
-    "website_url": "https://www.morrin.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.morrin.ca",
       "morrin.ca",
@@ -3339,8 +3024,6 @@
       "villageofmorrin.ca",
       "www.morrincounty.ca",
       "morrincounty.ca",
-      "www.morrin.com",
-      "morrin.com",
       "www.morrin-ab.ca",
       "morrin-ab.ca"
     ],
@@ -3348,7 +3031,7 @@
   },
   {
     "short_name": "Mountain View County",
-    "website_url": "https://www.mountainviewcounty.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.mountainviewcounty.ca",
       "mountainviewcounty.ca",
@@ -3360,24 +3043,10 @@
       "villageofmountainview.ca",
       "www.mountain-view.ca",
       "mountain-view.ca",
-      "www.mountainviewcounty.com",
-      "mountainviewcounty.com",
       "www.mountainview-ab.ca",
       "mountainview-ab.ca"
     ],
-    "platform_links": {
-      "civicweb": [
-        "https://mountainviewcounty.civicweb.net/Portal/MeetingInformation.aspx?Org=Cal&amp;Id=186",
-        "https://mountainviewcounty.civicweb.net/Portal/MeetingTypeList.aspx",
-        "https://mountainviewcounty.civicweb.net/document/26956/",
-        "https://mountainviewcounty.civicweb.net/portal/members.aspx?id=17",
-        "https://mountainviewcounty.civicweb.net/portal/members.aspx?id=19"
-      ],
-      "youtube": [
-        "https://www.youtube.com/@mountainviewcountyAB",
-        "https://www.youtube.com/channel/UCQ7Y2orfyHU1Ez-jl2a3Hig"
-      ]
-    }
+    "platform_links": {}
   },
   {
     "short_name": "Mundare",
@@ -3393,8 +3062,6 @@
       "villageofmundare.ca",
       "www.mundarecounty.ca",
       "mundarecounty.ca",
-      "www.mundare.com",
-      "mundare.com",
       "www.mundare-ab.ca",
       "mundare-ab.ca"
     ],
@@ -3414,8 +3081,6 @@
       "villageofmyrnam.ca",
       "www.myrnamcounty.ca",
       "myrnamcounty.ca",
-      "www.myrnam.com",
-      "myrnam.com",
       "www.myrnam-ab.ca",
       "myrnam-ab.ca"
     ],
@@ -3423,7 +3088,7 @@
   },
   {
     "short_name": "Nampa",
-    "website_url": "https://www.nampa.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.nampa.ca",
       "nampa.ca",
@@ -3435,8 +3100,6 @@
       "villageofnampa.ca",
       "www.nampacounty.ca",
       "nampacounty.ca",
-      "www.nampa.com",
-      "nampa.com",
       "www.nampa-ab.ca",
       "nampa-ab.ca"
     ],
@@ -3456,8 +3119,6 @@
       "villageofnanton.ca",
       "www.nantoncounty.ca",
       "nantoncounty.ca",
-      "www.nanton.com",
-      "nanton.com",
       "www.nanton-ab.ca",
       "nanton-ab.ca"
     ],
@@ -3481,8 +3142,6 @@
       "villageofnobleford.ca",
       "www.noblefordcounty.ca",
       "noblefordcounty.ca",
-      "www.nobleford.com",
-      "nobleford.com",
       "www.nobleford-ab.ca",
       "nobleford-ab.ca"
     ],
@@ -3502,8 +3161,6 @@
       "villageofnorthernsunrise.ca",
       "www.northern-sunrise.ca",
       "northern-sunrise.ca",
-      "www.northernsunrisecounty.com",
-      "northernsunrisecounty.com",
       "www.northernsunrise-ab.ca",
       "northernsunrise-ab.ca"
     ],
@@ -3523,8 +3180,6 @@
       "villageofolds.ca",
       "www.oldscounty.ca",
       "oldscounty.ca",
-      "www.olds.com",
-      "olds.com",
       "www.olds-ab.ca",
       "olds-ab.ca"
     ],
@@ -3548,8 +3203,6 @@
       "villageofonoway.ca",
       "www.onowaycounty.ca",
       "onowaycounty.ca",
-      "www.onoway.com",
-      "onoway.com",
       "www.onoway-ab.ca",
       "onoway-ab.ca"
     ],
@@ -3569,8 +3222,6 @@
       "villageofoyen.ca",
       "www.oyencounty.ca",
       "oyencounty.ca",
-      "www.oyen.com",
-      "oyen.com",
       "www.oyen-ab.ca",
       "oyen-ab.ca"
     ],
@@ -3592,8 +3243,6 @@
       "paddleprairiecounty.ca",
       "www.paddle-prairie.ca",
       "paddle-prairie.ca",
-      "www.paddleprairie.com",
-      "paddleprairie.com",
       "www.paddleprairie-ab.ca",
       "paddleprairie-ab.ca"
     ],
@@ -3615,8 +3264,6 @@
       "paradisevalleycounty.ca",
       "www.paradise-valley.ca",
       "paradise-valley.ca",
-      "www.paradisevalley.com",
-      "paradisevalley.com",
       "www.paradisevalley-ab.ca",
       "paradisevalley-ab.ca"
     ],
@@ -3636,8 +3283,6 @@
       "villageofparkland.ca",
       "www.parkland.ca",
       "parkland.ca",
-      "www.parklandcounty.com",
-      "parklandcounty.com",
       "www.parkland-ab.ca",
       "parkland-ab.ca"
     ],
@@ -3659,8 +3304,6 @@
       "peacerivercounty.ca",
       "www.peace-river.ca",
       "peace-river.ca",
-      "www.peaceriver.com",
-      "peaceriver.com",
       "www.peaceriver-ab.ca",
       "peaceriver-ab.ca"
     ],
@@ -3691,8 +3334,6 @@
       "villageofpeavine.ca",
       "www.peavinecounty.ca",
       "peavinecounty.ca",
-      "www.peavine.com",
-      "peavine.com",
       "www.peavine-ab.ca",
       "peavine-ab.ca"
     ],
@@ -3712,8 +3353,6 @@
       "villageofpenhold.ca",
       "www.penholdcounty.ca",
       "penholdcounty.ca",
-      "www.penhold.com",
-      "penhold.com",
       "www.penhold-ab.ca",
       "penhold-ab.ca"
     ],
@@ -3735,8 +3374,6 @@
       "picturebuttecounty.ca",
       "www.picture-butte.ca",
       "picture-butte.ca",
-      "www.picturebutte.com",
-      "picturebutte.com",
       "www.picturebutte-ab.ca",
       "picturebutte-ab.ca"
     ],
@@ -3758,8 +3395,6 @@
       "pinchercreekcounty.ca",
       "www.pincher-creek.ca",
       "pincher-creek.ca",
-      "www.pinchercreek.com",
-      "pinchercreek.com",
       "www.pinchercreek-ab.ca",
       "pinchercreek-ab.ca"
     ],
@@ -3784,8 +3419,6 @@
       "villageofponoka.ca",
       "www.ponokacounty.ca",
       "ponokacounty.ca",
-      "www.ponoka.com",
-      "ponoka.com",
       "www.ponoka-ab.ca",
       "ponoka-ab.ca"
     ],
@@ -3809,8 +3442,6 @@
       "villageofponoka.ca",
       "www.ponoka.ca",
       "ponoka.ca",
-      "www.ponokacounty.com",
-      "ponokacounty.com",
       "www.ponoka-ab.ca",
       "ponoka-ab.ca"
     ],
@@ -3834,8 +3465,6 @@
       "villageofprovost.ca",
       "www.provostcounty.ca",
       "provostcounty.ca",
-      "www.provost.com",
-      "provost.com",
       "www.provost-ab.ca",
       "provost-ab.ca"
     ],
@@ -3857,8 +3486,6 @@
       "rainbowlakecounty.ca",
       "www.rainbow-lake.ca",
       "rainbow-lake.ca",
-      "www.rainbowlake.com",
-      "rainbowlake.com",
       "www.rainbowlake-ab.ca",
       "rainbowlake-ab.ca"
     ],
@@ -3878,8 +3505,6 @@
       "villageofraymond.ca",
       "www.raymondcounty.ca",
       "raymondcounty.ca",
-      "www.raymond.com",
-      "raymond.com",
       "www.raymond-ab.ca",
       "raymond-ab.ca"
     ],
@@ -3904,8 +3529,6 @@
       "villageofreddeer.ca",
       "www.red-deer.ca",
       "red-deer.ca",
-      "www.reddeercounty.com",
-      "reddeercounty.com",
       "www.reddeer-ab.ca",
       "reddeer-ab.ca"
     ],
@@ -3925,8 +3548,6 @@
       "villageofredcliff.ca",
       "www.redcliffcounty.ca",
       "redcliffcounty.ca",
-      "www.redcliff.com",
-      "redcliff.com",
       "www.redcliff-ab.ca",
       "redcliff-ab.ca"
     ],
@@ -3942,7 +3563,7 @@
   },
   {
     "short_name": "Rimbey",
-    "website_url": "https://www.rimbey.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.rimbey.ca",
       "rimbey.ca",
@@ -3954,16 +3575,10 @@
       "villageofrimbey.ca",
       "www.rimbeycounty.ca",
       "rimbeycounty.ca",
-      "www.rimbey.com",
-      "rimbey.com",
       "www.rimbey-ab.ca",
       "rimbey-ab.ca"
     ],
-    "platform_links": {
-      "civicweb": [
-        "https://rimbey.civicweb.net/Portal/MeetingTypeList.aspx"
-      ]
-    }
+    "platform_links": {}
   },
   {
     "short_name": "Rocky Mountain House",
@@ -3981,8 +3596,6 @@
       "rockymountainhousecounty.ca",
       "www.rocky-mountain-house.ca",
       "rocky-mountain-house.ca",
-      "www.rockymountainhouse.com",
-      "rockymountainhouse.com",
       "www.rockymountainhouse-ab.ca",
       "rockymountainhouse-ab.ca"
     ],
@@ -4002,8 +3615,6 @@
       "villageofrockyview.ca",
       "www.rocky-view.ca",
       "rocky-view.ca",
-      "www.rockyviewcounty.com",
-      "rockyviewcounty.com",
       "www.rockyview-ab.ca",
       "rockyview-ab.ca"
     ],
@@ -4023,8 +3634,6 @@
       "villageofrockyford.ca",
       "www.rockyfordcounty.ca",
       "rockyfordcounty.ca",
-      "www.rockyford.com",
-      "rockyford.com",
       "www.rockyford-ab.ca",
       "rockyford-ab.ca"
     ],
@@ -4044,8 +3653,6 @@
       "villageofrosalind.ca",
       "www.rosalindcounty.ca",
       "rosalindcounty.ca",
-      "www.rosalind.com",
-      "rosalind.com",
       "www.rosalind-ab.ca",
       "rosalind-ab.ca"
     ],
@@ -4065,8 +3672,6 @@
       "villageofrycroft.ca",
       "www.rycroftcounty.ca",
       "rycroftcounty.ca",
-      "www.rycroft.com",
-      "rycroft.com",
       "www.rycroft-ab.ca",
       "rycroft-ab.ca"
     ],
@@ -4086,8 +3691,6 @@
       "villageofryley.ca",
       "www.ryleycounty.ca",
       "ryleycounty.ca",
-      "www.ryley.com",
-      "ryley.com",
       "www.ryley-ab.ca",
       "ryley-ab.ca"
     ],
@@ -4111,8 +3714,6 @@
       "argentiabeachcounty.ca",
       "www.argentia-beach.ca",
       "argentia-beach.ca",
-      "www.svargentiabeach.com",
-      "svargentiabeach.com",
       "www.argentiabeach-ab.ca",
       "argentiabeach-ab.ca"
     ],
@@ -4136,8 +3737,6 @@
       "betulabeachcounty.ca",
       "www.betula-beach.ca",
       "betula-beach.ca",
-      "www.svbetulabeach.com",
-      "svbetulabeach.com",
       "www.betulabeach-ab.ca",
       "betulabeach-ab.ca"
     ],
@@ -4161,8 +3760,6 @@
       "birchcovecounty.ca",
       "www.birch-cove.ca",
       "birch-cove.ca",
-      "www.svbirchcove.com",
-      "svbirchcove.com",
       "www.birchcove-ab.ca",
       "birchcove-ab.ca"
     ],
@@ -4186,8 +3783,6 @@
       "birchcliffcounty.ca",
       "www.birchcliff.ca",
       "birchcliff.ca",
-      "www.svbirchcliff.com",
-      "svbirchcliff.com",
       "www.birchcliff-ab.ca",
       "birchcliff-ab.ca"
     ],
@@ -4211,8 +3806,6 @@
       "bondisscounty.ca",
       "www.bondiss.ca",
       "bondiss.ca",
-      "www.svbondiss.com",
-      "svbondiss.com",
       "www.bondiss-ab.ca",
       "bondiss-ab.ca"
     ],
@@ -4236,8 +3829,6 @@
       "bonnyvillebeachcounty.ca",
       "www.bonnyville-beach.ca",
       "bonnyville-beach.ca",
-      "www.svbonnyvillebeach.com",
-      "svbonnyvillebeach.com",
       "www.bonnyvillebeach-ab.ca",
       "bonnyvillebeach-ab.ca"
     ],
@@ -4261,8 +3852,6 @@
       "brentwoodcounty.ca",
       "www.brentwood.ca",
       "brentwood.ca",
-      "www.svbrentwood.com",
-      "svbrentwood.com",
       "www.brentwood-ab.ca",
       "brentwood-ab.ca"
     ],
@@ -4290,8 +3879,6 @@
       "burnsticklakecounty.ca",
       "www.burnstick-lake.ca",
       "burnstick-lake.ca",
-      "www.svburnsticklake.com",
-      "svburnsticklake.com",
       "www.burnsticklake-ab.ca",
       "burnsticklake-ab.ca"
     ],
@@ -4315,8 +3902,6 @@
       "castleislandcounty.ca",
       "www.castle-island.ca",
       "castle-island.ca",
-      "www.svcastleisland.com",
-      "svcastleisland.com",
       "www.castleisland-ab.ca",
       "castleisland-ab.ca"
     ],
@@ -4340,8 +3925,6 @@
       "crystalspringscounty.ca",
       "www.crystal-springs.ca",
       "crystal-springs.ca",
-      "www.svcrystalsprings.com",
-      "svcrystalsprings.com",
       "www.crystalsprings-ab.ca",
       "crystalsprings-ab.ca"
     ],
@@ -4365,8 +3948,6 @@
       "ghostlakecounty.ca",
       "www.ghost-lake.ca",
       "ghost-lake.ca",
-      "www.svghostlake.com",
-      "svghostlake.com",
       "www.ghostlake-ab.ca",
       "ghostlake-ab.ca"
     ],
@@ -4390,8 +3971,6 @@
       "goldendayscounty.ca",
       "www.golden-days.ca",
       "golden-days.ca",
-      "www.svgoldendays.com",
-      "svgoldendays.com",
       "www.goldendays-ab.ca",
       "goldendays-ab.ca"
     ],
@@ -4415,8 +3994,6 @@
       "grandviewcounty.ca",
       "www.grandview.ca",
       "grandview.ca",
-      "www.svgrandview.com",
-      "svgrandview.com",
       "www.grandview-ab.ca",
       "grandview-ab.ca"
     ],
@@ -4440,8 +4017,6 @@
       "gulllakecounty.ca",
       "www.gull-lake.ca",
       "gull-lake.ca",
-      "www.svgulllake.com",
-      "svgulllake.com",
       "www.gulllake-ab.ca",
       "gulllake-ab.ca"
     ],
@@ -4465,8 +4040,6 @@
       "halfmoonbaycounty.ca",
       "www.half-moon-bay.ca",
       "half-moon-bay.ca",
-      "www.svhalfmoonbay.com",
-      "svhalfmoonbay.com",
       "www.halfmoonbay-ab.ca",
       "halfmoonbay-ab.ca"
     ],
@@ -4474,7 +4047,7 @@
   },
   {
     "short_name": "SV Horseshoe Bay",
-    "website_url": "https://www.svhorseshoebay.com/",
+    "website_url": null,
     "candidates_tried": [
       "summervillageofhorseshoebay.ca",
       "www.summervillageofhorseshoebay.ca",
@@ -4490,8 +4063,6 @@
       "horseshoebaycounty.ca",
       "www.horseshoe-bay.ca",
       "horseshoe-bay.ca",
-      "www.svhorseshoebay.com",
-      "svhorseshoebay.com",
       "www.horseshoebay-ab.ca",
       "horseshoebay-ab.ca"
     ],
@@ -4515,8 +4086,6 @@
       "islandlakecounty.ca",
       "www.island-lake.ca",
       "island-lake.ca",
-      "www.svislandlake.com",
-      "svislandlake.com",
       "www.islandlake-ab.ca",
       "islandlake-ab.ca"
     ],
@@ -4540,8 +4109,6 @@
       "islandlakesouthcounty.ca",
       "www.island-lake-south.ca",
       "island-lake-south.ca",
-      "www.svislandlakesouth.com",
-      "svislandlakesouth.com",
       "www.islandlakesouth-ab.ca",
       "islandlakesouth-ab.ca"
     ],
@@ -4565,8 +4132,6 @@
       "itaskabeachcounty.ca",
       "www.itaska-beach.ca",
       "itaska-beach.ca",
-      "www.svitaskabeach.com",
-      "svitaskabeach.com",
       "www.itaskabeach-ab.ca",
       "itaskabeach-ab.ca"
     ],
@@ -4590,8 +4155,6 @@
       "jarvisbaycounty.ca",
       "www.jarvis-bay.ca",
       "jarvis-bay.ca",
-      "www.svjarvisbay.com",
-      "svjarvisbay.com",
       "www.jarvisbay-ab.ca",
       "jarvisbay-ab.ca"
     ],
@@ -4615,8 +4178,6 @@
       "kapasiwincounty.ca",
       "www.kapasiwin.ca",
       "kapasiwin.ca",
-      "www.svkapasiwin.com",
-      "svkapasiwin.com",
       "www.kapasiwin-ab.ca",
       "kapasiwin-ab.ca"
     ],
@@ -4640,8 +4201,6 @@
       "lakeviewcounty.ca",
       "www.lakeview.ca",
       "lakeview.ca",
-      "www.svlakeview.com",
-      "svlakeview.com",
       "www.lakeview-ab.ca",
       "lakeview-ab.ca"
     ],
@@ -4665,8 +4224,6 @@
       "larkspurcounty.ca",
       "www.larkspur.ca",
       "larkspur.ca",
-      "www.svlarkspur.com",
-      "svlarkspur.com",
       "www.larkspur-ab.ca",
       "larkspur-ab.ca"
     ],
@@ -4690,8 +4247,6 @@
       "mameobeachcounty.ca",
       "www.ma-me-o-beach.ca",
       "ma-me-o-beach.ca",
-      "www.svmameobeach.com",
-      "svmameobeach.com",
       "www.mameobeach-ab.ca",
       "mameobeach-ab.ca"
     ],
@@ -4715,8 +4270,6 @@
       "mewathabeachcounty.ca",
       "www.mewatha-beach.ca",
       "mewatha-beach.ca",
-      "www.svmewathabeach.com",
-      "svmewathabeach.com",
       "www.mewathabeach-ab.ca",
       "mewathabeach-ab.ca"
     ],
@@ -4740,8 +4293,6 @@
       "nakamunparkcounty.ca",
       "www.nakamun-park.ca",
       "nakamun-park.ca",
-      "www.svnakamunpark.com",
-      "svnakamunpark.com",
       "www.nakamunpark-ab.ca",
       "nakamunpark-ab.ca"
     ],
@@ -4765,8 +4316,6 @@
       "norglenwoldcounty.ca",
       "www.norglenwold.ca",
       "norglenwold.ca",
-      "www.svnorglenwold.com",
-      "svnorglenwold.com",
       "www.norglenwold-ab.ca",
       "norglenwold-ab.ca"
     ],
@@ -4790,8 +4339,6 @@
       "norrisbeachcounty.ca",
       "www.norris-beach.ca",
       "norris-beach.ca",
-      "www.svnorrisbeach.com",
-      "svnorrisbeach.com",
       "www.norrisbeach-ab.ca",
       "norrisbeach-ab.ca"
     ],
@@ -4815,8 +4362,6 @@
       "parklandbeachcounty.ca",
       "www.parkland-beach.ca",
       "parkland-beach.ca",
-      "www.svparklandbeach.com",
-      "svparklandbeach.com",
       "www.parklandbeach-ab.ca",
       "parklandbeach-ab.ca"
     ],
@@ -4840,8 +4385,6 @@
       "pelicannarrowscounty.ca",
       "www.pelican-narrows.ca",
       "pelican-narrows.ca",
-      "www.svpelicannarrows.com",
-      "svpelicannarrows.com",
       "www.pelicannarrows-ab.ca",
       "pelicannarrows-ab.ca"
     ],
@@ -4849,7 +4392,7 @@
   },
   {
     "short_name": "SV Point Alison",
-    "website_url": "https://www.svpointalison.com/",
+    "website_url": null,
     "candidates_tried": [
       "summervillageofpointalison.ca",
       "www.summervillageofpointalison.ca",
@@ -4865,8 +4408,6 @@
       "pointalisoncounty.ca",
       "www.point-alison.ca",
       "point-alison.ca",
-      "www.svpointalison.com",
-      "svpointalison.com",
       "www.pointalison-ab.ca",
       "pointalison-ab.ca"
     ],
@@ -4890,8 +4431,6 @@
       "poplarbaycounty.ca",
       "www.poplar-bay.ca",
       "poplar-bay.ca",
-      "www.svpoplarbay.com",
-      "svpoplarbay.com",
       "www.poplarbay-ab.ca",
       "poplarbay-ab.ca"
     ],
@@ -4915,8 +4454,6 @@
       "rochonsandscounty.ca",
       "www.rochon-sands.ca",
       "rochon-sands.ca",
-      "www.svrochonsands.com",
-      "svrochonsands.com",
       "www.rochonsands-ab.ca",
       "rochonsands-ab.ca"
     ],
@@ -4940,8 +4477,6 @@
       "rosshavencounty.ca",
       "www.ross-haven.ca",
       "ross-haven.ca",
-      "www.svrosshaven.com",
-      "svrosshaven.com",
       "www.rosshaven-ab.ca",
       "rosshaven-ab.ca"
     ],
@@ -4965,8 +4500,6 @@
       "sebabeachcounty.ca",
       "www.seba-beach.ca",
       "seba-beach.ca",
-      "www.svsebabeach.com",
-      "svsebabeach.com",
       "www.sebabeach-ab.ca",
       "sebabeach-ab.ca"
     ],
@@ -4990,8 +4523,6 @@
       "silverbeachcounty.ca",
       "www.silver-beach.ca",
       "silver-beach.ca",
-      "www.svsilverbeach.com",
-      "svsilverbeach.com",
       "www.silverbeach-ab.ca",
       "silverbeach-ab.ca"
     ],
@@ -5015,8 +4546,6 @@
       "silversandscounty.ca",
       "www.silver-sands.ca",
       "silver-sands.ca",
-      "www.svsilversands.com",
-      "svsilversands.com",
       "www.silversands-ab.ca",
       "silversands-ab.ca"
     ],
@@ -5040,8 +4569,6 @@
       "southbaptistecounty.ca",
       "www.south-baptiste.ca",
       "south-baptiste.ca",
-      "www.svsouthbaptiste.com",
-      "svsouthbaptiste.com",
       "www.southbaptiste-ab.ca",
       "southbaptiste-ab.ca"
     ],
@@ -5065,8 +4592,6 @@
       "southviewcounty.ca",
       "www.south-view.ca",
       "south-view.ca",
-      "www.svsouthview.com",
-      "svsouthview.com",
       "www.southview-ab.ca",
       "southview-ab.ca"
     ],
@@ -5090,8 +4615,6 @@
       "sunbreakercovecounty.ca",
       "www.sunbreaker-cove.ca",
       "sunbreaker-cove.ca",
-      "www.svsunbreakercove.com",
-      "svsunbreakercove.com",
       "www.sunbreakercove-ab.ca",
       "sunbreakercove-ab.ca"
     ],
@@ -5115,8 +4638,6 @@
       "sundancebeachcounty.ca",
       "www.sundance-beach.ca",
       "sundance-beach.ca",
-      "www.svsundancebeach.com",
-      "svsundancebeach.com",
       "www.sundancebeach-ab.ca",
       "sundancebeach-ab.ca"
     ],
@@ -5140,8 +4661,6 @@
       "sunridgecounty.ca",
       "www.sunridge.ca",
       "sunridge.ca",
-      "www.svsunridge.com",
-      "svsunridge.com",
       "www.sunridge-ab.ca",
       "sunridge-ab.ca"
     ],
@@ -5165,8 +4684,6 @@
       "sunrisebeachcounty.ca",
       "www.sunrise-beach.ca",
       "sunrise-beach.ca",
-      "www.svsunrisebeach.com",
-      "svsunrisebeach.com",
       "www.sunrisebeach-ab.ca",
       "sunrisebeach-ab.ca"
     ],
@@ -5190,8 +4707,6 @@
       "sunsetbeachcounty.ca",
       "www.sunset-beach.ca",
       "sunset-beach.ca",
-      "www.svsunsetbeach.com",
-      "svsunsetbeach.com",
       "www.sunsetbeach-ab.ca",
       "sunsetbeach-ab.ca"
     ],
@@ -5215,8 +4730,6 @@
       "sunsetpointcounty.ca",
       "www.sunset-point.ca",
       "sunset-point.ca",
-      "www.svsunsetpoint.com",
-      "svsunsetpoint.com",
       "www.sunsetpoint-ab.ca",
       "sunsetpoint-ab.ca"
     ],
@@ -5240,8 +4753,6 @@
       "valquentincounty.ca",
       "www.val-quentin.ca",
       "val-quentin.ca",
-      "www.svvalquentin.com",
-      "svvalquentin.com",
       "www.valquentin-ab.ca",
       "valquentin-ab.ca"
     ],
@@ -5265,8 +4776,6 @@
       "waiparouscounty.ca",
       "www.waiparous.ca",
       "waiparous.ca",
-      "www.svwaiparous.com",
-      "svwaiparous.com",
       "www.waiparous-ab.ca",
       "waiparous-ab.ca"
     ],
@@ -5290,8 +4799,6 @@
       "westbaptistecounty.ca",
       "www.west-baptiste.ca",
       "west-baptiste.ca",
-      "www.svwestbaptiste.com",
-      "svwestbaptiste.com",
       "www.westbaptiste-ab.ca",
       "westbaptiste-ab.ca"
     ],
@@ -5315,8 +4822,6 @@
       "westcovecounty.ca",
       "www.west-cove.ca",
       "west-cove.ca",
-      "www.svwestcove.com",
-      "svwestcove.com",
       "www.westcove-ab.ca",
       "westcove-ab.ca"
     ],
@@ -5340,8 +4845,6 @@
       "whisperinghillscounty.ca",
       "www.whispering-hills.ca",
       "whispering-hills.ca",
-      "www.svwhisperinghills.com",
-      "svwhisperinghills.com",
       "www.whisperinghills-ab.ca",
       "whisperinghills-ab.ca"
     ],
@@ -5365,8 +4868,6 @@
       "whitesandscounty.ca",
       "www.white-sands.ca",
       "white-sands.ca",
-      "www.svwhitesands.com",
-      "svwhitesands.com",
       "www.whitesands-ab.ca",
       "whitesands-ab.ca"
     ],
@@ -5390,8 +4891,6 @@
       "yellowstonecounty.ca",
       "www.yellowstone.ca",
       "yellowstone.ca",
-      "www.svyellowstone.com",
-      "svyellowstone.com",
       "www.yellowstone-ab.ca",
       "yellowstone-ab.ca"
     ],
@@ -5411,8 +4910,6 @@
       "villageofsaddlehills.ca",
       "www.saddle-hills.ca",
       "saddle-hills.ca",
-      "www.saddlehillscounty.com",
-      "saddlehillscounty.com",
       "www.saddlehills-ab.ca",
       "saddlehills-ab.ca"
     ],
@@ -5432,8 +4929,6 @@
       "villageofsexsmith.ca",
       "www.sexsmithcounty.ca",
       "sexsmithcounty.ca",
-      "www.sexsmith.com",
-      "sexsmith.com",
       "www.sexsmith-ab.ca",
       "sexsmith-ab.ca"
     ],
@@ -5455,8 +4950,6 @@
       "slavelakecounty.ca",
       "www.slave-lake.ca",
       "slave-lake.ca",
-      "www.slavelake.com",
-      "slavelake.com",
       "www.slavelake-ab.ca",
       "slavelake-ab.ca"
     ],
@@ -5485,8 +4978,6 @@
       "smokylakecounty.ca",
       "www.smoky-lake.ca",
       "smoky-lake.ca",
-      "www.smokylake.com",
-      "smokylake.com",
       "www.smokylake-ab.ca",
       "smokylake-ab.ca"
     ],
@@ -5511,8 +5002,6 @@
       "villageofsmokylake.ca",
       "www.smoky-lake.ca",
       "smoky-lake.ca",
-      "www.smokylakecounty.com",
-      "smokylakecounty.com",
       "www.smokylake-ab.ca",
       "smokylake-ab.ca"
     ],
@@ -5534,8 +5023,6 @@
       "specialareano2county.ca",
       "www.special-area-no-2.ca",
       "special-area-no-2.ca",
-      "www.specialareano2.com",
-      "specialareano2.com",
       "www.specialareano2-ab.ca",
       "specialareano2-ab.ca"
     ],
@@ -5557,8 +5044,6 @@
       "specialareano3county.ca",
       "www.special-area-no-3.ca",
       "special-area-no-3.ca",
-      "www.specialareano3.com",
-      "specialareano3.com",
       "www.specialareano3-ab.ca",
       "specialareano3-ab.ca"
     ],
@@ -5580,8 +5065,6 @@
       "specialareano4county.ca",
       "www.special-area-no-4.ca",
       "special-area-no-4.ca",
-      "www.specialareano4.com",
-      "specialareano4.com",
       "www.specialareano4-ab.ca",
       "specialareano4-ab.ca"
     ],
@@ -5603,8 +5086,6 @@
       "spiritrivercounty.ca",
       "www.spirit-river.ca",
       "spirit-river.ca",
-      "www.spiritriver.com",
-      "spiritriver.com",
       "www.spiritriver-ab.ca",
       "spiritriver-ab.ca"
     ],
@@ -5632,8 +5113,6 @@
       "springlakecounty.ca",
       "www.spring-lake.ca",
       "spring-lake.ca",
-      "www.springlake.com",
-      "springlake.com",
       "www.springlake-ab.ca",
       "springlake-ab.ca"
     ],
@@ -5655,8 +5134,6 @@
       "stpaulcounty.ca",
       "www.st-paul.ca",
       "st-paul.ca",
-      "www.stpaul.com",
-      "stpaul.com",
       "www.stpaul-ab.ca",
       "stpaul-ab.ca"
     ],
@@ -5687,8 +5164,6 @@
       "villageofstandard.ca",
       "www.standardcounty.ca",
       "standardcounty.ca",
-      "www.standard.com",
-      "standard.com",
       "www.standard-ab.ca",
       "standard-ab.ca"
     ],
@@ -5701,7 +5176,7 @@
   },
   {
     "short_name": "Starland County",
-    "website_url": "https://www.starlandcounty.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.starlandcounty.ca",
       "starlandcounty.ca",
@@ -5713,16 +5188,10 @@
       "villageofstarland.ca",
       "www.starland.ca",
       "starland.ca",
-      "www.starlandcounty.com",
-      "starlandcounty.com",
       "www.starland-ab.ca",
       "starland-ab.ca"
     ],
-    "platform_links": {
-      "youtube": [
-        "https://www.youtube.com/@StarlandCountyAlberta"
-      ]
-    }
+    "platform_links": {}
   },
   {
     "short_name": "Stavely",
@@ -5738,8 +5207,6 @@
       "villageofstavely.ca",
       "www.stavelycounty.ca",
       "stavelycounty.ca",
-      "www.stavely.com",
-      "stavely.com",
       "www.stavely-ab.ca",
       "stavely-ab.ca"
     ],
@@ -5759,8 +5226,6 @@
       "villageofstettler.ca",
       "www.stettlercounty.ca",
       "stettlercounty.ca",
-      "www.stettler.com",
-      "stettler.com",
       "www.stettler-ab.ca",
       "stettler-ab.ca"
     ],
@@ -5787,8 +5252,6 @@
       "villageofstirling.ca",
       "www.stirlingcounty.ca",
       "stirlingcounty.ca",
-      "www.stirling.com",
-      "stirling.com",
       "www.stirling-ab.ca",
       "stirling-ab.ca"
     ],
@@ -5800,7 +5263,7 @@
   },
   {
     "short_name": "Stony Plain",
-    "website_url": "https://www.stonyplain.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.stonyplain.ca",
       "stonyplain.ca",
@@ -5814,21 +5277,14 @@
       "stonyplaincounty.ca",
       "www.stony-plain.ca",
       "stony-plain.ca",
-      "www.stonyplain.com",
-      "stonyplain.com",
       "www.stonyplain-ab.ca",
       "stonyplain-ab.ca"
     ],
-    "platform_links": {
-      "youtube": [
-        "https://www.youtube.com/@TownofStonyPlain",
-        "https://www.youtube.com/user/TownofStonyPlain"
-      ]
-    }
+    "platform_links": {}
   },
   {
     "short_name": "Strathcona County",
-    "website_url": "https://www.strathcona.ca/",
+    "website_url": "https://www.strathconacounty.ca/",
     "candidates_tried": [
       "www.strathconacounty.ca",
       "strathconacounty.ca",
@@ -5840,16 +5296,10 @@
       "villageofstrathcona.ca",
       "www.strathcona.ca",
       "strathcona.ca",
-      "www.strathconacounty.com",
-      "strathconacounty.com",
       "www.strathcona-ab.ca",
       "strathcona-ab.ca"
     ],
-    "platform_links": {
-      "youtube": [
-        "https://www.youtube.com/user/StrathconaCounty"
-      ]
-    }
+    "platform_links": {}
   },
   {
     "short_name": "Strathmore",
@@ -5865,8 +5315,6 @@
       "villageofstrathmore.ca",
       "www.strathmorecounty.ca",
       "strathmorecounty.ca",
-      "www.strathmore.com",
-      "strathmore.com",
       "www.strathmore-ab.ca",
       "strathmore-ab.ca"
     ],
@@ -5891,8 +5339,6 @@
       "villageofsturgeon.ca",
       "www.sturgeon.ca",
       "sturgeon.ca",
-      "www.sturgeoncounty.com",
-      "sturgeoncounty.com",
       "www.sturgeon-ab.ca",
       "sturgeon-ab.ca"
     ],
@@ -5900,7 +5346,7 @@
   },
   {
     "short_name": "Sundre",
-    "website_url": "https://www.sundre.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.sundre.ca",
       "sundre.ca",
@@ -5912,8 +5358,6 @@
       "villageofsundre.ca",
       "www.sundrecounty.ca",
       "sundrecounty.ca",
-      "www.sundre.com",
-      "sundre.com",
       "www.sundre-ab.ca",
       "sundre-ab.ca"
     ],
@@ -5935,8 +5379,6 @@
       "swanhillscounty.ca",
       "www.swan-hills.ca",
       "swan-hills.ca",
-      "www.swanhills.com",
-      "swanhills.com",
       "www.swanhills-ab.ca",
       "swanhills-ab.ca"
     ],
@@ -5958,8 +5400,6 @@
       "sylvanlakecounty.ca",
       "www.sylvan-lake.ca",
       "sylvan-lake.ca",
-      "www.sylvanlake.com",
-      "sylvanlake.com",
       "www.sylvanlake-ab.ca",
       "sylvanlake-ab.ca"
     ],
@@ -5978,7 +5418,7 @@
   },
   {
     "short_name": "Taber",
-    "website_url": "https://www.taber.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.taber.ca",
       "taber.ca",
@@ -5990,8 +5430,6 @@
       "villageoftaber.ca",
       "www.tabercounty.ca",
       "tabercounty.ca",
-      "www.taber.com",
-      "taber.com",
       "www.taber-ab.ca",
       "taber-ab.ca"
     ],
@@ -5999,7 +5437,7 @@
   },
   {
     "short_name": "Thorhild County",
-    "website_url": "https://www.thorhildcounty.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.thorhildcounty.ca",
       "thorhildcounty.ca",
@@ -6011,8 +5449,6 @@
       "villageofthorhild.ca",
       "www.thorhild.ca",
       "thorhild.ca",
-      "www.thorhildcounty.com",
-      "thorhildcounty.com",
       "www.thorhild-ab.ca",
       "thorhild-ab.ca"
     ],
@@ -6032,8 +5468,6 @@
       "villageofthorsby.ca",
       "www.thorsbycounty.ca",
       "thorsbycounty.ca",
-      "www.thorsby.com",
-      "thorsby.com",
       "www.thorsby-ab.ca",
       "thorsby-ab.ca"
     ],
@@ -6059,8 +5493,6 @@
       "threehillscounty.ca",
       "www.three-hills.ca",
       "three-hills.ca",
-      "www.threehills.com",
-      "threehills.com",
       "www.threehills-ab.ca",
       "threehills-ab.ca"
     ],
@@ -6072,7 +5504,7 @@
   },
   {
     "short_name": "Tofield",
-    "website_url": "https://www.tofield.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.tofield.ca",
       "tofield.ca",
@@ -6084,8 +5516,6 @@
       "villageoftofield.ca",
       "www.tofieldcounty.ca",
       "tofieldcounty.ca",
-      "www.tofield.com",
-      "tofield.com",
       "www.tofield-ab.ca",
       "tofield-ab.ca"
     ],
@@ -6093,7 +5523,7 @@
   },
   {
     "short_name": "Turner Valley",
-    "website_url": "https://www.turnervalley.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.turnervalley.ca",
       "turnervalley.ca",
@@ -6107,8 +5537,6 @@
       "turnervalleycounty.ca",
       "www.turner-valley.ca",
       "turner-valley.ca",
-      "www.turnervalley.com",
-      "turnervalley.com",
       "www.turnervalley-ab.ca",
       "turnervalley-ab.ca"
     ],
@@ -6116,7 +5544,7 @@
   },
   {
     "short_name": "Two Hills",
-    "website_url": "https://www.twohills.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.twohills.ca",
       "twohills.ca",
@@ -6130,8 +5558,6 @@
       "twohillscounty.ca",
       "www.two-hills.ca",
       "two-hills.ca",
-      "www.twohills.com",
-      "twohills.com",
       "www.twohills-ab.ca",
       "twohills-ab.ca"
     ],
@@ -6151,8 +5577,6 @@
       "villageoftwohills.ca",
       "www.two-hills.ca",
       "two-hills.ca",
-      "www.twohillscounty.com",
-      "twohillscounty.com",
       "www.twohills-ab.ca",
       "twohills-ab.ca"
     ],
@@ -6174,8 +5598,6 @@
       "valhallacentrecounty.ca",
       "www.valhalla-centre.ca",
       "valhalla-centre.ca",
-      "www.valhallacentre.com",
-      "valhallacentre.com",
       "www.valhallacentre-ab.ca",
       "valhallacentre-ab.ca"
     ],
@@ -6195,8 +5617,6 @@
       "villageofvauxhall.ca",
       "www.vauxhallcounty.ca",
       "vauxhallcounty.ca",
-      "www.vauxhall.com",
-      "vauxhall.com",
       "www.vauxhall-ab.ca",
       "vauxhall-ab.ca"
     ],
@@ -6204,7 +5624,7 @@
   },
   {
     "short_name": "Vegreville",
-    "website_url": "https://www.vegreville.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.vegreville.ca",
       "vegreville.ca",
@@ -6216,16 +5636,10 @@
       "villageofvegreville.ca",
       "www.vegrevillecounty.ca",
       "vegrevillecounty.ca",
-      "www.vegreville.com",
-      "vegreville.com",
       "www.vegreville-ab.ca",
       "vegreville-ab.ca"
     ],
-    "platform_links": {
-      "youtube": [
-        "https://www.youtube.com/@VegrevilleAB"
-      ]
-    }
+    "platform_links": {}
   },
   {
     "short_name": "Vermilion",
@@ -6241,8 +5655,6 @@
       "villageofvermilion.ca",
       "www.vermilioncounty.ca",
       "vermilioncounty.ca",
-      "www.vermilion.com",
-      "vermilion.com",
       "www.vermilion-ab.ca",
       "vermilion-ab.ca"
     ],
@@ -6269,8 +5681,6 @@
       "villageofvermilionriver.ca",
       "www.vermilion-river.ca",
       "vermilion-river.ca",
-      "www.vermilionrivercounty.com",
-      "vermilionrivercounty.com",
       "www.vermilionriver-ab.ca",
       "vermilionriver-ab.ca"
     ],
@@ -6278,7 +5688,7 @@
   },
   {
     "short_name": "Veteran",
-    "website_url": "https://www.veteran.com/",
+    "website_url": null,
     "candidates_tried": [
       "www.veteran.ca",
       "veteran.ca",
@@ -6290,16 +5700,10 @@
       "villageofveteran.ca",
       "www.veterancounty.ca",
       "veterancounty.ca",
-      "www.veteran.com",
-      "veteran.com",
       "www.veteran-ab.ca",
       "veteran-ab.ca"
     ],
-    "platform_links": {
-      "youtube": [
-        "https://www.youtube.com/c/MilitarybenefitsInfo"
-      ]
-    }
+    "platform_links": {}
   },
   {
     "short_name": "Vilna",
@@ -6315,8 +5719,6 @@
       "villageofvilna.ca",
       "www.vilnacounty.ca",
       "vilnacounty.ca",
-      "www.vilna.com",
-      "vilna.com",
       "www.vilna-ab.ca",
       "vilna-ab.ca"
     ],
@@ -6336,8 +5738,6 @@
       "villageofvulcan.ca",
       "www.vulcancounty.ca",
       "vulcancounty.ca",
-      "www.vulcan.com",
-      "vulcan.com",
       "www.vulcan-ab.ca",
       "vulcan-ab.ca"
     ],
@@ -6361,8 +5761,6 @@
       "villageofvulcan.ca",
       "www.vulcan.ca",
       "vulcan.ca",
-      "www.vulcancounty.com",
-      "vulcancounty.com",
       "www.vulcan-ab.ca",
       "vulcan-ab.ca"
     ],
@@ -6386,8 +5784,6 @@
       "villageofwabamun.ca",
       "www.wabamuncounty.ca",
       "wabamuncounty.ca",
-      "www.wabamun.com",
-      "wabamun.com",
       "www.wabamun-ab.ca",
       "wabamun-ab.ca"
     ],
@@ -6407,8 +5803,6 @@
       "villageofwainwright.ca",
       "www.wainwrightcounty.ca",
       "wainwrightcounty.ca",
-      "www.wainwright.com",
-      "wainwright.com",
       "www.wainwright-ab.ca",
       "wainwright-ab.ca"
     ],
@@ -6432,8 +5826,6 @@
       "villageofwarburg.ca",
       "www.warburgcounty.ca",
       "warburgcounty.ca",
-      "www.warburg.com",
-      "warburg.com",
       "www.warburg-ab.ca",
       "warburg-ab.ca"
     ],
@@ -6453,8 +5845,6 @@
       "villageofwarner.ca",
       "www.warnercounty.ca",
       "warnercounty.ca",
-      "www.warner.com",
-      "warner.com",
       "www.warner-ab.ca",
       "warner-ab.ca"
     ],
@@ -6474,8 +5864,6 @@
       "villageofwestlock.ca",
       "www.westlockcounty.ca",
       "westlockcounty.ca",
-      "www.westlock.com",
-      "westlock.com",
       "www.westlock-ab.ca",
       "westlock-ab.ca"
     ],
@@ -6499,8 +5887,6 @@
       "villageofwestlock.ca",
       "www.westlock.ca",
       "westlock.ca",
-      "www.westlockcounty.com",
-      "westlockcounty.com",
       "www.westlock-ab.ca",
       "westlock-ab.ca"
     ],
@@ -6524,8 +5910,6 @@
       "villageofwetaskiwin.ca",
       "www.wetaskiwincounty.ca",
       "wetaskiwincounty.ca",
-      "www.wetaskiwin.com",
-      "wetaskiwin.com",
       "www.wetaskiwin-ab.ca",
       "wetaskiwin-ab.ca"
     ],
@@ -6553,8 +5937,6 @@
       "villageofwetaskiwin.ca",
       "www.wetaskiwin.ca",
       "wetaskiwin.ca",
-      "www.wetaskiwincounty.com",
-      "wetaskiwincounty.com",
       "www.wetaskiwin-ab.ca",
       "wetaskiwin-ab.ca"
     ],
@@ -6582,8 +5964,6 @@
       "villageofwheatland.ca",
       "www.wheatland.ca",
       "wheatland.ca",
-      "www.wheatlandcounty.com",
-      "wheatlandcounty.com",
       "www.wheatland-ab.ca",
       "wheatland-ab.ca"
     ],
@@ -6612,8 +5992,6 @@
       "villageofwhitecourt.ca",
       "www.whitecourtcounty.ca",
       "whitecourtcounty.ca",
-      "www.whitecourt.com",
-      "whitecourt.com",
       "www.whitecourt-ab.ca",
       "whitecourt-ab.ca"
     ],
@@ -6638,8 +6016,6 @@
       "villageofwillingdon.ca",
       "www.willingdoncounty.ca",
       "willingdoncounty.ca",
-      "www.willingdon.com",
-      "willingdon.com",
       "www.willingdon-ab.ca",
       "willingdon-ab.ca"
     ],
@@ -6659,8 +6035,6 @@
       "villageofyellowhead.ca",
       "www.yellowhead.ca",
       "yellowhead.ca",
-      "www.yellowheadcounty.com",
-      "yellowheadcounty.com",
       "www.yellowhead-ab.ca",
       "yellowhead-ab.ca"
     ],
@@ -6680,8 +6054,6 @@
       "villageofyoungstown.ca",
       "www.youngstowncounty.ca",
       "youngstowncounty.ca",
-      "www.youngstown.com",
-      "youngstown.com",
       "www.youngstown-ab.ca",
       "youngstown-ab.ca"
     ],
