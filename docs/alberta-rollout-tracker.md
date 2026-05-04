@@ -19,6 +19,9 @@ updates this section first.
 | AB-007 | OPEN   | Phase 1 | Five AB cities load their eSCRIBE meeting list entirely via AJAX into an empty calendar; static HTML has zero meeting IDs even after the JSON-fallback regex. | Edmonton, Red Deer, Medicine Hat, Spruce Grove, Wood Buffalo | Needs eSCRIBE Web API integration (`/Web/api/Meeting/...`). Targeted for a dedicated PR after the muni inventory finishes. |
 | AB-008 | OPEN   | Phase 1 | No Legistar scraper exists, so `Platform.CUSTOM` placeholder sources can't ingest. | St. Albert (and likely future Phase 2+ Legistar munis) | Needs a new `LegistarScraper` class. Targeted alongside AB-007. |
 | AB-009 | OPEN   | Phase 1 | Pre-existing repo bug: SQLAlchemy emits enum values as Python names (`CITY`) but the Alembic migration creates them lowercase (`city`). Production worked because it used `Base.metadata.create_all`; local Alembic-applied DBs need manual enum recreation. | All deployments using Alembic from scratch | Fix is a separate cleanup PR (out of AB rollout scope, but logged for visibility). |
+| AB-010 | CLOSED | Phase 2 | Probe candidate-host generator was too permissive (`<slug>.com`), grabbing unrelated domains owned by people unrelated to the muni (e.g. `andrew.com` resolving to a YouTube channel for "Andrew Connectivity"). | Could have polluted seed for ~30 munis | Restricted candidate hosts to `.ca` only (commit `121b00d`). |
+| AB-011 | CLOSED | Phase 2 | Stale AB-directory PENDING placeholder sources stayed in the DB after a probe-discovered patch added a real CivicWeb/eSCRIBE source. Poller would have wasted a request on the dead URL every cron tick. | Every patched muni | Seed now demotes such placeholders to DISABLED once a non-placeholder source exists for the same muni (commit `c08f2e7`). |
+| AB-012 | CLOSED | Phase 30 | No CI guard ensured the rollout tracker stayed in sync with the AB seed roster — a silent gap could let an AB muni go unnoticed in future PRs. | All future seed edits | Added `backend/tests/test_alberta_tracker_coverage.py` — 2 invariants asserting (a) every AB seed muni has a tracker row, and (b) the tracker doesn't reference seed-unknown short_names. |
 
 New issues discovered while phasing through the remaining ~280 AB munis are
 appended to this table with IDs `AB-010+`.
@@ -50,7 +53,7 @@ into rows as their batches run.
 | 7 | Spruce Grove       | 1     | 2       | eSCRIBE + YouTube  | READY      | 2026-05-04 | AJAX-only calendar, see AB-007. |
 | 8 | Grande Prairie     | 1     | 2       | eSCRIBE + YouTube  | VALIDATED  | 2026-05-04 | eSCRIBE 10 agendas, YT 3 videos. |
 | 9 | St. Albert         | 1     | 2       | Legistar* + YouTube| VALIDATED  | 2026-05-04 | YT 3 videos; Legistar PENDING (AB-008). |
-| 10| Fort McMurray (RMWB)| 1    | 2       | eSCRIBE + YouTube  | VALIDATED  | 2026-05-04 | eSCRIBE 0 (AB-007), YT 5 videos. |
+| 10 | Fort McMurray | 1     | 2       | eSCRIBE + YouTube  | VALIDATED  | 2026-05-04 | RMWB eSCRIBE 0 items today (AB-007), YT 5 videos. |
 
 ### Phases 2..N (281 remaining munis)
 
@@ -83,7 +86,53 @@ sparse-data entities) stay PLACEHOLDER and explicitly note the rationale.
 ## Phases completed
 
 - **Phase 1** — 10 / 291 munis done (3.4%). Validated 2026-05-04.
-- **Phase 2..N** — pending.
+- **Phases 2–30** — 281 / 291 munis done (96.6%). Validated 2026-05-04.
+- **Total** — **291 / 291 munis polled** (100%).
+
+### Rollup (2026-05-04)
+
+| Status     | Count | Meaning                                                  |
+|------------|------:|----------------------------------------------------------|
+| VALIDATED  |    45* | At least one source returned items live during the phase poll |
+| READY      |    19 | Patched munis: portal URL resolves but no items today   |
+| PLACEHOLDER|   217 | No real portal URL discovered by the probe yet — single PENDING placeholder source pointing at the AB directory |
+| BROKEN     |     0 | No source raised an exception during validation         |
+| Phase 1    |    10 | (separate table) — 6 VALIDATED, 3 READY, 1 with a PENDING YouTube + a PENDING Legistar |
+
+*The Phase 1 table uses a slightly different template, so its 6 VALIDATED munis aren't counted in the 45 above. Adding them: **51 VALIDATED out of 291** (17.5%).
+
+The 217 PLACEHOLDER entries are the long tail — small villages, summer
+villages, Métis settlements, and special areas whose homepages don't link
+a meeting-management platform on any council subpage we crawled. Those
+are the natural targets for **manual seed patches** as future phases
+make time to spelunk through the actual websites.
+
+### Working scrapers per platform (across all 291 munis)
+
+| Platform  | ACTIVE sources | Munis covered (any platform) |
+|-----------|---------------:|------------------------------:|
+| eSCRIBE   | 21             | 21 |
+| CivicWeb  | 25             | 25 |
+| YouTube   | 60             | 60 (often co-located with another platform) |
+| Legistar  | 0  (1 PENDING) | 1 (St. Albert) — needs new scraper, see AB-008 |
+| Custom (placeholder) | 0 (217 PENDING) | 217 — see long tail above |
+
+(Counts based on `seed_registry.ALBERTA_MUNICIPALITIES_PHASE_1` +
+`ALBERTA_MUNICIPALITIES_REMAINDER` post-patch. Validate with
+`scripts/poll.py --province Alberta`.)
+
+### How to advance the tracker
+
+For a placeholder muni in this list, the path to VALIDATED is:
+
+1. Find the actual council page on the muni's website (they're often at
+   non-standard paths the probe didn't try).
+2. Identify the platform — most often a CivicWeb subdomain like
+   `<short>.civicweb.net` or eSCRIBE like `pub-<short>.escribemeetings.com`.
+3. Add the corrected URL to `_ab_remainder_patches.py` (or hand-edit
+   `_AB_REMAINDER_*` in `seed_registry.py` for one-off cases).
+4. Re-run `scripts/seed.py` and `scripts/poll.py "<short_name>"`.
+5. Append to the next phase sub-table or open a fresh validation table.
 
 ### Phase 2 (10 munis — 2026-05-04)
 
